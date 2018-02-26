@@ -1,6 +1,7 @@
-import {Platform} from 'react-native'
-import styled from 'styled-components'
+import {Platform, StyleSheet} from 'react-native'
 
-export default styled.View`
-  margin-top: ${Platform.OS === 'ios' ? 20 : 0};
-`
+export default StyleSheet.create({
+  container: {
+    marginTop: Platform.OS === 'ios' ? 20 : 0
+  }
+})

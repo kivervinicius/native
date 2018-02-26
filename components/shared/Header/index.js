@@ -1,18 +1,18 @@
-import {Component} from 'react'
+import {Component, Fragment} from 'react'
 import {StatusBar, SafeAreaView} from 'react-native'
 
 import Logo from '@/components/shared/Logo'
-import Container from './styles'
+import styles from './styles'
 
 export default class Header extends Component {
   render() {
     return (
-      <SafeAreaView>
+      <Fragment>
         <StatusBar barStyle="dark-content" />
-        <Container>
+        <SafeAreaView style={styles.container}>
           <Logo height={40} />
-        </Container>
-      </SafeAreaView>
+        </SafeAreaView>
+      </Fragment>
     )
   }
 }
