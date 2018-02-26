@@ -1,6 +1,7 @@
 {
   "presets": ["babel-preset-expo"],
   "plugins": [
+    "react-require",
     [
       "module-resolver",
       {
