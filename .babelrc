@@ -1,5 +1,15 @@
 {
   "presets": ["babel-preset-expo"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./"
+        }
+      }
+    ]
+  ],
   "env": {
     "development": {
       "plugins": ["transform-react-jsx-source"]
