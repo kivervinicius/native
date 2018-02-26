@@ -1,16 +1,6 @@
 import {StackNavigator} from 'react-navigation'
-import {Landing, Listings} from '@/components/views'
+import * as views from '@/components/views'
 
-export default StackNavigator(
-  {
-    Landing: {
-      screen: Landing
-    },
-    Listings: {
-      screen: Listings
-    }
-  },
-  {
-    initialRouteName: 'Landing'
-  }
-)
+export default StackNavigator(views, {
+  initialRouteName: 'home'
+})

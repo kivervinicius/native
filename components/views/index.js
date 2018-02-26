@@ -1,2 +1,4 @@
-export {default as Landing} from './Landing'
-export {default as Listings} from './Listings'
+import * as home from './Landing'
+import * as listings from './Listings'
+
+export {home, listings}
