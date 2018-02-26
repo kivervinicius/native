@@ -1,5 +1,5 @@
 import {StackNavigator} from 'react-navigation'
-import {Landing, Listings} from '@/src/components/views'
+import {Landing, Listings} from '@/components/views'
 
 export default StackNavigator(
   {
