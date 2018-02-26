@@ -1,22 +1,40 @@
-import {Fragment} from 'react'
-import {StatusBar, SafeAreaView, TouchableHighlight} from 'react-native'
+import {
+  View,
+  Text,
+  StatusBar,
+  SafeAreaView,
+  TouchableHighlight
+} from 'react-native'
 
 import Logo from '@/components/shared/Logo'
 import styles from './styles'
 
+const navigateTo = (navigation, scene) => (route) => () => {
+  if (scene.route.routeName !== route) {
+    navigation.navigate(route)
+  }
+}
+
 export default function Header({navigation, scene}) {
-  let gotoHome
-  if (scene.route.routeName !== 'home')
-    gotoHome = () => navigation.navigate('home')
+  const navigateToThis = navigateTo(navigation, scene)
 
   return (
-    <Fragment>
+    <SafeAreaView>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.container}>
-        <TouchableHighlight onPress={gotoHome} style={styles.logo}>
+      <View style={styles.container}>
+        <TouchableHighlight
+          style={styles.logo}
+          onPress={navigateToThis('home')}
+        >
           <Logo height={40} />
         </TouchableHighlight>
-      </SafeAreaView>
-    </Fragment>
+        <TouchableHighlight
+          style={styles.login}
+          onPress={navigateToThis('login')}
+        >
+          <Text style={styles.loginButton}>Login</Text>
+        </TouchableHighlight>
+      </View>
+    </SafeAreaView>
   )
 }
