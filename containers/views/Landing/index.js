@@ -5,7 +5,7 @@ import Shell from '@/components/shared/Shell'
 export default function LandingScreen() {
   return (
     <Shell>
-      <Text>Hello World</Text>
+      <Text style={{textAlign: 'center'}}>Hello World</Text>
     </Shell>
   )
 }
