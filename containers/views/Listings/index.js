@@ -1,11 +1,11 @@
 import {Text} from 'react-native'
 
-export default function ListingsPage() {
+export default function ListingsScreen() {
   return <Text>lmao</Text>
 }
 
-export const screen = ListingsPage
+export const screen = ListingsScreen
 
 export const navigationProps = () => ({
-  title: 'EmCasa Imobiliária | Imóveis'
+  title: 'EmCasa | Imóveis'
 })
