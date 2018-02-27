@@ -26,10 +26,9 @@ export default function auth(state = initialState, action) {
     case REQUEST:
       return {...state, loading: true}
     case SUCCESS:
-      return {...state, loading: false, data: action.data}
+      return {loading: false, data: action.data}
     case FAILURE:
       return {
-        ...state,
         loading: false,
         error: {
           message: action.error.message,
