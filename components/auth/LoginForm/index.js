@@ -20,6 +20,7 @@ export default class LoginForm extends Component {
       <KeyboardAvoidingView>
         <TextInput
           autoFocus
+          keyboardType="email-address"
           placeholder="Email"
           value={email}
           onChangeText={this.onChangeEmail}
