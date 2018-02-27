@@ -5,9 +5,14 @@ import * as actions from './index'
 
 function* signIn({email, password}) {
   yield put(actions.request())
-  yield call(api.signIn, {email, password})
+  try {
+    const {user} = yield call(api.signIn, {email, password})
+    yield put(actions.success(user))
+  } catch (err) {
+    yield put(actions.failure(err))
+  }
 }
 
 export default function* root() {
-  yield all([takeLatest(signIn)])
+  yield all([takeLatest(actions.SIGN_IN, signIn)])
 }
