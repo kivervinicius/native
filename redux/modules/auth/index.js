@@ -5,9 +5,9 @@ export const REQUEST = 'auth/REQUEST'
 export const SUCCESS = 'auth/SUCCESS'
 export const FAILURE = 'auth/FAILURE'
 
-export const signIn = ({username, password}) => ({
+export const signIn = ({email, password}) => ({
   type: SIGN_IN,
-  username,
+  email,
   password
 })
 export const signOut = () => ({type: SIGN_OUT})
@@ -26,9 +26,15 @@ export default function auth(state = initialState, action) {
     case REQUEST:
       return {...state, loading: true}
     case SUCCESS:
-      return {...state, loading: false, data: action.data}
+      return {loading: false, data: action.data}
     case FAILURE:
-      return {...state, loading: false, error: action.error}
+      return {
+        loading: false,
+        error: {
+          message: action.error.message,
+          status: action.error.status
+        }
+      }
     default:
       return state
   }
