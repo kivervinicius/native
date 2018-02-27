@@ -19,19 +19,24 @@ export default class LoginForm extends Component {
   get errorMessage() {
     const {error} = this.props
     if (!error) return null
-    if (!(error instanceof ResponseError))
-      return `An unexpected error occurred: ${error.message}`
-    if (error.status === 401) return 'Wrong email or password.'
-    else return 'Unknown error. Please try again.'
+    switch (error.status) {
+      case undefined:
+        return `An unexpected error occurred: ${error.message}`
+      case 401:
+        return 'Wrong email or password.'
+      default:
+        return 'Unknown error. Please try again.'
+    }
   }
 
   render() {
-    const {email, password, loading, error} = this.state
+    const {email, password} = this.state
+    const {loading, error} = this.props
     return (
       <KeyboardAvoidingView>
         {error && (
           <View>
-            <Text>${this.errorMessage}</Text>
+            <Text>{this.errorMessage}</Text>
           </View>
         )}
         <TextInput
