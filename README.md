@@ -15,11 +15,19 @@ cd native
 yarn install
 ```
 
-## Development
+## Run
+
+To run and develop the app locally:
 
 1. Download the [Expo](https://expo.io/) client on your mobile device
 2. Run `yarn start`
 3. Scan the QR code with the Expo client
+
+## Contribute
+
+Feel free to open issues and PRs.
+
+At the moment, we're tracking tasks at https://www.pivotaltracker.com/n/projects/2125081
 
 ---
 
