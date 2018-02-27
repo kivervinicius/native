@@ -1,7 +1,13 @@
 import {Text} from 'react-native'
 
+import Shell from '@/components/shared/Shell'
+
 export default function LandingScreen() {
-  return <Text>eyy</Text>
+  return (
+    <Shell>
+      <Text>Hello World</Text>
+    </Shell>
+  )
 }
 
 export const screen = LandingScreen
