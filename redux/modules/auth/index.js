@@ -5,9 +5,9 @@ export const REQUEST = 'auth/REQUEST'
 export const SUCCESS = 'auth/SUCCESS'
 export const FAILURE = 'auth/FAILURE'
 
-export const signIn = ({username, password}) => ({
+export const signIn = ({email, password}) => ({
   type: SIGN_IN,
-  username,
+  email,
   password
 })
 export const signOut = () => ({type: SIGN_OUT})
