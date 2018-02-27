@@ -28,7 +28,7 @@ Optionally, to use a local instance of the backend server:
 
 4. Download and run [em-casa/backend](https://github.com/em-casa/backend)
 5. Find your external ip address by running `curl ipinfo.io/ip`
-6. `export REACT_NATIVE_API_CLIENT=https://{your-external-ip}:4000`
+6. `export REACT_NATIVE_API_CLIENT=https://{your-external-ip}:4000`
 7. Restart the app
 
 ## Contribute
