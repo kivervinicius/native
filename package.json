@@ -27,9 +27,16 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "es6-error": "^4.1.1",
     "expo": "^25.0.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
-    "react-navigation": "^1.2.0"
+    "react-navigation": "^1.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-persist": "^5.9.1",
+    "redux-saga": "^0.16.0",
+    "reselect": "^3.0.1",
+    "styled-components": "^3.1.6"
   }
 }
