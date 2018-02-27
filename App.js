@@ -3,7 +3,7 @@ import {PersistGate} from 'redux-persist/integration/react'
 import {StackNavigator} from 'react-navigation'
 
 import createStore from '@/redux'
-import * as views from '@/components/views'
+import * as views from '@/containers/views'
 
 const Stack = StackNavigator(views, {
   initialRouteName: 'home'
