@@ -1,37 +1,30 @@
-import {
-  View,
-  Text,
-  StatusBar,
-  SafeAreaView,
-  TouchableOpacity
-} from 'react-native'
+import {Component} from 'react'
+import {View, StatusBar, SafeAreaView, TouchableOpacity} from 'react-native'
 
 import Logo from '@/components/shared/Logo'
 import styles from './styles'
 
-const navigateTo = (navigation, scene) => (route) => () => {
-  if (scene.route.routeName !== route) {
-    navigation.navigate(route)
+export default class Header extends Component {
+  navigateTo = (route) => () => {
+    const {navigation, scene} = this.props
+    if (scene.route.routeName !== route) navigation.navigate(route)
   }
-}
 
-export default function Header({navigation, scene}) {
-  const navigateToThis = navigateTo(navigation, scene)
+  render() {
+    const {auth} = this.props
 
-  return (
-    <SafeAreaView>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.logo} onPress={navigateToThis('home')}>
-          <Logo height={40} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.login}
-          onPress={navigateToThis('login')}
-        >
-          <Text style={styles.loginButton}>Login</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  )
+    return (
+      <SafeAreaView>
+        <StatusBar barStyle="dark-content" />
+        <View style={styles.container}>
+          <View style={styles.logo}>
+            <TouchableOpacity onPress={this.navigateTo('home')}>
+              <Logo height={40} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.auth}>{auth}</View>
+        </View>
+      </SafeAreaView>
+    )
+  }
 }
