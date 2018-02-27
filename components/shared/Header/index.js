@@ -3,7 +3,7 @@ import {
   Text,
   StatusBar,
   SafeAreaView,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native'
 
 import Logo from '@/components/shared/Logo'
@@ -22,18 +22,15 @@ export default function Header({navigation, scene}) {
     <SafeAreaView>
       <StatusBar barStyle="dark-content" />
       <View style={styles.container}>
-        <TouchableHighlight
-          style={styles.logo}
-          onPress={navigateToThis('home')}
-        >
+        <TouchableOpacity style={styles.logo} onPress={navigateToThis('home')}>
           <Logo height={40} />
-        </TouchableHighlight>
-        <TouchableHighlight
+        </TouchableOpacity>
+        <TouchableOpacity
           style={styles.login}
           onPress={navigateToThis('login')}
         >
           <Text style={styles.loginButton}>Login</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   )
