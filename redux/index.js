@@ -17,13 +17,14 @@ export default function create() {
   store.close = () => store.dispatch(END)
   store.runSaga(saga)
   if (module.hot) {
-    module.hot.accept('./modules/reducer.js', () =>
+    module.hot.accept('./modules/reducer', () =>
       store.replaceReducer(require('./modules/reducer').default)
     )
-    module.hot.accept('./modules/saga.js', () => {
+    module.hot.accept('./modules/saga', () => {
       store.task.cancel()
       store.runSaga(require('./modules/saga').default)
     })
+    module.hot.accept(() => {})
   }
   return store
 }
