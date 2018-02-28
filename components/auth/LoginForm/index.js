@@ -1,8 +1,6 @@
 import {Component} from 'react'
 import {KeyboardAvoidingView, TextInput, Button, View, Text} from 'react-native'
 
-import ResponseError from '@/lib/api/ResponseError'
-
 export default class LoginForm extends Component {
   state = {
     email: '',

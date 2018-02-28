@@ -23,6 +23,8 @@ const initialState = {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
+    case SIGN_OUT:
+      return {...state, data: undefined}
     case REQUEST:
       return {...state, loading: true}
     case SUCCESS:
