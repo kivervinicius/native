@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "es6-error": "^4.1.1",
+    "querystring": "^0.2.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-navigation": "^1.2.0",

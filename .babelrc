@@ -5,7 +5,6 @@
     [
       "module-resolver",
       {
-        "root": ["./"],
         "extensions": [".js", ".ios.js", ".android.js"],
         "alias": {
           "@": "./"
