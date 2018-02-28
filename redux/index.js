@@ -17,13 +17,17 @@ export default function create() {
   store.close = () => store.dispatch(END)
   store.runSaga(saga)
   if (module.hot) {
-    module.hot.accept('./modules/reducer', () =>
+    module.hot.accept('./modules/reducer.js', () =>
       store.replaceReducer(require('./modules/reducer').default)
     )
-    module.hot.accept('./modules/saga', () => {
+    module.hot.accept('./modules/saga.js', () => {
       store.task.cancel()
       store.runSaga(require('./modules/saga').default)
     })
   }
   return store
 }
+
+// Create store outside entry point to avoid creating a new one on HMR
+export const store = create()
+export const persistor = store.persistor
