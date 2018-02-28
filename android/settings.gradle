@@ -1,0 +1,3 @@
+rootProject.name = 'EmCasa'
+
+include ':app'
