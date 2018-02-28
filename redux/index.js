@@ -11,8 +11,19 @@ export default function create() {
   const finalCreateStore = compose(applyMiddleware(...middleware))(createStore)
   const store = finalCreateStore(reducer)
   store.persistor = persistStore(store)
-  store.runSaga = sagaMiddleware.run
+  store.runSaga = (_) => {
+    store.task = sagaMiddleware.run(_)
+  }
   store.close = () => store.dispatch(END)
   store.runSaga(saga)
+  if (module.hot) {
+    module.hot.accept('./modules/reducer', () =>
+      store.replaceReducer(require('./modules/reducer').default)
+    )
+    module.hot.accept('./modules/saga', () => {
+      store.task.cancel()
+      store.runSaga(require('./modules/saga').default)
+    })
+  }
   return store
 }
