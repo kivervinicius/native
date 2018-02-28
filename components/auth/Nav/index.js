@@ -23,7 +23,7 @@ export default class UserNav extends Component {
   renderMenuItem({item: {label, ...props}}) {
     return (
       <TouchableOpacity style={styles.menuItem} {...props}>
-        <Text style={styles.menuText}>{label}</Text>
+        <Text style={styles.menuItemText}>{label}</Text>
       </TouchableOpacity>
     )
   }

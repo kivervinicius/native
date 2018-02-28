@@ -11,6 +11,13 @@ export default StyleSheet.create({
     position: 'absolute',
     top: '100%',
     marginTop: 10,
-    elevation: 2
+    backgroundColor: '#ddd'
+  },
+  menuItem: {
+    padding: 10
+  },
+  menuItemText: {
+    fontSize: 12,
+    textAlign: 'center'
   }
 })
