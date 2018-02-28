@@ -17,16 +17,18 @@ const Stack = StackNavigator(views, {
   }
 })
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <Stack />
-        </PersistGate>
-      </Provider>
-    )
-  }
-}
+AppRegistry.registerComponent('EmCasa', () => Stack)
 
-AppRegistry.registerComponent('EmCasa', () => App)
+AppRegistry.setWrapperComponentProvider(
+  () =>
+    class extends Component {
+      render() {
+        const {children} = this.props
+        return (
+          <Provider store={store}>
+            <PersistGate persistor={persistor}>{children}</PersistGate>
+          </Provider>
+        )
+      }
+    }
+)
