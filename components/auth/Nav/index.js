@@ -8,6 +8,10 @@ export default class UserNav extends Component {
     active: false
   }
 
+  componentWillReceiveProps({user}) {
+    if (user !== this.props.user && !user) this.setState({active: false})
+  }
+
   onToggle = () => this.setState((state) => ({active: !state.active}))
 
   onPress = () => {
