@@ -5,7 +5,7 @@ import {PersistGate} from 'redux-persist/integration/react'
 import {StackNavigator} from 'react-navigation'
 
 import {store, persistor} from '@/redux'
-import Header from '@/components/shared/Header'
+import Header from '@/containers/shared/Header'
 import * as views from '@/containers/views'
 
 const Stack = StackNavigator(views, {

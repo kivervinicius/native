@@ -12,10 +12,7 @@ export default StyleSheet.create({
   logo: {
     flex: 0
   },
-  login: {
+  auth: {
     flex: 0
-  },
-  loginButton: {
-    fontSize: 10
   }
 })
