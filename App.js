@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {AppRegistry} from 'react-native'
 import {Provider} from 'react-redux'
 import {PersistGate} from 'redux-persist/integration/react'
 import {StackNavigator} from 'react-navigation'
@@ -16,7 +17,7 @@ const Stack = StackNavigator(views, {
   }
 })
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <Provider store={store}>
@@ -27,3 +28,5 @@ export default class App extends Component {
     )
   }
 }
+
+AppRegistry.registerComponent('EmCasa', () => App)
