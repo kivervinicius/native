@@ -29,6 +29,9 @@ matrix:
     - android-sdk-license-.+
     - google-gdk-license-.+
     env: PLATFORM=android
+    before_install:
+    - curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+    - sudo apt-get install -y nodejs
   - os: osx
     language: objective-c
     osx_image: xcode8.3
