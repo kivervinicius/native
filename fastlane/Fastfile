@@ -34,11 +34,11 @@ platform :android do
     # Set extended regex option according to OS
     # http://www.grymoire.com/Unix/Sed.html#uh-4a
     opt = case RUBY_PLATFORM
-      when /darwin/i then 'E'
-      when /linux|arch/i then 'r'
+      when /darwin/i then "Ei ''"
+      when /linux|arch/i then 'ri'
     end
-    sh %Q{sed -#{opt}i '' 's/#{BUILD_NUMBER_PATTERN}/\\1 #{build_number}/' #{gradle_build}}
-    sh %Q{sed -#{opt}i '' 's/#{VERSION_NAME_PATTERN}/\\1 "#{version}"/' #{gradle_build}}
+    sh %Q{sed -#{opt} 's/#{BUILD_NUMBER_PATTERN}/\\1 #{build_number}/' #{gradle_build}}
+    sh %Q{sed -#{opt} 's/#{VERSION_NAME_PATTERN}/\\1 "#{version}"/' #{gradle_build}}
   end
 
   desc "Build akp file"
