@@ -38,6 +38,11 @@ matrix:
     xcode_project: ios/EmCasa.xcodeproj
     xcode_scheme: ios/EmCasa
     env: PLATFORM=ios
+    before_install:
+    - brew update
+    - brew install yarn ios-sim jq ios-deploy cocoapods
+    - rvm use 2.3.0
+    - pod setup
   allow_failures:
   - os: osx
 
@@ -60,10 +65,6 @@ before_cache:
 - rm -f  $HOME/.gradle/caches/transforms-1/transforms-1.lock
 - rm -rf $HOME/.gradle/caches/3.5/fileHashes/
 - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
-
-before_install:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; brew install yarn ios-sim
-  jq ios-deploy cocoapods; rvm use system; pod setup; fi
 
 install:
 - bundle install
