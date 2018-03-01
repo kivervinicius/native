@@ -41,6 +41,7 @@ matrix:
     before_install:
     - brew update
     - brew install yarn ios-sim jq ios-deploy cocoapods
+    - rvm install ruby-2.3.0
     - rvm use 2.3.0
     - pod setup
   allow_failures:
