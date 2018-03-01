@@ -20,12 +20,17 @@ or alternatively using `brew cask install fastlane`
 ```
 fastlane android bump
 ```
-Bump version number
+Bump build and version numbers
 ### android build
 ```
 fastlane android build
 ```
-Build akp
+Build akp file
+### android beta
+```
+fastlane android beta
+```
+Publish beta build
 
 ----
 
@@ -34,7 +39,7 @@ Build akp
 ```
 fastlane ios bump
 ```
-
+Bump build and version numbers
 ### ios build
 ```
 fastlane ios build

@@ -41,10 +41,20 @@ platform :android do
     sh %Q{sed -#{opt}i '' 's/#{VERSION_NAME_PATTERN}/\\1 "#{version}"/' #{gradle_build}}
   end
 
-  desc "Build akp"
+  desc "Build akp file"
   lane :build do |options|
     bump options
     gradle(task: "clean assembleRelease", project_dir: ANDROID_DIR)
+  end
+
+  desc "Publish beta build"
+  lane :beta do |comment: nil, **options|
+    build options
+    testfairy(
+      api_key: ENV['TESTFAIRY_API_KEY'],
+      ipa: lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH],
+      comment: comment
+    )
   end
 end
 
