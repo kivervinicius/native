@@ -41,13 +41,14 @@ matrix:
 env:
   global:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
-    LANG=pt_BR.UTF-8
+  - LANG=pt_BR.UTF-8
+  - secure: vNM0bFeO9XSDx8cxZQRxLDFDNUiT4sWAcngX5SRB+zy44ei23RR555NUeus00O2FoSO0MlXULjpnIC3Be0ijU09Tm4e6sJ5XkHOp6YiTp1cktyC//2vNay1UTaSgB2KH/H9dyQXoxqnEFr5jR9NyEwGfpjIzXer3H1+LbxlgsW4skbbVB1eh2SUGWlJId14K27scPKodrRK6MIos7FJ07bTw9BYBATymyyd1+VKP59maeTsAM1hTXIdf6qCKvluWO/qJPxFTGq+Nbn/f9N/K+mRelIRL4OWWXQvLC5232SwKRqLs8PNaDbmFVR7uptMQH1unsV4faLEFWbvXtVN5Z7JXG40WARcawzU4IL3iCF3lo0vhMyM8ouQNjN7Xx+9BfEMOkrUH5gmq+WmvJE5Jf5XJpGWVBA9GmjRGXTAAFVkdymGRZGH011OKZ2BXKGxbDyXGH9FjMHzpkqfJVRvTLJ/ldUqiYZ/P9E8e2Z56lOeMmt4OZEX+OKlRhFcQZBC3728C5fFTiov3ZGOXQ6ekl9BFKfTzTMZHLRDYvvYfR+faRL0CHvHWiu4CHCZqiGhYIVNuO8hWHm3niylfMEfB9QWKe3Woc3jPHycelFj3RonI9v2BXhPmaIOCh2YxOUSlvHH4RkZoT76KKkZcrQ85M1ORIEotqJL57HFv5Cj5JQk=
 
 cache:
   yarn: true
   directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
   - node_modules
   - android/app/build
 
@@ -58,12 +59,8 @@ before_cache:
 - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
 
 before_install:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]];
-    then brew update;
-    brew install yarn ios-sim jq ios-deploy cocoapods;
-    rvm use system;
-    pod setup;
-  fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; brew install yarn ios-sim
+  jq ios-deploy cocoapods; rvm use system; pod setup; fi
 
 install:
 - bundle install
