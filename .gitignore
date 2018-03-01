@@ -41,3 +41,6 @@ project.xcworkspace
 .gradle
 local.properties
 *.keystore
+
+# fastlane
+report.xml
