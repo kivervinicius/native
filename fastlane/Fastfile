@@ -19,6 +19,20 @@ def package
   )
 end
 
+def certificate(platform = lane_context[SharedValues::PLATFORM_NAME])
+  case platform.to_sym
+    when :android then {
+      'android.injected.signing.store.file' => ENV['ANDROID_KEYSTORE_FILE'],
+      'android.injected.signing.store.password' => ENV['ANDROID_KEYSTORE_PASSWORD'],
+      'android.injected.signing.key.alias' => ENV['ANDROID_KEY_ALIAS'],
+      'android.injected.signing.key.password' => ENV['ANDROID_KEY_PASSWORD']
+    }
+    when :ios then {
+      # TODO
+    }
+  end
+end
+
 platform :android do
   BUILD_NUMBER_PATTERN = '(versionCode) ([[:digit:]]*)'
   VERSION_NAME_PATTERN = '(versionName) "(.*)"'
@@ -42,9 +56,14 @@ platform :android do
   end
 
   desc "Build akp file"
-  lane :build do |options|
-    bump options
-    gradle(task: "clean assembleRelease", project_dir: ANDROID_DIR)
+  lane :build do |signed: false, bump: false, **options|
+    bump options if bump
+    build_options = signed ? {print_command: false, properties: certificate} : {}
+    gradle(
+      task: "clean assembleRelease",
+      project_dir: ANDROID_DIR,
+      **build_options
+    )
   end
 
   desc "Publish beta build"
@@ -68,8 +87,8 @@ platform :ios do
     increment_version_number(version_number: version, xcodeproj: PROJECT_DIR)
   end
 
-  lane :build do |options|
-    bump options
+  lane :build do |bump: false, **options|
+    bump options if bump
     gym(scheme: 'EmCasa', project: IOS_DIR)
   end
 end
