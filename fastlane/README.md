@@ -16,11 +16,6 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## Android
-### android play
-```
-fastlane android play
-```
-
 ### android bump
 ```
 fastlane android bump
