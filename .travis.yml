@@ -75,7 +75,7 @@ install:
 
 before_script:
 - export ANDROID_KEYSTORE_FILE=~/.secrets/keystore.jks
-- aws s3 sync s3://$AWS_BUCKET ~/.secrets
+- aws s3 sync s3://$AWS_SECRETS_BUCKET ~/.secrets
 
 script:
 - bundle exec fastlane $PLATFORM build
