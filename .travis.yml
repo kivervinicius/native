@@ -1,0 +1,83 @@
+sudo: false
+
+matrix:
+  include:
+  - os: linux
+    language: android
+    android:
+      components:
+      - tools
+      - platform-tools
+      - tools
+      - build-tools-26.0.0
+      - android-25
+      - extra-google-google_play_services
+      - extra-google-m2repository
+      - extra-android-m2repository
+    addons:
+      apt:
+        sources:
+        - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
+          key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
+        packages:
+        - oracle-java8-installer
+        - oracle-java8-set-default
+        - yarn
+        - jq
+    licenses:
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+    env: PLATFORM=android
+    before_install:
+    - export PATH=$HOME/.local/bin:$PATH
+    - pip install awscli --upgrade --user `whoami`
+    - curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+    - sudo apt-get install -y nodejs
+  - os: osx
+    language: objective-c
+    osx_image: xcode8.3
+    xcode_project: ios/EmCasa.xcodeproj
+    xcode_scheme: ios/EmCasa
+    env: PLATFORM=ios
+    before_install:
+    - brew update
+    - brew install yarn ios-sim jq ios-deploy cocoapods awscli
+    - rvm install ruby-2.3.0
+    - rvm use 2.3.0
+    - pod setup
+  allow_failures:
+  - os: osx
+
+env:
+  global:
+  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - LANG=pt_BR.UTF-8
+
+cache:
+  yarn: true
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - node_modules
+  - android/app/build
+
+before_cache:
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -f  $HOME/.gradle/caches/transforms-1/transforms-1.lock
+- rm -rf $HOME/.gradle/caches/3.5/fileHashes/
+- rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+
+install:
+- bundle install
+- yarn install
+
+before_script:
+- export ANDROID_KEYSTORE_FILE=~/.secrets/keystore.jks
+- aws s3 sync s3://$AWS_SECRETS_BUCKET ~/.secrets
+
+script:
+- bundle exec fastlane $PLATFORM beta
+  bump:true
+  signed:true
+  build_number:$TRAVIS_BUILD_NUMBER

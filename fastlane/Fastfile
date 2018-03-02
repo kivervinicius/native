@@ -1,0 +1,97 @@
+require 'dotenv/load'
+
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+ANDROID_DIR = File.expand_path('../android', __dir__)
+IOS_DIR = File.expand_path('../ios', __dir__)
+
+def package
+  $package_json ||= JSON.parse(
+    File.read('../package.json'),
+    symbolize_names: true
+  )
+end
+
+def certificate(platform = lane_context[SharedValues::PLATFORM_NAME])
+  case platform.to_sym
+    when :android then {
+      'android.injected.signing.store.file' => ENV['ANDROID_KEYSTORE_FILE'],
+      'android.injected.signing.store.password' => ENV['ANDROID_KEYSTORE_PASSWORD'],
+      'android.injected.signing.key.alias' => ENV['ANDROID_KEY_ALIAS'],
+      'android.injected.signing.key.password' => ENV['ANDROID_KEY_PASSWORD']
+    }
+    when :ios then {
+      # TODO
+    }
+  end
+end
+
+platform :android do
+  BUILD_NUMBER_PATTERN = '(versionCode) ([[:digit:]]*)'
+  VERSION_NAME_PATTERN = '(versionName) "(.*)"'
+
+  desc "Bump build and version numbers"
+  lane :bump do |build_number: nil, version: nil|
+    gradle_build = "#{ANDROID_DIR}/app/build.gradle"
+    version ||= package[:version]
+    unless build_number
+      build_number = sh "awk 'match($0,/#{BUILD_NUMBER_PATTERN}/) {print $2}' #{gradle_build}"
+      build_number = build_number.to_i + 1
+    end
+    # Set extended regex option according to OS
+    # http://www.grymoire.com/Unix/Sed.html#uh-4a
+    opt = case RUBY_PLATFORM
+      when /darwin/i then "Ei ''"
+      when /linux|arch/i then 'ri'
+    end
+    sh %Q{sed -#{opt} 's/#{BUILD_NUMBER_PATTERN}/\\1 #{build_number}/' #{gradle_build}}
+    sh %Q{sed -#{opt} 's/#{VERSION_NAME_PATTERN}/\\1 "#{version}"/' #{gradle_build}}
+  end
+
+  desc "Build akp file"
+  lane :build do |signed: false, bump: false, **options|
+    bump options if bump
+    build_options = signed ? {print_command: false, properties: certificate} : {}
+    gradle(
+      task: "clean assembleRelease",
+      project_dir: ANDROID_DIR,
+      **build_options
+    )
+  end
+
+  desc "Publish beta build"
+  lane :beta do |comment: nil, **options|
+    build options
+    testfairy(
+      api_key: ENV['TESTFAIRY_API_KEY'],
+      ipa: lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH],
+      comment: comment
+    )
+  end
+end
+
+platform :ios do
+  PROJECT_DIR="#{IOS_DIR}/EmCasa.xcodeproj"
+
+  desc "Bump build and version numbers"
+  lane :bump do |build_number: nil, version: nil|
+    version ||= package[:version]
+    increment_build_number(build_number: build_number, xcodeproj: PROJECT_DIR)
+    increment_version_number(version_number: version, xcodeproj: PROJECT_DIR)
+  end
+
+  lane :build do |bump: false, **options|
+    bump options if bump
+    gym(scheme: 'EmCasa', project: IOS_DIR)
+  end
+end
+
