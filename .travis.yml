@@ -77,7 +77,7 @@ before_script:
 - aws s3 sync s3://$AWS_SECRETS_BUCKET ~/.secrets
 
 script:
-- bundle exec fastlane $PLATFORM build
+- bundle exec fastlane $PLATFORM beta
   bump:true
   signed:true
   build_number:$TRAVIS_BUILD_NUMBER
