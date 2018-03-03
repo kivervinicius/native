@@ -47,3 +47,6 @@ report.xml
 
 # env
 .env
+
+# cocoapods
+/ios/Pods
