@@ -46,7 +46,7 @@ matrix:
     - brew install yarn ios-sim jq ios-deploy cocoapods awscli
     - rvm install ruby-2.3.0
     - rvm use 2.3.0
-    - pod setup
+    - (cd ios && pod install)
   allow_failures:
   - os: osx
 
