@@ -661,6 +661,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				E45F80C427AFF34207272398 /* [CP] Embed Pods Frameworks */,
 				46D99C53E9DE81B4ED70108A /* [CP] Copy Pods Resources */,
+				C3113622204DC391003BDB80 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -1191,6 +1192,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3113622204DC391003BDB80 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -n \"${FABRIC_API_KEY}\"]; then\n    \"${PODS_ROOT}/Fabric/run\" \"${FABRIC_API_KEY}\" \"${FABRIC_BUILD_SECRET}\"\nfi";
 			showEnvVarsInLog = 0;
 		};
 		E45F80C427AFF34207272398 /* [CP] Embed Pods Frameworks */ = {
