@@ -55,6 +55,7 @@ env:
   global:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
   - LANG=pt_BR.UTF-8
+  - PROMOTE=$([ $TRAVIS_BRANCH == "master" ] && echo "true" || echo "false")
 
 cache:
   yarn: true
@@ -82,4 +83,5 @@ script:
 - bundle exec fastlane $PLATFORM beta
   bump:true
   signed:true
+  promote:$PROMOTE
   build_number:$TRAVIS_BUILD_NUMBER
