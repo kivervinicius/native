@@ -35,6 +35,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+*.xcconfig
 project.xcworkspace
 
 # android
@@ -47,3 +48,6 @@ report.xml
 
 # env
 .env
+
+# cocoapods
+/ios/Pods

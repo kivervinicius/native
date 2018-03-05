@@ -10,7 +10,9 @@ matrix:
       - platform-tools
       - tools
       - build-tools-26.0.0
+      - build-tools-23.0.1
       - android-25
+      - android-23
       - extra-google-google_play_services
       - extra-google-m2repository
       - extra-android-m2repository
@@ -45,7 +47,7 @@ matrix:
     - brew install yarn ios-sim jq ios-deploy cocoapods awscli
     - rvm install ruby-2.3.0
     - rvm use 2.3.0
-    - pod setup
+    - (cd ios && pod install)
   allow_failures:
   - os: osx
 
@@ -53,6 +55,7 @@ env:
   global:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
   - LANG=pt_BR.UTF-8
+  - PROMOTE=$([ $TRAVIS_BRANCH == "master" ] && echo "true" || echo "false")
 
 cache:
   yarn: true
@@ -80,4 +83,5 @@ script:
 - bundle exec fastlane $PLATFORM beta
   bump:true
   signed:true
+  promote:$PROMOTE
   build_number:$TRAVIS_BUILD_NUMBER

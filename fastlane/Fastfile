@@ -69,12 +69,14 @@ platform :android do
   end
 
   desc "Publish beta build"
-  lane :beta do |comment: nil, **options|
+  lane :beta do |comment: nil, promote: false, **options|
     build options
-    testfairy(
-      api_key: ENV['TESTFAIRY_API_KEY'],
-      ipa: lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH],
-      comment: comment
+    crashlytics(
+      api_token: ENV['FABRIC_API_KEY'],
+      build_secret: ENV['FABRIC_BUILD_SECRET'],
+      apk_path: lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH],
+      notes: comment,
+      notifications: promote
     )
   end
 end
