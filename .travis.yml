@@ -56,6 +56,7 @@ env:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
   - LANG=pt_BR.UTF-8
   - TESTERS=$([ $TRAVIS_BRANCH == "master" ] && echo $BETA_TESTERS || echo $ALPHA_TESTERS)
+  - PROMOTE=$([ $TRAVIS_BRANCH == "master" && $TRAVIS_EVENT_TYPE == "pull_request" ] && echo "true" || echo "false")
 
 cache:
   yarn: true
@@ -84,4 +85,5 @@ script:
   bump:true
   signed:true
   groups:$TESTERS
+  promote:$PROMOTE
   build_number:$TRAVIS_BUILD_NUMBER
