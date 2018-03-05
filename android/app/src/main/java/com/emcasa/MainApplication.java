@@ -12,6 +12,7 @@ import com.facebook.soloader.SoLoader;
 
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
+import com.smixx.fabric.FabricPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+          new FabricPackage()
       );
     }
 
@@ -36,16 +38,6 @@ public class MainApplication extends Application implements ReactApplication {
       return "index";
     }
   };
-
-  private String getMetaData(String prop) {
-    try {
-      ApplicationInfo info = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
-      return info.metaData.getString(prop);
-    } catch (PackageManager.NameNotFoundException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
 
   @Override
   public ReactNativeHost getReactNativeHost() {
@@ -56,8 +48,6 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-    if (!this.getMetaData("io.fabric.ApiKey").isEmpty()) {
-      Fabric.with(this, new Crashlytics());
-    }
+    Fabric.with(this, new Crashlytics());
   }
 }
