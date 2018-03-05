@@ -35,6 +35,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+*.xcconfig
 project.xcworkspace
 
 # android
