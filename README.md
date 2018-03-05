@@ -52,16 +52,38 @@ You can pass any of the following options to fastlane's build task by appending 
 
 e.g: `bundle exec fastlane android build bump:true version:1.0.0`
 
-| option       |   type   | default                | description                  |
-| ------------ | :------: | ---------------------- | ---------------------------- |
-| signed\*     |  `bool`  | `false`                | Enable code signing.         |
-| bump         |  `bool`  | `false`                | Bump version number          |
-| build_number |  `int`   | current build n˚ + `1` | New build number to bump to. |
-| version      | `string` | package.json `version` | New version to bump to.      |
+| option       |   type   |        default         | description                 |
+| ------------ | :------: | :--------------------: | --------------------------- |
+| signed\*     |  `bool`  |        `false`         | Enable code signing         |
+| bump         |  `bool`  |        `false`         | Bump version number         |
+| build_number |  `int`   | current build n˚ + `1` | New build number to bump to |
+| version      | `string` | package.json `version` | New version to bump to      |
 
-\* Requires the `ANDROID_KEY*` environment variables. See [.env.example](.env.example)
+\* Requires the `ANDROID_KEY*` environment variables. See [.env.example](.env.example)
 
 ### IOS
+
+TODO
+
+## Release
+
+This project uses Crashnalytics for beta testing.
+
+### Android
+
+```sh
+bundle exec fastlane android beta
+```
+
+In addition to all of `build` task's options, you can pass the following to `beta`:
+
+| option  |   type   | default | description                                                          |
+| ------- | :------: | :-----: | -------------------------------------------------------------------- |
+| groups  | `string` |  `nil`  | Comma delimited list of beta tester groups to invite for this update |
+| promote |  `bool`  | `false` | Send update notifications to beta testers                            |
+| comment | `string` |  `nil`  | Release notes                                                        |
+
+## IOS
 
 TODO
 
