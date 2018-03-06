@@ -1,6 +1,6 @@
 import {Text} from 'react-native'
 
-import Shell from '@/components/shared/Shell'
+import Shell from '@/containers/shared/Shell'
 
 export default function LandingScreen() {
   return (

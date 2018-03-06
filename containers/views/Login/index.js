@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {connect} from 'react-redux'
 
 import {getUser} from '@/redux/modules/auth/selectors'
-import Shell from '@/components/shared/Shell'
+import Shell from '@/containers/shared/Shell'
 import LoginForm from '@/containers/auth/LoginForm'
 
 class BaseLoginScreen extends Component {
