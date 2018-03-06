@@ -7,15 +7,23 @@ export default function Navigation({user, navigation}) {
   const navigateTo = (scene) => () => navigation.navigate(scene)
   return (
     <View style={styles.container}>
-      <Button onPress={navigateTo('home')}>Home</Button>
-      <Button onPress={navigateTo('create')}>Anunciar</Button>
-      <Button onPress={navigateTo('liked')}>Salvos</Button>
+      <Button icon="home-outline" onPress={navigateTo('home')}>
+        Home
+      </Button>
       {user ? (
-        <Button>Perfil</Button>
+        <Button icon="account-outline">Perfil</Button>
       ) : (
-        <Button onPress={navigateTo('login')}>Login</Button>
+        <Button icon="account-outline" onPress={navigateTo('login')}>
+          Login
+        </Button>
       )}
-      <Button>Mais</Button>
+      <Button icon="plus-outline" onPress={navigateTo('create')}>
+        Anunciar
+      </Button>
+      <Button icon="heart-outline" onPress={navigateTo('liked')}>
+        Salvos
+      </Button>
+      <Button icon="dots-horizontal">Mais</Button>
     </View>
   )
 }
