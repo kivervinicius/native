@@ -8,6 +8,8 @@ target 'EmCasa' do
   pod 'Fabric'
   pod 'Crashlytics'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'EmCasaTests' do
     inherit! :search_paths
     # Pods for testing
