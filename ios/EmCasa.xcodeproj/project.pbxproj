@@ -1261,7 +1261,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -n \"${FABRIC_API_KEY}\"]; then\n    \"${PODS_ROOT}/Fabric/run\" \"${FABRIC_API_KEY}\" \"${FABRIC_BUILD_SECRET}\"\nfi";
+			shellScript = "if [[ -n \"${FABRIC_API_KEY}\" ]]; then\n    \"${PODS_ROOT}/Fabric/run\" \"${FABRIC_API_KEY}\" \"${FABRIC_BUILD_SECRET}\";\nfi";
 			showEnvVarsInLog = 0;
 		};
 		E45F80C427AFF34207272398 /* [CP] Embed Pods Frameworks */ = {
