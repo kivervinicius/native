@@ -4,8 +4,8 @@ import styles from './styles'
 
 export default function NavButton({children, ...props}) {
   return (
-    <TouchableOpacity {...props}>
-      <Text>{children}</Text>
+    <TouchableOpacity style={styles.buttonContainer} {...props}>
+      <Text style={styles.buttonText}>{children}</Text>
     </TouchableOpacity>
   )
 }
