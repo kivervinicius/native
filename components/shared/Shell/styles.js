@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native'
 
+import * as colors from '@/assets/styles/colors'
+
 export default StyleSheet.create({
   container: {
     flex: 1
@@ -12,6 +14,8 @@ export default StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    width: '100%'
+    width: '100%',
+    borderTopColor: colors.gray.light,
+    borderTopWidth: StyleSheet.hairlineWidth
   }
 })
