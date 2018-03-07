@@ -15,6 +15,6 @@ function* initialize() {
   if (data) yield fork(identifySession, {data})
 }
 
-export default function* root() {
+export default function* fabricSaga() {
   yield all([takeLatest(auth.SUCCESS, identifySession), fork(initialize)])
 }

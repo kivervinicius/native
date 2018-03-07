@@ -28,6 +28,6 @@ function* request({key, options}) {
     yield fork(load, {key, options})
 }
 
-export default function* root() {
+export default function* listingsFeedSaga() {
   yield all([takeLatest(actions.REQUEST, request)])
 }
