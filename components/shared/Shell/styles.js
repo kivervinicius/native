@@ -7,14 +7,13 @@ export default StyleSheet.create({
     flex: 1
   },
   main: {
+    flex: 1,
     padding: 10
   },
   nav: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
+    flex: 0,
     width: '100%',
+    backgroundColor: 'white',
     borderTopColor: colors.gray.light,
     borderTopWidth: StyleSheet.hairlineWidth
   }
