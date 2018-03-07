@@ -1,13 +1,14 @@
 import {Image} from 'react-native'
 
-import {CDN_URL} from '@/lib/config'
+import * as image from '@/assets/image'
+
+const imageRatio = image.withRatio({width: 400, height: 200})
 
 const imageUrl = (filename = 'default_w4ki8j.jpg', thumbnail = false) => {
-  const baseName = filename || 'default_w4ki8j.jpg'
-  const display = thumbnail
-    ? 'f_auto,c_fit,h_200,w_400'
-    : 'f_auto,c_fit,h_400,w_600'
-  return `${CDN_URL}/${display}/v1513818385/${baseName}`
+  return image.url(
+    filename,
+    thumbnail ? {width: 400, height: 200} : {width: 600, height: 400}
+  )
 }
 
 export default function ListingImage({
@@ -20,7 +21,7 @@ export default function ListingImage({
   return (
     <Image
       {...props}
-      style={{position: 'relative', width: '100%'}}
+      style={imageRatio({width, height})}
       source={{uri: imageUrl(filename, thumbnail)}}
     />
   )
