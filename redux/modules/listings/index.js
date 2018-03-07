@@ -1,6 +1,6 @@
-import {createReducer} from 'redux'
+import {combineReducers} from 'redux'
 
 import data from './data'
 import feed from './feed'
 
-export default createReducer({data, feed})
+export default combineReducers({data, feed})
