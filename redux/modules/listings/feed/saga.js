@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {put, fork, call, select, all, takeLatest} from 'redux-saga'
+import {put, fork, call, select, all, takeLatest} from 'redux-saga/effects'
 
 import * as api from '@/lib/services/listings'
 import {getFeed} from './selectors'
