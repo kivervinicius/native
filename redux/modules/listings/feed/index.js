@@ -55,7 +55,7 @@ listingsFeed.node = (state = initialState, action) => {
           pagination: action.pagination
         },
         pages: {
-          $add: [action.pagination.currentPage, _.map(action.data, 'id')]
+          $add: [[action.pagination.currentPage, _.map(action.data, 'id')]]
         }
       })
     case FAILURE:

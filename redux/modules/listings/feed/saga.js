@@ -1,8 +1,6 @@
-import _ from 'lodash'
-import {put, fork, call, select, all, takeLatest} from 'redux-saga/effects'
+import {put, call, all, takeLatest} from 'redux-saga/effects'
 
 import * as api from '@/lib/services/listings'
-import {getFeed} from './selectors'
 import * as actions from './index'
 
 const pagination = (res) => ({
@@ -22,12 +20,6 @@ function* load({key, options}) {
   }
 }
 
-function* request({key, options}) {
-  const state = yield select(getFeed)
-  if (state.key !== key && !_.isEqual(state.options, options))
-    yield fork(load, {key, options})
-}
-
 export default function* listingsFeedSaga() {
-  yield all([takeLatest(actions.REQUEST, request)])
+  yield all([takeLatest(actions.REQUEST, load)])
 }

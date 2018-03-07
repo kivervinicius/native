@@ -3,6 +3,8 @@ import {createSelector} from 'reselect'
 
 import {getListings as getListingsData} from '../data/selectors'
 
+const emptyMap = new Map()
+
 export const getFeedTypes = (state) => state.listings.feed
 
 export const getFeed = createSelector(
@@ -15,7 +17,10 @@ export const getError = createSelector(getFeed, (feed) => feed.error)
 
 export const isLoading = createSelector(getFeed, (feed) => feed.loading)
 
-export const getPages = createSelector(getFeed, (feed) => feed.pages)
+export const getPages = createSelector(
+  getFeed,
+  (feed) => feed.pages || emptyMap
+)
 
 export const getListingIds = createSelector(getPages, (pages) =>
   _.flatten(pages.values())
