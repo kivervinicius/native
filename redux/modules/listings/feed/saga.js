@@ -16,9 +16,9 @@ function* load({key, options}) {
   yield put(actions.loading(key, options))
   try {
     const response = yield call(api[key], options)
-    yield put(actions.success(response.listings, pagination(response)))
+    yield put(actions.success(key, response.listings, pagination(response)))
   } catch (err) {
-    yield put(actions.failure(err))
+    yield put(actions.failure(key, err))
   }
 }
 

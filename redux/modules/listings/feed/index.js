@@ -8,21 +8,38 @@ export const FAILURE = 'listings/feed/FAILURE'
 
 export const request = (key, options = {}) => ({type: REQUEST, key, options})
 export const loading = (key, options) => ({type: LOADING, key, options})
-export const success = (data, pagination) => ({type: SUCCESS, data, pagination})
-export const failure = (error) => ({type: FAILURE, error})
+export const success = (key, data, pagination) => ({
+  type: SUCCESS,
+  key,
+  data,
+  pagination
+})
+export const failure = (key, error) => ({type: FAILURE, key, error})
+
+function listingsFeed(state = {}, action) {
+  switch (action.type) {
+    case LOADING:
+    case SUCCESS:
+    case FAILURE:
+      return update(state, {
+        [action.key]: {$set: listingsFeed.node(state[action.key], action)}
+      })
+    default:
+      return state
+  }
+}
 
 const initialState = {
-  type: null,
   options: null,
   loading: false,
   error: null,
   pagination: {
     currentPage: 0
   },
-  pages: {}
+  pages: new Map()
 }
 
-export default function listingsFeed(state = initialState, action) {
+listingsFeed.node = (state = initialState, action) => {
   switch (action.type) {
     case LOADING:
       return update(state, {
@@ -38,7 +55,7 @@ export default function listingsFeed(state = initialState, action) {
           pagination: action.pagination
         },
         pages: {
-          [action.pagination.currentPage]: {$set: _.map(action.data, 'id')}
+          $add: [action.pagination.currentPage, _.map(action.data, 'id')]
         }
       })
     case FAILURE:
@@ -52,3 +69,5 @@ export default function listingsFeed(state = initialState, action) {
       return state
   }
 }
+
+export default listingsFeed
