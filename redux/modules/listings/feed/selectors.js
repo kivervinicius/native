@@ -23,7 +23,7 @@ export const getPages = createSelector(
 )
 
 export const getListingIds = createSelector(getPages, (pages) =>
-  _.flatten(Array.from(pages.values()))
+  _.flatten(Object.values(pages))
 )
 
 export const getListings = createSelector(
