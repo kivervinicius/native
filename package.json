@@ -29,7 +29,7 @@
   "jest": {
     "preset": "react-native",
     "automock": true,
-    "unmockedModulePathPatterns": ["[^\\w]"],
+    "unmockedModulePathPatterns": ["/node_modules/"],
     "setupFiles": ["./__test__/setup.js"],
     "transformIgnorePatterns": [
       "/node_modules/(?!(react-native|react-navigation))/"
