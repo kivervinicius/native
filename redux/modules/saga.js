@@ -1,7 +1,8 @@
 import {fork, all} from 'redux-saga/effects'
-import auth from './auth/saga'
 import fabric from './fabric/saga'
+import auth from './auth/saga'
+import listings from './listings/saga'
 
 export default function* root() {
-  yield all([fork(auth), fork(fabric)])
+  yield all([fork(fabric), fork(auth), fork(listings)])
 }

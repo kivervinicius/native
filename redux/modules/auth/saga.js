@@ -13,6 +13,6 @@ function* signIn({email, password}) {
   }
 }
 
-export default function* root() {
+export default function* authSaga() {
   yield all([takeLatest(actions.SIGN_IN, signIn)])
 }

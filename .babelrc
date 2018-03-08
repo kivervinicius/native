@@ -1,6 +1,7 @@
 {
   "presets": ["babel-preset-react-native-stage-0/decorator-support"],
   "plugins": [
+    "lodash",
     "react-require",
     "functional-hmr",
     [
@@ -15,7 +16,7 @@
     [
       "transform-inline-environment-variables",
       {
-        "include": ["NODE_ENV", "API_URL"]
+        "include": ["NODE_ENV", "API_URL", "CDN_URL"]
       }
     ]
   ],
