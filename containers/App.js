@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {StackNavigator} from 'react-navigation'
 
 import Header from '@/containers/shared/Header'
-import * as views from '@/containers/views'
+import views from '@/containers/views'
 
 const Stack = StackNavigator(views, {
   initialRouteName: 'home',

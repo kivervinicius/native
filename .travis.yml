@@ -36,6 +36,8 @@ matrix:
     - pip install awscli --upgrade --user `whoami`
     - curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
     - sudo apt-get install -y nodejs
+    - rvm install "ruby-$RUBY_VERSION"
+    - rvm use $RUBY_VERSION
   - os: osx
     language: objective-c
     osx_image: xcode8.3
@@ -45,18 +47,17 @@ matrix:
     before_install:
     - brew update
     - brew install yarn ios-sim jq ios-deploy cocoapods awscli
-    - rvm install ruby-2.3.0
-    - rvm use 2.3.0
+    - rvm install "ruby-$RUBY_VERSION"
+    - rvm use $RUBY_VERSION
     - (cd ios && pod install)
   allow_failures:
   - os: osx
 
 env:
   global:
-  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - RUBY_VERSION=2.3.6
   - LANG=pt_BR.UTF-8
-  - TESTERS=$([ $TRAVIS_BRANCH == "master" ] && echo "${BETA_TESTERS}" || echo "${ALPHA_TESTERS}")
-  - PROMOTE=$([ $TRAVIS_BRANCH == "master" && $TRAVIS_EVENT_TYPE == "pull_request" ] && echo "true" || echo "false")
+  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
 cache:
   yarn: true
@@ -74,16 +75,37 @@ before_cache:
 
 install:
 - bundle install
-- yarn install
+- yarn install --frozen-lockfile --production=false
 
 before_script:
 - export ANDROID_KEYSTORE_FILE=~/.secrets/keystore.jks
 - aws s3 sync s3://$AWS_SECRETS_BUCKET ~/.secrets
 
 script:
-- bundle exec fastlane $PLATFORM beta
-  bump:true
-  signed:true
-  groups:$TESTERS
-  promote:$PROMOTE
-  build_number:$TRAVIS_BUILD_NUMBER
+- yarn test
+
+deploy:
+  - provider: script
+    script: >-
+      rvm use $RUBY_VERSION do
+      bundle exec fastlane $PLATFORM beta
+      bump:true
+      signed:true
+      groups:$ALPHA_TESTERS
+      version_suffix:$TRAVIS_BRANCH
+      build_number:$TRAVIS_BUILD_NUMBER
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH != master
+  - provider: script
+    script: >-
+      rvm use $RUBY_VERSION do
+      bundle exec fastlane $PLATFORM beta
+      bump:true
+      signed:true
+      groups:$BETA_TESTERS
+      build_number:$TRAVIS_BUILD_NUMBER
+    skip_cleanup: true
+    on:
+      branch: master
