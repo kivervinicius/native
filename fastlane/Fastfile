@@ -96,7 +96,7 @@ platform :ios do
 
   lane :build do |bump: false, **options|
     bump options if bump
-    gym(scheme: 'EmCasa', project: IOS_DIR)
+    gym(scheme: 'EmCasa', project: PROJECT_DIR)
   end
 end
 
