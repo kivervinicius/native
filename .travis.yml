@@ -45,8 +45,6 @@ matrix:
     before_install:
     - brew update
     - brew install yarn ios-sim jq ios-deploy cocoapods awscli
-    - rvm install ruby-2.3.0
-    - rvm use 2.3.0
     - (cd ios && pod install)
   allow_failures:
   - os: osx
@@ -54,6 +52,7 @@ matrix:
 env:
   global:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - TRAVIS_RUBY_VERSION=2.3.6
   - LANG=pt_BR.UTF-8
   - TESTERS=$([ $TRAVIS_BRANCH == "master" ] && echo "${BETA_TESTERS}" || echo "${ALPHA_TESTERS}")
   - PROMOTE=$([ $TRAVIS_BRANCH == "master" && $TRAVIS_EVENT_TYPE == "pull_request" ] && echo "true" || echo "false")
@@ -72,6 +71,9 @@ before_cache:
 - rm -rf $HOME/.gradle/caches/3.5/fileHashes/
 - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
 
+before_install:
+- rvm use $TRAVIS_RUBY_VERSION
+
 install:
 - bundle install
 - yarn install --frozen-lockfile --production=false
@@ -83,12 +85,10 @@ before_script:
 script:
 - yarn test
 
-before_deploy:
-  - bundle install
-
 deploy:
   - provider: script
     script: >
+      rvm use $TRAVIS_RUBY_VERSION do
       bundle exec fastlane $PLATFORM beta
       bump:true
       signed:true
