@@ -94,4 +94,5 @@ deploy:
       build_number:$BUILD_NUMBER
     # skip_cleanup: true
     on:
+      all_branches: true
       condition: $TRAVIS_BRANCH != master
