@@ -55,11 +55,11 @@ matrix:
 
 env:
   global:
-  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
   - RUBY_VERSION=2.3.6
   - LANG=pt_BR.UTF-8
-  - TESTERS=$([ $TRAVIS_BRANCH == "master" ] && echo "${BETA_TESTERS}" || echo "${ALPHA_TESTERS}")
-  - PROMOTE=$([ $TRAVIS_BRANCH == "master" && $TRAVIS_EVENT_TYPE == "pull_request" ] && echo "true" || echo "false")
+  - BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
+  - VERSION=$(node -e "console.log(require('./package.json').version)")
+  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
 cache:
   yarn: true
