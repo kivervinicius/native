@@ -1,12 +1,14 @@
 import {StyleSheet} from 'react-native'
 
+import {elevation} from '@/assets/styles'
 import * as colors from '@/assets/colors'
 
 export default StyleSheet.create({
   container: {
     margin: 10,
     borderRadius: 5,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    ...elevation(4)
   },
   imageContainer: {
     display: 'flex',
