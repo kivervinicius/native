@@ -13,7 +13,10 @@ export default StyleSheet.create({
   imageContainer: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'hidden',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5
   },
   image: {
     borderTopLeftRadius: 5,
