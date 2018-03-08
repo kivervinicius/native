@@ -74,16 +74,24 @@ before_cache:
 
 install:
 - bundle install
-- yarn install
+- yarn install --frozen-lockfile --production=false
 
 before_script:
 - export ANDROID_KEYSTORE_FILE=~/.secrets/keystore.jks
 - aws s3 sync s3://$AWS_SECRETS_BUCKET ~/.secrets
 
 script:
-- bundle exec fastlane $PLATFORM beta
-  bump:true
-  signed:true
-  groups:$TESTERS
-  promote:$PROMOTE
-  build_number:$TRAVIS_BUILD_NUMBER
+- yarn test
+
+deploy:
+  - provider: script
+    script: >
+      bundle exec fastlane $PLATFORM beta
+      bump:true
+      signed:true
+      groups:$ALPHA_TESTERS
+      version:"$VERSION-$TRAVIS_BRANCH"
+      build_number:$BUILD_NUMBER
+    # skip_cleanup: true
+    on:
+      condition: $TRAVIS_BRANCH != master
