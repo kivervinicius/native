@@ -28,7 +28,9 @@
   "jest": {
     "preset": "react-native",
     "setupFiles": ["./__test__/setup.js"],
-    "transformIgnorePatterns": ["/node_modules/(?!(react-native))/"]
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(react-native|react-navigation))/"
+    ]
   },
   "dependencies": {
     "es6-error": "^4.1.1",
