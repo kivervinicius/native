@@ -8,6 +8,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   currency: {
-    marginTop: 2
+    marginTop: '2%',
+    marginRight: '2%'
   }
 })
