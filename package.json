@@ -32,7 +32,7 @@
     "unmockedModulePathPatterns": ["/node_modules/"],
     "setupFiles": ["./__test__/setup.js"],
     "transformIgnorePatterns": [
-      "/node_modules/(?!(react-native|react-navigation))/"
+      "/node_modules/(?!(jest-)?react-native|react-navigation)/"
     ]
   },
   "dependencies": {
