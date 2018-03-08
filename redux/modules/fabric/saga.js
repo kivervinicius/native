@@ -8,13 +8,17 @@ import * as auth from '../auth'
 import * as actions from './index'
 
 function reportError({error}) {
-  let message = error.trace || error.message
-  if (typeof message !== 'string') message = message.toString()
-  if (Platform.OS === 'ios') {
-    Crashlytics.reportError(message)
-  } else {
-    Crashlytics.logException(message)
+  if (!__DEV__) {
+    let message = error.trace || error.message
+    if (typeof message !== 'string') message = message.toString()
+    if (Platform.OS === 'ios') {
+      Crashlytics.reportError(message)
+    } else {
+      Crashlytics.logException(message)
+    }
   }
+  // eslint-disable-next-line no-console
+  console.error(error)
 }
 
 function identifySession({data}) {
