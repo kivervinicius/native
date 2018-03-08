@@ -1,22 +1,14 @@
 import {Image} from 'react-native'
 
-const WIDTH = 264
-const HEIGHT = 72
+import {withRatio} from '@/assets/image'
 
-export default function Logo({width, height, style, ...props}) {
-  const newStyle = Object.assign(
-    {
-      width,
-      height
-    },
-    style || {}
-  )
-  if (height) newStyle.width = WIDTH * height / HEIGHT
-  else if (width) newStyle.height = HEIGHT * width / WIDTH
+const ratio = withRatio({width: 264, height: 72})
+
+export default function Logo({width, height, ...props}) {
   return (
     <Image
       {...props}
-      style={newStyle}
+      style={ratio({width, height})}
       source={require('@/assets/img/logo.png')}
     />
   )
