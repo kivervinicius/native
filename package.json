@@ -15,7 +15,8 @@
     "eslint-plugin-react": "^7.7.0",
     "jest-react-native": "^18.0.0",
     "prettier": "^1.10.2",
-    "react-test-renderer": "16.2.0"
+    "react-test-renderer": "16.2.0",
+    "redux-logger": "^3.0.6"
   },
   "scripts": {
     "start": "react-native start",
@@ -27,11 +28,15 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "babel-plugin-lodash": "^3.3.2",
     "es6-error": "^4.1.1",
+    "immutability-helper": "^2.6.6",
+    "lodash": "^4.17.5",
     "querystring": "^0.2.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-fabric": "^0.5.1",
+    "react-native-fabric-crashlytics": "^0.1.8",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.2.0",
     "react-redux": "^5.0.7",

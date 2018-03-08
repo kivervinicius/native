@@ -3,6 +3,7 @@ import {combineReducers} from 'redux'
 import {persistReducer} from 'redux-persist'
 
 import auth from './auth'
+import listings from './listings'
 
 const persistent = (reducer, options = {}) =>
   persistReducer(
@@ -15,5 +16,6 @@ const persistent = (reducer, options = {}) =>
   )
 
 export default combineReducers({
-  auth: persistent(auth, {blacklist: ['error', 'loading']})
+  auth: persistent(auth, {blacklist: ['error', 'loading']}),
+  listings
 })
