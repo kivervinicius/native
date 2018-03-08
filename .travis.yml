@@ -57,8 +57,6 @@ env:
   global:
   - RUBY_VERSION=2.3.6
   - LANG=pt_BR.UTF-8
-  - BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
-  - VERSION=$(node -e "console.log(require('./package.json').version)")
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
 cache:
@@ -86,6 +84,9 @@ before_script:
 script:
 - yarn test
 
+before_deplopy:
+  - export VERSION=$(node -e "console.log(require('./package.json').version)")
+
 deploy:
   - provider: script
     script: >
@@ -95,7 +96,7 @@ deploy:
       signed:true
       groups:$ALPHA_TESTERS
       version:"$VERSION-$TRAVIS_BRANCH"
-      build_number:$BUILD_NUMBER
+      build_number:$TRAVIS_BUILD_NUMBER
     skip_cleanup: true
     on:
       all_branches: true
