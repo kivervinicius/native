@@ -84,7 +84,7 @@ script:
 - yarn test
 
 before_deploy:
-  bundle install
+  - bundle install
 
 deploy:
   - provider: script
