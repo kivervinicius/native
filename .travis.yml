@@ -84,18 +84,15 @@ before_script:
 script:
 - yarn test
 
-before_deplopy:
-  - export VERSION=$(node -e "console.log(require('./package.json').version)")
-
 deploy:
   - provider: script
-    script: >
+    script: >-
       rvm use $RUBY_VERSION do
       bundle exec fastlane $PLATFORM beta
       bump:true
       signed:true
       groups:$ALPHA_TESTERS
-      version:"$VERSION-$TRAVIS_BRANCH"
+      version_suffix:$TRAVIS_BRANCH
       build_number:$TRAVIS_BUILD_NUMBER
     skip_cleanup: true
     on:
