@@ -16,12 +16,13 @@ export default function ListingImage({
   thumbnail,
   width,
   height,
+  style,
   ...props
 }) {
   return (
     <Image
       {...props}
-      style={imageRatio({width, height})}
+      style={[imageRatio({width, height}), style]}
       source={{uri: imageUrl(filename, thumbnail)}}
     />
   )
