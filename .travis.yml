@@ -92,7 +92,7 @@ deploy:
       groups:$ALPHA_TESTERS
       version:"$VERSION-$TRAVIS_BRANCH"
       build_number:$BUILD_NUMBER
-    # skip_cleanup: true
+    skip_cleanup: true
     on:
       all_branches: true
       condition: $TRAVIS_BRANCH != master
