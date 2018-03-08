@@ -36,6 +36,8 @@ matrix:
     - pip install awscli --upgrade --user `whoami`
     - curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
     - sudo apt-get install -y nodejs
+    - rvm install "ruby-$RUBY_VERSION"
+    - rvm use $RUBY_VERSION
   - os: osx
     language: objective-c
     osx_image: xcode8.3
@@ -45,6 +47,8 @@ matrix:
     before_install:
     - brew update
     - brew install yarn ios-sim jq ios-deploy cocoapods awscli
+    - rvm install "ruby-$RUBY_VERSION"
+    - rvm use $RUBY_VERSION
     - (cd ios && pod install)
   allow_failures:
   - os: osx
@@ -52,7 +56,7 @@ matrix:
 env:
   global:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
-  - TRAVIS_RUBY_VERSION=2.3.6
+  - RUBY_VERSION=2.3.6
   - LANG=pt_BR.UTF-8
   - TESTERS=$([ $TRAVIS_BRANCH == "master" ] && echo "${BETA_TESTERS}" || echo "${ALPHA_TESTERS}")
   - PROMOTE=$([ $TRAVIS_BRANCH == "master" && $TRAVIS_EVENT_TYPE == "pull_request" ] && echo "true" || echo "false")
@@ -71,9 +75,6 @@ before_cache:
 - rm -rf $HOME/.gradle/caches/3.5/fileHashes/
 - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
 
-before_install:
-- rvm use $TRAVIS_RUBY_VERSION
-
 install:
 - bundle install
 - yarn install --frozen-lockfile --production=false
@@ -88,7 +89,7 @@ script:
 deploy:
   - provider: script
     script: >
-      rvm use $TRAVIS_RUBY_VERSION do
+      rvm use $RUBY_VERSION do
       bundle exec fastlane $PLATFORM beta
       bump:true
       signed:true
