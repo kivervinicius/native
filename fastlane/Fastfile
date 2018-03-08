@@ -40,9 +40,10 @@ platform :android do
   VERSION_NAME_PATTERN = '(versionName) "(.*)"'
 
   desc "Bump build and version numbers"
-  lane :bump do |build_number: nil, version: nil|
+  lane :bump do |build_number: nil, version: nil, version_suffix: nil|
     gradle_build = "#{ANDROID_DIR}/app/build.gradle"
     version ||= package[:version]
+    version << "-#{version_suffix}" if version_suffix
     unless build_number
       build_number = sh "awk 'match($0,/#{BUILD_NUMBER_PATTERN}/) {print $2}' #{gradle_build}"
       build_number = build_number.to_i + 1
@@ -86,8 +87,9 @@ platform :ios do
   PROJECT_DIR="#{IOS_DIR}/EmCasa.xcodeproj"
 
   desc "Bump build and version numbers"
-  lane :bump do |build_number: nil, version: nil|
+  lane :bump do |build_number: nil, version: nil, version_suffix: nil|
     version ||= package[:version]
+    version << "-#{version_suffix}" if version_suffix
     increment_build_number(build_number: build_number, xcodeproj: PROJECT_DIR)
     increment_version_number(version_number: version, xcodeproj: PROJECT_DIR)
   end
