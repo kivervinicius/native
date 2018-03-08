@@ -98,3 +98,14 @@ deploy:
     on:
       all_branches: true
       condition: $TRAVIS_BRANCH != master
+  - provider: script
+    script: >-
+      rvm use $RUBY_VERSION do
+      bundle exec fastlane $PLATFORM beta
+      bump:true
+      signed:true
+      groups:$BETA_TESTERS
+      build_number:$TRAVIS_BUILD_NUMBER
+    skip_cleanup: true
+    on:
+      branch: master
