@@ -1,5 +1,7 @@
 import {put, call, all, takeLatest} from 'redux-saga/effects'
 
+import ResponseError from '@/lib/api/ResponseError'
+import {reportError} from '@/redux/modules/fabric'
 import * as api from '@/lib/services/listings'
 import * as actions from './index'
 
@@ -17,6 +19,7 @@ function* load({key, options}) {
     yield put(actions.success(key, response.listings, pagination(response)))
   } catch (err) {
     yield put(actions.failure(key, err))
+    if (!(err instanceof ResponseError)) yield put(reportError(err))
   }
 }
 
