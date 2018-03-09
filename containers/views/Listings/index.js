@@ -10,5 +10,5 @@ export const screen = ListingsScreen
 
 export const navigationOptions = () => ({
   title: 'EmCasa | Pesquisa',
-  header: <Search />
+  header: (props) => <Search {...props} />
 })
