@@ -6,7 +6,7 @@ import {getListings} from '@/redux/modules/listings/feed/selectors'
 import Feed from '@/components/listings/Feed'
 
 class FeedApp extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const {type, request} = this.props
     request(type)
   }
