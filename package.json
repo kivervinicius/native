@@ -1,5 +1,5 @@
 {
-  "name": "em-casa-native",
+  "name": "EmCasa",
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
@@ -32,8 +32,12 @@
   "jest": {
     "preset": "react-native",
     "automock": true,
-    "unmockedModulePathPatterns": ["/node_modules/"],
-    "setupFiles": ["./__test__/setup.js"],
+    "unmockedModulePathPatterns": [
+      "/node_modules/"
+    ],
+    "setupFiles": [
+      "./__test__/setup.js"
+    ],
     "transformIgnorePatterns": [
       "/node_modules/(?!(jest-)?react-native|react-navigation)/"
     ]
@@ -44,7 +48,7 @@
     "immutability-helper": "^2.6.6",
     "lodash": "^4.17.5",
     "querystring": "^0.2.0",
-    "react": "16.2.0",
+    "react": "^16.3.0-alpha.1",
     "react-native": "0.54.0",
     "react-native-fabric": "^0.5.1",
     "react-native-fabric-crashlytics": "^0.1.8",
