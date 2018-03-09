@@ -6,7 +6,7 @@ import views from '@/containers/views'
 
 const Stack = StackNavigator(views, {
   initialRouteName: 'home',
-  headerMode: 'screen',
+  headerMode: 'float',
   navigationOptions: {
     title: 'EmCasa',
     header: (props) => <Header {...props} />
