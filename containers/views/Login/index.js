@@ -32,6 +32,6 @@ export default LoginScreen
 
 export const screen = LoginScreen
 
-export const navigationProps = () => ({
+export const navigationOptions = () => ({
   title: 'EmCasa | Login'
 })
