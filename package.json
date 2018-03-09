@@ -1,5 +1,5 @@
 {
-  "name": "em-casa-native",
+  "name": "EmCasa",
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
@@ -17,21 +17,27 @@
     "jest": "^22.4.2",
     "jest-react-native": "^18.0.0",
     "prettier": "^1.10.2",
+    "react-devtools": "^3.1.0",
     "react-test-renderer": "16.2.0",
-    "redux-mock-store": "^1.5.1",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.1"
   },
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "devtools": "react-devtools",
     "test": "node node_modules/jest/bin/jest.js"
   },
   "jest": {
     "preset": "react-native",
     "automock": true,
-    "unmockedModulePathPatterns": ["/node_modules/"],
-    "setupFiles": ["./__test__/setup.js"],
+    "unmockedModulePathPatterns": [
+      "/node_modules/"
+    ],
+    "setupFiles": [
+      "./__test__/setup.js"
+    ],
     "transformIgnorePatterns": [
       "/node_modules/(?!(jest-)?react-native|react-navigation)/"
     ]
@@ -42,7 +48,7 @@
     "immutability-helper": "^2.6.6",
     "lodash": "^4.17.5",
     "querystring": "^0.2.0",
-    "react": "16.2.0",
+    "react": "^16.3.0-alpha.1",
     "react-native": "0.54.0",
     "react-native-fabric": "^0.5.1",
     "react-native-fabric-crashlytics": "^0.1.8",
