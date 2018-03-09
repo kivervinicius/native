@@ -11,8 +11,12 @@ export const withRatio = (dimensions) => (options) => {
 }
 
 export const url = (filename, options = {}) => {
-  let display = ['f_auto', 'c_fit']
+  let display = ['f_auto']
   if (options.height) display.push(`h_${options.height}`)
   if (options.width) display.push(`w_${options.width}`)
+  if (options.mode) display.push(`c_${options.mode}`)
+  else if (options.height && options.width)
+    // Default to fill mode on images with fixed size
+    display.push('c_fill')
   return `${CDN_URL}/${display.join(',')}/v1513818385/${filename}`
 }
