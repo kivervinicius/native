@@ -14,9 +14,8 @@ export default class Header extends Component {
     const {auth} = this.props
 
     return (
-      <SafeAreaView>
-        <StatusBar barStyle="dark-content" />
-        <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.wrapper}>
           <View style={styles.logo}>
             <TouchableOpacity onPress={this.navigateTo('home')}>
               <Logo height={40} />

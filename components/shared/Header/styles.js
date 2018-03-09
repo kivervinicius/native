@@ -1,13 +1,15 @@
-import {Platform, StyleSheet} from 'react-native'
+import {StyleSheet} from 'react-native'
 
 export default StyleSheet.create({
   container: {
+    backgroundColor: 'white'
+  },
+  wrapper: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
-    padding: 5
+    padding: 10
   },
   logo: {
     flex: 0
