@@ -1,8 +1,9 @@
 import _ from 'lodash'
 import update from 'immutability-helper'
 import {Component} from 'react'
-import {SafeAreaView, View, Modal} from 'react-native'
+import {SafeAreaView, View} from 'react-native'
 
+import Modal from '@/components/shared/Modal'
 import Button from './Button'
 import Menu from './Menu'
 import * as fields from './fields'
@@ -75,14 +76,10 @@ export default class ListingsSearch extends Component {
         </View>
         <Modal
           visible={Boolean(visible)}
-          animationType="slide"
           presentationStyle="formSheet"
-          onRequestClose={this.onHide}
           onDismiss={this.onHide}
         >
-          <SafeAreaView style={{flex: 1}}>
-            {visible && this.renderField(visible)}
-          </SafeAreaView>
+          {visible && this.renderField(visible)}
         </Modal>
       </SafeAreaView>
     )
