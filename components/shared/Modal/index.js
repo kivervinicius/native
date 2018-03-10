@@ -13,7 +13,7 @@ export default function ControlledModal({
 }) {
   return (
     <Modal {...props} onRequestClose={onDismiss} onDismiss={onDismiss}>
-      <SafeAreaView style={[{flex: 1}, style]}>
+      <SafeAreaView style={[styles.container, style]}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.closeButton} onPress={onDismiss}>
             <Icon name={closeIcon} style={styles.closeIcon} />

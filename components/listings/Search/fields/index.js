@@ -2,19 +2,45 @@ import InputRange from './InputRange'
 import SelectRange from './SelectRange'
 import Select from './Select'
 
-const ROOM_OPTIONS = [1, 2, 3, 4]
-const AREA_OPTIONS = [50, 80, 100, 200, 300, 500]
+const mapRange = (options, label) =>
+  options.map((i) => ({
+    label: typeof label === 'function' ? label(i) : `${i} ${label}`,
+    value: i
+  }))
 
-const mapRange = (label) => (i) => ({
-  label: typeof label === 'function' ? label(i) : `${i} ${label}`,
-  value: i
-})
+const assign = (options) => (Target) => {
+  const Component = (props) => <Target {...props} />
+  return Object.assign(Component, options)
+}
 
-export const price = InputRange
-export const rooms = (props) => (
-  <SelectRange options={mapRange('quartos')(ROOM_OPTIONS)} {...props} />
-)
-export const area = (props) => (
-  <SelectRange options={mapRange('m²')(AREA_OPTIONS)} {...props} />
-)
-export const neighborhoods = (props) => <Select options={[]} {...props} />
+export const price = assign({
+  title: 'Preço'
+})(InputRange)
+
+export const rooms = assign({
+  title: 'Quartos',
+  defaultProps: {
+    options: mapRange([1, 2, 3, 4], 'quartos')
+  }
+})(SelectRange)
+
+export const area = assign({
+  title: 'Área',
+  defaultProps: {
+    options: mapRange([50, 80, 100, 200, 300, 500], 'm²')
+  }
+})(SelectRange)
+
+export const neighborhoods = assign({
+  title: 'Bairros',
+  defaultProps: {
+    options: []
+  }
+})(Select)
+
+export default {
+  price,
+  rooms,
+  area,
+  neighborhoods
+}

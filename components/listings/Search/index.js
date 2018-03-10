@@ -6,10 +6,10 @@ import {SafeAreaView, View} from 'react-native'
 import Modal from '@/components/shared/Modal'
 import Button from './Button'
 import Menu from './Menu'
-import * as fields from './fields'
+import fields from './fields'
 import styles from './styles'
 
-const SHOW_MORE = Symbol('more')
+const SHOW_MORE = Symbol('SHOW_MORE')
 
 export default class ListingsSearch extends Component {
   state = {
@@ -51,18 +51,19 @@ export default class ListingsSearch extends Component {
     if (type === SHOW_MORE) {
       return (
         <Menu
-          options={[
-            {label: 'Bairros', value: 'neighborhoods'},
-            {label: 'Preço', value: 'price'},
-            {label: 'Área', value: 'area'},
-            {label: 'Quartos', value: 'rooms'}
-          ]}
+          options={_.map(fields, (field, key) => ({
+            label: field.title,
+            value: key
+          }))}
           onSelect={this.onShow}
         />
       )
+    } else if (type in fields) {
+      const Field = fields[type]
+      return (
+        <Field value={this.getValue(type)} onChange={this.onChange(type)} />
+      )
     }
-    const Field = fields[type]
-    return <Field value={this.getValue(type)} onChange={this.onChange(type)} />
   }
 
   render() {
@@ -70,8 +71,11 @@ export default class ListingsSearch extends Component {
     return (
       <SafeAreaView style={styles.wrapper}>
         <View style={styles.container}>
-          <Button onPress={this.onShow('price')}>Preço</Button>
-          <Button onPress={this.onShow('neighborhoods')}>Bairros</Button>
+          {['price', 'neighborhoods'].map((key) => (
+            <Button key={key} onPress={this.onShow(key)}>
+              {fields[key].title}
+            </Button>
+          ))}
           <Button onPress={this.onShow(SHOW_MORE)}>Mais</Button>
         </View>
         <Modal
