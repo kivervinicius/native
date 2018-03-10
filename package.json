@@ -52,6 +52,7 @@
     "react-native": "0.54.0",
     "react-native-fabric": "^0.5.1",
     "react-native-fabric-crashlytics": "^0.1.8",
+    "react-native-sectioned-multi-select": "^0.3.5",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.5.0",
     "react-redux": "^5.0.7",
