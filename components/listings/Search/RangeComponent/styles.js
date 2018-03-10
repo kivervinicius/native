@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native'
 
+import {margin} from '@/assets/styles'
+
 export default StyleSheet.create({
   container: {
     display: 'flex',
@@ -11,6 +13,7 @@ export default StyleSheet.create({
     flex: 0.5
   },
   divider: {
-    fontWeight: '600'
+    fontWeight: '600',
+    ...margin(null, 10)
   }
 })
