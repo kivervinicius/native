@@ -2,11 +2,13 @@ import InputRange from './InputRange'
 import SelectRange from './SelectRange'
 import Select from './Select'
 
-const mapRange = (options, label) =>
-  options.map((i) => ({
-    label: typeof label === 'function' ? label(i) : `${i} ${label}`,
-    value: i
-  }))
+const mapRange = (options, label = '') =>
+  [{label: String.fromCharCode(0x2500), value: undefined}].concat(
+    options.map((i) => ({
+      label: typeof label === 'function' ? label(i) : `${i} ${label}`,
+      value: i
+    }))
+  )
 
 const assign = (options) => (Target) => {
   const Component = (props) => <Target {...props} />
@@ -20,7 +22,7 @@ export const price = assign({
 export const rooms = assign({
   title: 'Quartos',
   defaultProps: {
-    options: mapRange([1, 2, 3, 4], 'quartos')
+    options: mapRange([1, 2, 3, 4])
   }
 })(SelectRange)
 

@@ -10,7 +10,7 @@ export default class SelectRangeField extends RangeComponent {
         selectedValue={this.getValue(type)}
         onValueChange={this.onChange(type)}
       >
-        {options.map((props) => <Picker.Item key={props.value} {...props} />)}
+        {options.map((props) => <Picker.Item key={props.label} {...props} />)}
       </Picker>
     )
   }

@@ -1,16 +1,21 @@
+import _ from 'lodash/fp'
 import {Component} from 'react'
 import {View, Text} from 'react-native'
 
 import styles from './styles'
 
+const filterResult = _.omitBy(_.isNil)
+
 export default class RangeFieldComponent extends Component {
   styles = {}
 
   onChange = (type) => (value) =>
-    this.props.onChange({
-      ...this.props.value,
-      [type]: this.parseValue(value)
-    })
+    this.props.onChange(
+      filterResult({
+        ...this.props.value,
+        [type]: this.parseValue(value)
+      })
+    )
 
   parseValue = (value) => value
 
