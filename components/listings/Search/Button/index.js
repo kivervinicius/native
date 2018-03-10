@@ -6,11 +6,9 @@ import styles from './styles'
 export default function FilterButton({children, icon, ...props}) {
   return (
     <TouchableOpacity {...props}>
-      <View style={styles.buttonContainer}>
-        {icon && <Icon name={icon} size={25} style={styles.buttonText} />}
-        {children && (
-          <Text style={styles.buttonText}>{children.toUpperCase()}</Text>
-        )}
+      <View style={styles.container}>
+        {icon && <Icon name={icon} size={25} style={styles.icon} />}
+        {children && <Text style={styles.text}>{children.toUpperCase()}</Text>}
       </View>
     </TouchableOpacity>
   )

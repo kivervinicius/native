@@ -11,19 +11,5 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10
-  },
-  buttonContainer: {
-    borderRadius: 15,
-    height: 35,
-    backgroundColor: 'grey',
-    ...padding(0, 15)
-  },
-  buttonText: {
-    fontSize: 14,
-    lineHeight: 35,
-    fontWeight: '600',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    includeFontPadding: false
   }
 })
