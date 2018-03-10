@@ -1,3 +1,6 @@
+import _ from 'lodash'
+
+// Simulate drop shadow elevation across all platforms
 export const elevation = (value) => ({
   elevation: value,
   shadowColor: '#666',
@@ -8,3 +11,17 @@ export const elevation = (value) => ({
     height: 2.5 * value / 5
   }
 })
+
+// Mimic CSS's shorthand padding/margin syntax
+export const spacing = (prefix) =>
+  function(top, right, bottom, left) {
+    const style = {top, left, bottom, right}
+    if (arguments.length === 1) return {[prefix]: top}
+    if (typeof bottom === 'undefined') style.bottom = top
+    if (typeof left === 'undefined') style.left = right
+    return _.mapKeys(style, (__, key) => prefix + _.upperFirst(key))
+  }
+
+export const padding = spacing('padding')
+
+export const margin = spacing('margin')
