@@ -1,9 +1,11 @@
 import _ from 'lodash'
 import update from 'immutability-helper'
 import {Component} from 'react'
-import {SafeAreaView, View} from 'react-native'
+import {SafeAreaView, View, Modal} from 'react-native'
 
 import Button from './Button'
+import Menu from './Menu'
+import * as fields from './fields'
 import styles from './styles'
 
 const SHOW_MORE = Symbol('more')
@@ -42,7 +44,28 @@ export default class ListingsSearch extends Component {
 
   onSubmit = () => this.props.onSubmit(this.state.value)
 
+  getValue = (type) => this.state.value[type]
+
+  renderField(type) {
+    if (type === SHOW_MORE) {
+      return (
+        <Menu
+          options={[
+            {label: 'Bairros', value: 'neighborhoods'},
+            {label: 'Preço', value: 'price'},
+            {label: 'Área', value: 'area'},
+            {label: 'Quartos', value: 'rooms'}
+          ]}
+          onSelect={this.onShow}
+        />
+      )
+    }
+    const Field = fields[type]
+    return <Field value={this.getValue(type)} onChange={this.onChange(type)} />
+  }
+
   render() {
+    const {visible} = this.state
     return (
       <SafeAreaView style={styles.wrapper}>
         <View style={styles.container}>
@@ -50,6 +73,17 @@ export default class ListingsSearch extends Component {
           <Button onPress={this.onShow('neighborhoods')}>Bairros</Button>
           <Button onPress={this.onShow(SHOW_MORE)}>Mais</Button>
         </View>
+        <Modal
+          visible={Boolean(visible)}
+          animationType="slide"
+          presentationStyle="formSheet"
+          onRequestClose={this.onHide}
+          onDismiss={this.onHide}
+        >
+          <SafeAreaView style={{flex: 1}}>
+            {visible && this.renderField(visible)}
+          </SafeAreaView>
+        </Modal>
       </SafeAreaView>
     )
   }
