@@ -3,11 +3,14 @@ import update from 'immutability-helper'
 import {Component} from 'react'
 import {SafeAreaView, View} from 'react-native'
 
+import Button from './Button'
 import styles from './styles'
+
+const SHOW_MORE = Symbol('more')
 
 export default class ListingsSearch extends Component {
   state = {
-    visible: [],
+    visible: undefined,
     value: {}
   }
 
@@ -33,12 +36,20 @@ export default class ListingsSearch extends Component {
       })
     }))
 
+  onShow = (field) => () => this.setState({visible: field})
+
+  onHide = () => this.setState({visible: undefined})
+
   onSubmit = () => this.props.onSubmit(this.state.value)
 
   render() {
     return (
       <SafeAreaView style={styles.wrapper}>
-        <View style={styles.container}>...</View>
+        <View style={styles.container}>
+          <Button onPress={this.onShow('price')}>Preço</Button>
+          <Button onPress={this.onShow('neighborhoods')}>Bairros</Button>
+          <Button onPress={this.onShow(SHOW_MORE)}>Mais</Button>
+        </View>
       </SafeAreaView>
     )
   }
