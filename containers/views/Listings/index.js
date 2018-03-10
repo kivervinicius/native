@@ -10,5 +10,5 @@ export const screen = ListingsScreen
 
 export const navigationOptions = () => ({
   title: 'EmCasa | Pesquisa',
-  header: (props) => <Search {...props} />
+  header: (props) => <Search onSubmit={console.log} {...props} />
 })

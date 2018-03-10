@@ -5,6 +5,7 @@ import {SafeAreaView, View} from 'react-native'
 
 import Modal from '@/components/shared/Modal'
 import Button from './Button'
+import Field from './Field'
 import Menu from './Menu'
 import fields from './fields'
 import styles from './styles'
@@ -43,11 +44,18 @@ export default class ListingsSearch extends Component {
     this.setState(({location}) => ({location: [...location, field]}))
 
   onPopLocation = () =>
-    this.setState(({location}) => ({
-      location: location.slice(0, location.length - 1)
-    }))
+    this.setState(
+      ({location}) => ({
+        location: location.slice(0, location.length - 1)
+      }),
+      () => {
+        if (this.state.location.length === 0) this.onSubmit()
+      }
+    )
 
-  onSubmit = () => this.props.onSubmit(this.state.value)
+  onClose = () => this.setState({location: []}, this.onSubmit)
+
+  onSubmit = () => this.props.onSubmit(_.omitBy(this.state.value, _.isEmpty))
 
   getValue = (type) => this.state.value[type]
 
@@ -63,9 +71,14 @@ export default class ListingsSearch extends Component {
         />
       )
     } else if (type in fields) {
-      const Field = fields[type]
+      const TargetField = fields[type]
       return (
-        <Field value={this.getValue(type)} onChange={this.onChange(type)} />
+        <Field onSubmit={this.onClose}>
+          <TargetField
+            value={this.getValue(type)}
+            onChange={this.onChange(type)}
+          />
+        </Field>
       )
     }
   }
