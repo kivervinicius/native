@@ -9,8 +9,10 @@ export default class RangeFieldComponent extends Component {
   onChange = (type) => (value) =>
     this.props.onChange({
       ...this.props.value,
-      [type]: value
+      [type]: this.parseValue(value)
     })
+
+  parseValue = (value) => value
 
   getValue = (type) => this.props.value[type]
 
