@@ -6,8 +6,8 @@ export default class InputRangeField extends RangeComponent {
   renderField(type) {
     return (
       <TextInput
-        value={Number(this.getValue(type))}
         keyboardType="numeric"
+        value={Number(this.getValue(type))}
         onChangeText={this.onChange(type)}
       />
     )
