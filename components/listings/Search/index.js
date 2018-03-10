@@ -13,7 +13,7 @@ const SHOW_MORE = Symbol('SHOW_MORE')
 
 export default class ListingsSearch extends Component {
   state = {
-    visible: undefined,
+    location: [],
     value: {}
   }
 
@@ -39,9 +39,13 @@ export default class ListingsSearch extends Component {
       })
     }))
 
-  onShow = (field) => () => this.setState({visible: field})
+  onPushLocation = (field) => () =>
+    this.setState(({location}) => ({location: [...location, field]}))
 
-  onHide = () => this.setState({visible: undefined})
+  onPopLocation = () =>
+    this.setState(({location}) => ({
+      location: location.slice(0, location.length - 1)
+    }))
 
   onSubmit = () => this.props.onSubmit(this.state.value)
 
@@ -55,7 +59,7 @@ export default class ListingsSearch extends Component {
             label: field.title,
             value: key
           }))}
-          onSelect={this.onShow}
+          onSelect={this.onPushLocation}
         />
       )
     } else if (type in fields) {
@@ -66,25 +70,39 @@ export default class ListingsSearch extends Component {
     }
   }
 
+  renderModal() {
+    const {location} = this.state
+    const currentLocation = _.last(location)
+    const props = {
+      visible: location.length > 0,
+      icon: location.length > 1 ? 'chevron-left' : 'close',
+      title: undefined
+    }
+    if (currentLocation in fields) props.title = fields[currentLocation].title
+
+    return (
+      <Modal
+        presentationStyle="formSheet"
+        onDismiss={this.onPopLocation}
+        {...props}
+      >
+        {currentLocation && this.renderField(currentLocation)}
+      </Modal>
+    )
+  }
+
   render() {
-    const {visible} = this.state
     return (
       <SafeAreaView style={styles.wrapper}>
         <View style={styles.container}>
           {['price', 'neighborhoods'].map((key) => (
-            <Button key={key} onPress={this.onShow(key)}>
+            <Button key={key} onPress={this.onPushLocation(key)}>
               {fields[key].title}
             </Button>
           ))}
-          <Button onPress={this.onShow(SHOW_MORE)}>Mais</Button>
+          <Button onPress={this.onPushLocation(SHOW_MORE)}>Mais</Button>
         </View>
-        <Modal
-          visible={Boolean(visible)}
-          presentationStyle="formSheet"
-          onDismiss={this.onHide}
-        >
-          {visible && this.renderField(visible)}
-        </Modal>
+        {this.renderModal()}
       </SafeAreaView>
     )
   }
