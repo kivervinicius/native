@@ -2,7 +2,7 @@ import {TextInput} from 'react-native'
 
 import RangeComponent from '../RangeComponent'
 
-export default class RangeField extends RangeComponent {
+export default class InputRangeField extends RangeComponent {
   renderField(type) {
     return (
       <TextInput
