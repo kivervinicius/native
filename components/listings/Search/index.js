@@ -75,7 +75,7 @@ export default class ListingsSearch extends Component {
     const currentLocation = _.last(location)
     const props = {
       visible: location.length > 0,
-      icon: location.length > 1 ? 'chevron-left' : 'close',
+      closeIcon: location.length > 1 ? 'chevron-left' : 'close',
       title: undefined
     }
     if (currentLocation in fields) props.title = fields[currentLocation].title

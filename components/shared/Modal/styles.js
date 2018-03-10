@@ -10,6 +10,7 @@ export default StyleSheet.create({
   header: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
     ...padding(10, 20)
   },
   closeIcon: {
@@ -17,8 +18,10 @@ export default StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 25,
-    fontWeight: '600'
+    ...padding(0, 40, 0, 15),
+    fontSize: 20,
+    fontWeight: '600',
+    textAlign: 'center'
   },
   body: {
     flex: 1
