@@ -10,7 +10,7 @@ import Menu from './Menu'
 import fields from './fields'
 import styles from './styles'
 
-const SHOW_MORE = Symbol('SHOW_MORE')
+const SHOW_MORE = 'SHOW_MORE'
 
 export default class ListingsSearch extends Component {
   state = {
