@@ -14,6 +14,7 @@ export default StyleSheet.create({
   },
   divider: {
     fontWeight: '600',
-    ...margin(null, 10)
+    textAlign: 'center',
+    ...margin(null, 25)
   }
 })

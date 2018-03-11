@@ -18,7 +18,10 @@ const assign = (options) => (Target) => {
 }
 
 export const price = assign({
-  title: 'Preço'
+  title: 'Preço',
+  defaultProps: {
+    label: (type) => `Preço ${type == 'min' ? 'mínimo' : 'máximo'}`
+  }
 })(InputRange)
 
 export const rooms = assign({
