@@ -1,5 +1,5 @@
 import Shell from '@/containers/shared/Shell'
-import Search from '@/components/listings/Search'
+import Search from '@/containers/listings/Search'
 import Listings from '@/containers/listings/Feed'
 
 export default function ListingsScreen() {

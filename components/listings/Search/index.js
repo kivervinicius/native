@@ -77,6 +77,7 @@ export default class ListingsSearch extends Component {
           <TargetField
             value={this.getValue(type)}
             onChange={this.onChange(type)}
+            neighborhoods={this.props.neighborhoods}
           />
         </Field>
       )

@@ -10,6 +10,8 @@ const mapRange = (options, label = '') =>
     }))
   )
 
+const mapOptions = (options) => options.map((value) => ({label: value, value}))
+
 const assign = (options) => (Target) => {
   const Component = (props) => <Target {...props} />
   return Object.assign(Component, options)
@@ -34,11 +36,10 @@ export const area = assign({
 })(SelectRange)
 
 export const neighborhoods = assign({
-  title: 'Bairros',
-  defaultProps: {
-    options: []
-  }
-})(Select)
+  title: 'Bairros'
+})(({neighborhoods, ...props}) => (
+  <Select options={mapOptions(neighborhoods)} {...props} />
+))
 
 export default {
   price,
