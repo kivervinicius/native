@@ -59,6 +59,9 @@ export default class ListingsSearch extends Component {
 
   getValue = (type) => this.state.value[type]
 
+  isActive = (...keys) =>
+    _.find(keys, (type) => !_.isEmpty(this.getValue(type)))
+
   renderField(type) {
     if (type === SHOW_MORE) {
       return (
@@ -106,15 +109,27 @@ export default class ListingsSearch extends Component {
   }
 
   render() {
+    const buttons = ['price', 'neighborhoods']
+    const moreButtons = _.without(Object.keys(fields), ...buttons)
+
     return (
       <SafeAreaView style={styles.wrapper}>
         <View style={styles.container}>
-          {['price', 'neighborhoods'].map((key) => (
-            <Button key={key} onPress={this.onPushLocation(key)}>
+          {buttons.map((key) => (
+            <Button
+              active={this.isActive(key)}
+              key={key}
+              onPress={this.onPushLocation(key)}
+            >
               {fields[key].title}
             </Button>
           ))}
-          <Button onPress={this.onPushLocation(SHOW_MORE)}>Mais</Button>
+          <Button
+            active={this.isActive(...moreButtons)}
+            onPress={this.onPushLocation(SHOW_MORE)}
+          >
+            Mais
+          </Button>
         </View>
         {this.renderModal()}
       </SafeAreaView>
