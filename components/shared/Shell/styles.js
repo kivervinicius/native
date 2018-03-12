@@ -10,6 +10,9 @@ export default StyleSheet.create({
     flex: 1,
     padding: 10
   },
+  header: {
+    margin: 0
+  },
   nav: {
     flex: 0,
     width: '100%',

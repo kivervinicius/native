@@ -1,13 +1,15 @@
 import _ from 'lodash'
 import update from 'immutability-helper'
 
+export const RESET = 'listings/feed/RESET'
+export const LOAD = 'listings/feed/LOAD'
 export const REQUEST = 'listings/feed/REQUEST'
-export const LOADING = 'listings/feed/LOADING'
 export const SUCCESS = 'listings/feed/SUCCESS'
 export const FAILURE = 'listings/feed/FAILURE'
 
+export const reset = (key) => ({type: RESET, key})
+export const load = (key, options) => ({type: LOAD, key, options})
 export const request = (key, options = {}) => ({type: REQUEST, key, options})
-export const loading = (key, options) => ({type: LOADING, key, options})
 export const success = (key, data, pagination) => ({
   type: SUCCESS,
   key,
@@ -18,7 +20,8 @@ export const failure = (key, error) => ({type: FAILURE, key, error})
 
 function listingsFeed(state = {}, action) {
   switch (action.type) {
-    case LOADING:
+    case RESET:
+    case REQUEST:
     case SUCCESS:
     case FAILURE:
       return update(state, {
@@ -30,7 +33,6 @@ function listingsFeed(state = {}, action) {
 }
 
 const initialState = {
-  options: null,
   loading: false,
   error: null,
   pagination: {
@@ -41,7 +43,9 @@ const initialState = {
 
 listingsFeed.node = (state = initialState, action) => {
   switch (action.type) {
-    case LOADING:
+    case RESET:
+      return initialState
+    case REQUEST:
       return update(state, {
         $merge: {
           loading: true,

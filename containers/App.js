@@ -7,6 +7,7 @@ import views from '@/containers/views'
 
 const Stack = StackNavigator(views, {
   initialRouteName: 'home',
+  initialRouteParams: {},
   headerMode: 'float',
   navigationOptions: {
     title: 'EmCasa',

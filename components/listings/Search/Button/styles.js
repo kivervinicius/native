@@ -9,6 +9,9 @@ export default StyleSheet.create({
     backgroundColor: 'grey',
     ...padding(0, 15)
   },
+  activeContainer: {
+    backgroundColor: 'dodgerblue'
+  },
   text: {
     fontSize: 14,
     lineHeight: 35,
@@ -16,5 +19,8 @@ export default StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     includeFontPadding: false
+  },
+  activeText: {
+    color: 'white'
   }
 })
