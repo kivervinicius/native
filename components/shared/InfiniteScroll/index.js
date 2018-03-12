@@ -11,7 +11,7 @@ export default class InfiniteScroll extends Component {
     onLoad(pagination.currentPage + 1)
   }
 
-  shouldTriggerLoad = ({contentOffset, contentSize, layoutMeasurement}) => {
+  isOverThreshold = ({contentOffset, contentSize, layoutMeasurement}) => {
     const {threshold} = this.props
     const offsetHeight = contentOffset.y
     const height = contentSize.height - layoutMeasurement.height
@@ -20,7 +20,11 @@ export default class InfiniteScroll extends Component {
   }
 
   onScroll = ({nativeEvent}) => {
-    if (this.shouldTriggerLoad(nativeEvent) && !this.isLastPage) {
+    if (
+      !this.props.loading &&
+      !this.isLastPage &&
+      this.isOverThreshold(nativeEvent)
+    ) {
       this.onLoad()
     }
   }
