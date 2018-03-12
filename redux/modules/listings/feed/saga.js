@@ -1,4 +1,4 @@
-import {put, call, all, takeLatest} from 'redux-saga/effects'
+import {put, call, all, race, fork, take, takeLatest} from 'redux-saga/effects'
 
 import ResponseError from '@/lib/api/ResponseError'
 import {reportError} from '@/redux/modules/fabric'
@@ -12,8 +12,8 @@ const pagination = (res) => ({
   totalEntries: res.total_entries
 })
 
-function* load({key, options}) {
-  yield put(actions.loading(key, options))
+function* request({key, options}) {
+  yield put(actions.request(key, options))
   try {
     const response = yield call(api[key], options)
     yield put(actions.success(key, response.listings, pagination(response)))
@@ -23,6 +23,13 @@ function* load({key, options}) {
   }
 }
 
+function* load(action) {
+  yield race({
+    task: yield fork(request, action),
+    cancel: take(actions.RESET)
+  })
+}
+
 export default function* listingsFeedSaga() {
-  yield all([takeLatest(actions.REQUEST, load)])
+  yield all([takeLatest(actions.LOAD, load)])
 }
