@@ -3,7 +3,11 @@ import Search from '@/containers/listings/Search'
 import Listings from '@/containers/listings/Feed'
 
 export default function ListingsScreen(props) {
-  return <Shell header={<Search {...props} />}>{/* ... */}</Shell>
+  return (
+    <Shell header={<Search {...props} />}>
+      <Listings type="search" params={props.navigation.state.params} />
+    </Shell>
+  )
 }
 
 export const screen = ListingsScreen
