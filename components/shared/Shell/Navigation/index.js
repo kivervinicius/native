@@ -7,8 +7,8 @@ export default function Navigation({user, navigation}) {
   const navigateTo = (scene) => () => navigation.navigate(scene)
   return (
     <View style={styles.container}>
-      <Button icon="home-outline" onPress={navigateTo('home')}>
-        Home
+      <Button icon="magnify" onPress={navigateTo('listings')}>
+        Busca
       </Button>
       {user ? (
         <Button icon="account-outline">Perfil</Button>
