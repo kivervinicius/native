@@ -1,9 +1,16 @@
-import {View} from 'react-native'
+import _ from 'lodash/fp'
+import {FlatList} from 'react-native'
 
 import Card from '../Card'
 
-export default function ListingsFeed({data}) {
+const keyExtractor = _.flow(_.get('id'), _.toString)
+
+export default function ListingsFeed(props) {
   return (
-    <View>{data.map((listing) => <Card key={listing.id} {...listing} />)}</View>
+    <FlatList
+      {...props}
+      keyExtractor={keyExtractor}
+      renderItem={({item}) => <Card {...item} />}
+    />
   )
 }
