@@ -8,7 +8,7 @@ import saga from './modules/saga'
 export default function create() {
   const sagaMiddleware = createSagaMiddleware()
   const middleware = [sagaMiddleware]
-  if (process.env.NODE_ENV === 'development') {
+  if (__DEV__) {
     middleware.push(require('redux-logger').default)
   }
   const finalCreateStore = compose(applyMiddleware(...middleware))(createStore)
