@@ -25,7 +25,7 @@ function* request({key, options}) {
 
 function* load(action) {
   yield race({
-    task: yield fork(request, action),
+    task: fork(request, action),
     cancel: take(actions.RESET)
   })
 }
