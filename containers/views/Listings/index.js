@@ -2,13 +2,13 @@ import Shell from '@/containers/shared/Shell'
 import Search from '@/containers/listings/Search'
 import Listings from '@/containers/listings/Feed'
 
-export default function ListingsScreen() {
-  return <Shell>{/* <Listings type="search" /> */}</Shell>
+export default function ListingsScreen(props) {
+  return <Shell header={<Search {...props} />}>{/* ... */}</Shell>
 }
 
 export const screen = ListingsScreen
 
 export const navigationOptions = () => ({
   title: 'EmCasa | Pesquisa',
-  header: (props) => <Search onSubmit={console.log} {...props} />
+  header: null
 })

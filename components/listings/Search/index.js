@@ -25,9 +25,9 @@ export default class ListingsSearch extends Component {
   static getDerivedStateFromProps(props, state) {
     return {
       value: _.defaults({}, props.value, state.value, {
-        area: {min: undefined, max: undefined},
-        price: {min: undefined, max: undefined},
-        rooms: {min: undefined, max: undefined},
+        area: {},
+        price: {},
+        rooms: {},
         neighborhoods: []
       })
     }
