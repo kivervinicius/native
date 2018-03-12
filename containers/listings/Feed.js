@@ -3,7 +3,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import {load, reset} from '@/redux/modules/listings/feed'
-import {getListings} from '@/redux/modules/listings/feed/selectors'
+import {
+  getListings,
+  getPagination,
+  isLoading
+} from '@/redux/modules/listings/feed/selectors'
 import Feed from '@/components/listings/Feed'
 
 class FeedApp extends Component {
@@ -37,15 +41,25 @@ class FeedApp extends Component {
   }
 
   render() {
-    const {loader} = this.props
+    const {loader, pagination, loading} = this.props
     const children = this.renderFeed()
     if (!loader) return children
-    return React.cloneElement(loader, {onLoad: this.onLoad}, children)
+    return React.cloneElement(
+      loader,
+      {
+        loading,
+        pagination,
+        onLoad: this.onLoad
+      },
+      children
+    )
   }
 }
 
 const props = (...args) => ({
-  data: getListings(...args)
+  data: getListings(...args),
+  pagination: getPagination(...args),
+  loading: isLoading(...args)
 })
 
 const actions = {

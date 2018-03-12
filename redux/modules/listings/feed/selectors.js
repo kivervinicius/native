@@ -11,6 +11,11 @@ export const getFeed = createSelector(
   (feed, type) => feed[type] || {}
 )
 
+export const getPagination = createSelector(
+  getFeed,
+  (feed) => feed.pagination || {}
+)
+
 export const getError = createSelector(getFeed, (feed) => feed.error)
 
 export const isLoading = createSelector(getFeed, (feed) => feed.loading)
