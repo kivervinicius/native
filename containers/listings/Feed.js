@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import {load, reset} from '@/redux/modules/listings/feed'
@@ -32,8 +32,15 @@ class FeedApp extends Component {
     load(type, {...params, page, pageSize: length})
   }
 
-  render() {
+  renderFeed() {
     return <Feed {...this.props} />
+  }
+
+  render() {
+    const {loader} = this.props
+    const children = this.renderFeed()
+    if (!loader) return children
+    return React.cloneElement(loader, {onLoad: this.onLoad}, children)
   }
 }
 
