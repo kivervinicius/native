@@ -11,16 +11,11 @@ export default class ListingGallery extends Component {
     position: 0
   }
 
-  onSwipe = (offset) => () =>
-    this.setState((state) => ({
-      position: _.clamp(state.position + offset, this.items.length)
-    }))
-
-  onSwipeLeft = this.onSwipe(-1)
-
-  onSwipeRight = this.onSwipe(1)
-
-  isActive = ({position}) => this.state.position === position
+  onSwipe = ({nativeEvent}) => {
+    const position = nativeEvent.contentOffset.x / this.dimensions.width
+    const index = Math.round(position)
+    this.setState({position: index})
+  }
 
   get items() {
     return this.props.children
@@ -31,11 +26,13 @@ export default class ListingGallery extends Component {
   }
 
   renderPagination() {
-    return this.items.map((image) => (
+    const {position} = this.state
+
+    return this.items.map((image, index) => (
       <Icon
         key={image.id}
         name="circle"
-        style={[styles.icon, this.isActive(image) && styles.iconActive]}
+        style={[styles.icon, position === index && styles.iconActive]}
       />
     ))
   }
@@ -51,10 +48,13 @@ export default class ListingGallery extends Component {
       <View style={styles.container}>
         <ScrollView
           horizontal
+          bounces={false}
           style={styles.gallery}
           snapToInterval={this.dimensions.width}
           snapToAlignment="center"
           decelerationRate="fast"
+          onScroll={this.onSwipe}
+          scrollEventThrottle={200}
         >
           {this.renderImages()}
         </ScrollView>
