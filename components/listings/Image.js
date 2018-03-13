@@ -4,11 +4,15 @@ import * as image from '@/assets/image'
 
 const imageRatio = image.withRatio({width: 400, height: 200})
 
-const imageUrl = (filename = 'default_w4ki8j.jpg', thumbnail = false) => {
-  return image.url(
-    filename,
-    thumbnail ? {width: 400, height: 200} : {width: 600, height: 400}
-  )
+const imageUrl = (
+  filename = 'default_w4ki8j.jpg',
+  {thumbnail, width, height}
+) => {
+  let options
+  if (width && height) options = {width, height}
+  else if (thumbnail) options = {width: 400, height: 200}
+  else options = {width: 600, height: 400}
+  return image.url(filename, options)
 }
 
 export default function ListingImage({
@@ -23,7 +27,7 @@ export default function ListingImage({
     <Image
       {...props}
       style={[imageRatio({width, height}), style]}
-      source={{uri: imageUrl(filename, thumbnail)}}
+      source={{uri: imageUrl(filename, {thumbnail, width, height})}}
     />
   )
 }
