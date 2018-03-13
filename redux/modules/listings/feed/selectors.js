@@ -29,5 +29,5 @@ export const getListingIds = createSelector(getPages, (pages) =>
 export const getListings = createSelector(
   getListingsData,
   getListingIds,
-  (listings, ids) => ids.map((id) => listings[id])
+  (listings, ids) => ids.map((id) => listings[id].data)
 )
