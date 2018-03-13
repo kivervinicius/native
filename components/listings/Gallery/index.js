@@ -11,6 +11,8 @@ export default class ListingGallery extends Component {
     position: 0
   }
 
+  dimensions = Dimensions.get('window')
+
   onSwipe = ({nativeEvent}) => {
     const position = nativeEvent.contentOffset.x / this.dimensions.width
     const index = Math.round(position)
@@ -19,10 +21,6 @@ export default class ListingGallery extends Component {
 
   get items() {
     return this.props.children
-  }
-
-  get dimensions() {
-    return Dimensions.get('window')
   }
 
   renderPagination() {
