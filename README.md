@@ -13,15 +13,8 @@ cd native
 
 ```sh
 yarn install
-```
-
-3. Install build dependencies (Optional)
-
-Ruby and Cocoapods is required to build this app for production.
-
-```sh
 bundle install
-(cs ios && pod install)
+(cd ios && pod install)
 ```
 
 ## Run
