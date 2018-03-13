@@ -56,6 +56,7 @@ listingsFeed.node = (state = initialState, action) => {
       return update(state, {
         $merge: {
           loading: false,
+          error: undefined,
           pagination: action.pagination
         },
         pages: {

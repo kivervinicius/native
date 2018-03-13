@@ -6,10 +6,10 @@ import styles from './styles'
 
 const imageWidth = Math.min(400, Dimensions.get('window').width - 40)
 
-export default function ListingCard({images, price, address}) {
+export default function ListingCard({style, images, price, address}) {
   const image = images[0] || {}
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.imageContainer}>
         <Image thumbnail width={imageWidth} style={styles.image} {...image} />
       </View>
