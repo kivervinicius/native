@@ -28,6 +28,8 @@ export default StyleSheet.create({
   address: {
     color: colors.gray.light,
     fontSize: 16,
+    fontFamily: 'Open Sans',
+    fontWeight: '300',
     marginTop: 5
   },
   neighborhood: {
