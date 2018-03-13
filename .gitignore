@@ -39,9 +39,11 @@ DerivedData
 project.xcworkspace
 
 # android
+.idea
 .gradle
 local.properties
 *.keystore
+*.iml
 
 # fastlane
 report.xml
