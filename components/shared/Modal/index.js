@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import styles from './styles'
 
 export default function ControlledModal({
+  overlay,
   children,
   title,
   closeIcon,
@@ -14,7 +15,7 @@ export default function ControlledModal({
   return (
     <Modal {...props} onRequestClose={onDismiss} onDismiss={onDismiss}>
       <SafeAreaView style={[styles.container, style]}>
-        <View style={styles.header}>
+        <View style={[styles.header, overlay && styles.headerOverlay]}>
           <TouchableOpacity style={styles.closeButton} onPress={onDismiss}>
             <Icon name={closeIcon} style={styles.closeIcon} />
           </TouchableOpacity>
