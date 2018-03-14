@@ -8,5 +8,10 @@ const WebGlView = Platform.select({
 
 export default function Matterport({code}) {
   const uri = `https://my.matterport.com/show/?m=${code}&play=1`
-  return <WebGlView source={{uri}} />
+  return (
+    <WebGlView
+      source={{uri}}
+      style={{flex: 1, width: '100%', height: '100%'}}
+    />
+  )
 }
