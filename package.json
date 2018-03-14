@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "rnpm": {
-    "assets": ["./assets/fonts"]
+    "assets": [
+      "./assets/fonts"
+    ]
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
@@ -35,8 +37,12 @@
   "jest": {
     "preset": "react-native",
     "automock": false,
-    "unmockedModulePathPatterns": ["/node_modules/"],
-    "setupFiles": ["./__test__/setup.js"],
+    "unmockedModulePathPatterns": [
+      "/node_modules/"
+    ],
+    "setupFiles": [
+      "./__test__/setup.js"
+    ],
     "transformIgnorePatterns": [
       "/node_modules/(?!(jest-)?react-native|react-navigation)/"
     ]
@@ -53,6 +59,7 @@
     "react-native-fabric-crashlytics": "^0.1.8",
     "react-native-sectioned-multi-select": "0.3.4",
     "react-native-vector-icons": "^4.5.0",
+    "react-native-webkit-webview": "^0.10.7",
     "react-navigation": "^1.5.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
