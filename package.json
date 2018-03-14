@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "rnpm": {
-     "assets": ["./assets/fonts"]
+    "assets": ["./assets/fonts"]
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
@@ -34,13 +34,9 @@
   },
   "jest": {
     "preset": "react-native",
-    "automock": true,
-    "unmockedModulePathPatterns": [
-      "/node_modules/"
-    ],
-    "setupFiles": [
-      "./__test__/setup.js"
-    ],
+    "automock": false,
+    "unmockedModulePathPatterns": ["/node_modules/"],
+    "setupFiles": ["./__test__/setup.js"],
     "transformIgnorePatterns": [
       "/node_modules/(?!(jest-)?react-native|react-navigation)/"
     ]

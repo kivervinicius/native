@@ -1,3 +1,5 @@
+jest.mock('@/redux')
+
 import Provider from '@/containers/Provider'
 import App from '@/containers/App'
 
