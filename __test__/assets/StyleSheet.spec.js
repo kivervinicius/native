@@ -8,6 +8,9 @@ const STYLES = {
     width: 100,
     ':foo': {height: 200},
     ':bar': {width: 200}
+  },
+  bar: {
+    position: 'relative'
   }
 }
 
@@ -24,12 +27,22 @@ describe.only('StyleSheet', () => {
     })
   })
 
-  it('returns an array with valid variants', () => {
+  describe('NestedStyleSheet', () => {
     const styles = StyleSheet(STYLES)
-    expect(styles.foo()).toHaveLength(1)
-    expect(styles.foo({test: true})).toHaveLength(1)
-    expect(styles.foo({foo: false})).toHaveLength(1)
-    expect(styles.foo({foo: true})).toHaveLength(2)
-    expect(styles.foo({foo: true, bar: true})).toHaveLength(3)
+    it('returns an array with valid variants', () => {
+      expect(styles.foo()).toHaveLength(1)
+      expect(styles.foo({test: true})).toHaveLength(1)
+      expect(styles.foo({foo: false})).toHaveLength(1)
+      expect(styles.foo({foo: true})).toHaveLength(2)
+      expect(styles.foo({foo: true, bar: true})).toHaveLength(3)
+    })
+
+    describe('#with', () => {
+      const finalStyles = styles.with({foo: true, bar: true})
+      it('returns a flat style object with defined variants', () => {
+        expect(finalStyles.foo).toHaveLength(3)
+        expect(finalStyles.bar).toHaveLength(1)
+      })
+    })
   })
 })

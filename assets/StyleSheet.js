@@ -30,8 +30,17 @@ const styleSheetFactory = _.flow(flatten, StyleSheet.create, buildStyleSheet)
 
 export default function NestedStyleSheet(styles) {
   const builder = styleSheetFactory(styles)
-  return Object.keys(styles).reduce((result, key) => {
+  const namespaces = Object.keys(styles)
+  const result = {}
+  namespaces.forEach((key) => {
     result[key] = builder(key)
-    return result
-  }, {})
+  })
+  result.with = (variants) => {
+    const nextStyles = {}
+    namespaces.forEach((key) => {
+      nextStyles[key] = result[key].call(undefined, variants)
+    })
+    return nextStyles
+  }
+  return result
 }
