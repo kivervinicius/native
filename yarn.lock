@@ -4733,9 +4733,9 @@ react-native-vector-icons@^4.5.0:
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-react-native-webkit-webview@^0.10.7:
+"react-native-webkit-webview@https://github.com/react-native-china/react-native-webkit-webview":
   version "0.10.7"
-  resolved "https://registry.yarnpkg.com/react-native-webkit-webview/-/react-native-webkit-webview-0.10.7.tgz#189ce6ee5800e8f1e4cacc4e2f33ad2ab5a5c057"
+  resolved "https://github.com/react-native-china/react-native-webkit-webview#ed97ba0b149030229872f1cd3464a88dee0ed482"
   dependencies:
     node-wget "^0.4.2"
 
