@@ -38,20 +38,20 @@ matrix:
     - sudo apt-get install -y nodejs
     - rvm install "ruby-$RUBY_VERSION"
     - rvm use $RUBY_VERSION
-  - os: osx
-    language: objective-c
-    osx_image: xcode8.3
-    xcode_project: ios/EmCasa.xcodeproj
-    xcode_scheme: ios/EmCasa
-    env: PLATFORM=ios
-    before_install:
-    - brew update
-    - brew install yarn ios-sim jq ios-deploy cocoapods awscli
-    - rvm install "ruby-$RUBY_VERSION"
-    - rvm use $RUBY_VERSION
-    - (cd ios && pod install)
-  allow_failures:
-  - os: osx
+  # - os: osx
+  #   language: objective-c
+  #   osx_image: xcode8.3
+  #   xcode_project: ios/EmCasa.xcodeproj
+  #   xcode_scheme: ios/EmCasa
+  #   env: PLATFORM=ios
+  #   before_install:
+  #   - brew update
+  #   - brew install yarn ios-sim jq ios-deploy cocoapods awscli
+  #   - rvm install "ruby-$RUBY_VERSION"
+  #   - rvm use $RUBY_VERSION
+  #   - (cd ios && pod install)
+  # allow_failures:
+  # - os: osx
 
 env:
   global:
