@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native'
 
 import * as colors from '@/assets/colors'
-import {elevation, padding} from '@/assets/styles'
+import {padding} from '@/assets/styles'
 
 export default StyleSheet.create({
   container: {
@@ -23,7 +23,7 @@ export default StyleSheet.create({
   },
   propertyText: {
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: '700',
     color: colors.gray.mediumDark
   },
   icon: {
