@@ -4,16 +4,6 @@ matrix:
   include:
   - os: linux
     language: android
-    android:
-      components:
-      - tools
-      - platform-tools
-      - build-tools-26.0.1
-      - build-tools-23.0.1
-      - android-26
-      - android-23
-      - extra-google-m2repository
-      - extra-android-m2repository
     addons:
       apt:
         sources:
@@ -59,11 +49,17 @@ env:
 
 cache:
   yarn: true
+  pip: true
+  bundler: true
+  cocoapods: true
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
+  - /home/travis/.rvm/
   - node_modules
+  - android/.gradle
   - android/app/build
+  - ios/build
 
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
