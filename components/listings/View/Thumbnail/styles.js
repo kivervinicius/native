@@ -8,7 +8,9 @@ export default StyleSheet.create({
   actions: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'center'
+  },
+  button: {
+    flex: 1
   }
 })
