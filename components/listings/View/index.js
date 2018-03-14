@@ -1,11 +1,12 @@
 import {Component} from 'react'
-import {View, Button} from 'react-native'
+import {View} from 'react-native'
 
 import Modal from '@/components/shared/Modal'
 import Gallery from '../Gallery'
 import Matterport from '../Matterport'
 import Description from './Description'
 import Properties from './Properties'
+import Thumbnail from './Thumbnail'
 import styles from './styles'
 
 export default class ListingView extends Component {
@@ -14,9 +15,6 @@ export default class ListingView extends Component {
   }
 
   onOpen = (view) => () => this.setState({view})
-
-  onOpenGallery = this.onOpen('gallery')
-  onOpenTour = this.onOpen('matterport')
 
   onClose = () => this.setState({view: undefined})
 
@@ -39,7 +37,7 @@ export default class ListingView extends Component {
     const {view} = this.state
     return (
       <View style={styles.container}>
-        <Button title="Ver Imagens" onPress={this.onOpenGallery} />
+        <Thumbnail onOpen={this.onOpen} {...this.props} />
         <Properties {...this.props} />
         <Description {...this.props} />
         <Modal overlay visible={Boolean(view)} onDismiss={this.onClose}>
