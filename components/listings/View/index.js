@@ -3,6 +3,7 @@ import {View, Text, Button} from 'react-native'
 
 import Modal from '@/components/shared/Modal'
 import Gallery from '../Gallery'
+import Properties from './Properties'
 import styles from './styles'
 
 export default class ListingView extends Component {
@@ -30,11 +31,12 @@ export default class ListingView extends Component {
   }
 
   render() {
-    const {description} = this.props
+    const {description, ...props} = this.props
     const {view} = this.state
     return (
       <View style={styles.container}>
         <Button title="Ver Imagens" onPress={this.onOpenGallery} />
+        <Properties {...props} />
         <Text style={styles.description}>{description}</Text>
         <Modal overlay visible={Boolean(view)} onDismiss={this.onClose}>
           {this.renderModal()}
