@@ -50,7 +50,7 @@ export default class ListingGallery extends Component {
           horizontal
           bounces={false}
           style={styles.gallery}
-          snapToInterval={this.dimensions.width}
+          snapToInterval={Math.ceil(this.dimensions.width)}
           snapToAlignment="center"
           decelerationRate="fast"
           onScroll={this.onSwipe}
