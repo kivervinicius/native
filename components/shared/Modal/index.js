@@ -14,7 +14,7 @@ export default function ControlledModal({
     <Modal {...props} onRequestClose={onDismiss} onDismiss={onDismiss}>
       <SafeAreaView style={styles.container()}>
         <View style={styles.header(props)}>
-          <TouchableOpacity style={styles.closeButton} onPress={onDismiss}>
+          <TouchableOpacity style={styles.closeButton()} onPress={onDismiss}>
             <Icon name={closeIcon} style={styles.closeIcon()} />
           </TouchableOpacity>
           {title && <Text style={styles.title()}>{title}</Text>}
