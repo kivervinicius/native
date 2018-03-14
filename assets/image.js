@@ -12,8 +12,8 @@ export const withRatio = (dimensions) => (options) => {
 
 export const url = (filename, options = {}) => {
   let display = ['f_auto']
-  if (options.height) display.push(`h_${options.height}`)
-  if (options.width) display.push(`w_${options.width}`)
+  if (options.height) display.push(`h_${Math.ceil(options.height)}`)
+  if (options.width) display.push(`w_${Math.ceil(options.width)}`)
   if (options.mode) display.push(`c_${options.mode}`)
   else if (options.height && options.width)
     // Default to fill mode on images with fixed size
