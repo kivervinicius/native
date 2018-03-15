@@ -1,31 +1,41 @@
-import {View, Text} from 'react-native'
+import {View, Text, Dimensions} from 'react-native'
 
-import {responsive} from '@/components/shared/Orientation'
 import Price from '@/components/shared/Price'
 import Image from '@/components/listings/Image'
-import styles from './styles'
+import $styles from './styles'
 
-function ListingCard({images, price, address, dimensions}) {
+const WIDTH = Dimensions.get('window').width - 40
+const HEIGHT = WIDTH * 0.64
+
+function FullListingCard({styles, images, price, address, description}) {
   const image = images[0] || {}
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
+      <View style={styles.thumbnail}>
         <Image
           thumbnail
-          width={dimensions.width - 40}
+          width={WIDTH}
+          height={HEIGHT}
           style={styles.image}
           {...image}
         />
       </View>
       <View style={styles.body}>
-        <Price size={22}>{price}</Price>
-        <Text style={styles.address}>{address.street}</Text>
-        <Text style={[styles.address, styles.neighborhood]}>
-          {address.neighborhood.toUpperCase()}
+        <View style={styles.header}>
+          <Text style={styles.street} numberOfLines={1} ellipsizeMode="tail">
+            {address.street}
+          </Text>
+          <Text style={styles.neighborhood}>
+            {address.neighborhood.toUpperCase()}
+          </Text>
+        </View>
+        <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail">
+          {description}
         </Text>
+        <Price size={22}>{price}</Price>
       </View>
     </View>
   )
 }
 
-export default responsive()(ListingCard)
+export default $styles.inject(FullListingCard)

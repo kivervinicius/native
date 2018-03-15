@@ -5,7 +5,7 @@ import LAYOUTS from './layouts'
 
 export default class ListingCard extends Component {
   static defaultProps = {
-    layout: 'minimal'
+    layout: 'full'
   }
 
   state = {

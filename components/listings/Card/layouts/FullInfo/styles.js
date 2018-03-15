@@ -1,38 +1,45 @@
 import {StyleSheet} from 'react-native'
 
-import {elevation} from '@/assets/styles'
+import NestedStyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
 
-export default StyleSheet.create({
+export default NestedStyleSheet({
   container: {
-    margin: 10,
-    borderRadius: 5,
-    backgroundColor: 'white',
-    ...elevation(4)
+    padding: 10,
+    borderBottomWidth: StyleSheet.hairlineWidth
   },
-  imageContainer: {
+  thumbnail: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5
+    borderRadius: 5
   },
   image: {
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5
+    borderRadius: 5
   },
   body: {
-    padding: 20
+    padding: 15
   },
-  address: {
-    color: colors.gray.light,
-    fontSize: 16,
-    fontFamily: 'Open Sans',
-    fontWeight: '300',
-    marginTop: 5
+  description: {
+    color: colors.gray.mediumDark,
+    fontSize: 17,
+    lineHeight: 30
+  },
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  street: {
+    color: colors.gray.darker,
+    flex: 1,
+    fontSize: 20
   },
   neighborhood: {
+    color: colors.gray.medium,
     fontWeight: '600'
   }
 })
