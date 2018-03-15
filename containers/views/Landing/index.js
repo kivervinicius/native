@@ -1,5 +1,3 @@
-import {Text} from 'react-native'
-
 import Shell from '@/containers/shared/Shell'
 import Listings from '@/containers/listings/Feed'
 
