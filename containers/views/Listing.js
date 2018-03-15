@@ -3,7 +3,7 @@ import Listing from '@/containers/listings/View'
 
 export default function ListingScreen({navigation}) {
   return (
-    <Shell>
+    <Shell scroll>
       <Listing id={navigation.state.params.id} />
     </Shell>
   )
