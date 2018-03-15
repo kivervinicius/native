@@ -1,7 +1,7 @@
 function merge($styles, styles) {
   if (styles) {
     Object.keys($styles).forEach((key) => {
-      if (key in styles) $styles[key].push(styles[key])
+      if (key in styles) $styles[key] = $styles[key].concat(styles[key])
     })
   }
   return $styles
