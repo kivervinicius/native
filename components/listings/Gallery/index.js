@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import {Component} from 'react'
-import {View, ScrollView, Dimensions} from 'react-native'
+import {View, Dimensions} from 'react-native'
+import SwipeableView from 'react-swipeable-views-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Image from '../Image'
@@ -11,11 +12,7 @@ export default class ListingGallery extends Component {
     position: 0
   }
 
-  onSwipe = ({nativeEvent}) => {
-    const position = nativeEvent.contentOffset.x / this.dimensions.width
-    const index = Math.round(position)
-    this.setState({position: index})
-  }
+  onSwipe = (position) => this.setState({position})
 
   get items() {
     return this.props.children
@@ -46,18 +43,9 @@ export default class ListingGallery extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView
-          horizontal
-          bounces={false}
-          style={styles.gallery}
-          snapToInterval={Math.ceil(this.dimensions.width)}
-          snapToAlignment="center"
-          decelerationRate="fast"
-          onScroll={this.onSwipe}
-          scrollEventThrottle={200}
-        >
+        <SwipeableView style={styles.gallery} onChangeIndex={this.onSwipe}>
           {this.renderImages()}
-        </ScrollView>
+        </SwipeableView>
         <View style={styles.pagination}>{this.renderPagination()}</View>
       </View>
     )
