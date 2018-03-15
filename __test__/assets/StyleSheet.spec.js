@@ -37,5 +37,17 @@ describe('StyleSheet', () => {
     expect(styles.foo__bar).toMatchObject(FLAT_STYLES.foo__bar)
   })
 
-  it('returns a stylesheet with desired variants')
+  it('returns a stylesheet with desired variants', () => {
+    expect(styles({foo: true, bar: true})).toMatchObject({
+      foo: [FLAT_STYLES.foo, FLAT_STYLES.foo__foo, FLAT_STYLES.foo__bar],
+      bar: [FLAT_STYLES.bar]
+    })
+  })
+
+  it('ignores falsy values', () => {
+    expect(styles({foo: true, bar: false})).toMatchObject({
+      foo: [FLAT_STYLES.foo, FLAT_STYLES.foo__foo],
+      bar: [FLAT_STYLES.bar]
+    })
+  })
 })

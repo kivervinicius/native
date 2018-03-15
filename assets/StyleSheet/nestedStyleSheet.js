@@ -3,8 +3,11 @@ import _ from 'lodash/fp'
 export default function createStyleSheet(flat) {
   const get = (namespace, variantsToApply = {}) =>
     _.keys(variantsToApply).reduce(
-      (result, variant) =>
-        result.concat(flat.styles[`${namespace}__${variant}`]),
+      (result, variant) => {
+        const key = `${namespace}__${variant}`
+        if (key in flat.styles) result.push(flat.styles[key])
+        return result
+      },
       [flat.styles[namespace]]
     )
   const styleSheet = _.flow(
