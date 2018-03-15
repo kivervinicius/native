@@ -1,6 +1,7 @@
 import {Modal, View, Text, SafeAreaView, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import {responsive} from '@/components/shared/Orientation'
 import $styles from './styles'
 
 function ControlledModal({
@@ -31,4 +32,4 @@ ControlledModal.defaultProps = {
   animationType: 'slide'
 }
 
-export default $styles.inject(ControlledModal)
+export default responsive()($styles.inject(ControlledModal))
