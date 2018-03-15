@@ -1,12 +1,14 @@
 import _ from 'lodash'
 import {Component} from 'react'
-import {View, Dimensions} from 'react-native'
+import {View} from 'react-native'
 import SwipeableView from 'react-swipeable-views-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import {responsive} from '@/components/shared/Orientation'
 import Image from '../Image'
 import styles from './styles'
 
+@responsive()
 export default class ListingGallery extends Component {
   state = {
     position: 0
@@ -16,10 +18,6 @@ export default class ListingGallery extends Component {
 
   get items() {
     return this.props.children
-  }
-
-  get dimensions() {
-    return Dimensions.get('window')
   }
 
   renderPagination() {
@@ -35,8 +33,9 @@ export default class ListingGallery extends Component {
   }
 
   renderImages() {
+    const {dimensions} = this.props
     return this.items.map((image) => (
-      <Image key={image.id} {...image} {...this.dimensions} />
+      <Image key={image.id} {...image} {...dimensions} />
     ))
   }
 
