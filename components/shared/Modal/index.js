@@ -3,15 +3,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import $styles from './styles'
 
-export default function ControlledModal({
+function ControlledModal({
   children,
   title,
   closeIcon,
   onDismiss,
-  overlay,
+  styles,
   ...props
 }) {
-  const styles = $styles({overlay})
   return (
     <Modal {...props} onRequestClose={onDismiss} onDismiss={onDismiss}>
       <SafeAreaView style={styles.container}>
@@ -31,3 +30,5 @@ ControlledModal.defaultProps = {
   closeIcon: 'close',
   animationType: 'slide'
 }
+
+export default $styles.inject(ControlledModal)
