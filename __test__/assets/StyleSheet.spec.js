@@ -1,11 +1,9 @@
 import _ from 'lodash'
-import StyleSheet, {flatten} from '@/assets/StyleSheet'
+import StyleSheet from '@/assets/StyleSheet'
 
 const STYLES = {
   foo: {
     position: 'relative',
-    height: 100,
-    width: 100,
     ':foo': {height: 200},
     ':bar': {width: 200}
   },
@@ -14,35 +12,30 @@ const STYLES = {
   }
 }
 
-describe.only('StyleSheet', () => {
-  describe('flatten', () => {
-    const styles = flatten(STYLES)
-    it('assigns style properties to base namespace', () => {
-      expect(styles.foo).toMatchObject(_.omit(STYLES.foo, [':foo', ':bar']))
-    })
-    it('flattens nested style definitions', () => {
-      expect(styles).toHaveProperty('foo')
-      expect(styles).toHaveProperty('foo__foo')
-      expect(styles).toHaveProperty('foo__bar')
+const FLAT_STYLES = {
+  foo: _.omit(STYLES.foo, [':foo', ':bar']),
+  foo__foo: STYLES.foo[':foo'],
+  foo__bar: STYLES.foo[':bar'],
+  bar: STYLES.bar
+}
+
+describe('StyleSheet', () => {
+  const styles = StyleSheet(STYLES)
+
+  describe('#get', () => {
+    it('returns a style with desired variants', () => {
+      expect(styles.get('foo')).toHaveLength(1)
+      expect(styles.get('foo', {foo: true})).toHaveLength(2)
+      expect(styles.get('foo', {foo: true, bar: true})).toHaveLength(3)
     })
   })
 
-  describe('NestedStyleSheet', () => {
-    const styles = StyleSheet(STYLES)
-    it('returns an array with valid variants', () => {
-      expect(styles.foo()).toHaveLength(1)
-      expect(styles.foo({test: true})).toHaveLength(1)
-      expect(styles.foo({foo: false})).toHaveLength(1)
-      expect(styles.foo({foo: true})).toHaveLength(2)
-      expect(styles.foo({foo: true, bar: true})).toHaveLength(3)
-    })
-
-    describe('#with', () => {
-      const finalStyles = styles.with({foo: true, bar: true})
-      it('returns a flat style object with defined variants', () => {
-        expect(finalStyles.foo).toHaveLength(3)
-        expect(finalStyles.bar).toHaveLength(1)
-      })
-    })
+  it('contains flat stylesheet properties', () => {
+    expect(styles.foo).toMatchObject(FLAT_STYLES.foo)
+    expect(styles.bar).toMatchObject(FLAT_STYLES.bar)
+    expect(styles.foo__foo).toMatchObject(FLAT_STYLES.foo__foo)
+    expect(styles.foo__bar).toMatchObject(FLAT_STYLES.foo__bar)
   })
+
+  it('returns a stylesheet with desired variants')
 })
