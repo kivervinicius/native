@@ -1,21 +1,20 @@
 import {Modal, View, Text, SafeAreaView, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import styles from './styles'
+import $styles from './styles'
 
-export default function ControlledModal({
-  overlay,
+function ControlledModal({
   children,
   title,
   closeIcon,
-  style,
   onDismiss,
+  styles,
   ...props
 }) {
   return (
     <Modal {...props} onRequestClose={onDismiss} onDismiss={onDismiss}>
-      <SafeAreaView style={[styles.container, style]}>
-        <View style={[styles.header, overlay && styles.headerOverlay]}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.header}>
           <TouchableOpacity style={styles.closeButton} onPress={onDismiss}>
             <Icon name={closeIcon} style={styles.closeIcon} />
           </TouchableOpacity>
@@ -31,3 +30,5 @@ ControlledModal.defaultProps = {
   closeIcon: 'close',
   animationType: 'slide'
 }
+
+export default $styles.inject(ControlledModal)
