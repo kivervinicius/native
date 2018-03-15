@@ -36,7 +36,7 @@ export default function ListingProperties(props) {
       </View>
       <View style={styles.row}>
         <Property icon="currency-usd">Preço/m²</Property>
-        <Price style={styles.value}>
+        <Price styles={{container: styles.value}}>
           {Math.floor(props.price / props.area)}
         </Price>
       </View>

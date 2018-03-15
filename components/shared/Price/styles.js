@@ -1,14 +1,15 @@
-import {StyleSheet} from 'react-native'
+import StyleSheet from '@/assets/StyleSheet'
+import {padding} from '@/assets/styles'
 
-export default StyleSheet.create({
+export default StyleSheet({
   container: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'center'
+    alignItems: 'baseline'
   },
   currency: {
-    marginTop: '2%',
-    marginRight: '2%'
-  }
+    ...padding(null, '1%', '0.5%', null)
+  },
+  text: {}
 })

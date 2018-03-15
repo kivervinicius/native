@@ -2,19 +2,23 @@ import {Fragment} from 'react'
 import {View, Text} from 'react-native'
 
 import * as format from '@/assets/format'
-import styles from './styles'
+import $styles from './styles'
 
-export default function Price({children, nullable, size, style, ...props}) {
-  const currency = {fontSize: size / 1.6}
-  const amount = {fontSize: size}
+function Price({styles, children, nullable, size, ...props}) {
+  const currencyStyle = $styles.all(
+    {fontSize: size / 1.6},
+    styles.currency,
+    styles.text
+  )
+  const amountStyle = $styles.all({fontSize: size}, styles.amount, styles.text)
   return (
-    <View style={[styles.container, style]} {...props}>
+    <View style={styles.container} {...props}>
       {nullable && !children ? (
         <Text style={styles.amount}>{String.fromCharCode(0x2500)}</Text>
       ) : (
         <Fragment>
-          <Text style={[styles.currency, currency]}>R$</Text>
-          <Text style={[styles.amount, amount]}>{format.number(children)}</Text>
+          <Text style={currencyStyle}>R$</Text>
+          <Text style={amountStyle}>{format.number(children)}</Text>
         </Fragment>
       )}
     </View>
@@ -24,3 +28,5 @@ export default function Price({children, nullable, size, style, ...props}) {
 Price.defaultProps = {
   size: 15
 }
+
+export default $styles.inject(Price)
