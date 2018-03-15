@@ -2,9 +2,13 @@ import {StyleSheet} from 'react-native'
 
 export default StyleSheet.create({
   container: {
-    position: 'relative'
+    position: 'relative',
+    flex: 1
   },
-  images: {},
+  gallery: {
+    flex: 1,
+    width: '100%'
+  },
   pagination: {
     position: 'absolute',
     display: 'flex',
