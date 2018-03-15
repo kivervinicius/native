@@ -1,17 +1,21 @@
-import {View, Text, Dimensions} from 'react-native'
+import {View, Text} from 'react-native'
 
+import {responsive} from '@/components/shared/Orientation'
 import Price from '@/components/shared/Price'
 import Image from '../Image'
 import styles from './styles'
 
-const imageWidth = Math.min(400, Dimensions.get('window').width - 40)
-
-export default function ListingCard({style, images, price, address}) {
+function ListingCard({images, price, address, dimensions}) {
   const image = images[0] || {}
   return (
-    <View style={[styles.container, style]}>
+    <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image thumbnail width={imageWidth} style={styles.image} {...image} />
+        <Image
+          thumbnail
+          width={dimensions.width - 40}
+          style={styles.image}
+          {...image}
+        />
       </View>
       <View style={styles.body}>
         <Price size={22}>{price}</Price>
@@ -23,3 +27,5 @@ export default function ListingCard({style, images, price, address}) {
     </View>
   )
 }
+
+export default responsive()(ListingCard)
