@@ -40,7 +40,8 @@ export default NestedStyleSheet({
   street: {
     color: colors.gray.darker,
     flex: 1,
-    fontSize: 20
+    fontSize: 20,
+    marginRight: 15
   },
   neighborhood: {
     color: colors.gray.medium,
