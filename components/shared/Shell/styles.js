@@ -4,7 +4,8 @@ import * as colors from '@/assets/colors'
 
 export default StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'white'
   },
   main: {
     flex: 1

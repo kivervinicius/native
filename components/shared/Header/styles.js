@@ -1,8 +1,12 @@
 import {StyleSheet} from 'react-native'
 
+import * as colors from '@/assets/colors'
+
 export default StyleSheet.create({
   container: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderColor: colors.gray.light,
+    borderBottomWidth: StyleSheet.hairlineWidth
   },
   wrapper: {
     display: 'flex',
@@ -12,9 +16,6 @@ export default StyleSheet.create({
     padding: 10
   },
   logo: {
-    flex: 0
-  },
-  auth: {
     flex: 0
   }
 })

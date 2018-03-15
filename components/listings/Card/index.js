@@ -1,31 +1,34 @@
-import {View, Text} from 'react-native'
+import {Component} from 'react'
+import {TouchableHighlight} from 'react-native'
 
-import {responsive} from '@/components/shared/Orientation'
-import Price from '@/components/shared/Price'
-import Image from '../Image'
-import styles from './styles'
+import LAYOUTS from './layouts'
 
-function ListingCard({images, price, address, dimensions}) {
-  const image = images[0] || {}
-  return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image
-          thumbnail
-          width={dimensions.width - 40}
-          style={styles.image}
-          {...image}
-        />
-      </View>
-      <View style={styles.body}>
-        <Price size={22}>{price}</Price>
-        <Text style={styles.address}>{address.street}</Text>
-        <Text style={[styles.address, styles.neighborhood]}>
-          {address.neighborhood.toUpperCase()}
-        </Text>
-      </View>
-    </View>
-  )
+export default class ListingCard extends Component {
+  static defaultProps = {
+    layout: 'full'
+  }
+
+  state = {
+    active: false
+  }
+
+  onHighlight = (active) => () => this.setState({active})
+
+  render() {
+    const {onPress, layout, ...props} = this.props
+    const {active} = this.state
+    const Card = LAYOUTS[layout]
+    if (!Card) throw new Error(`Invalid ListingCard layout "${layout}"`)
+
+    return (
+      <TouchableHighlight
+        onPress={onPress}
+        underlayColor="rgba(0,0,0,0)"
+        onShowUnderlay={this.onHighlight(true)}
+        onHideUnderlay={this.onHighlight(false)}
+      >
+        <Card active={active} {...props} />
+      </TouchableHighlight>
+    )
+  }
 }
-
-export default responsive()(ListingCard)
