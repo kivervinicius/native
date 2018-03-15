@@ -5,8 +5,11 @@ import * as colors from '@/assets/colors'
 
 export default NestedStyleSheet({
   container: {
-    padding: 10,
-    borderBottomWidth: StyleSheet.hairlineWidth
+    padding: 20,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    ':active': {
+      backgroundColor: 'powderblue'
+    }
   },
   thumbnail: {
     display: 'flex',
@@ -24,7 +27,8 @@ export default NestedStyleSheet({
   description: {
     color: colors.gray.mediumDark,
     fontSize: 17,
-    lineHeight: 30
+    lineHeight: 30,
+    marginBottom: 10
   },
   header: {
     display: 'flex',
@@ -41,5 +45,8 @@ export default NestedStyleSheet({
   neighborhood: {
     color: colors.gray.medium,
     fontWeight: '600'
+  },
+  priceText: {
+    color: colors.gray.darker
   }
 })

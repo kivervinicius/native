@@ -32,7 +32,9 @@ function FullListingCard({styles, images, price, address, description}) {
         <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail">
           {description}
         </Text>
-        <Price size={22}>{price}</Price>
+        <Price styles={{text: styles.priceText}} size={22}>
+          {price}
+        </Price>
       </View>
     </View>
   )

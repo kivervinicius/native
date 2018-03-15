@@ -4,7 +4,6 @@ import {FlatList} from 'react-native'
 import withNavigation from 'react-navigation/src/views/withNavigation'
 
 import Card from '@/components/listings/Card'
-import styles from './styles'
 
 const keyExtractor = _.flow(_.get('id'), _.toString)
 
@@ -21,7 +20,6 @@ export default class ListingsFeed extends Component {
     return (
       <FlatList
         {...this.props}
-        style={styles.container}
         keyExtractor={keyExtractor}
         renderItem={({item}) => (
           <Card onPress={this.onSelect(item.id)} layout={layout} {...item} />
