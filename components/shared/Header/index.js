@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {View, StatusBar, SafeAreaView, TouchableOpacity} from 'react-native'
+import {View, SafeAreaView, TouchableOpacity} from 'react-native'
 
 import Logo from '@/components/shared/Logo'
 import styles from './styles'
@@ -11,8 +11,6 @@ export default class Header extends Component {
   }
 
   render() {
-    const {auth} = this.props
-
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
@@ -21,7 +19,6 @@ export default class Header extends Component {
               <Logo height={40} />
             </TouchableOpacity>
           </View>
-          <View style={styles.auth}>{auth}</View>
         </View>
       </SafeAreaView>
     )

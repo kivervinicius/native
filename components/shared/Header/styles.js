@@ -13,8 +13,5 @@ export default StyleSheet.create({
   },
   logo: {
     flex: 0
-  },
-  auth: {
-    flex: 0
   }
 })
