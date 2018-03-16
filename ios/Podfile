@@ -8,6 +8,8 @@ target 'EmCasa' do
   pod 'Fabric'
   pod 'Crashlytics'
 
+  pod 'GoogleMaps'
+
   target 'EmCasaTests' do
     inherit! :search_paths
     # Pods for testing
