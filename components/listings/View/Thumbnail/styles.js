@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native'
 
+import * as colors from '@/assets/colors'
+
 export default StyleSheet.create({
   container: {
     display: 'flex',
@@ -8,7 +10,9 @@ export default StyleSheet.create({
   actions: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderColor: colors.gray.light,
+    borderBottomWidth: StyleSheet.hairlineWidth
   },
   button: {
     flex: 1
