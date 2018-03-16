@@ -14,7 +14,6 @@ export default StyleSheet.create({
   },
   fallback: {
     position: 'absolute',
-    display: 'none',
-    zIndex: 0
+    flex: 1
   }
 })

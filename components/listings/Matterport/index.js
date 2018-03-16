@@ -19,7 +19,7 @@ export default function Matterport({children, code, play, width, height}) {
           <WebGlView source={{uri}} style={[styles.webview, display]} />
         </View>
       )}
-      <View style={styles.fallback}>{children}</View>
+      <View style={[styles.fallback, display]}>{children}</View>
     </View>
   )
 }
