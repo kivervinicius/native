@@ -15,7 +15,7 @@ export default function Matterport({children, code, play, width, height}) {
   return (
     <View style={[styles.container, display]}>
       {code && (
-        <View style={styles.content}>
+        <View style={[styles.content, display]}>
           <WebGlView source={{uri}} style={[styles.webview, display]} />
         </View>
       )}
