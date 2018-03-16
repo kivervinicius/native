@@ -9,7 +9,7 @@ const HEIGHT = WIDTH * 0.64
 
 const ActionButton = (props) => (
   <View style={styles.button}>
-    <Button {...props} />
+    <Button color={colors.button} {...props} />
   </View>
 )
 
