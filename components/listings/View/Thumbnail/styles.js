@@ -2,6 +2,8 @@ import {StyleSheet, Platform} from 'react-native'
 
 const matterportBackground = '#313435'
 
+import * as $colors from '@/assets/colors'
+
 export const colors = {
   button: Platform.select({
     ios: 'white',
@@ -18,6 +20,8 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    borderColor: $colors.gray.light,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     backgroundColor: Platform.select({
       ios: matterportBackground,
       android: colors.button

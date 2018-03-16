@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "rnpm": {
-    "assets": [
-      "./assets/fonts"
-    ]
+    "assets": ["./assets/fonts"]
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
@@ -31,18 +29,18 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "android:log": "yarn android && yarn log-android",
+    "ios:log": "yarn ios && yarn log-ios",
     "devtools": "react-devtools",
+    "log-android": "react-native log-android",
+    "log-ios": "react-native log-ios",
     "test": "node node_modules/jest/bin/jest.js"
   },
   "jest": {
     "preset": "react-native",
     "automock": false,
-    "unmockedModulePathPatterns": [
-      "/node_modules/"
-    ],
-    "setupFiles": [
-      "./__test__/setup.js"
-    ],
+    "unmockedModulePathPatterns": ["/node_modules/"],
+    "setupFiles": ["./__test__/setup.js"],
     "transformIgnorePatterns": [
       "/node_modules/(?!(jest-)?react-native|react-navigation)/"
     ]
@@ -59,7 +57,8 @@
     "react-native-fabric-crashlytics": "^0.1.8",
     "react-native-sectioned-multi-select": "0.3.4",
     "react-native-vector-icons": "^4.5.0",
-    "react-native-webkit-webview": "https://github.com/react-native-china/react-native-webkit-webview",
+    "react-native-webkit-webview":
+      "https://github.com/react-native-china/react-native-webkit-webview",
     "react-navigation": "^1.5.0",
     "react-redux": "^5.0.7",
     "react-swipeable-views-native": "^0.12.9",
