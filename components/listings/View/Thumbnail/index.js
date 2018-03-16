@@ -23,7 +23,10 @@ export default function ListingThumbnail({images, matterport_code, onOpen}) {
       <View style={styles.actions}>
         <ActionButton title="Ver Imagens" onPress={onOpen('gallery')} />
         {matterport_code && (
-          <ActionButton title="Tour Virtual" onPress={onOpen('matterport')} />
+          <ActionButton
+            title="Ver em Tela Cheia"
+            onPress={onOpen('matterport')}
+          />
         )}
       </View>
     </View>
