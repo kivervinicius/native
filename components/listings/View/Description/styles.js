@@ -9,7 +9,7 @@ export default StyleSheet.create({
     ...padding(10, 30)
   },
   title: {
-    color: colors.gray.dark,
+    color: colors.gray.darker,
     fontWeight: '700',
     marginBottom: 10
   },
@@ -19,9 +19,15 @@ export default StyleSheet.create({
     justifyContent: 'space-between'
   },
   section: {
-    ...padding(10, null)
+    ...padding(10, null, 20)
   },
   subSection: {
     flex: 0.4
+  },
+  text: {
+    color: colors.gray.darker,
+    fontSize: 17,
+    lineHeight: 30,
+    fontWeight: '300'
   }
 })

@@ -9,6 +9,7 @@ export default StyleSheet.create({
   },
   header: {
     borderColor: colors.gray.light,
-    borderBottomWidth: StyleSheet.hairlineWidth
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginBottom: 10
   }
 })
