@@ -7,6 +7,7 @@ import Matterport from '../Matterport'
 import Description from './Description'
 import Properties from './Properties'
 import Thumbnail from './Thumbnail'
+import Map from './Map'
 import styles from './styles'
 
 export default class ListingView extends Component {
@@ -40,6 +41,7 @@ export default class ListingView extends Component {
         <Thumbnail onOpen={this.onOpen} {...this.props} />
         <Properties {...this.props} />
         <Description {...this.props} />
+        <Map {...this.props.address} />
         <Modal overlay visible={Boolean(view)} onDismiss={this.onClose}>
           {this.renderModal()}
         </Modal>
