@@ -19,8 +19,8 @@ class ListingApp extends Component {
   }
 
   render() {
-    const {data} = this.props
-    return <View {...data} />
+    const {data, ...props} = this.props
+    return <View {...props} {...data} />
   }
 }
 
