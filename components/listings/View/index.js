@@ -39,8 +39,10 @@ export default class ListingView extends Component {
     const {view} = this.state
     return (
       <View style={styles.container}>
-        <Thumbnail onOpen={this.onOpen} {...this.props} />
-        <Properties {...this.props} />
+        <View style={styles.header}>
+          <Thumbnail onOpen={this.onOpen} {...this.props} />
+          <Properties {...this.props} />
+        </View>
         <Description {...this.props} />
         {active && <Map {...this.props.address} />}
         <Modal overlay visible={Boolean(view)} onDismiss={this.onClose}>
