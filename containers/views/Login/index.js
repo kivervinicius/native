@@ -5,6 +5,9 @@ import {getUser} from '@/redux/modules/auth/selectors'
 import Shell from '@/containers/shared/Shell'
 import LoginForm from '@/containers/auth/LoginForm'
 
+connect((state) => ({
+  user: getUser(state)
+}))
 class BaseLoginScreen extends Component {
   componentWillReceiveProps({user, navigation}) {
     // Return to homepage on success
@@ -22,11 +25,7 @@ class BaseLoginScreen extends Component {
   }
 }
 
-const props = (state) => ({
-  user: getUser(state)
-})
-
-const LoginScreen = connect(props)(BaseLoginScreen)
+const LoginScreen = BaseLoginScreen
 
 export default LoginScreen
 

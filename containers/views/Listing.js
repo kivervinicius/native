@@ -1,12 +1,13 @@
 import Shell from '@/containers/shared/Shell'
 import Listing from '@/containers/listings/View'
+import {withNavigationFocus} from 'react-navigation'
 
-export default function ListingScreen({navigation}) {
+export default function ListingScreen({navigation, isFocused}) {
   return (
     <Shell scroll>
-      <Listing id={navigation.state.params.id} />
+      <Listing active={isFocused} id={navigation.state.params.id} />
     </Shell>
   )
 }
 
-export const screen = ListingScreen
+export const screen = withNavigationFocus(ListingScreen)
