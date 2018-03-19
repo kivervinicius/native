@@ -16,8 +16,23 @@ export default class ListingGallery extends Component {
 
   onChange = (position) => this.setState({position: Math.floor(position)})
 
+  onLayout = (e) => {
+    const {dimensions} = this.props
+    const {position} = this.state
+    this.gallery.handleLayout(e)
+    this.gallery.scrollViewNode.scrollTo({
+      x: dimensions.width * position,
+      y: 0,
+      animated: false
+    })
+  }
+
   get items() {
     return this.props.children
+  }
+
+  galleryRef = (node) => {
+    this.gallery = node
   }
 
   renderPagination() {
@@ -45,9 +60,16 @@ export default class ListingGallery extends Component {
   }
 
   render() {
+    const {dimensions} = this.props
     return (
-      <View style={styles.container}>
-        <SwipeableView style={styles.gallery} onChangeIndex={this.onChange}>
+      <View style={[styles.container, dimensions]}>
+        <SwipeableView
+          ref={this.galleryRef}
+          onLayout={this.onLayout}
+          // index={this.state.position}
+          style={styles.gallery}
+          onChangeIndex={this.onChange}
+        >
           {this.renderImages()}
         </SwipeableView>
         <View style={styles.pagination}>{this.renderPagination()}</View>
