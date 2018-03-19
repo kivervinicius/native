@@ -1,10 +1,34 @@
 import {Image} from 'react-native'
+import PhotoView from 'react-native-photo-view'
 
 import * as image from '@/assets/image'
 
-const imageRatio = image.withRatio({width: 400, height: 200})
+export default function ListingImage({
+  scalable,
+  filename,
+  thumbnail,
+  width,
+  height,
+  style,
+  ...props
+}) {
+  const imageStyle = scalable
+    ? {position: 'absolute', width: '100%', height: '100%'}
+    : ListingImage.ratio({width, height})
+  const Component = scalable ? PhotoView : Image
+  if (scalable) props.minimumZoomScale = props.minimumZoomScale || 1
+  return (
+    <Component
+      {...props}
+      style={[imageStyle, style]}
+      source={{uri: ListingImage.url(filename, {thumbnail, width, height})}}
+    />
+  )
+}
 
-const imageUrl = (
+ListingImage.ratio = image.withRatio({width: 400, height: 200})
+
+ListingImage.url = (
   filename = 'default_w4ki8j.jpg',
   {thumbnail, width, height}
 ) => {
@@ -13,21 +37,4 @@ const imageUrl = (
   else if (thumbnail) options = {width: 400, height: 200}
   else options = {width: 600, height: 400}
   return image.url(filename, options)
-}
-
-export default function ListingImage({
-  filename,
-  thumbnail,
-  width,
-  height,
-  style,
-  ...props
-}) {
-  return (
-    <Image
-      {...props}
-      style={[imageRatio({width, height}), style]}
-      source={{uri: imageUrl(filename, {thumbnail, width, height})}}
-    />
-  )
 }
