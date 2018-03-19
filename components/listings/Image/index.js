@@ -13,7 +13,6 @@ export default function ListingImage({
   if (!Component) throw new Error(`Invalid ListingImage layout "${layout}".`)
   delete props.position
   delete props.layout
-  delete props[layout]
   return (
     <Component
       source={{uri: ListingImage.url(filename, {thumbnail, width, height})}}
