@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import {Component} from 'react'
 import {View} from 'react-native'
-import SwipeableView from 'react-swipeable-views-native'
+import SwipeableView from 'react-swipeable-views-native/lib/SwipeableViews.scroll'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import {responsive} from '@/components/shared/Orientation'
@@ -14,10 +14,25 @@ export default class ListingGallery extends Component {
     position: 0
   }
 
-  onSwipe = (position) => this.setState({position})
+  onChange = (position) => this.setState({position: Math.floor(position)})
+
+  onLayout = (e) => {
+    const {dimensions} = this.props
+    const {position} = this.state
+    this.gallery.handleLayout(e)
+    this.gallery.scrollViewNode.scrollTo({
+      x: dimensions.width * position,
+      y: 0,
+      animated: false
+    })
+  }
 
   get items() {
     return this.props.children
+  }
+
+  galleryRef = (node) => {
+    this.gallery = node
   }
 
   renderPagination() {
@@ -33,16 +48,27 @@ export default class ListingGallery extends Component {
   }
 
   renderImages() {
-    const {dimensions} = this.props
     return this.items.map((image) => (
-      <Image key={image.id} {...image} {...dimensions} />
+      <Image
+        layout="scalable"
+        key={image.id}
+        width={800}
+        height={650}
+        {...image}
+      />
     ))
   }
 
   render() {
+    const {dimensions} = this.props
     return (
-      <View style={styles.container}>
-        <SwipeableView style={styles.gallery} onChangeIndex={this.onSwipe}>
+      <View style={[styles.container, dimensions]}>
+        <SwipeableView
+          ref={this.galleryRef}
+          onLayout={this.onLayout}
+          style={styles.gallery}
+          onChangeIndex={this.onChange}
+        >
           {this.renderImages()}
         </SwipeableView>
         <View style={styles.pagination}>{this.renderPagination()}</View>
