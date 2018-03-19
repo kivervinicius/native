@@ -34,7 +34,13 @@ export default class ListingGallery extends Component {
 
   renderImages() {
     return this.items.map((image) => (
-      <Image scalable key={image.id} width={800} height={650} {...image} />
+      <Image
+        layout="scalable"
+        key={image.id}
+        width={800}
+        height={650}
+        {...image}
+      />
     ))
   }
 
