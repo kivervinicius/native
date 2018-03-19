@@ -66,7 +66,6 @@ export default class ListingGallery extends Component {
         <SwipeableView
           ref={this.galleryRef}
           onLayout={this.onLayout}
-          // index={this.state.position}
           style={styles.gallery}
           onChangeIndex={this.onChange}
         >
