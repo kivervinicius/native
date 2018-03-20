@@ -5,10 +5,12 @@ import * as colors from '@/assets/colors'
 
 export default NestedStyleSheet({
   container: {
-    padding: 20,
+    padding: 7,
+    paddingTop: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: colors.gray.lighter,
     ':active': {
-      backgroundColor: 'powderblue'
+      backgroundColor: colors.gray.offWhite
     }
   },
   thumbnail: {
@@ -27,7 +29,7 @@ export default NestedStyleSheet({
   description: {
     color: colors.gray.mediumDark,
     fontSize: 17,
-    lineHeight: 30,
+    lineHeight: 26,
     marginBottom: 10
   },
   header: {
