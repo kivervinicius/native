@@ -55,7 +55,7 @@ matrix:
 
 env:
   global:
-  - RUBY_VERSION=2.3.6
+  - RUBY_VERSION=$(head -n 1 .ruby-version)
   - LANG=pt_BR.UTF-8
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
   - SECRETS_DIR=~/.secrets
@@ -103,7 +103,7 @@ deploy:
       bump:true
       signed:true
       groups:$ALPHA_TESTERS
-      version_suffix:$TRAVIS_BRANCH
+      tag:$TRAVIS_BRANCH
       build_number:$TRAVIS_BUILD_NUMBER
     skip_cleanup: true
     on:
