@@ -46,9 +46,10 @@ matrix:
     - BIN_FILE=ios/build/EmCasa.ipa
     before_install:
     - brew update
-    - brew install yarn ios-sim jq ios-deploy cocoapods awscli
+    - brew install yarn ios-sim jq ios-deploy awscli
     - rvm install "ruby-$RUBY_VERSION"
     - rvm use $RUBY_VERSION
+    - gem install cocoapods
     - (cd ios && pod install)
 
 env:
