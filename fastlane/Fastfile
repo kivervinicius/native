@@ -29,9 +29,15 @@ def certificate(platform = lane_context[SharedValues::PLATFORM_NAME])
       'android.injected.signing.key.alias' => ENV['ANDROID_KEY_ALIAS'],
       'android.injected.signing.key.password' => ENV['ANDROID_KEY_PASSWORD']
     }
-    when :ios then {
-      # TODO
-    }
+    when :ios then [
+      {
+        certificate_path: ENV['IOS_CERTIFICATE_P12'],
+        certificate_password: ENV['IOS_CERTIFICATE_PASSWORD']
+      },
+      {
+        certificate_path: ENV['IOS_CERTIFICATE_CER'],
+      }
+    ]
   end
 end
 
@@ -70,7 +76,7 @@ platform :android do
   end
 
   desc "Publish beta build"
-  lane :beta do |comment: nil, groups: '', promote: false, **options|
+  lane :beta do |comment: nil, groups: nil, promote: false, **options|
     build options
     crashlytics(
       api_token: ENV['FABRIC_API_KEY'],
@@ -85,6 +91,7 @@ end
 
 platform :ios do
   PROJECT_DIR="#{IOS_DIR}/EmCasa.xcodeproj"
+  WORKSPACE_DIR="#{IOS_DIR}/EmCasa.xcworkspace"
 
   desc "Bump build and version numbers"
   lane :bump do |build_number: nil, version: nil, version_suffix: nil|
@@ -94,9 +101,56 @@ platform :ios do
     increment_version_number(version_number: version, xcodeproj: PROJECT_DIR)
   end
 
-  lane :build do |bump: false, **options|
+  desc "Configure xcode code signing"
+  lane :sign do |keychain: 'ci.keychain'|
+    password = SecureRandom.base64
+    delete_keychain(name: keychain) rescue nil
+    create_keychain(
+      name: keychain,
+      unlock: true,
+      timeout: false,
+      lock_when_sleeps: true,
+      password: password
+    )
+    certificate.map do |opts|
+      import_certificate(
+        keychain_name: keychain,
+        keychain_password: password,
+        **opts
+      )
+    end
+  end
+
+  desc "Build ipa file"
+  lane :build do |bump: false, signed: false, method: 'ad-hoc', **options|
     bump options if bump
-    gym(scheme: 'EmCasa', project: PROJECT_DIR)
+    sign options if signed
+    gym(
+      scheme: 'EmCasa',
+      output_directory: "#{IOS_DIR}/build",
+      xcconfig: ENV['XCCONFIG_FILE'] || nil,
+      workspace: WORKSPACE_DIR,
+      export_method: method,
+      export_options: {
+        provisioningProfiles: {
+          'com.EmCasa.native' => "#{method}.EmCasa.native"
+        }
+      }
+    )
+  end
+
+  desc "Publish beta build"
+  lane :beta do |comment: nil, groups: nil, promote: false, bin: nil, **options|
+    build options unless bin
+    bin ||= lane_context[SharedValues::IPA_OUTPUT_PATH]
+    crashlytics(
+      api_token: ENV['FABRIC_API_KEY'],
+      build_secret: ENV['FABRIC_BUILD_SECRET'],
+      ipa_path: bin,
+      notes: comment,
+      groups: groups,
+      notifications: promote
+    )
   end
 end
 

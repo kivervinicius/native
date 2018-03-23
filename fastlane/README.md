@@ -40,11 +40,21 @@ Publish beta build
 fastlane ios bump
 ```
 Bump build and version numbers
+### ios sign
+```
+fastlane ios sign
+```
+Configure xcode code signing
 ### ios build
 ```
 fastlane ios build
 ```
-
+Build ipa file
+### ios beta
+```
+fastlane ios beta
+```
+Publish beta build
 
 ----
 
