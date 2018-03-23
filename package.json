@@ -3,31 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "rnpm": {
-    "assets": [
-      "./assets/fonts"
-    ]
-  },
-  "devDependencies": {
-    "babel-eslint": "^8.2.2",
-    "babel-jest": "^22.4.1",
-    "babel-plugin-functional-hmr": "^1.0.24",
-    "babel-plugin-module-resolver": "^3.1.0",
-    "babel-plugin-react-require": "^3.0.0",
-    "babel-plugin-transform-inline-environment-variables": "^0.3.0",
-    "babel-preset-react-native-stage-0": "^1.0.1",
-    "eslint": "^4.18.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react": "^7.7.0",
-    "jest": "^22.4.2",
-    "jest-react-native": "^18.0.0",
-    "patch-package": "^5.1.1",
-    "postinstall-prepare": "^1.0.1",
-    "prettier": "^1.10.2",
-    "react-devtools": "^3.1.0",
-    "react-test-renderer": "16.2.0",
-    "redux-logger": "^3.0.6",
-    "redux-mock-store": "^1.5.1"
+    "assets": ["./assets/fonts"]
   },
   "scripts": {
     "prepare": "patch-package",
@@ -44,12 +20,8 @@
   "jest": {
     "preset": "react-native",
     "automock": false,
-    "unmockedModulePathPatterns": [
-      "/node_modules/"
-    ],
-    "setupFiles": [
-      "./__test__/setup.js"
-    ],
+    "unmockedModulePathPatterns": ["/node_modules/"],
+    "setupFiles": ["./__test__/setup.js"],
     "transformIgnorePatterns": [
       "/node_modules/(?!(jest-)?react-native|react-navigation)/"
     ]
@@ -76,5 +48,29 @@
     "redux-persist": "^5.9.1",
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^22.4.1",
+    "babel-plugin-functional-hmr": "^1.0.24",
+    "babel-plugin-module-resolver": "^3.1.0",
+    "babel-plugin-react-require": "^3.0.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.3.0",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "jest": "^22.4.2",
+    "jest-react-native": "^18.0.0",
+    "patch-package": "^5.1.1",
+    "postinstall-prepare": "^1.0.1",
+    "prettier": "^1.10.2",
+    "react-test-renderer": "16.2.0",
+    "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.1"
+  },
+  "optionalDependencies": {
+    "react-devtools": "^3.1.0",
+    "eslint": "^4.18.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0"
   }
 }
