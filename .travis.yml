@@ -9,12 +9,7 @@ matrix:
       - tools
       - platform-tools
       - build-tools-26.0.1
-      - build-tools-23.0.1
-      - build-tools-23.0.2
-      - build-tools-25.0.0
-      - build-tools-25.0.3
       - android-26
-      - android-23
       - extra-google-m2repository
       - extra-android-m2repository
     addons:
@@ -39,20 +34,20 @@ matrix:
     - sudo apt-get install -y nodejs
     - rvm install "ruby-$RUBY_VERSION"
     - rvm use $RUBY_VERSION
-  # - os: osx
-  #   language: objective-c
-  #   osx_image: xcode8.3
-  #   xcode_project: ios/EmCasa.xcodeproj
-  #   xcode_scheme: ios/EmCasa
-  #   env: PLATFORM=ios
-  #   before_install:
-  #   - brew update
-  #   - brew install yarn ios-sim jq ios-deploy cocoapods awscli
-  #   - rvm install "ruby-$RUBY_VERSION"
-  #   - rvm use $RUBY_VERSION
-  #   - (cd ios && pod install)
-  # allow_failures:
-  # - os: osx
+#  - os: osx
+#    language: objective-c
+#    osx_image: xcode8.3
+#    xcode_project: ios/EmCasa.xcodeproj
+#    xcode_scheme: ios/EmCasa
+#    env: PLATFORM=ios
+#    before_install:
+#    - brew update
+#    - brew install yarn ios-sim jq ios-deploy cocoapods awscli
+#    - rvm install "ruby-$RUBY_VERSION"
+#    - rvm use $RUBY_VERSION
+#    - (cd ios && pod install)
+#  allow_failures:
+#  - os: osx
 
 env:
   global:
@@ -68,7 +63,6 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
-  - "$HOME/.cache/pip"
   - "$HOME/.rvm/"
   - node_modules
   - android/.gradle
@@ -83,7 +77,7 @@ before_cache:
 
 install:
 - bundle install
-- yarn install --frozen-lockfile --production=false
+- yarn install --frozen-lockfile --no-optional --production=false
 
 before_script:
 - export ANDROID_KEYSTORE_FILE=~/.secrets/keystore.jks
