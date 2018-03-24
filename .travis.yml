@@ -18,8 +18,8 @@ matrix:
         - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
           key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
         packages:
-        - oracle-java8-installer
-        - oracle-java8-set-default
+        - oracle-java9-installer
+        - oracle-java9-set-default
         - yarn
         - jq
     licenses:
@@ -60,7 +60,7 @@ env:
   global:
   - RUBY_VERSION=$(head -n 1 .ruby-version)
   - LANG=pt_BR.UTF-8
-  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - JAVA_HOME=/usr/lib/jvm/java-9-oracle
   - SECRETS_DIR=~/.secrets
   - ANDROID_KEYSTORE_FILE=~/.secrets/keystore.jks
   - IOS_CERTIFICATE_CER=~/.secrets/ad-hoc/app.cer
