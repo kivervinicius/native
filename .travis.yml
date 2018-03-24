@@ -38,7 +38,7 @@ matrix:
     - rvm use $RUBY_VERSION
   - os: osx
     language: objective-c
-    osx_image: xcode8.3
+    osx_image: xcode9.2
     xcode_project: ios/EmCasa.xcodeproj
     xcode_scheme: ios/EmCasa
     env:
