@@ -108,42 +108,38 @@ platform :ios do
   end
 
   desc "Configure xcode code signing"
-  lane :sign do |args|
+  lane :sign do
+    name = SecureRandom.hex(3)
     password = SecureRandom.base64
-    keychain = args[:keychain] || 'ci.keychain'
-    delete_keychain(name: keychain) rescue nil
-    create_keychain(
-      name: keychain,
-      unlock: true,
-      timeout: false,
-      lock_when_sleeps: true,
-      password: password
-    )
-    certificate.map do |opts|
-      import_certificate(
-        keychain_name: keychain,
-        keychain_password: password,
-        **opts
-      )
-    end
+    keychain = `./keychain.sh #{password} #{name}`
   end
 
   desc "Build ipa file"
   lane :build do |bump: false, signed: false, method: 'ad-hoc', **options|
     bump options if bump
-    sign options if signed
-    gym(
-      scheme: 'EmCasa',
-      output_directory: "#{IOS_DIR}/build",
-      xcconfig: ENV['XCCONFIG_FILE'] || nil,
-      workspace: WORKSPACE_DIR,
-      export_method: method,
-      export_options: {
-        provisioningProfiles: {
-          'com.EmCasa.native' => "#{method}.EmCasa.native"
+    keychain = signed ? sign(options) : nil
+    gym_options = {
+        scheme: 'EmCasa',
+        output_directory: "#{IOS_DIR}/build",
+        xcconfig: ENV['XCCONFIG_FILE'] || nil,
+        workspace: WORKSPACE_DIR,
+        export_method: method,
+        export_options: {
+          provisioningProfiles: {
+            'com.EmCasa.native' => "#{method}.EmCasa.native"
+          }
         }
-      }
-    )
+    }
+    if keychain
+      gym_options[:export_xcargs] = "OTHER_CODE_SIGN_FLAGS=--keychain #{keychain}"
+    end
+    puts keychain
+    begin
+      gym(gym_options)
+    ensure
+      File.delete(keychain) if keychain
+      puts 'Temporary keychain deleted'
+    end
   end
 
   desc "Publish beta build"
