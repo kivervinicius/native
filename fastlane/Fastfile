@@ -115,7 +115,8 @@ platform :ios do
   end
 
   lane :provision do
-    `./provision.sh`.strip
+    args = `./provision.sh`.strip.split("\n")
+    {uuid: args[0], name: args[1]}
   end
 
   desc "Build ipa file"
@@ -131,9 +132,15 @@ platform :ios do
     keychain = nil
     if signed
       keychain = sign
+      prov_profile = provision
       gym_options[:export_xcargs] = "OTHER_CODE_SIGN_FLAGS='--keychain #{keychain}' "
-      gym_options[:export_xcargs] << "PROVISIONING_PROFILE=#{provision} "
-      gym_options[:export_xcargs] << "CODE_SIGNING_IDENTITY=\"$CODE_SIGNING_IDENTITY\" "
+      gym_options[:export_xcargs] << "PROVISIONING_PROFILE=#{prov_profile[:uuid]} "
+      gym_options[:export_xcargs] << 'CODE_SIGNING_IDENTITY="$CODE_SIGNING_IDENTITY" '
+      gym_options[:export_options] = {
+        provisioningProfiles: {
+          'com.EmCasa.native' => prov_profile[:name]
+        }
+      }
     end
     puts keychain
     begin
