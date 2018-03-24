@@ -82,12 +82,13 @@ platform :android do
   end
 
   desc "Publish beta build"
-  lane :beta do |comment: nil, groups: nil, promote: false, **options|
-    build options
+  lane :beta do |comment: nil, groups: nil, promote: false, bin: nil, **options|
+    build options unless bin
+    bin ||= lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
     crashlytics(
       api_token: ENV['FABRIC_API_KEY'],
       build_secret: ENV['FABRIC_BUILD_SECRET'],
-      apk_path: lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH],
+      apk_path: bin,
       notes: comment,
       groups: groups,
       notifications: promote

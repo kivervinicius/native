@@ -66,6 +66,7 @@ env:
   - IOS_CERTIFICATE_CER=~/.secrets/ad-hoc/app.cer
   - IOS_CERTIFICATE_P12=~/.secrets/ad-hoc/app.p12
   - IOS_MOBILE_PROVISION=~/.secrets/ad-hoc/app.mobileprovision
+  - VERSION_TAG=$(if [[ $a != "master" ]]; then echo $a; fi)
 
 cache:
   yarn: true
@@ -94,17 +95,20 @@ before_script:
 
 script:
 - yarn test
+- >-
+  bundle exec fastlane $PLATFORM build
+  signed:true
+  bump:true
+  tag:$VERSION_TAG
+  build_number:$TRAVIS_BUILD_NUMBER
 
 deploy:
   - provider: script
     script: >-
       rvm use $RUBY_VERSION do
       bundle exec fastlane $PLATFORM beta
-      bump:true
-      signed:true
       groups:$ALPHA_TESTERS
-      tag:$TRAVIS_BRANCH
-      build_number:$TRAVIS_BUILD_NUMBER
+      bin:$BIN_FILE
     skip_cleanup: true
     on:
       all_branches: true
@@ -113,10 +117,8 @@ deploy:
     script: >-
       rvm use $RUBY_VERSION do
       bundle exec fastlane $PLATFORM beta
-      bump:true
-      signed:true
       groups:$BETA_TESTERS
-      build_number:$TRAVIS_BUILD_NUMBER
+      bin:$BIN_FILE
     skip_cleanup: true
     on:
       branch: master
