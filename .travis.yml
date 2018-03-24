@@ -53,6 +53,8 @@ matrix:
     - pod setup
     - pod repo update
     - (cd ios && pod install)
+    after_failure:
+    - find $HOME/Library/Logs/gym/*.log | xargs bash -c 'printf "Printing log file\n==> $0\n\n"; tail -n 100 $0'
 
 env:
   global:
