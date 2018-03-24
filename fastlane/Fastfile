@@ -111,28 +111,29 @@ platform :ios do
   lane :sign do
     name = SecureRandom.hex(3)
     password = SecureRandom.base64
-    sh "./provision.sh"
-    keychain = `./keychain.sh #{password} #{name}`
+    `./keychain.sh #{password} #{name}`.strip
+  end
+
+  lane :provision do
+    `./provision.sh`.strip
   end
 
   desc "Build ipa file"
   lane :build do |bump: false, signed: false, method: 'ad-hoc', **options|
-    bump options if bump
-    keychain = signed ? sign : nil
     gym_options = {
         scheme: 'EmCasa',
         output_directory: "#{IOS_DIR}/build",
         xcconfig: ENV['XCCONFIG_FILE'] || nil,
         workspace: WORKSPACE_DIR,
-        export_method: method,
-        export_options: {
-          provisioningProfiles: {
-            'com.EmCasa.native' => "#{method}.EmCasa.native"
-          }
-        }
+        export_method: method
     }
-    if keychain
-      gym_options[:export_xcargs] = "OTHER_CODE_SIGN_FLAGS=--keychain #{keychain}"
+    bump options if bump
+    keychain = nil
+    if signed
+      keychain = sign
+      gym_options[:export_xcargs] = "OTHER_CODE_SIGN_FLAGS='--keychain #{keychain}' "
+      gym_options[:export_xcargs] << "PROVISIONING_PROFILE=#{provision} "
+      gym_options[:export_xcargs] << "CODE_SIGNING_IDENTITY=\"$CODE_SIGNING_IDENTITY\" "
     end
     puts keychain
     begin

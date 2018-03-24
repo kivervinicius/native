@@ -45,6 +45,11 @@ Bump build and version numbers
 fastlane ios sign
 ```
 Create keychain with credentials
+### ios provision
+```
+fastlane ios provision
+```
+
 ### ios build
 ```
 fastlane ios build
