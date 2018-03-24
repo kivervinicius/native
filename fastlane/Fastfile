@@ -107,17 +107,18 @@ platform :ios do
     increment_version_number(version_number: version, xcodeproj: PROJECT_DIR)
   end
 
-  desc "Configure xcode code signing"
+  desc "Create keychain with credentials"
   lane :sign do
     name = SecureRandom.hex(3)
     password = SecureRandom.base64
+    sh "./provision.sh"
     keychain = `./keychain.sh #{password} #{name}`
   end
 
   desc "Build ipa file"
   lane :build do |bump: false, signed: false, method: 'ad-hoc', **options|
     bump options if bump
-    keychain = signed ? sign(options) : nil
+    keychain = signed ? sign : nil
     gym_options = {
         scheme: 'EmCasa',
         output_directory: "#{IOS_DIR}/build",

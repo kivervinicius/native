@@ -44,7 +44,7 @@ Bump build and version numbers
 ```
 fastlane ios sign
 ```
-Configure xcode code signing
+Create keychain with credentials
 ### ios build
 ```
 fastlane ios build
