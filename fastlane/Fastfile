@@ -153,15 +153,11 @@ platform :ios do
         profile_uuid: prov_profile[:uuid],
         code_sign_identity: ENV['CODE_SIGNING_IDENTITY'],
         bundle_identifier: APP_ID,
-        team_id: TEAM_ID
+        team_id: TEAM_ID,
+        targets: ['EmCasa']
       )
     end
-    puts keychain
-    begin
-      gym(gym_options)
-    ensure
-      File.delete(keychain) if keychain
-    end
+    gym(gym_options)
   end
 
   desc "Publish beta build"
