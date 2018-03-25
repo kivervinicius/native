@@ -96,7 +96,7 @@ before_script:
 script:
 - yarn test
 - >-
-  bundle exec fastlane $PLATFORM build
+  travis_wait bundle exec fastlane $PLATFORM build
   signed:true
   bump:true
   tag:$VERSION_TAG
