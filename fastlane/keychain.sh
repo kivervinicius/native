@@ -8,6 +8,8 @@ security create-keychain -p $keychain_pass $keychain_name
 
 security unlock-keychain -p $keychain_pass $keychain_file
 
+security default-keychain -s $keychain_name
+
 [[ ! -z $IOS_CERTIFICATE_CER ]] && \
   security import $IOS_CERTIFICATE_CER \
     -k $keychain_file \
