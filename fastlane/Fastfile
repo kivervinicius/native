@@ -115,7 +115,9 @@ platform :ios do
   lane :sign do
     name = SecureRandom.hex(3)
     password = SecureRandom.base64
-    `./keychain.sh #{password} #{name}`.strip
+    keychain = `./keychain.sh #{password} #{name}`.strip
+    sh "security find-identity -v"
+    keychain
   end
 
   lane :provision do
@@ -139,7 +141,7 @@ platform :ios do
       prov_profile = provision
       gym_options[:skip_profile_detection] = true
       gym_options[:xcargs] = "OTHER_CODE_SIGN_FLAGS='--keychain #{keychain}' "
-      gym_options[:export_xcargs] = "OTHER_CODE_SIGN_FLAGS='--keychain #{keychain}' "
+      gym_options[:xcargs] << 'CODE_SIGNING_REQUIRED=NO '
       gym_options[:export_options] = {
         provisioningProfiles: {
           APP_ID => prov_profile[:name]
