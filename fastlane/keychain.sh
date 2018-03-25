@@ -20,4 +20,6 @@ security set-keychain-settings -t 3600 -l $keychain_file
     -P "$IOS_CERTIFICATE_PASSWORD" \
     -T /usr/bin/codesign > /dev/null
 
+security set-key-partition-list -S apple-tool:,apple: -s -k $keychain_pass $keychain_name
+
 echo $keychain_file
