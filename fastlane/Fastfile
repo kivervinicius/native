@@ -135,10 +135,13 @@ platform :ios do
     if signed
       keychain = sign
       prov_profile = provision
+      gym_options[:skip_profile_detection] = true
       gym_options[:export_xcargs] = "OTHER_CODE_SIGN_FLAGS='--keychain #{keychain}' "
       gym_options[:export_xcargs] << "PROVISIONING_PROFILE=#{prov_profile[:uuid]} "
+      gym_options[:export_xcargs] << "PROVISIONING_PROFILE_SPECIFIER=#{prov_profile[:name]} "
       gym_options[:export_xcargs] << 'CODE_SIGNING_IDENTITY="$CODE_SIGNING_IDENTITY" '
       gym_options[:export_options] = {
+        signingStyle: 'manual',
         provisioningProfiles: {
           'com.EmCasa.native' => prov_profile[:name]
         }
