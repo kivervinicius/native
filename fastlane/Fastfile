@@ -100,6 +100,8 @@ end
 platform :ios do
   PROJECT_DIR="#{IOS_DIR}/EmCasa.xcodeproj"
   WORKSPACE_DIR="#{IOS_DIR}/EmCasa.xcworkspace"
+  TEAM_ID = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+  APP_ID = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
 
   desc "Bump build and version numbers"
   lane :bump do |args|
@@ -136,23 +138,27 @@ platform :ios do
       keychain = sign
       prov_profile = provision
       gym_options[:skip_profile_detection] = true
+      gym_options[:xcargs] = "OTHER_CODE_SIGN_FLAGS='--keychain #{keychain}' "
       gym_options[:export_xcargs] = "OTHER_CODE_SIGN_FLAGS='--keychain #{keychain}' "
-      gym_options[:export_xcargs] << "PROVISIONING_PROFILE=#{prov_profile[:uuid]} "
-      gym_options[:export_xcargs] << "PROVISIONING_PROFILE_SPECIFIER=#{prov_profile[:name]} "
-      gym_options[:export_xcargs] << 'CODE_SIGNING_IDENTITY="$CODE_SIGNING_IDENTITY" '
       gym_options[:export_options] = {
-        signingStyle: 'manual',
         provisioningProfiles: {
-          'com.EmCasa.native' => prov_profile[:name]
+          APP_ID => prov_profile[:name]
         }
       }
+      automatic_code_signing(
+        path: PROJECT_DIR,
+        profile_name: prov_profile[:name],
+        profile_uuid: prov_profile[:uuid],
+        code_sign_identity: ENV['CODE_SIGNING_IDENTITY'],
+        bundle_identifier: APP_ID,
+        team_id: TEAM_ID
+      )
     end
     puts keychain
     begin
       gym(gym_options)
     ensure
       File.delete(keychain) if keychain
-      puts 'Temporary keychain deleted'
     end
   end
 
