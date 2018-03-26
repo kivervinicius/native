@@ -22,32 +22,20 @@ export default class ListingView extends Component {
   renderModal() {
     const {images} = this.props
     const {view} = this.state
-    const props = {
-      visible: Boolean(view),
-      onDismiss: this.onClose
-    }
     switch (view) {
       case 'gallery':
-        props.overlay = true
-        props.children = <Gallery>{images}</Gallery>
+        return <Gallery>{images}</Gallery>
         break
       case 'matterport':
-        props.overlay = true
-        props.children = <Matterport code={this.props.matterport_code} />
-        break
-      case 'interest':
-        props.title = 'Marcar Visita'
-        props.children = this.props.interestForm
-        break
+        return <Matterport code={this.props.matterport_code} />
       default:
         return undefined
     }
-
-    return <Modal {...props} />
   }
 
   render() {
     const {active} = this.props
+    const {view} = this.state
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -56,7 +44,9 @@ export default class ListingView extends Component {
         </View>
         <Description {...this.props} />
         {active && <Map {...this.props.address} />}
-        {this.renderModal()}
+        <Modal overlay visible={Boolean(view)} onDismiss={this.onClose}>
+          {this.renderModal()}
+        </Modal>
       </View>
     )
   }

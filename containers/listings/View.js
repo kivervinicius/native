@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 
 import {load} from '@/redux/modules/listings/data'
 import {getData, isLoading} from '@/redux/modules/listings/data/selectors'
-import InterestForm from '@/containers/interest/Form'
 import View from '@/components/listings/View'
 
 class ListingApp extends Component {
@@ -21,13 +20,7 @@ class ListingApp extends Component {
 
   render() {
     const {data, ...props} = this.props
-    return (
-      <View
-        {...props}
-        {...data}
-        interestForm={<InterestForm id={props.id} />}
-      />
-    )
+    return <View {...props} {...data} />
   }
 }
 
