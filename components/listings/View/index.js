@@ -19,11 +19,9 @@ export default class ListingView extends Component {
 
   onClose = () => this.setState({view: undefined})
 
-  renderGallery() {}
   renderModal() {
     const {images} = this.props
     const {view} = this.state
-
     switch (view) {
       case 'gallery':
         return <Gallery>{images}</Gallery>
