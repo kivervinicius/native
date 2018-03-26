@@ -19,7 +19,6 @@ export default class ListingView extends Component {
 
   onClose = () => this.setState({view: undefined})
 
-  renderGallery() {}
   renderModal() {
     const {images} = this.props
     const {view} = this.state
@@ -29,6 +28,8 @@ export default class ListingView extends Component {
         return <Gallery>{images}</Gallery>
       case 'matterport':
         return <Matterport code={this.props.matterport_code} />
+      case 'interest':
+        return this.props.interestForm
       default:
         return undefined
     }
