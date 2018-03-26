@@ -1,5 +1,11 @@
 import {Component} from 'react'
-import {KeyboardAvoidingView, View, Text, Button} from 'react-native'
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  View,
+  Text,
+  Button
+} from 'react-native'
 
 import interestTypes from './interestTypes'
 import SelectType from './SelectType'
@@ -40,7 +46,7 @@ export default class InterestForm extends Component {
     const {fields} = interestTypes[type]
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.text}>
           Escolha a melhor forma para agendar sua visita ao imóvel:
         </Text>
@@ -55,7 +61,7 @@ export default class InterestForm extends Component {
           {fields.map(this.renderField)}
         </KeyboardAvoidingView>
         <Button title="Enviar" onPress={this.onSubmit} />
-      </View>
+      </ScrollView>
     )
   }
 }

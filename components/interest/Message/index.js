@@ -1,5 +1,4 @@
-import {View, Text, TouchableOpacity} from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import {View, Text, Button} from 'react-native'
 
 import $styles, {buttonColor} from './styles'
 
@@ -12,16 +11,12 @@ function InterestMessage({styles, onDismiss}) {
       <Text style={styles.text}>
         Entraremos em contato o mais rápido possível para agendarmos uma visita!
       </Text>
-      <TouchableOpacity onPress={onDismiss}>
-        <Icon.Button
-          style={styles.button}
-          name="check"
-          backgroundColor={buttonColor}
-          style={styles.icon}
-        >
-          Ok
-        </Icon.Button>
-      </TouchableOpacity>
+      <Button
+        title="Ok"
+        color={buttonColor}
+        style={styles.icon}
+        onPress={onDismiss}
+      />
     </View>
   )
 }

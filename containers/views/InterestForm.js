@@ -12,7 +12,7 @@ export default class InterestFormScreen extends Component {
   render() {
     const {navigation} = this.props
     return (
-      <Shell scroll>
+      <Shell>
         <Form id={navigation.state.params.id} onReturn={this.onReturn} />
       </Shell>
     )
