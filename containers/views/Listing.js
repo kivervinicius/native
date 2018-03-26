@@ -1,6 +1,7 @@
+import {withNavigationFocus} from 'react-navigation'
+
 import Shell from '@/containers/shared/Shell'
 import Listing from '@/containers/listings/View'
-import {withNavigationFocus} from 'react-navigation'
 
 export default function ListingScreen({navigation, isFocused}) {
   return (
