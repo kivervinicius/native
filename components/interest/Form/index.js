@@ -33,11 +33,7 @@ export default class InterestForm extends Component {
     const Target = Fields[type]
     return (
       <View key={type} style={styles.field}>
-        <Target
-          value={value}
-          style={styles.input}
-          onChange={this.onChangeValue(type)}
-        />
+        <Target value={value} onChange={this.onChangeValue(type)} />
       </View>
     )
   }
