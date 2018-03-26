@@ -13,7 +13,7 @@ export default class InterestForm extends Component {
   onChange = (field) => (value) => this.setState({[field]: value})
 
   get selectedType() {
-    return this.props.types.find(({id}) => id === this.active)
+    return this.props.types.find(({id}) => id === this.state.active)
   }
 
   render() {
