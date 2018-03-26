@@ -1,27 +1,37 @@
-import _ from 'lodash'
 import {Component} from 'react'
 import {View, Text} from 'react-native'
+import interestTypes from './interestTypes'
+import Fields from './Fields'
 
 export default class InterestForm extends Component {
-  state = {}
-
-  constructor(props) {
-    super(props)
-    this.state.active = props.types[0].id
+  state = {
+    activeIndex: 0,
+    value: {}
   }
 
-  onChange = (field) => (value) => this.setState({[field]: value})
+  onChange = (field) => (value) =>
+    this.setState({
+      value: {[field]: value}
+    })
 
   get selectedType() {
-    return this.props.types.find(({id}) => id === this.state.active)
+    return this.props.types[this.state.activeIndex]
+  }
+
+  renderField = (type) => {
+    const value = this.state.value[type] || ''
+    const Target = Fields[type]
+    return <Target value={value} onChange={this.onChange(type)} />
   }
 
   render() {
-    const {text} = this.selectedType
+    const {id, text} = this.selectedType
+    const {fields} = interestTypes[id]
+
     return (
       <View>
-        <Text>Marcar Visita</Text>
         <Text>{text}</Text>
+        {fields.map(this.renderField)}
       </View>
     )
   }
