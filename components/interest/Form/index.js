@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {KeyboardAvoidingView, View, Text} from 'react-native'
+import {KeyboardAvoidingView, View, Text, Button} from 'react-native'
 
 import interestTypes from './interestTypes'
 import SelectType from './SelectType'
@@ -9,27 +9,23 @@ import $styles from './styles'
 @$styles.inject
 export default class InterestForm extends Component {
   state = {
-    activeIndex: 0,
-    value: {}
+    type: 0
   }
 
-  onChangeValue = (field) => (value) =>
-    this.setState({
-      value: {[field]: value}
-    })
-
-  onChangeType = (id) =>
-    this.setState({
-      activeIndex: this.props.types.findIndex((t) => t.id == id)
-    })
-
-  get selectedType() {
-    return this.props.types[this.state.activeIndex]
+  constructor(props) {
+    super(props)
+    this.state.type = props.types[0].id
   }
+
+  onChangeValue = (field) => (value) => this.setState({[field]: value})
+
+  onChangeType = (id) => this.setState({type: id})
+
+  onSubmit = () => this.props.onSubmit(this.state)
 
   renderField = (type) => {
     const {styles} = this.props
-    const value = this.state.value[type] || ''
+    const value = this.state[type] || ''
     const Target = Fields[type]
     return (
       <View key={type} style={styles.field}>
@@ -40,19 +36,26 @@ export default class InterestForm extends Component {
 
   render() {
     const {styles, types} = this.props
-    const {id} = this.selectedType
-    const {fields} = interestTypes[id]
+    const {type} = this.state
+    const {fields} = interestTypes[type]
 
     return (
-      <KeyboardAvoidingView style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.text}>
           Escolha a melhor forma para agendar sua visita ao imóvel:
         </Text>
-        <View style={styles.field}>
-          <SelectType types={types} value={id} onChange={this.onChangeType} />
-        </View>
-        {fields.map(this.renderField)}
-      </KeyboardAvoidingView>
+        <KeyboardAvoidingView style={{flex: 1}}>
+          <View style={styles.field}>
+            <SelectType
+              types={types}
+              value={type}
+              onChange={this.onChangeType}
+            />
+          </View>
+          {fields.map(this.renderField)}
+        </KeyboardAvoidingView>
+        <Button title="Enviar" onPress={this.onSubmit} />
+      </View>
     )
   }
 }

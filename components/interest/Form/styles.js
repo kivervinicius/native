@@ -3,7 +3,9 @@ import {padding} from '@/assets/styles'
 
 export default StyleSheet({
   container: {
-    padding: 20
+    flex: 1,
+    padding: 20,
+    display: 'flex'
   },
   text: {
     fontSize: 18,
