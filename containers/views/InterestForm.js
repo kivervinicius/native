@@ -4,7 +4,7 @@ import Shell from '@/containers/shared/Shell'
 import Form from '@/containers/interest/Form'
 
 export default class InterestFormScreen extends Component {
-  onReturn = () => {
+  onDismiss = () => {
     const {navigation} = this.props
     navigation.goBack()
   }
@@ -13,7 +13,7 @@ export default class InterestFormScreen extends Component {
     const {navigation} = this.props
     return (
       <Shell>
-        <Form id={navigation.state.params.id} onReturn={this.onReturn} />
+        <Form id={navigation.state.params.id} onDismiss={this.onDismiss} />
       </Shell>
     )
   }

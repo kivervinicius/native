@@ -9,7 +9,7 @@ import Message from '@/components/interest/Message'
 
 class InterestFormApp extends Component {
   state = {
-    ok: true
+    ok: false
   }
 
   componentWillReceiveProps(next) {
