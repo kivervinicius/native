@@ -40,11 +40,26 @@ Publish beta build
 fastlane ios bump
 ```
 Bump build and version numbers
+### ios sign
+```
+fastlane ios sign
+```
+Create keychain with credentials
+### ios provision
+```
+fastlane ios provision
+```
+
 ### ios build
 ```
 fastlane ios build
 ```
-
+Build ipa file
+### ios beta
+```
+fastlane ios beta
+```
+Publish beta build
 
 ----
 

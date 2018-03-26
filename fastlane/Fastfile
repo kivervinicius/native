@@ -21,6 +21,13 @@ def package
   )
 end
 
+def version_name(args)
+    tag = args[:tag] || ''
+    version = args[:version] || package[:version]
+    version << '-' << args[:tag] unless args[:tag].empty?
+    version
+end
+
 def certificate(platform = lane_context[SharedValues::PLATFORM_NAME])
   case platform.to_sym
     when :android then {
@@ -29,9 +36,15 @@ def certificate(platform = lane_context[SharedValues::PLATFORM_NAME])
       'android.injected.signing.key.alias' => ENV['ANDROID_KEY_ALIAS'],
       'android.injected.signing.key.password' => ENV['ANDROID_KEY_PASSWORD']
     }
-    when :ios then {
-      # TODO
-    }
+    when :ios then [
+      {
+        certificate_path: ENV['IOS_CERTIFICATE_P12'],
+        certificate_password: ENV['IOS_CERTIFICATE_PASSWORD']
+      },
+      {
+        certificate_path: ENV['IOS_CERTIFICATE_CER'],
+      }
+    ]
   end
 end
 
@@ -40,10 +53,10 @@ platform :android do
   VERSION_NAME_PATTERN = '(versionName) "(.*)"'
 
   desc "Bump build and version numbers"
-  lane :bump do |build_number: nil, version: nil, version_suffix: nil|
+  lane :bump do |args|
     gradle_build = "#{ANDROID_DIR}/app/build.gradle"
-    version ||= package[:version]
-    version << "-#{version_suffix}" if version_suffix
+    version = version_name args
+    build_number = args[:build_number]
     unless build_number
       build_number = sh "awk 'match($0,/#{BUILD_NUMBER_PATTERN}/) {print $2}' #{gradle_build}"
       build_number = build_number.to_i + 1
@@ -70,12 +83,13 @@ platform :android do
   end
 
   desc "Publish beta build"
-  lane :beta do |comment: nil, groups: '', promote: false, **options|
-    build options
+  lane :beta do |comment: nil, groups: nil, promote: false, bin: nil, **options|
+    build options unless bin
+    bin ||= lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
     crashlytics(
       api_token: ENV['FABRIC_API_KEY'],
       build_secret: ENV['FABRIC_BUILD_SECRET'],
-      apk_path: lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH],
+      apk_path: bin,
       notes: comment,
       groups: groups,
       notifications: promote
@@ -85,18 +99,79 @@ end
 
 platform :ios do
   PROJECT_DIR="#{IOS_DIR}/EmCasa.xcodeproj"
+  WORKSPACE_DIR="#{IOS_DIR}/EmCasa.xcworkspace"
+  TEAM_ID = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+  APP_ID = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
 
   desc "Bump build and version numbers"
-  lane :bump do |build_number: nil, version: nil, version_suffix: nil|
-    version ||= package[:version]
-    version << "-#{version_suffix}" if version_suffix
+  lane :bump do |args|
+    version = version_name(args)
+    build_number = args[:build_number]
     increment_build_number(build_number: build_number, xcodeproj: PROJECT_DIR)
     increment_version_number(version_number: version, xcodeproj: PROJECT_DIR)
   end
 
-  lane :build do |bump: false, **options|
+  desc "Create keychain with credentials"
+  lane :sign do
+    name = SecureRandom.hex(3)
+    password = SecureRandom.base64
+    output = `./keychain.sh #{password} #{name}`.strip
+    sh "security find-identity -v"
+    output.split("\n").last
+  end
+
+  lane :provision do
+    args = `./provision.sh`.strip.split("\n")
+    {uuid: args[0], name: args[1]}
+  end
+
+  desc "Build ipa file"
+  lane :build do |bump: false, signed: false, method: 'ad-hoc', **options|
+    gym_options = {
+        scheme: 'EmCasa',
+        output_directory: "#{IOS_DIR}/build",
+        xcconfig: ENV['XCCONFIG_FILE'] || nil,
+        workspace: WORKSPACE_DIR,
+        export_method: method
+    }
     bump options if bump
-    gym(scheme: 'EmCasa', project: PROJECT_DIR)
+    keychain = nil
+    if signed
+      keychain = sign
+      prov_profile = provision
+      gym_options[:skip_profile_detection] = true
+      gym_options[:xcargs] = "OTHER_CODE_SIGN_FLAGS='--keychain #{keychain}' "
+      gym_options[:xcargs] << 'CODE_SIGNING_REQUIRED=NO '
+      gym_options[:export_options] = {
+        provisioningProfiles: {
+          APP_ID => prov_profile[:name]
+        }
+      }
+      automatic_code_signing(
+        path: PROJECT_DIR,
+        profile_name: prov_profile[:name],
+        profile_uuid: prov_profile[:uuid],
+        code_sign_identity: ENV['CODE_SIGNING_IDENTITY'],
+        bundle_identifier: APP_ID,
+        team_id: TEAM_ID,
+        targets: ['EmCasa']
+      )
+    end
+    gym(gym_options)
+  end
+
+  desc "Publish beta build"
+  lane :beta do |comment: nil, groups: nil, promote: false, bin: nil, **options|
+    build options unless bin
+    bin ||= lane_context[SharedValues::IPA_OUTPUT_PATH]
+    crashlytics(
+      api_token: ENV['FABRIC_API_KEY'],
+      build_secret: ENV['FABRIC_BUILD_SECRET'],
+      ipa_path: bin,
+      notes: comment,
+      groups: groups,
+      notifications: promote
+    )
   end
 end
 

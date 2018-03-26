@@ -9,12 +9,7 @@ matrix:
       - tools
       - platform-tools
       - build-tools-26.0.1
-      - build-tools-23.0.1
-      - build-tools-23.0.2
-      - build-tools-25.0.0
-      - build-tools-25.0.3
       - android-26
-      - android-23
       - extra-google-m2repository
       - extra-android-m2repository
     addons:
@@ -31,7 +26,9 @@ matrix:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
     - google-gdk-license-.+
-    env: PLATFORM=android
+    env:
+    - PLATFORM=android
+    - BIN_FILE=android/app/build/outputs/apk/app-release.apk
     before_install:
     - export PATH=$HOME/.local/bin:$PATH
     - pip install awscli --upgrade --user `whoami`
@@ -39,26 +36,37 @@ matrix:
     - sudo apt-get install -y nodejs
     - rvm install "ruby-$RUBY_VERSION"
     - rvm use $RUBY_VERSION
-  # - os: osx
-  #   language: objective-c
-  #   osx_image: xcode8.3
-  #   xcode_project: ios/EmCasa.xcodeproj
-  #   xcode_scheme: ios/EmCasa
-  #   env: PLATFORM=ios
-  #   before_install:
-  #   - brew update
-  #   - brew install yarn ios-sim jq ios-deploy cocoapods awscli
-  #   - rvm install "ruby-$RUBY_VERSION"
-  #   - rvm use $RUBY_VERSION
-  #   - (cd ios && pod install)
-  # allow_failures:
-  # - os: osx
+  - os: osx
+    language: objective-c
+    osx_image: xcode9.2
+    xcode_project: ios/EmCasa.xcodeproj
+    xcode_scheme: ios/EmCasa
+    env:
+    - PLATFORM=ios
+    - BIN_FILE=ios/build/EmCasa.ipa
+    before_install:
+    - brew update
+    - brew install yarn ios-sim jq ios-deploy awscli
+    - rvm install "ruby-$RUBY_VERSION"
+    - rvm use $RUBY_VERSION
+    - gem install cocoapods
+    - pod setup
+    - pod repo update
+    - (cd ios && pod install)
+    after_failure:
+    - find $HOME/Library/Logs/gym/*.log | xargs bash -c 'printf "Printing log file\n==> $0\n\n"; tail -n 100 $0'
 
 env:
   global:
-  - RUBY_VERSION=2.3.6
+  - RUBY_VERSION=$(head -n 1 .ruby-version)
   - LANG=pt_BR.UTF-8
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - SECRETS_DIR=~/.secrets
+  - ANDROID_KEYSTORE_FILE=~/.secrets/keystore.jks
+  - IOS_CERTIFICATE_CER=~/.secrets/ad-hoc/app.cer
+  - IOS_CERTIFICATE_P12=~/.secrets/ad-hoc/app.p12
+  - IOS_MOBILE_PROVISION=~/.secrets/ad-hoc/app.mobileprovision
+  - VERSION_TAG=$(if [[ $a != "master" ]]; then echo $a; fi)
 
 cache:
   yarn: true
@@ -66,24 +74,20 @@ cache:
   bundler: true
   cocoapods: true
   directories:
+  - "$HOME/.gradle/native/"
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
-  - "$HOME/.cache/pip"
   - "$HOME/.rvm/"
   - node_modules
   - android/.gradle
-  - android/app/build
-  - ios/build
 
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -f  $HOME/.gradle/caches/transforms-1/transforms-1.lock
-- rm -rf $HOME/.gradle/caches/3.5/fileHashes/
-- rm -rf $HOME/.gradle/caches/*/plugin-resolution/
 
 install:
 - bundle install
-- yarn install --frozen-lockfile --production=false
+- yarn install --frozen-lockfile --no-optional --production=false
 
 before_script:
 - export ANDROID_KEYSTORE_FILE=~/.secrets/keystore.jks
@@ -91,17 +95,20 @@ before_script:
 
 script:
 - yarn test
+- >-
+  bundle exec fastlane $PLATFORM build
+  signed:true
+  bump:true
+  tag:$VERSION_TAG
+  build_number:$TRAVIS_BUILD_NUMBER
 
 deploy:
   - provider: script
     script: >-
       rvm use $RUBY_VERSION do
       bundle exec fastlane $PLATFORM beta
-      bump:true
-      signed:true
       groups:$ALPHA_TESTERS
-      version_suffix:$TRAVIS_BRANCH
-      build_number:$TRAVIS_BUILD_NUMBER
+      bin:$BIN_FILE
     skip_cleanup: true
     on:
       all_branches: true
@@ -110,10 +117,8 @@ deploy:
     script: >-
       rvm use $RUBY_VERSION do
       bundle exec fastlane $PLATFORM beta
-      bump:true
-      signed:true
       groups:$BETA_TESTERS
-      build_number:$TRAVIS_BUILD_NUMBER
+      bin:$BIN_FILE
     skip_cleanup: true
     on:
       branch: master
