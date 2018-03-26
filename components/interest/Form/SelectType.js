@@ -1,11 +1,14 @@
-import {Picker} from 'react-native'
+import _ from 'lodash/fp'
+import {Dropdown} from 'react-native-material-dropdown'
+
+const mapInterestTypes = _.map(({id, name}) => ({value: id, label: name}))
 
 export default function SelectInterestType({types, value, onChange}) {
   return (
-    <Picker selectedValue={value} onValueChange={onChange}>
-      {types.map(({id, name}) => (
-        <Picker.Item key={id} value={id} label={name} />
-      ))}
-    </Picker>
+    <Dropdown
+      data={mapInterestTypes(types)}
+      value={value}
+      onChangeText={onChange}
+    />
   )
 }
