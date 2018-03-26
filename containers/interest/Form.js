@@ -5,15 +5,34 @@ import {getInterestTypes} from '@/redux/modules/interest/types/selectors'
 import {isLoading, getError} from '@/redux/modules/interest/form/selectors'
 import {request} from '@/redux/modules/interest/form'
 import Form from '@/components/interest/Form'
+import Message from '@/components/interest/Message'
 
 class InterestFormApp extends Component {
+  state = {
+    ok: false
+  }
+
+  componentWillReceiveProps(next) {
+    if (this.props.loading && !next.loading && !next.error) {
+      this.setState({ok: true})
+    }
+  }
+
   onSubmit = (params) => {
     const {request, id, loading} = this.props
     if (!loading) request(id, params)
   }
 
-  render() {
+  renderForm() {
     return <Form {...this.props} onSubmit={this.onSubmit} />
+  }
+
+  renderMessage() {
+    return <Message onDismiss={this.props.onDismiss} />
+  }
+
+  render() {
+    return this.state.ok ? this.renderMessage() : this.renderForm()
   }
 }
 
