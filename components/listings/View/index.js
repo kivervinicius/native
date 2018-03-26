@@ -25,7 +25,6 @@ export default class ListingView extends Component {
     switch (view) {
       case 'gallery':
         return <Gallery>{images}</Gallery>
-        break
       case 'matterport':
         return <Matterport code={this.props.matterport_code} />
       default:
