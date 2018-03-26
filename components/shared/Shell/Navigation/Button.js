@@ -1,6 +1,7 @@
-import {TouchableOpacity, Text} from 'react-native'
+import {TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import Text from '@/components/shared/Text'
 import styles, {iconColor} from './styles'
 
 export default function NavButton({children, icon, ...props}) {

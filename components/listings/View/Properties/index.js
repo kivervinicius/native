@@ -1,6 +1,7 @@
-import {View, Text} from 'react-native'
+import {View} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import Text from '@/components/shared/Text'
 import Price from '@/components/shared/Price'
 import styles from './styles'
 

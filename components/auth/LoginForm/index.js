@@ -1,5 +1,7 @@
 import {Component} from 'react'
-import {KeyboardAvoidingView, TextInput, Button, View, Text} from 'react-native'
+import {KeyboardAvoidingView, TextInput, Button, View} from 'react-native'
+
+import Text from '@/components/shared/Text'
 
 export default class LoginForm extends Component {
   state = {

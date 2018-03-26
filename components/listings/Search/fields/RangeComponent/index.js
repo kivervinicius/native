@@ -1,7 +1,8 @@
 import _ from 'lodash/fp'
 import {Component} from 'react'
-import {View, Text} from 'react-native'
+import {View} from 'react-native'
 
+import Text from '@/components/shared/Text'
 import styles from './styles'
 
 const filterResult = _.omitBy(_.isNil)

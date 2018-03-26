@@ -1,6 +1,7 @@
-import {TouchableOpacity, View, Text} from 'react-native'
+import {TouchableOpacity, View} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import Text from '@/components/shared/Text'
 import styles from './styles'
 
 export default function FilterButton({children, icon, active, ...props}) {
