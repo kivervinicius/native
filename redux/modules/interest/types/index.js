@@ -6,7 +6,7 @@ export const request = () => ({type: REQUEST})
 export const success = (data) => ({type: SUCCESS, data})
 export const failure = (error) => ({type: FAILURE, error})
 
-export function interestTypes(state = [], action) {
+export default function interestTypes(state = [], action) {
   switch (action.type) {
     case SUCCESS:
       return action.data
