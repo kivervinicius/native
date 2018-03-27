@@ -19,7 +19,7 @@ export default StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     fontSize: 11,
-    fontWeight: '800',
+    fontWeight: '700',
     color: colors.gray.light
   }
 })
