@@ -12,7 +12,7 @@ export default class HeaderApp extends Component {
       null,
       NavigationActions.navigate({
         routeName: 'search',
-        params: route.last(navigation).params
+        params: route.last(navigation.state).params
       })
     )
   }
