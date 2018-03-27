@@ -1,15 +1,20 @@
-import {SwitchNavigator} from 'react-navigation'
+import {StackNavigator} from 'react-navigation'
 
-import fields from './fields'
+import Header from './Header'
 import * as menu from './Menu'
+import fields from './fields'
 
-export const screen = SwitchNavigator(
+export const screen = StackNavigator(
   {
     menu,
     ...fields
   },
   {
     initialRouteName: 'menu',
-    headerMode: 'none'
+    initialRouteParams: {},
+    headerMode: 'float',
+    navigationOptions: {
+      header: (props) => <Header {...props} />
+    }
   }
 )

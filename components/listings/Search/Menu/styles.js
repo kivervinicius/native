@@ -1,7 +1,5 @@
 import {StyleSheet} from 'react-native'
 
-import {margin} from '@/assets/styles'
-
 export default StyleSheet.create({
   container: {
     flex: 1
