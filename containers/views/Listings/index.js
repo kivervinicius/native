@@ -1,23 +1,13 @@
-import Shell from '@/containers/shared/Shell'
-import Search from '@/containers/listings/Search'
-import Listings from '@/containers/listings/Feed'
-import InfiniteScroll from '@/components/shared/InfiniteScroll'
+import {StackNavigator} from 'react-navigation'
 
-export default function ListingsScreen(props) {
-  return (
-    <Shell header={<Search {...props} />}>
-      <Listings
-        type="search"
-        params={props.navigation.state.params}
-        loader={<InfiniteScroll />}
-      />
-    </Shell>
-  )
-}
+import * as results from './Results'
+import * as search from './Search'
 
-export const screen = ListingsScreen
+export const screen = StackNavigator(
+  {results, search},
+  {
+    initialRouteName: 'results'
+  }
+)
 
-export const navigationOptions = () => ({
-  title: 'EmCasa | Pesquisa',
-  header: null
-})
+export default screen

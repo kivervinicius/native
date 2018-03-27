@@ -1,3 +1,4 @@
+import {createField} from './Field'
 import InputRange from './InputRange'
 import SelectRange from './SelectRange'
 import Select from './Select'
@@ -12,33 +13,37 @@ const mapRange = (options, label = '') =>
 
 const mapOptions = (options) => options.map((value) => ({label: value, value}))
 
-const assign = (options) => (Target) => {
-  const Component = (props) => <Target {...props} />
+const createScreen = (options) => (Target) => {
+  const Field = createField(Target)
+  const Component = ({screenProps, ...props}) => (
+    <Field {...props} {...screenProps} />
+  )
+  Component.screen = Component
   return Object.assign(Component, options)
 }
 
-export const price = assign({
+export const price = createScreen({
   title: 'Preço',
   defaultProps: {
     label: (type) => `Preço ${type == 'min' ? 'mínimo' : 'máximo'}`
   }
 })(InputRange)
 
-export const rooms = assign({
+export const rooms = createScreen({
   title: 'Quartos',
   defaultProps: {
     options: mapRange([1, 2, 3, 4])
   }
 })(SelectRange)
 
-export const area = assign({
+export const area = createScreen({
   title: 'Área',
   defaultProps: {
     options: mapRange([50, 80, 100, 200, 300, 500], 'm²')
   }
 })(SelectRange)
 
-export const neighborhoods = assign({
+export const neighborhoods = createScreen({
   title: 'Bairros'
 })(({neighborhoods, ...props}) => (
   <Select options={mapOptions(neighborhoods)} {...props} />

@@ -12,3 +12,9 @@ export default function Field({children, onSubmit}) {
     </View>
   )
 }
+
+export const createField = (Component) => ({onSubmit, ...props}) => (
+  <Field onSubmit={onSubmit}>
+    <Component {...props} />
+  </Field>
+)
