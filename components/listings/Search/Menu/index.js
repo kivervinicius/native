@@ -11,12 +11,17 @@ const OPTIONS = _.map(fields, (field, name) => ({
   label: field.title
 }))
 
-export default function SearchMenu({onSelect}) {
+export default function SearchMenu({onSelect, active}) {
   return (
     <View style={styles.container}>
       {OPTIONS.map(({label, value}) => (
         <TouchableOpacity key={value} onPress={onSelect(value)}>
-          <View style={styles.item}>
+          <View
+            style={[
+              styles.item,
+              active.indexOf(value) !== -1 && styles.itemActive
+            ]}
+          >
             <Text style={styles.itemText}>{label}</Text>
             <Icon name="chevron-right" style={styles.itemIcon} />
           </View>
@@ -24,4 +29,8 @@ export default function SearchMenu({onSelect}) {
       ))}
     </View>
   )
+}
+
+SearchMenu.defaultProps = {
+  active: []
 }

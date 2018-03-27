@@ -1,7 +1,10 @@
+import _ from 'lodash/fp'
 import {Component} from 'react'
 
 import Menu from '@/components/listings/Search/Menu'
 import Screen from './Screen'
+
+const activeParams = _.flow(_.omitBy(_.isEmpty), _.keys)
 
 export default class MenuScreen extends Component {
   onSelect = (name) => () => {
@@ -13,10 +16,15 @@ export default class MenuScreen extends Component {
     this.props.navigation.goBack(null)
   }
 
+  get active() {
+    const {navigation} = this.props
+    return activeParams(navigation.state.params)
+  }
+
   render() {
     return (
       <Screen {...this.props} onNavigate={this.onDismiss}>
-        <Menu onSelect={this.onSelect} />
+        <Menu active={this.active} onSelect={this.onSelect} />
       </Screen>
     )
   }

@@ -13,6 +13,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     padding: 15
   },
+  itemActive: {
+    backgroundColor: 'grey'
+  },
   itemText: {
     fontSize: 16
   },
