@@ -15,7 +15,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     padding: 10
   },
-  logo: {
-    flex: 0
+  input: {
+    flex: 1
+  },
+  icon: {
+    fontSize: 25
   }
 })
