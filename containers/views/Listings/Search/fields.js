@@ -24,9 +24,13 @@ export const createField = (Target) =>
       navigation.setParams({[this.name]: value})
     }
 
+    onNavigate = () => {
+      const {navigation} = this.props
+      navigation.navigate('menu', navigation.state.params)
+    }
     render() {
       return (
-        <Screen to="menu" {...this.props}>
+        <Screen onNavigate={this.onNavigate} {...this.props}>
           <Target value={this.value} onChange={this.onChange} />
         </Screen>
       )

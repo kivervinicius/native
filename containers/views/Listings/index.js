@@ -6,7 +6,7 @@ import * as search from './Search'
 export const screen = StackNavigator(
   {results, search},
   {
-    initialRouteName: 'search',
+    initialRouteName: 'results',
     headerMode: 'none'
   }
 )

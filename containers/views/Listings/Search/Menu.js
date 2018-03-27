@@ -9,9 +9,13 @@ export default class MenuScreen extends Component {
     navigation.navigate(name, navigation.state.params)
   }
 
+  onDismiss = () => {
+    this.props.navigation.goBack(null)
+  }
+
   render() {
     return (
-      <Screen {...this.props}>
+      <Screen {...this.props} onNavigate={this.onDismiss}>
         <Menu onSelect={this.onSelect} />
       </Screen>
     )
