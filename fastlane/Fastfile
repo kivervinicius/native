@@ -24,7 +24,7 @@ end
 def version_name(args)
     tag = args[:tag] || ''
     version = args[:version] || package[:version]
-    version << '-' << args[:tag] unless args[:tag].empty?
+    version << '-' << tag unless tag.empty?
     version
 end
 
