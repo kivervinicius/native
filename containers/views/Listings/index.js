@@ -10,5 +10,3 @@ export const screen = StackNavigator(
     headerMode: 'none'
   }
 )
-
-export default screen

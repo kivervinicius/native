@@ -1,7 +1,8 @@
-import _ from 'lodash/fp'
+import _ from 'lodash'
 import {Component} from 'react'
 
-import {createScreen} from '../Screen'
+import fields from '@/components/listings/Search/fields'
+import Screen from './Screen'
 
 export const createField = (Target) =>
   class extends Component {
@@ -23,25 +24,15 @@ export const createField = (Target) =>
       navigation.setParams({[this.name]: value})
     }
 
-    onReturn = () => {
-      const {navigation} = this.props
-      navigation.navigate('menu', navigation.state.params)
-    }
-
     render() {
-      const {onSubmit} = this.props
       return (
-        <Field onSubmit={onSubmit} onReturn={this.onReturn}>
+        <Screen to="menu" {...this.props}>
           <Target value={this.value} onChange={this.onChange} />
-        </Field>
+        </Screen>
       )
     }
   }
 
-export const createFieldScreen = _.flow(createField, createScreen({to: 'menu'}))
-
-export const fieldFactory = (options) => (Target) => {
-  const Field = createFieldScreen(Target)
-  Field.screen = Field
-  return Object.assign(Field, options)
-}
+export default _.mapValues(fields, (Target) => ({
+  screen: createField(Target)
+}))

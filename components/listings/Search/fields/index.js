@@ -1,4 +1,3 @@
-import {fieldFactory} from './Field'
 import InputRange from './InputRange'
 import SelectRange from './SelectRange'
 import Select from './Select'
@@ -13,28 +12,33 @@ const mapRange = (options, label = '') =>
 
 const mapOptions = (options) => options.map((value) => ({label: value, value}))
 
-export const price = fieldFactory({
+export const assign = (options) => (Target) => {
+  const Field = (props) => <Target {...props} />
+  return Object.assign(Field, options)
+}
+
+export const price = assign({
   title: 'Preço',
   defaultProps: {
     label: (type) => `Preço ${type == 'min' ? 'mínimo' : 'máximo'}`
   }
 })(InputRange)
 
-export const rooms = fieldFactory({
+export const rooms = assign({
   title: 'Quartos',
   defaultProps: {
     options: mapRange([1, 2, 3, 4])
   }
 })(SelectRange)
 
-export const area = fieldFactory({
+export const area = assign({
   title: 'Área',
   defaultProps: {
     options: mapRange([50, 80, 100, 200, 300, 500], 'm²')
   }
 })(SelectRange)
 
-export const neighborhoods = fieldFactory({
+export const neighborhoods = assign({
   title: 'Bairros'
 })(({neighborhoods, ...props}) => (
   <Select options={mapOptions(neighborhoods)} {...props} />
