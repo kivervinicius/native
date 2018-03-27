@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import {Component} from 'react'
 import {View} from 'react-native'
 import SwipeableView from 'react-swipeable-views-native/lib/SwipeableViews.scroll'

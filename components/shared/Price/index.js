@@ -1,6 +1,7 @@
 import {Fragment} from 'react'
-import {View, Text} from 'react-native'
+import {View} from 'react-native'
 
+import Text from '@/components/shared/Text'
 import * as format from '@/assets/format'
 import $styles from './styles'
 

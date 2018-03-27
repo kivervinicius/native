@@ -1,5 +1,6 @@
-import {View, Text} from 'react-native'
+import {View} from 'react-native'
 
+import Text from '@/components/shared/Text'
 import Price from '@/components/shared/Price'
 import styles from './styles'
 

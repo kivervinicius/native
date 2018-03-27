@@ -1,6 +1,7 @@
-import {Modal, View, Text, SafeAreaView, TouchableOpacity} from 'react-native'
+import {Modal, View, SafeAreaView, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import Text from '@/components/shared/Text'
 import {responsive} from '@/components/shared/Orientation'
 import $styles from './styles'
 
