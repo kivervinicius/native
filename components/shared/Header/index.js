@@ -20,7 +20,7 @@ export default class Header extends Component {
           <Icon name="magnify" style={styles.icon} />
           <TextInput
             style={styles.input}
-            placeholder="Pesquisa"
+            placeholder="Buscar"
             value={value}
             onChangeText={this.onChange}
           />
