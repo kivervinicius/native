@@ -1,5 +1,6 @@
 import {Component} from 'react'
 
+import Shell from '@/containers/shared/Shell'
 import Screen from '@/components/listings/Search/Screen'
 
 export default class SearchScreenApp extends Component {
@@ -9,6 +10,10 @@ export default class SearchScreenApp extends Component {
   }
 
   render() {
-    return <Screen {...this.props} onSubmit={this.onSubmit} />
+    return (
+      <Shell>
+        <Screen {...this.props} onSubmit={this.onSubmit} />
+      </Shell>
+    )
   }
 }
