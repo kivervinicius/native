@@ -8,17 +8,18 @@ import fields from '../fields'
 import styles from './styles'
 
 const OPTIONS = _.map(fields, (field, name) => ({
-  name: name,
+  value: name,
   label: field.title
 }))
 
 export default class Menu extends Component {
   onSelect = (field) => () => {
     const {navigation} = this.props
-    navigation.navigate(field)
+    navigation.navigate(field, navigation.state.params)
   }
 
   render() {
+    console.log(this.props.navigation.state)
     return (
       <View style={styles.container}>
         {OPTIONS.map(({label, value}) => (
