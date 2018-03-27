@@ -1,11 +1,11 @@
 import {SwitchNavigator} from 'react-navigation'
 
 import fields from './fields'
-import Menu from './Menu'
+import * as menu from './Menu'
 
 export default SwitchNavigator(
   {
-    menu: {screen: Menu},
+    menu,
     ...fields
   },
   {

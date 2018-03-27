@@ -1,22 +1,7 @@
+import _ from 'lodash/fp'
 import {Component} from 'react'
-import {Button, View, TouchableOpacity} from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import styles from './styles'
-
-export default function Field({children, onSubmit, onReturn}) {
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={onReturn}>
-        <Icon name="chevron-left" size={30} />
-      </TouchableOpacity>
-      <View style={styles.body}>{children}</View>
-      <View style={styles.footer}>
-        <Button style={styles.button} title="Aplicar" onPress={onSubmit} />
-      </View>
-    </View>
-  )
-}
+import {createScreen} from '../Screen'
 
 export const createField = (Target) =>
   class extends Component {
@@ -52,3 +37,11 @@ export const createField = (Target) =>
       )
     }
   }
+
+export const createFieldScreen = _.flow(createField, createScreen({to: 'menu'}))
+
+export const fieldFactory = (options) => (Target) => {
+  const Field = createFieldScreen(Target)
+  Field.screen = Field
+  return Object.assign(Field, options)
+}

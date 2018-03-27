@@ -4,6 +4,7 @@ import {View, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Text from '@/components/shared/Text'
+import {createScreen} from '../Screen'
 import fields from '../fields'
 import styles from './styles'
 
@@ -19,7 +20,6 @@ export default class Menu extends Component {
   }
 
   render() {
-    console.log(this.props.navigation.state)
     return (
       <View style={styles.container}>
         {OPTIONS.map(({label, value}) => (
@@ -35,4 +35,4 @@ export default class Menu extends Component {
   }
 }
 
-export const screen = Menu
+export const screen = createScreen()(Menu)

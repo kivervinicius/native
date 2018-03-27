@@ -12,7 +12,7 @@ export default class ListingsSearchScreen extends Component {
   render() {
     return (
       <Shell>
-        <Search renderProps={{onSubmit: this.onSubmit}} />
+        <Search screenProps={{onSubmit: this.onSubmit}} />
       </Shell>
     )
   }
