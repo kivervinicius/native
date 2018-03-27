@@ -23,6 +23,7 @@ export default class Header extends Component {
             placeholder="Buscar"
             value={value}
             onChangeText={this.onChange}
+            underlineColorAndroid="rgba(0,0,0,0)"
           />
           <TouchableOpacity style={styles.button} onPress={onSearchOptions}>
             <Text style={styles.buttonText}>Filtrar</Text>

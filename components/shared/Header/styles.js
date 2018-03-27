@@ -12,17 +12,19 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 5,
     backgroundColor: 'white',
     borderColor: colors.gray.lighter,
     borderWidth: StyleSheet.hairlineWidth,
-    ...elevation(6),
-    ...margin(10, 20)
+    height: 45,
+    ...padding(0, 10),
+    ...margin(10, 20),
+    ...elevation(6)
   },
   input: {
     flex: 1,
     color: colors.gray.dark,
     fontSize: 16,
+    lineHeight: 18,
     ...margin(0, 5)
   },
   icon: {
