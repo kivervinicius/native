@@ -18,8 +18,24 @@ class InterestFormApp extends Component {
     if (!loading) request(id, params)
   }
 
+  onOpenCalendly = () => {
+    const {request, id, onOpenCalendly} = this.props
+    request(id, {
+      name: 'Calendly',
+      message:
+        'Esta mensagem está sendo enviada porque algum usuário tentou agendar uma visita pelo Calendly neste imóvel.'
+    })
+    if (onOpenCalendly) onOpenCalendly()
+  }
+
   render() {
-    return <Form {...this.props} onSubmit={this.onSubmit} />
+    return (
+      <Form
+        {...this.props}
+        onSubmit={this.onSubmit}
+        onOpenCalendly={this.onOpenCalendly}
+      />
+    )
   }
 }
 
