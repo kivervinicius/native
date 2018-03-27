@@ -38,7 +38,7 @@ export default class InterestForm extends Component {
   render() {
     const {styles, types, onOpenCalendly} = this.props
     const {type} = this.state
-    const {fields} = type ? interestTypes[type] : undefined
+    const fields = type ? interestTypes[type].fields : undefined
 
     return (
       <View style={styles.container}>
@@ -48,7 +48,7 @@ export default class InterestForm extends Component {
           </Text>
           <Button title="Agendamento Online" onPress={onOpenCalendly} />
           <Text style={styles.separator}>OU</Text>
-          <KeyboardAvoidingView style={{flex: 1}}>
+          <KeyboardAvoidingView>
             <View style={styles.field}>
               <SelectType
                 types={types}

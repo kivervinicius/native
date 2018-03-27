@@ -25,6 +25,6 @@ export default StyleSheet({
     textAlign: 'center',
     fontWeight: '600',
     fontSize: 14,
-    marginTop: 10
+    marginTop: 15
   }
 })
