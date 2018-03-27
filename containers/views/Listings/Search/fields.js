@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import {Component} from 'react'
 
-import fields from '@/components/listings/Search/fields'
+import fields from '@/containers/listings/Search/fields'
 import Screen from './Screen'
 
 export const createField = (Target) =>
