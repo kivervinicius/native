@@ -14,6 +14,11 @@ export default class InterestFormScreen extends Component {
     if (!err) navigation.navigate('message')
   }
 
+  onOpenCalendly = () => {
+    const {navigation} = this.props
+    navigation.navigate('calendly')
+  }
+
   render() {
     const {navigation} = this.props
     return (
@@ -22,6 +27,7 @@ export default class InterestFormScreen extends Component {
           id={navigation.state.params.id}
           onFinish={this.onFinish}
           onDismiss={this.onDismiss}
+          onOpenCalendly={this.onOpenCalendly}
         />
       </Shell>
     )

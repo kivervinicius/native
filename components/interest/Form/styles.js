@@ -4,8 +4,10 @@ import {padding} from '@/assets/styles'
 export default StyleSheet({
   container: {
     flex: 1,
-    padding: 20,
     display: 'flex'
+  },
+  body: {
+    padding: 20
   },
   text: {
     fontSize: 18,
@@ -18,5 +20,11 @@ export default StyleSheet({
   input: {
     fontSize: 18,
     width: '100%'
+  },
+  separator: {
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: 14,
+    marginTop: 10
   }
 })

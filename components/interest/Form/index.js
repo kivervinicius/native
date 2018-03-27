@@ -1,12 +1,7 @@
 import {Component} from 'react'
-import {
-  KeyboardAvoidingView,
-  ScrollView,
-  View,
-  Text,
-  Button
-} from 'react-native'
+import {KeyboardAvoidingView, ScrollView, View, Button} from 'react-native'
 
+import Text from '@/components/shared/Text'
 import interestTypes from './interestTypes'
 import SelectType from './SelectType'
 import Fields from './Fields'
@@ -15,7 +10,7 @@ import $styles from './styles'
 @$styles.inject
 export default class InterestForm extends Component {
   state = {
-    type: 0
+    type: undefined
   }
 
   constructor(props) {
@@ -41,27 +36,31 @@ export default class InterestForm extends Component {
   }
 
   render() {
-    const {styles, types} = this.props
+    const {styles, types, onOpenCalendly} = this.props
     const {type} = this.state
-    const {fields} = interestTypes[type]
+    const {fields} = type ? interestTypes[type] : undefined
 
     return (
-      <ScrollView style={styles.container}>
-        <Text style={styles.text}>
-          Escolha a melhor forma para agendar sua visita ao imóvel:
-        </Text>
-        <KeyboardAvoidingView style={{flex: 1}}>
-          <View style={styles.field}>
-            <SelectType
-              types={types}
-              value={type}
-              onChange={this.onChangeType}
-            />
-          </View>
-          {fields.map(this.renderField)}
-        </KeyboardAvoidingView>
+      <View style={styles.container}>
+        <ScrollView style={styles.body}>
+          <Text style={styles.text}>
+            Escolha a melhor forma para agendar sua visita ao imóvel:
+          </Text>
+          <Button title="Agendamento Online" onPress={onOpenCalendly} />
+          <Text style={styles.separator}>OU</Text>
+          <KeyboardAvoidingView style={{flex: 1}}>
+            <View style={styles.field}>
+              <SelectType
+                types={types}
+                value={type}
+                onChange={this.onChangeType}
+              />
+            </View>
+            {fields && fields.map(this.renderField)}
+          </KeyboardAvoidingView>
+        </ScrollView>
         <Button title="Enviar" onPress={this.onSubmit} />
-      </ScrollView>
+      </View>
     )
   }
 }
