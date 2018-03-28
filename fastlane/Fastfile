@@ -119,7 +119,7 @@ platform :ios do
       }
       automatic_code_signing(
         path: PROJECT_DIR,
-        code_sign_identity: ENV['CODE_SIGNING_IDENTITY'],
+        code_sign_identity: ENV['IOS_CODE_SIGNING_IDENTITY'],
         bundle_identifier: APP_ID,
         team_id: TEAM_ID,
         targets: ['EmCasa']
