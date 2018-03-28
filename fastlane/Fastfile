@@ -24,28 +24,17 @@ end
 def version_name(args)
     tag = args[:tag] || ''
     version = args[:version] || package[:version]
-    version << '-' << args[:tag] unless args[:tag].empty?
+    version << '-' << tag unless tag.empty?
     version
 end
 
-def certificate(platform = lane_context[SharedValues::PLATFORM_NAME])
-  case platform.to_sym
-    when :android then {
-      'android.injected.signing.store.file' => ENV['ANDROID_KEYSTORE_FILE'],
-      'android.injected.signing.store.password' => ENV['ANDROID_KEYSTORE_PASSWORD'],
-      'android.injected.signing.key.alias' => ENV['ANDROID_KEY_ALIAS'],
-      'android.injected.signing.key.password' => ENV['ANDROID_KEY_PASSWORD']
-    }
-    when :ios then [
-      {
-        certificate_path: ENV['IOS_CERTIFICATE_P12'],
-        certificate_password: ENV['IOS_CERTIFICATE_PASSWORD']
-      },
-      {
-        certificate_path: ENV['IOS_CERTIFICATE_CER'],
-      }
-    ]
-  end
+def android_certificate()
+  {
+    'android.injected.signing.store.file' => ENV['ANDROID_KEYSTORE_FILE'],
+    'android.injected.signing.store.password' => ENV['ANDROID_KEYSTORE_PASSWORD'],
+    'android.injected.signing.key.alias' => ENV['ANDROID_KEY_ALIAS'],
+    'android.injected.signing.key.password' => ENV['ANDROID_KEY_PASSWORD']
+  }
 end
 
 platform :android do
@@ -74,7 +63,7 @@ platform :android do
   desc "Build akp file"
   lane :build do |signed: false, bump: false, **options|
     bump options if bump
-    build_options = signed ? {print_command: false, properties: certificate} : {}
+    build_options = signed ? {print_command: false, properties: android_certificate} : {}
     gradle(
       task: "clean assembleRelease",
       project_dir: ANDROID_DIR,
@@ -111,47 +100,28 @@ platform :ios do
     increment_version_number(version_number: version, xcodeproj: PROJECT_DIR)
   end
 
-  desc "Create keychain with credentials"
-  lane :sign do
-    name = SecureRandom.hex(3)
-    password = SecureRandom.base64
-    output = `./keychain.sh #{password} #{name}`.strip
-    sh "security find-identity -v"
-    output.split("\n").last
-  end
-
-  lane :provision do
-    args = `./provision.sh`.strip.split("\n")
-    {uuid: args[0], name: args[1]}
-  end
-
   desc "Build ipa file"
   lane :build do |bump: false, signed: false, method: 'ad-hoc', **options|
     gym_options = {
         scheme: 'EmCasa',
         output_directory: "#{IOS_DIR}/build",
-        xcconfig: ENV['XCCONFIG_FILE'] || nil,
+        xcconfig: ENV['IOS_XCCONFIG_FILE'] || nil,
         workspace: WORKSPACE_DIR,
-        export_method: method
+        export_method: method,
+        xcargs: 'CODE_SIGNING_REQUIRED=NO'
     }
     bump options if bump
-    keychain = nil
     if signed
-      keychain = sign
-      prov_profile = provision
-      gym_options[:skip_profile_detection] = true
-      gym_options[:xcargs] = "OTHER_CODE_SIGN_FLAGS='--keychain #{keychain}' "
-      gym_options[:xcargs] << 'CODE_SIGNING_REQUIRED=NO '
       gym_options[:export_options] = {
         provisioningProfiles: {
-          APP_ID => prov_profile[:name]
+          APP_ID => ENV['IOS_PROVISIONING_NAME']
         }
       }
       automatic_code_signing(
         path: PROJECT_DIR,
-        profile_name: prov_profile[:name],
-        profile_uuid: prov_profile[:uuid],
-        code_sign_identity: ENV['CODE_SIGNING_IDENTITY'],
+        code_sign_identity: ENV['IOS_CODE_SIGNING_IDENTITY'],
+        profile_name: ENV['IOS_PROVISIONING_NAME'],
+        profile_uuid: ENV['IOS_PROVISIONING_UUID'],
         bundle_identifier: APP_ID,
         team_id: TEAM_ID,
         targets: ['EmCasa']
