@@ -11,5 +11,9 @@ export default StyleSheet.create({
     borderColor: colors.gray.light,
     borderBottomWidth: StyleSheet.hairlineWidth,
     marginBottom: 10
+  },
+  map: {
+    width: '100%',
+    height: 300
   }
 })
