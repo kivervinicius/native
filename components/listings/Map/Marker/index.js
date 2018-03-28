@@ -18,7 +18,7 @@ function ListingMarker({styles, icon, price, address: {lat, lng}}) {
       <View style={styles.container}>
         <View style={styles.body}>
           {icon ? (
-            <Icon style={styles.all('text', 'icon')} name={icon} />
+            <Icon style={styles.text} name={icon} />
           ) : (
             <Text style={styles.text}>{abbrevPrice(price)}</Text>
           )}
