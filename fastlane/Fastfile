@@ -114,12 +114,14 @@ platform :ios do
     if signed
       gym_options[:export_options] = {
         provisioningProfiles: {
-          APP_ID => ENV['IOS_PROVISIONING_PROFILE_NAME']
+          APP_ID => ENV['IOS_PROVISIONING_NAME']
         }
       }
       automatic_code_signing(
         path: PROJECT_DIR,
         code_sign_identity: ENV['IOS_CODE_SIGNING_IDENTITY'],
+        profile_name: ENV['IOS_PROVISIONING_NAME'],
+        profile_uuid: ENV['IOS_PROVISIONING_UUID'],
         bundle_identifier: APP_ID,
         team_id: TEAM_ID,
         targets: ['EmCasa']
