@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native'
 
-import {margin} from '@/assets/styles'
+import * as colors from '@/assets/colors'
 
 export default StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    width: '100%'
   },
   item: {
     display: 'flex',
@@ -12,6 +13,9 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 15
+  },
+  itemActive: {
+    backgroundColor: colors.gray.lighter
   },
   itemText: {
     fontSize: 16

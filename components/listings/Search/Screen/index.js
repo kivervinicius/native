@@ -2,7 +2,7 @@ import {Button, View} from 'react-native'
 
 import styles from './styles'
 
-export default function Field({children, onSubmit}) {
+export default function SearchScreen({children, onSubmit}) {
   return (
     <View style={styles.container}>
       <View style={styles.body}>{children}</View>

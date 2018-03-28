@@ -8,6 +8,10 @@ import styles from './styles'
 const filterResult = _.omitBy(_.isNil)
 
 export default class RangeFieldComponent extends Component {
+  static defaultProps = {
+    value: {}
+  }
+
   styles = {}
 
   onChange = (type) => (value) =>
