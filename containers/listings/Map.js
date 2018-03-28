@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import {withFeed} from './Feed'
 import Map, {Marker} from '@/components/listings/Map'
 

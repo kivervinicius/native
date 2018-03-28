@@ -4,7 +4,7 @@ import Map from '@/containers/listings/Map'
 export default function MapScreen() {
   return (
     <Shell>
-      <Map />
+      <Map type="search" />
     </Shell>
   )
 }
