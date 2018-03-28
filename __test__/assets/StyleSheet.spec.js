@@ -11,7 +11,7 @@ const STYLES = {
     ':bar': {width: 200}
   },
   bar: {
-    position: 'relative'
+    position: 'absolute'
   }
 }
 
@@ -73,6 +73,20 @@ describe('StyleSheet', () => {
       expect(node.props.style).toMatchObject([
         FLAT_STYLES.foo,
         FLAT_STYLES.foo__bar,
+        moreStyles.foo
+      ])
+    })
+  })
+
+  describe('#all', () => {
+    it('concatenates stylesheets', () => {
+      const moreStyles = {foo: {flex: 1}}
+      expect($styles.all('foo', 'bar')).toMatchObject([
+        FLAT_STYLES.foo,
+        FLAT_STYLES.bar
+      ])
+      expect($styles.all('foo', moreStyles.foo)).toMatchObject([
+        FLAT_STYLES.foo,
         moreStyles.foo
       ])
     })

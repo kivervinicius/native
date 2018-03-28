@@ -1,5 +1,6 @@
 import {concat} from 'lodash'
 import _ from 'lodash/fp'
+import combine from './combine'
 import inject from './hoc'
 
 export default function createStyleSheet(flat) {
@@ -26,6 +27,6 @@ export default function createStyleSheet(flat) {
     )
   styleSheet._flat = flat
   styleSheet.inject = inject(styleSheet)
-  styleSheet.all = concat
+  styleSheet.all = combine(styleSheet)
   return Object.assign(styleSheet, flat.styles)
 }
