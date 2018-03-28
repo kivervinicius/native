@@ -105,7 +105,7 @@ platform :ios do
     gym_options = {
         scheme: 'EmCasa',
         output_directory: "#{IOS_DIR}/build",
-        xcconfig: ENV['XCCONFIG_FILE'] || nil,
+        xcconfig: ENV['IOS_XCCONFIG_FILE'] || nil,
         workspace: WORKSPACE_DIR,
         export_method: method,
         xcargs: 'CODE_SIGNING_REQUIRED=NO'
