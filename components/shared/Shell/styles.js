@@ -25,6 +25,6 @@ export default StyleSheet({
     zIndex: 1,
     backgroundColor: 'white',
     borderTopColor: colors.gray.light,
-    borderTopWidth: StyleSheet.hairlineWidth
+    borderTopWidth: 0.8
   }
 })
