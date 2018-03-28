@@ -7,6 +7,7 @@ export default StyleSheet.create({
   },
   body: {
     flex: 1,
-    padding: 15
+    display: 'flex',
+    justifyContent: 'center'
   }
 })

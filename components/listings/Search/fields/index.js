@@ -12,9 +12,9 @@ const mapRange = (options, label = '') =>
 
 const mapOptions = (options) => options.map((value) => ({label: value, value}))
 
-const assign = (options) => (Target) => {
-  const Component = (props) => <Target {...props} />
-  return Object.assign(Component, options)
+export const assign = (options) => (Target) => {
+  const Field = (props) => <Target {...props} />
+  return Object.assign(Field, options)
 }
 
 export const price = assign({

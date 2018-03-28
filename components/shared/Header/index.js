@@ -1,24 +1,33 @@
 import {Component} from 'react'
-import {View, SafeAreaView, TouchableOpacity} from 'react-native'
+import {View, TextInput, SafeAreaView, TouchableOpacity} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import Logo from '@/components/shared/Logo'
+import Text from '@/components/shared/Text'
 import styles from './styles'
 
 export default class Header extends Component {
-  navigateTo = (route) => () => {
-    const {navigation, scene} = this.props
-    if (scene.route.routeName !== route) navigation.navigate(route)
+  state = {
+    value: ''
   }
 
   render() {
+    const {onSearchOptions} = this.props
+    const {value} = this.state
+
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
-          <View style={styles.logo}>
-            <TouchableOpacity onPress={this.navigateTo('home')}>
-              <Logo height={40} />
-            </TouchableOpacity>
-          </View>
+          <Icon name="magnify" style={styles.icon} />
+          <TextInput
+            style={styles.input}
+            placeholder="Buscar"
+            value={value}
+            onChangeText={this.onChange}
+            underlineColorAndroid="rgba(0,0,0,0)"
+          />
+          <TouchableOpacity style={styles.button} onPress={onSearchOptions}>
+            <Text style={styles.buttonText}>Filtrar</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     )
