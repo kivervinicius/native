@@ -1,4 +1,7 @@
 import MapView from 'react-native-maps'
+import Marker from './Marker'
+
+export {Marker}
 
 export default function ListingMap({children, lat, lng, style}) {
   return (
@@ -11,9 +14,11 @@ export default function ListingMap({children, lat, lng, style}) {
         longitudeDelta: 0.0034
       }}
     >
-      {children}
+      {typeof children === 'undefined' ? (
+        <Marker icon="home" address={{lat, lng}} />
+      ) : (
+        children
+      )}
     </MapView>
   )
 }
-
-export {default as Marker} from './Marker'
