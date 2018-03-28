@@ -1,9 +1,22 @@
 import {Component} from 'react'
+import {View, StyleSheet} from 'react-native'
 
 import Shell from '@/containers/shared/Shell'
 import Listings from '@/containers/listings/Feed'
 import MapButton from '@/components/listings/Map/Button'
 import InfiniteScroll from '@/components/shared/InfiniteScroll'
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    flex: 1
+  },
+  button: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10
+  }
+})
 
 export default class ListingsScreen extends Component {
   onOpenMap = () => {
@@ -16,12 +29,14 @@ export default class ListingsScreen extends Component {
 
     return (
       <Shell>
-        <Listings
-          type="search"
-          params={navigation.state.params}
-          loader={<InfiniteScroll />}
-        />
-        <MapButton onPress={this.onOpenMap} />
+        <View style={styles.container}>
+          <Listings
+            type="search"
+            params={navigation.state.params}
+            loader={<InfiniteScroll />}
+          />
+          <MapButton style={styles.button} onPress={this.onOpenMap} />
+        </View>
       </Shell>
     )
   }
