@@ -42,7 +42,7 @@ export default class ListingView extends Component {
           <Properties {...this.props} />
         </View>
         <Description {...this.props} />
-        {active && <Map style={styles.map} {...address} />}
+        {active && <Map zoom="close" style={styles.map} {...address} />}
         <Modal overlay visible={Boolean(view)} onDismiss={this.onClose}>
           {this.renderModal()}
         </Modal>
