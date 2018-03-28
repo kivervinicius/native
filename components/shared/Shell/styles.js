@@ -22,6 +22,7 @@ export default StyleSheet({
   nav: {
     flex: 0,
     width: '100%',
+    zIndex: 1,
     backgroundColor: 'white',
     borderTopColor: colors.gray.light,
     borderTopWidth: StyleSheet.hairlineWidth
