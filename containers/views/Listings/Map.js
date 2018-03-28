@@ -3,7 +3,7 @@ import Map from '@/containers/listings/Map'
 
 export default function MapScreen() {
   return (
-    <Shell>
+    <Shell overlay>
       <Map type="search" />
     </Shell>
   )
