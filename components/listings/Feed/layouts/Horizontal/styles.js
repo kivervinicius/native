@@ -2,6 +2,9 @@ import {StyleSheet} from 'react-native'
 
 export default StyleSheet.create({
   container: {
+    flex: null
+  },
+  slide: {
     display: 'flex',
     flexDirection: 'row',
     width: '100%',

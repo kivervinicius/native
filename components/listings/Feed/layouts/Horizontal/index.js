@@ -19,7 +19,7 @@ export default class HorizontalFeed extends Component {
     let itemIndex = this.totalCount + index % this.totalCount
     itemIndex *= count
     return (
-      <View style={styles.container} key={index}>
+      <View style={styles.slide} key={index}>
         {_.times(count).map((i) =>
           this.renderSlide(data[(itemIndex + i) % this.totalCount])
         )}
@@ -49,6 +49,8 @@ export default class HorizontalFeed extends Component {
     if (!this.totalCount) return null
     return (
       <VirtualizedView
+        style={styles.container}
+        containerStyle={styles.container}
         overscanSlideAfter={1}
         overscanSlideBefore={1}
         slideRenderer={this.slideRenderer}

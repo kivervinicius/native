@@ -29,7 +29,9 @@ export default class MapScreen extends Component {
             <Map onSelect={this.onSelect} active={active} type="search" />
           </View>
           {active ? (
-            <RelatedListings id={active} />
+            <View style={styles.listings}>
+              <RelatedListings id={active} />
+            </View>
           ) : (
             <ActionButton
               style={styles.actionButton}

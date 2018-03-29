@@ -3,16 +3,17 @@ import {StyleSheet} from 'react-native'
 export default StyleSheet.create({
   container: {
     flex: 1,
-    position: 'relative'
+    position: 'relative',
+    display: 'flex'
   },
   body: {
-    flex: 1,
-    zIndex: 0
+    flex: 1
   },
   actionButton: {
     position: 'absolute',
     width: '100%',
     bottom: 0,
     zIndex: 1
-  }
+  },
+  listings: {}
 })
