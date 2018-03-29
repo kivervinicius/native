@@ -19,4 +19,4 @@ function Shell({styles, children, header, scroll, ...props}) {
 
 export {Section}
 
-export default $styles.inject(Shell)
+export default $styles.inject()(Shell)
