@@ -2,7 +2,6 @@ import {Component} from 'react'
 import {Platform, StatusBar} from 'react-native'
 import {StackNavigator} from 'react-navigation'
 
-import Header from '@/containers/shared/Header'
 import views from '@/containers/views'
 
 const Stack = StackNavigator(views, {
@@ -10,8 +9,7 @@ const Stack = StackNavigator(views, {
   initialRouteParams: {},
   headerMode: 'float',
   navigationOptions: {
-    title: 'EmCasa',
-    header: (props) => <Header {...props} />
+    header: null
   }
 })
 

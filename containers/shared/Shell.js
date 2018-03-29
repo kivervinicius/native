@@ -1,13 +1,15 @@
-import {connect} from 'react-redux'
 import withNavigation from 'react-navigation/src/views/withNavigation'
 
-import {getUser} from '@/redux/modules/auth/selectors'
 import Shell, {Section} from '@/components/shared/Shell'
+import Header from './Header'
 
-const props = (state) => ({
-  user: getUser(state)
-})
-
-export default withNavigation(connect(props)(Shell))
+function ShellApp({...props}) {
+  if (typeof props.header === 'undefined') {
+    props.header = <Header />
+  }
+  return <Shell {...props} />
+}
 
 export {Section}
+
+export default withNavigation(ShellApp)

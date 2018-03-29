@@ -1,23 +1,30 @@
-import {StyleSheet} from 'react-native'
-
+import StyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
 
-export default StyleSheet.create({
+export default StyleSheet({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    position: 'relative'
   },
   main: {
-    flex: 1
+    flex: 1,
+    zIndex: 0
   },
   header: {
-    margin: 0
+    margin: 0,
+    width: '100%',
+    ':overlay': {
+      position: 'absolute',
+      zIndex: 1
+    }
   },
   nav: {
     flex: 0,
     width: '100%',
+    zIndex: 1,
     backgroundColor: 'white',
     borderTopColor: colors.gray.light,
-    borderTopWidth: StyleSheet.hairlineWidth
+    borderTopWidth: 0.8
   }
 })
