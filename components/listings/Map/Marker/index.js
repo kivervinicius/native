@@ -1,20 +1,20 @@
 import {View} from 'react-native'
-import {Marker} from 'react-native-maps'
+import {Marker, Callout} from 'react-native-maps'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Text from '@/components/shared/Text'
 import {abbrevPrice} from '@/assets/format'
 import $styles from './styles'
 
-function ListingMarker({styles, icon, price, address: {lat, lng}}) {
-  const props = {
-    coordinate: {
-      latitude: lat,
-      longitude: lng
-    }
-  }
+function ListingMarker({styles, icon, price, address: {lat, lng}, ...props}) {
   return (
-    <Marker {...props}>
+    <Marker
+      {...props}
+      coordinate={{
+        latitude: lat,
+        longitude: lng
+      }}
+    >
       <View style={styles.container}>
         <View style={styles.body}>
           {icon ? (
@@ -25,6 +25,7 @@ function ListingMarker({styles, icon, price, address: {lat, lng}}) {
         </View>
       </View>
       <View style={styles.tip} />
+      <Callout tooltip />
     </Marker>
   )
 }

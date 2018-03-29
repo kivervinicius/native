@@ -11,6 +11,7 @@ export default class MapScreen extends Component {
   onSelect = (id) => {
     const {navigation} = this.props
     navigation.setParams({id})
+    return false
   }
 
   onDismiss = () => {
