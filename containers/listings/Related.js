@@ -7,7 +7,7 @@ import Feed from '@/components/listings/Feed'
 
 export class RelatedLoader extends Component {
   static defaultProps = {
-    length: 15
+    layout: 'horizontal'
   }
 
   componentDidMount() {
