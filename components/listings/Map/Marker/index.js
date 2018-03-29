@@ -23,8 +23,8 @@ function ListingMarker({styles, icon, price, address: {lat, lng}, ...props}) {
             <Text style={styles.text}>{abbrevPrice(price)}</Text>
           )}
         </View>
+        <View style={styles.tip} />
       </View>
-      <View style={styles.tip} />
       <Callout tooltip />
     </Marker>
   )
