@@ -1,30 +1,24 @@
-import _ from 'lodash/fp'
 import {Component} from 'react'
-import {FlatList} from 'react-native'
 import withNavigation from 'react-navigation/src/views/withNavigation'
 
-import Card from '@/components/listings/Card'
-
-const keyExtractor = _.flow(_.get('id'), _.toString)
+import layouts from './layouts'
 
 @withNavigation
 export default class ListingsFeed extends Component {
+  static defaultProps = {
+    layout: 'vertical'
+  }
+
   onSelect = (id) => () => {
     const {navigation} = this.props
     navigation.navigate('listing', {id})
   }
 
   render() {
-    const {layout} = this.props
+    const {layout, ...props} = this.props
+    const Layout = layouts[layout]
+    if (!Layout) throw new Error(`Invalid ListingsFeed layout ${layout}`)
 
-    return (
-      <FlatList
-        {...this.props}
-        keyExtractor={keyExtractor}
-        renderItem={({item}) => (
-          <Card onPress={this.onSelect(item.id)} layout={layout} {...item} />
-        )}
-      />
-    )
+    return <Layout {...props} onSelect={this.onSelect} />
   }
 }
