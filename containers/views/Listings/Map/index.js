@@ -10,8 +10,8 @@ import styles from './styles'
 export default class MapScreen extends Component {
   onSelect = (id) => {
     const {navigation} = this.props
-    navigation.setParams({id})
-    return false
+    if (id === this.activeId) navigation.setParams({id: null})
+    else navigation.setParams({id})
   }
 
   onDismiss = () => {
@@ -19,8 +19,12 @@ export default class MapScreen extends Component {
     navigation.goBack(null)
   }
 
+  get activeId() {
+    return this.props.navigation.state.params.id
+  }
+
   render() {
-    const active = this.props.navigation.state.params.id
+    const active = this.activeId
 
     return (
       <Shell overlay>
