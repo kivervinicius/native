@@ -8,15 +8,15 @@ import $styles from './styles'
 const WIDTH = Dimensions.get('window').width - 40
 const HEIGHT = WIDTH * 0.64
 
-function FullListingCard({styles, images, price, address, description}) {
+function FullListingCard({styles, size, images, price, address}) {
   const image = images[0] || {}
   return (
     <View style={styles.container}>
       <View style={styles.thumbnail}>
         <Image
           thumbnail
-          width={WIDTH}
-          height={HEIGHT}
+          width={WIDTH * size}
+          height={HEIGHT * size}
           style={styles.image}
           {...image}
         />
@@ -26,14 +26,13 @@ function FullListingCard({styles, images, price, address, description}) {
           <Text style={styles.street} numberOfLines={1} ellipsizeMode="tail">
             {address.street}
           </Text>
-          <Text style={styles.neighborhood}>
-            {address.neighborhood.toUpperCase()}
-          </Text>
+          {size > 0.5 && (
+            <Text style={styles.neighborhood}>
+              {address.neighborhood.toUpperCase()}
+            </Text>
+          )}
         </View>
-        <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail">
-          {description}
-        </Text>
-        <Price styles={{text: styles.priceText}} size={22}>
+        <Price styles={{text: styles.priceText}} size={Math.max(17, 22 * size)}>
           {price}
         </Price>
       </View>
@@ -41,4 +40,11 @@ function FullListingCard({styles, images, price, address, description}) {
   )
 }
 
-export default $styles.inject(FullListingCard)
+FullListingCard.defaultProps = {
+  size: 1
+}
+
+export default $styles.inject(({size, active}) => ({
+  active,
+  small: size < 0.7
+}))(FullListingCard)

@@ -6,7 +6,7 @@ import layouts from './layouts'
 @withNavigation
 export default class ListingsFeed extends Component {
   static defaultProps = {
-    layout: 'horizontal'
+    layout: 'vertical'
   }
 
   onSelect = (id) => () => {
@@ -19,7 +19,6 @@ export default class ListingsFeed extends Component {
     const Layout = layouts[layout]
     if (!Layout) throw new Error(`Invalid ListingsFeed layout ${layout}`)
 
-    console.log(Layout, props)
     return <Layout {...props} onSelect={this.onSelect} />
   }
 }
