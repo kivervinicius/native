@@ -8,6 +8,7 @@ const TIP_WIDTH = 10
 export default StyleSheet({
   container: {
     position: 'relative',
+    marginBottom: TIP_HEIGHT,
     ...elevation(2)
   },
   body: {
