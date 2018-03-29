@@ -10,7 +10,7 @@ import {
 } from '@/redux/modules/listings/feed/selectors'
 import Feed from '@/components/listings/Feed'
 
-class FeedApp extends Component {
+export class FeedLoader extends Component {
   static defaultProps = {
     length: 15
   }
@@ -28,7 +28,7 @@ class FeedApp extends Component {
 
   onReset = () => {
     const {reset, type} = this.props
-    reset(type)
+    if (reset) reset(type)
   }
 
   onLoad = (page = 1) => {
@@ -67,4 +67,4 @@ const actions = {
   reset
 }
 
-export default connect(props, actions)(FeedApp)
+export default connect(props, actions)(FeedLoader)
