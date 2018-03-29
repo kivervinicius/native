@@ -18,19 +18,19 @@ export default NestedStyleSheet({
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    borderRadius: 5
+    borderRadius: 5,
+    ':small': {
+      borderRadius: 3
+    }
   },
   image: {
-    borderRadius: 5
+    borderRadius: 5,
+    ':small': {
+      borderRadius: 3
+    }
   },
   body: {
     padding: 15
-  },
-  description: {
-    color: colors.gray.mediumDark,
-    fontSize: 17,
-    lineHeight: 26,
-    marginBottom: 10
   },
   header: {
     display: 'flex',
@@ -43,13 +43,17 @@ export default NestedStyleSheet({
     color: colors.gray.darker,
     flex: 1,
     fontSize: 20,
-    marginRight: 15
+    marginRight: 15,
+    ':small': {
+      fontSize: 14
+    }
   },
   neighborhood: {
     color: colors.gray.medium,
     fontWeight: '600'
   },
   priceText: {
+    fontWeight: '300',
     color: colors.gray.darker
   }
 })

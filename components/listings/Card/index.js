@@ -1,13 +1,9 @@
 import {Component} from 'react'
 import {TouchableHighlight} from 'react-native'
 
-import LAYOUTS from './layouts'
+import Card from './Body'
 
 export default class ListingCard extends Component {
-  static defaultProps = {
-    layout: 'full'
-  }
-
   state = {
     active: false
   }
@@ -15,11 +11,8 @@ export default class ListingCard extends Component {
   onHighlight = (active) => () => this.setState({active})
 
   render() {
-    const {onPress, layout, ...props} = this.props
+    const {onPress, ...props} = this.props
     const {active} = this.state
-    const Card = LAYOUTS[layout]
-    if (!Card) throw new Error(`Invalid ListingCard layout "${layout}"`)
-
     return (
       <TouchableHighlight
         onPress={onPress}

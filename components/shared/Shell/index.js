@@ -1,6 +1,7 @@
 import {SafeAreaView, ScrollView, View} from 'react-native'
 
 import Navigation from './Navigation'
+import Section from './Section'
 import $styles from './styles'
 
 function Shell({styles, children, header, scroll, ...props}) {
@@ -16,4 +17,6 @@ function Shell({styles, children, header, scroll, ...props}) {
   )
 }
 
-export default $styles.inject(Shell)
+export {Section}
+
+export default $styles.inject()(Shell)

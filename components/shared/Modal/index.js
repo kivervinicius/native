@@ -33,4 +33,4 @@ ControlledModal.defaultProps = {
   animationType: 'slide'
 }
 
-export default responsive()($styles.inject(ControlledModal))
+export default responsive()($styles.inject()(ControlledModal))

@@ -7,7 +7,7 @@ import SelectType from './SelectType'
 import Fields from './Fields'
 import $styles from './styles'
 
-@$styles.inject
+@$styles.inject()
 export default class InterestForm extends Component {
   state = {
     type: undefined

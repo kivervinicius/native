@@ -1,6 +1,6 @@
 import withNavigation from 'react-navigation/src/views/withNavigation'
 
-import Shell from '@/components/shared/Shell'
+import Shell, {Section} from '@/components/shared/Shell'
 import Header from './Header'
 
 function ShellApp({...props}) {
@@ -9,5 +9,7 @@ function ShellApp({...props}) {
   }
   return <Shell {...props} />
 }
+
+export {Section}
 
 export default withNavigation(ShellApp)

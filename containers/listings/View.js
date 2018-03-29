@@ -5,7 +5,7 @@ import {load} from '@/redux/modules/listings/data'
 import {getData, isLoading} from '@/redux/modules/listings/data/selectors'
 import View from '@/components/listings/View'
 
-class ListingApp extends Component {
+export class ListingLoader extends Component {
   componentDidMount() {
     const {data, loading} = this.props
     if (!data && !loading) {
@@ -33,4 +33,4 @@ const actions = {
   load
 }
 
-export default connect(props, actions)(ListingApp)
+export default connect(props, actions)(ListingLoader)

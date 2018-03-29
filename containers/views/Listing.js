@@ -1,8 +1,9 @@
 import {Component} from 'react'
 import {withNavigationFocus} from 'react-navigation'
 
-import Shell from '@/containers/shared/Shell'
+import Shell, {Section} from '@/containers/shared/Shell'
 import Listing from '@/containers/listings/View'
+import RelatedListings from '@/containers/listings/Related'
 
 export default class ListingScreen extends Component {
   onInterest = () => {
@@ -12,13 +13,14 @@ export default class ListingScreen extends Component {
 
   render() {
     const {navigation, isFocused} = this.props
+    const {id} = navigation.state.params
+
     return (
       <Shell scroll>
-        <Listing
-          active={isFocused}
-          id={navigation.state.params.id}
-          onInterest={this.onInterest}
-        />
+        <Listing active={isFocused} id={id} onInterest={this.onInterest} />
+        <Section title="Veja Também">
+          <RelatedListings id={id} />
+        </Section>
       </Shell>
     )
   }

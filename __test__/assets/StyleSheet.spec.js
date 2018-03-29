@@ -55,13 +55,23 @@ describe('StyleSheet', () => {
   })
 
   describe('#inject', () => {
-    const Component = $styles.inject(({styles}) => <View style={styles.foo} />)
+    const Target = ({styles}) => <View style={styles.foo} />
+    const mapStyles = (props) => ({bar: props.value === 'bar', ...props})
+    const Component = $styles.inject(mapStyles)(Target)
 
     it('extracts variants from props', () => {
       const node = renderer.create(<Component foo />).toJSON()
       expect(node.props.style).toMatchObject([
         FLAT_STYLES.foo,
         FLAT_STYLES.foo__foo
+      ])
+    })
+
+    it('maps props to style variants', () => {
+      const node = renderer.create(<Component value="bar" />).toJSON()
+      expect(node.props.style).toMatchObject([
+        FLAT_STYLES.foo,
+        FLAT_STYLES.foo__bar
       ])
     })
 
