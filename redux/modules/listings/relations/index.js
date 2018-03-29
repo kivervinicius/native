@@ -17,5 +17,7 @@ export default function relatedListings(state = {}, action) {
         ...state,
         [action.id]: _.map(action.data, 'id')
       }
+    default:
+      return state
   }
 }
