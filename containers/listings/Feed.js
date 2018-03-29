@@ -67,4 +67,6 @@ const actions = {
   reset
 }
 
-export default connect(props, actions)(FeedApp)
+export const withFeed = connect(props, actions)
+
+export default withFeed(FeedApp)

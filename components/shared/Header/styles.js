@@ -4,9 +4,6 @@ import * as colors from '@/assets/colors'
 import {elevation, margin, padding} from '@/assets/styles'
 
 export default StyleSheet.create({
-  container: {
-    backgroundColor: 'white'
-  },
   wrapper: {
     display: 'flex',
     flexDirection: 'row',
