@@ -29,4 +29,4 @@ function ListingMarker({styles, icon, price, address: {lat, lng}}) {
   )
 }
 
-export default $styles.inject(ListingMarker)
+export default $styles.inject()(ListingMarker)

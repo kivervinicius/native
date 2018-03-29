@@ -22,4 +22,4 @@ function InterestMessage({styles, onDismiss}) {
   )
 }
 
-export default $styles.inject(InterestMessage)
+export default $styles.inject()(InterestMessage)

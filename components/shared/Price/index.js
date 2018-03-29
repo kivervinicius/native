@@ -30,4 +30,4 @@ Price.defaultProps = {
   size: 15
 }
 
-export default $styles.inject(Price)
+export default $styles.inject()(Price)
