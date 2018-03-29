@@ -2,6 +2,7 @@ import _ from 'lodash/fp'
 import update from 'immutability-helper'
 
 import * as feed from '../feed'
+import * as relations from '../relations'
 
 export const LOAD = 'listings/data/LOAD'
 export const REQUEST = 'listings/data/REQUEST'
@@ -27,6 +28,7 @@ export default function listingsData(state = {}, action) {
         [action.id]: {$set: listingsData.node(state[action.id], action)}
       })
     case feed.SUCCESS:
+    case relations.SUCCESS:
       return update(state, {$merge: mapFeed(action.data)})
     default:
       return state
