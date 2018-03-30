@@ -1,9 +1,20 @@
-import {put, call, all, race, fork, take, takeLatest} from 'redux-saga/effects'
+import _ from 'lodash/fp'
+import {
+  put,
+  call,
+  all,
+  race,
+  fork,
+  select,
+  take,
+  takeLatest
+} from 'redux-saga/effects'
 
 import ResponseError from '@/lib/api/ResponseError'
 import {reportError} from '@/redux/modules/fabric'
 import * as api from '@/lib/services/listings'
 import * as actions from './index'
+import {getOptions} from './selectors'
 
 const pagination = (res) => ({
   currentPage: res.page_number || 0,
@@ -23,7 +34,14 @@ function* request({key, options}) {
   }
 }
 
+const filterParams = _.omit('page')
+
+const eqlOptions = _.overArgs(_.isEqual)(Array(2).fill(filterParams))
+
 function* load(action) {
+  const options = yield select(getOptions, {type: action.key})
+  // Reset results if params will change
+  if (!eqlOptions(options, action.options)) yield put(actions.reset(action.key))
   yield race({
     task: fork(request, action),
     cancel: take(actions.RESET)
