@@ -1,11 +1,11 @@
-import {Component} from 'react'
+import {PureComponent} from 'react'
 import {connect} from 'react-redux'
 
 import {load} from '@/redux/modules/listings/data'
 import {getData, isLoading} from '@/redux/modules/listings/data/selectors'
 import Loader from '@/containers/shared/Loader'
 
-export class ListingLoader extends Component {
+export class ListingLoader extends PureComponent {
   onLoad = () => {
     const {load, id} = this.props
     load(id)

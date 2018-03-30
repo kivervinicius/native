@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import {PureComponent} from 'react'
 import {connect} from 'react-redux'
 
 import {load} from '@/redux/modules/listings/feed'
@@ -9,7 +9,7 @@ import {
 } from '@/redux/modules/listings/feed/selectors'
 import Loader from '@/containers/shared/Loader'
 
-export class FeedLoader extends Component {
+export class FeedLoader extends PureComponent {
   state = {page: 1}
 
   static defaultProps = {
