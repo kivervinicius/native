@@ -18,7 +18,7 @@ export default class Loader extends Component {
 
   renderChildren() {
     const {children} = this.props
-    if (typeof children === 'function') return children(this.status)
+    if (_.isFunction(children)) return children(this.status)
     return React.cloneElement(React.Children.only(children), this.status)
   }
 
