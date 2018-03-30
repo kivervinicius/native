@@ -7,6 +7,11 @@ export default class Loader extends Component {
     onLoad(params)
   }
 
+  componentDidUpdate(prev) {
+    const {onLoad, params} = this.props
+    if (!_.isEqual(prev.params, params)) onLoad(params)
+  }
+
   get status() {
     return _.pick(this.props, 'pagination', 'loading', 'error', 'data')
   }

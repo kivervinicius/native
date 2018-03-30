@@ -10,19 +10,18 @@ import {
 import Loader from '@/containers/shared/Loader'
 
 export class FeedLoader extends Component {
-  state = {}
+  state = {page: 1}
 
   static defaultProps = {
     length: 15
   }
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props) {
     if (props.page) return {page: props.page}
-    else if (!state) return {page: 1}
     return null
   }
 
-  onChangePage = (page = 1) => this.setState({page})
+  onChangePage = (page) => this.setState({page})
 
   onLoad = (params) => {
     const {load, type} = this.props
@@ -38,10 +37,10 @@ export class FeedLoader extends Component {
   render() {
     return (
       <Loader
+        {...this.props}
         params={this.params}
         onLoad={this.onLoad}
         onChangePage={this.onChangePage}
-        {...this.props}
       />
     )
   }
