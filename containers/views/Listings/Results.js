@@ -33,7 +33,7 @@ export default class ListingsScreen extends Component {
           <Listings
             type="search"
             params={navigation.state.params}
-            loader={<InfiniteScroll />}
+            as={InfiniteScroll}
           />
           <MapButton style={styles.button} onPress={this.onOpenMap} />
         </View>

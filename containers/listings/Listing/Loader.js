@@ -1,26 +1,18 @@
-import {Component} from 'react'
+import {PureComponent} from 'react'
 import {connect} from 'react-redux'
 
 import {load} from '@/redux/modules/listings/data'
 import {getData, isLoading} from '@/redux/modules/listings/data/selectors'
-import View from '@/components/listings/View'
+import Loader from '@/containers/shared/Loader'
 
-export class ListingLoader extends Component {
-  componentDidMount() {
-    const {data, loading} = this.props
-    if (!data && !loading) {
-      this.onLoad()
-    }
-  }
-
+export class ListingLoader extends PureComponent {
   onLoad = () => {
     const {load, id} = this.props
     load(id)
   }
 
   render() {
-    const {data, ...props} = this.props
-    return <View {...props} {...data} />
+    return <Loader {...this.props} onLoad={this.onLoad} />
   }
 }
 
