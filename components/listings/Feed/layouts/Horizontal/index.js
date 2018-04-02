@@ -43,7 +43,7 @@ export default class HorizontalFeed extends Component {
     return (
       <View
         key={`placeholder-${n}`}
-        style={[styles.placeholder, {width: `${1 / count * 100}%`}]}
+        style={[styles.placeholder, {flex: 1 / count}]}
       />
     )
   }
