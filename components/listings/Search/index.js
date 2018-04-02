@@ -1,13 +1,5 @@
 import PriceText from '@/components/shared/Price'
-import {Select, SlideRange} from './Field'
-
-const mapRange = (options, label = '') =>
-  [{label: String.fromCharCode(0x2500), value: undefined}].concat(
-    options.map((i) => ({
-      label: typeof label === 'function' ? label(i) : `${i} ${label}`,
-      value: i
-    }))
-  )
+import {SelectRange, SlideRange} from './Field'
 
 const mapOptions = (options) => options.map((value) => ({label: value, value}))
 
@@ -34,9 +26,14 @@ export const Price = assign({
 export const Rooms = assign({
   title: 'Quartos',
   defaultProps: {
-    options: mapRange([1, 2, 3, 4])
+    options: [
+      {value: 1, label: '1'},
+      {value: 2, label: '2'},
+      {value: 3, label: '3'},
+      {value: 4, label: '+4'}
+    ]
   }
-})(Select)
+})(SelectRange)
 
 export const Area = assign({
   title: 'Área',
@@ -49,4 +46,4 @@ export const Area = assign({
 
 export const Neighborhoods = assign({
   title: 'Bairros'
-})(({data, ...props}) => <Select options={mapOptions(data)} {...props} />)
+})(({data, ...props}) => <SelectRange options={mapOptions(data)} {...props} />)

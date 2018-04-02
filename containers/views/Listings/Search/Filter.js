@@ -31,6 +31,9 @@ export default class MenuScreen extends Component {
         <Field title="Área">
           <Area />
         </Field>
+        <Field title="Quartos">
+          <Rooms />
+        </Field>
       </Screen>
     )
   }
