@@ -1,4 +1,11 @@
-import {SelectRange, SlideRange} from '@/components/listings/Search/Field'
+import {withNeighborhoods} from '@/containers/neighborhoods/Loader'
+import {
+  SelectRange,
+  SlideRange,
+  MultiSelect
+} from '@/components/listings/Search/Field'
+
+const mapOptions = (options) => options.map((value) => ({label: value, value}))
 
 export const assign = (options) => (Target) => {
   const Field = (props) => <Target {...props} />
@@ -31,3 +38,7 @@ export const Area = assign({
     step: 10
   }
 })(SlideRange)
+
+export const Neighborhoods = withNeighborhoods(({neighborhoods, ...props}) => (
+  <MultiSelect {...props} options={mapOptions(neighborhoods)} />
+))

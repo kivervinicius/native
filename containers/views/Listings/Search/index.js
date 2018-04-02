@@ -2,10 +2,12 @@ import {StackNavigator} from 'react-navigation'
 
 import Header from './Header'
 import * as filter from './Filter'
+import * as neighborhoods from './Neighborhoods'
 
 export const screen = StackNavigator(
   {
-    filter
+    filter,
+    neighborhoods
   },
   {
     initialRouteName: 'filter',
