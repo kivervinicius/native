@@ -4,6 +4,7 @@ import {View, Dimensions} from 'react-native'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 
 import Text from '@/components/shared/Text'
+import Price from '@/components/shared/Price'
 import styles from './styles'
 
 const SLIDER_WIDTH = Dimensions.get('window').width - 120
@@ -22,9 +23,15 @@ export default class SlideRangeField extends Component {
     }
   }
 
+  static priceLabel = (value) => (
+    <Price size={18} abbrev>
+      {value}
+    </Price>
+  )
+
   onChangeSlider = _.debounce(
     ([min, max]) => this.props.onChange({min, max}),
-    500
+    300
   )
 
   parseValue = (value) => Number(value)

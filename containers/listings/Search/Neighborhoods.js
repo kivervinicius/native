@@ -3,4 +3,4 @@ import {Neighborhoods as NeighborhoodsField} from '@/components/listings/Search'
 
 export const Neighborhoods = withNeighborhoods(NeighborhoodsField)
 
-export {Price, Area, Rooms} from '@/components/listings/Search'
+const mapOptions = (options) => options.map((value) => ({label: value, value}))

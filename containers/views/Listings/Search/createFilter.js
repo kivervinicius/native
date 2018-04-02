@@ -1,12 +1,10 @@
 import {Component} from 'react'
 import withNavigation from 'react-navigation/src/views/withNavigation'
 
-import * as Fields from '@/containers/listings/Search'
-
-const createField = ({name}) => (Target) =>
+export default ({name}) => (Target) =>
   withNavigation(
     class extends Component {
-      displayName = `searchField(${Target.displayName || Target.name})`
+      displayName = `searchFilter(${Target.displayName || Target.name})`
 
       get value() {
         const {navigation} = this.props
@@ -29,10 +27,3 @@ const createField = ({name}) => (Target) =>
       }
     }
   )
-
-export const Price = createField({name: 'price'})(Fields.Price)
-export const Area = createField({name: 'area'})(Fields.Area)
-export const Rooms = createField({name: 'rooms'})(Fields.Rooms)
-export const Neighborhoods = createField({name: 'neighborhoods'})(
-  Fields.Neighborhoods
-)

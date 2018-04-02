@@ -17,5 +17,6 @@ export default function SearchField({children, title, onReset}) {
   )
 }
 
+export {default as Button} from './Button'
 export {default as SelectRange} from './SelectRange'
 export {default as SlideRange} from './SlideRange'

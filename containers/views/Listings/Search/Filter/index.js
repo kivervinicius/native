@@ -3,7 +3,7 @@ import {Component} from 'react'
 
 import Field from '@/components/listings/Search/Field'
 import {Price, Area, Rooms} from './filters'
-import Screen from './Screen'
+import Screen from '../Screen'
 
 const activeParams = _.flow(_.omitBy(_.isEmpty), _.keys)
 

@@ -1,7 +1,4 @@
-import PriceText from '@/components/shared/Price'
-import {SelectRange, SlideRange} from './Field'
-
-const mapOptions = (options) => options.map((value) => ({label: value, value}))
+import {SelectRange, SlideRange} from '@/components/listings/Search/Field'
 
 export const assign = (options) => (Target) => {
   const Field = (props) => <Target {...props} />
@@ -9,22 +6,14 @@ export const assign = (options) => (Target) => {
 }
 
 export const Price = assign({
-  title: 'Preço',
   defaultProps: {
     max: 10000000,
     step: 100000,
-    renderLabel(value) {
-      return (
-        <PriceText size={18} abbrev>
-          {value}
-        </PriceText>
-      )
-    }
+    renderLabel: SlideRange.priceLabel
   }
 })(SlideRange)
 
 export const Rooms = assign({
-  title: 'Quartos',
   defaultProps: {
     options: [
       {value: 1, label: '1'},
@@ -36,14 +25,9 @@ export const Rooms = assign({
 })(SelectRange)
 
 export const Area = assign({
-  title: 'Área',
   defaultProps: {
     max: 1000,
     suffix: 'm²',
     step: 10
   }
 })(SlideRange)
-
-export const Neighborhoods = assign({
-  title: 'Bairros'
-})(({data, ...props}) => <SelectRange options={mapOptions(data)} {...props} />)
