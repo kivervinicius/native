@@ -1,4 +1,4 @@
-import InputRange from './InputRange'
+import SlideRange from './SlideRange'
 import SelectRange from './SelectRange'
 import Select from './Select'
 
@@ -20,9 +20,10 @@ export const assign = (options) => (Target) => {
 export const price = assign({
   title: 'Preço',
   defaultProps: {
-    label: (type) => `Preço ${type == 'min' ? 'mínimo' : 'máximo'}`
+    max: 10000000,
+    step: 10000
   }
-})(InputRange)
+})(SlideRange)
 
 export const rooms = assign({
   title: 'Quartos',
@@ -34,9 +35,11 @@ export const rooms = assign({
 export const area = assign({
   title: 'Área',
   defaultProps: {
-    options: mapRange([50, 80, 100, 200, 300, 500], 'm²')
+    max: 1000,
+    unit: 'm²',
+    step: 50
   }
-})(SelectRange)
+})(SlideRange)
 
 export const neighborhoods = assign({
   title: 'Bairros'
