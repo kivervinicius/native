@@ -10,6 +10,9 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'stretch'
+  },
+  placeholder: {
+    width: null
   }
 })
 
