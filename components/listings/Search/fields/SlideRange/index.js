@@ -1,12 +1,12 @@
 import _ from 'lodash'
-import {Component} from 'react'
+import {Component, Fragment} from 'react'
 import {View, Dimensions} from 'react-native'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 
 import Text from '@/components/shared/Text'
 import styles from './styles'
 
-const SLIDER_WIDTH = Dimensions.get('window').width - 80
+const SLIDER_WIDTH = Dimensions.get('window').width - 120
 
 export default class SlideRangeField extends Component {
   static defaultProps = {
@@ -14,10 +14,10 @@ export default class SlideRangeField extends Component {
     value: {},
     renderLabel(value, {suffix}) {
       return (
-        <Text style={styles.text}>
-          {value}
-          {suffix}
-        </Text>
+        <Fragment>
+          <Text style={styles.text}>{value}</Text>
+          <Text style={[styles.text, styles.suffix]}>{suffix}</Text>
+        </Fragment>
       )
     }
   }

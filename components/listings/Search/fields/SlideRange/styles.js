@@ -14,10 +14,16 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   slider: {
-    margin: 40
+    margin: 60
   },
   separator: {
     fontSize: 14,
     ...margin(5, 10, null)
+  },
+  text: {
+    fontSize: 18
+  },
+  suffix: {
+    fontSize: 14
   }
 })

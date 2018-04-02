@@ -22,7 +22,7 @@ export const price = assign({
   title: 'Preço',
   defaultProps: {
     max: 10000000,
-    step: 10000,
+    step: 100000,
     renderLabel(value) {
       return (
         <Price size={18} abbrev>
@@ -44,8 +44,8 @@ export const area = assign({
   title: 'Área',
   defaultProps: {
     max: 1000,
-    unit: 'm²',
-    step: 50
+    suffix: 'm²',
+    step: 10
   }
 })(SlideRange)
 
