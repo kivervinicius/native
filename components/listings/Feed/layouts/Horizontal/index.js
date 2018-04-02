@@ -64,13 +64,14 @@ export default class HorizontalFeed extends Component {
 
   render() {
     if (!this.totalCount) return null
+    const {slideCount} = this
     return (
       <VirtualizedView
         style={styles.container}
         containerStyle={styles.container}
-        overscanSlideAfter={1}
-        overscanSlideBefore={1}
-        slideCount={this.slideCount}
+        overscanSlideAfter={slideCount ? 0 : 1}
+        overscanSlideBefore={slideCount ? 0 : 1}
+        slideCount={slideCount}
         slideRenderer={this.slideRenderer}
       />
     )
