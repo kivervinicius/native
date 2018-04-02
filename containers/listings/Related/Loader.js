@@ -1,22 +1,18 @@
-import {Component} from 'react'
+import {PureComponent} from 'react'
 import {connect} from 'react-redux'
 
 import {load} from '@/redux/modules/listings/relations'
 import {getRelatedListings} from '@/redux/modules/listings/relations/selectors'
-import Feed from '@/components/listings/Feed'
+import Loader from '@/containers/shared/Loader'
 
-export class RelatedLoader extends Component {
-  static defaultProps = {
-    layout: 'horizontal'
-  }
-
-  componentDidMount() {
+export class RelatedLoader extends PureComponent {
+  onLoad = () => {
     const {load, id} = this.props
     load(id)
   }
 
   render() {
-    return <Feed {...this.props} />
+    return <Loader {...this.props} onLoad={this.onLoad} />
   }
 }
 

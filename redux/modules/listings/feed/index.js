@@ -35,6 +35,7 @@ function listingsFeed(state = {}, action) {
 const initialState = {
   loading: false,
   error: null,
+  options: undefined,
   pagination: {
     currentPage: 0
   },
@@ -48,6 +49,7 @@ listingsFeed.node = (state = initialState, action) => {
     case REQUEST:
       return update(state, {
         $merge: {
+          options: action.options,
           loading: true,
           error: null
         }

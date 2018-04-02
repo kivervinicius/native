@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {withNavigationFocus} from 'react-navigation'
 
 import Shell, {Section} from '@/containers/shared/Shell'
-import Listing from '@/containers/listings/View'
+import Listing from '@/containers/listings/Listing'
 import RelatedListings from '@/containers/listings/Related'
 
 export default class ListingScreen extends Component {

@@ -18,6 +18,8 @@ export const getPagination = createSelector(
 
 export const getError = createSelector(getFeed, (feed) => feed.error)
 
+export const getOptions = createSelector(getFeed, (feed) => feed.options)
+
 export const isLoading = createSelector(getFeed, (feed) => feed.loading)
 
 export const getPages = createSelector(getFeed, (feed) => feed.pages || {})
