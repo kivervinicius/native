@@ -12,7 +12,8 @@ export class RelatedLoader extends PureComponent {
   }
 
   render() {
-    return <Loader {...this.props} onLoad={this.onLoad} />
+    const {id} = this.props
+    return <Loader {...this.props} params={id} onLoad={this.onLoad} />
   }
 }
 
