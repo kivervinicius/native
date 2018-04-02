@@ -42,7 +42,15 @@ export default class SlideRangeField extends Component {
     }
   }
 
-  renderInput(type) {
+  renderMarker = () => {
+    return (
+      <View style={styles.markerContainer}>
+        <View style={styles.marker} />
+      </View>
+    )
+  }
+
+  renderLabel(type) {
     const {renderLabel} = this.props
     return (
       <View style={styles.label}>
@@ -62,6 +70,10 @@ export default class SlideRangeField extends Component {
         step={step}
         sliderLength={SLIDER_WIDTH}
         onValuesChange={this.onChangeSlider}
+        customMarker={this.renderMarker}
+        trackStyle={styles.track}
+        selectedStyle={styles.trackActive}
+        unselectedStyle={styles.trackInactive}
       />
     )
   }
@@ -70,9 +82,9 @@ export default class SlideRangeField extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          {this.renderInput('min')}
+          {this.renderLabel('min')}
           <Text style={styles.separator}>{String.fromCharCode(0x2500)}</Text>
-          {this.renderInput('max')}
+          {this.renderLabel('max')}
         </View>
         <View style={styles.slider}>{this.renderSlider()}</View>
       </View>

@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native'
 
-import {margin} from '@/assets/styles'
+import * as colors from '@/assets/colors'
+import {elevation, margin} from '@/assets/styles'
 
 export default StyleSheet.create({
   header: {
@@ -25,5 +26,26 @@ export default StyleSheet.create({
   },
   suffix: {
     fontSize: 14
+  },
+  track: {
+    height: 5
+  },
+  trackActive: {
+    backgroundColor: colors.blue.pastel
+  },
+  trackInactive: {
+    backgroundColor: colors.gray.$f0f0
+  },
+  markerContainer: {
+    padding: 10
+  },
+  marker: {
+    height: 30,
+    width: 30,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: colors.gray.lighter,
+    backgroundColor: colors.gray.$ffff,
+    ...elevation(3)
   }
 })
