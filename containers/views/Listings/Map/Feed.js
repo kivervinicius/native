@@ -7,6 +7,7 @@ function MapFeed({id, data: listing}) {
     <RelatedLoader id={id}>
       {({data}) => (
         <Feed
+          key={id}
           layout="horizontal"
           data={[{...listing, primary: true}].concat(data)}
         />
