@@ -1,12 +1,26 @@
-import {StyleSheet} from 'react-native'
+import {StyleSheet, Platform} from 'react-native'
+
+import * as colors from '@/assets/colors'
+import {padding} from '@/assets/styles'
+
+const offset = Platform.OS === 'ios' ? 20 : 0
 
 export default StyleSheet.create({
   container: {
-    padding: 5,
-    paddingLeft: 10,
-    backgroundColor: 'white'
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.gray.lighter,
+    ...padding(15 + offset, 10, 15)
   },
   icon: {
     fontSize: 28
+  },
+  title: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '300'
   }
 })
