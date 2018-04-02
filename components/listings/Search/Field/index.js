@@ -1,14 +1,15 @@
 import {View, TouchableOpacity} from 'react-native'
 
 import Text from '@/components/shared/Text'
+import styles from './styles'
 
 export default function SearchField({children, title, onReset}) {
   return (
-    <View>
-      <View>
-        <Text>{title}</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>{title.toUpperCase()}</Text>
         <TouchableOpacity onPress={onReset}>
-          <Text>Limpar</Text>
+          <Text style={styles.button}>Limpar</Text>
         </TouchableOpacity>
       </View>
       {children && <View>{children}</View>}
