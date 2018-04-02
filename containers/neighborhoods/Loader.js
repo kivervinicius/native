@@ -6,4 +6,4 @@ const props = (...args) => ({
   neighborhoods: getNeighborhoods(...args)
 })
 
-export default connect(props)
+export const withNeighborhoods = connect(props)

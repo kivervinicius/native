@@ -1,7 +1,8 @@
 import _ from 'lodash/fp'
 import {Component} from 'react'
 
-import Menu from '@/components/listings/Search/Menu'
+import Field from '@/components/listings/Search/Field'
+import {Price, Area, Rooms} from './filters'
 import Screen from './Screen'
 
 const activeParams = _.flow(_.omitBy(_.isEmpty), _.keys)
@@ -24,7 +25,12 @@ export default class MenuScreen extends Component {
   render() {
     return (
       <Screen {...this.props} onNavigate={this.onDismiss}>
-        <Menu active={this.active} onSelect={this.onSelect} />
+        <Field title="Preço">
+          <Price />
+        </Field>
+        <Field title="Área">
+          <Area />
+        </Field>
       </Screen>
     )
   }
