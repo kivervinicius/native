@@ -2,9 +2,9 @@ import {Component} from 'react'
 import {View} from 'react-native'
 
 import Shell from '@/containers/shared/Shell'
-import RelatedListings from '@/containers/listings/Related'
 import Map from '@/containers/listings/Map'
 import ActionButton from '@/components/listings/Map/ActionButton'
+import Feed from './Feed'
 import styles from './styles'
 
 export default class MapScreen extends Component {
@@ -34,7 +34,7 @@ export default class MapScreen extends Component {
           </View>
           {active ? (
             <View style={styles.listings}>
-              <RelatedListings id={active} />
+              <Feed id={active} />
             </View>
           ) : (
             <ActionButton

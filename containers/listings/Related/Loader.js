@@ -24,4 +24,6 @@ const actions = {
   load
 }
 
-export default connect(props, actions)(RelatedLoader)
+export const withRelatedListings = connect(props, actions)
+
+export default withRelatedListings(RelatedLoader)

@@ -1,6 +1,6 @@
 import {PureComponent} from 'react'
 
-import {withFeed} from './Feed'
+import {withFeed} from './Feed/Loader'
 import Map, {Marker} from '@/components/listings/Map'
 
 class MapApp extends PureComponent {
