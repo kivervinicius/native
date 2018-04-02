@@ -22,7 +22,7 @@ export const button = StyleSheet({
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: colors.gray.medium,
-    ...margin(0, 10)
+    ...margin(null, 10, 15)
   },
   text: {
     fontSize: 18,

@@ -1,26 +1,20 @@
 import {StyleSheet} from 'react-native'
 
 import * as colors from '@/assets/colors'
+import {elevation, margin} from '@/assets/styles'
 
 export default StyleSheet.create({
   container: {
-    borderBottomWidth: 1,
-    borderColor: colors.gray.lighter
-  },
-  header: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     padding: 15
   },
-  title: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: colors.gray.mediumDark
+  text: {
+    color: colors.blue.medium
   },
-  button: {
-    fontSize: 12,
+  icon: {
+    fontSize: 20,
     color: colors.blue.medium
   }
 })

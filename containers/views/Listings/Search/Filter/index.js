@@ -1,7 +1,7 @@
 import _ from 'lodash/fp'
 import {Component} from 'react'
 
-import Field from '@/components/listings/Search/Field'
+import Field, {Button} from '@/components/listings/Search/Field'
 import {Price, Area, Rooms} from './filters'
 import Screen from '../Screen'
 
@@ -25,6 +25,9 @@ export default class MenuScreen extends Component {
   render() {
     return (
       <Screen {...this.props} onNavigate={this.onDismiss}>
+        <Field title="Bairros">
+          <Button onPress={this.onSelect('neighborhoods')}>Ver bairros</Button>
+        </Field>
         <Field title="Preço">
           <Price />
         </Field>
