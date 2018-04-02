@@ -12,8 +12,13 @@ export default class SlideRangeField extends Component {
   static defaultProps = {
     min: 0,
     value: {},
-    renderLabel(value) {
-      return <Text style={styles.text}>{value}</Text>
+    renderLabel(value, {suffix}) {
+      return (
+        <Text style={styles.text}>
+          {value}
+          {suffix}
+        </Text>
+      )
     }
   }
 
@@ -40,7 +45,9 @@ export default class SlideRangeField extends Component {
   renderInput(type) {
     const {renderLabel} = this.props
     return (
-      <View style={styles.label}>{renderLabel(this.displayValue[type])}</View>
+      <View style={styles.label}>
+        {renderLabel(this.displayValue[type], this.props)}
+      </View>
     )
   }
 

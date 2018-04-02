@@ -1,3 +1,4 @@
+import Price from '@/components/shared/Price'
 import SlideRange from './SlideRange'
 import SelectRange from './SelectRange'
 import Select from './Select'
@@ -21,7 +22,14 @@ export const price = assign({
   title: 'Preço',
   defaultProps: {
     max: 10000000,
-    step: 10000
+    step: 10000,
+    renderLabel(value) {
+      return (
+        <Price size={18} abbrev>
+          {value}
+        </Price>
+      )
+    }
   }
 })(SlideRange)
 
