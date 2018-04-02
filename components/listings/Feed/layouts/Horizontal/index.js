@@ -51,7 +51,7 @@ export default class HorizontalFeed extends Component {
   renderSlide = ({id, ...props}) => {
     const {onSelect, count} = this.props
     return (
-      <View style={styles.item} key={id}>
+      <View style={[styles.item, {flex: 1 / count}]} key={id}>
         <Card
           size={1 / count}
           styles={cardStyles}
