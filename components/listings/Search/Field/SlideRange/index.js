@@ -71,6 +71,7 @@ export default class SlideRangeField extends Component {
         sliderLength={SLIDER_WIDTH}
         onValuesChange={this.onChangeSlider}
         customMarker={this.renderMarker}
+        containerStyle={styles.slider}
         trackStyle={styles.track}
         selectedStyle={styles.trackActive}
         unselectedStyle={styles.trackInactive}
@@ -86,7 +87,7 @@ export default class SlideRangeField extends Component {
           <Text style={styles.separator}>{String.fromCharCode(0x2500)}</Text>
           {this.renderLabel('max')}
         </View>
-        <View style={styles.slider}>{this.renderSlider()}</View>
+        <View style={styles.body}>{this.renderSlider()}</View>
       </View>
     )
   }

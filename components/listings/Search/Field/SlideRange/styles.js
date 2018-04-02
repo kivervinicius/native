@@ -8,13 +8,14 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    marginBottom: -10
   },
   label: {
     display: 'flex',
     flexDirection: 'row'
   },
-  slider: {
+  body: {
     margin: 60
   },
   separator: {
@@ -26,6 +27,9 @@ export default StyleSheet.create({
   },
   suffix: {
     fontSize: 14
+  },
+  slider: {
+    height: null
   },
   track: {
     height: 5
