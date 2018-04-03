@@ -337,6 +337,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@ptomasroos/react-native-multi-slider@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@ptomasroos/react-native-multi-slider/-/react-native-multi-slider-0.0.12.tgz#db2f2c4006a347e293ad06c6fbb16f75bea7c8c3"
+
 "@types/node@^8.0.24":
   version "8.9.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.9.5.tgz#162b864bc70be077e6db212b322754917929e976"
@@ -4863,10 +4867,6 @@ react-native-safe-area-view@^0.7.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.7.0.tgz#38f5ab9368d6ef9e5d18ab64212938af3ec39421"
   dependencies:
     hoist-non-react-statics "^2.3.1"
-
-react-native-sectioned-multi-select@0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/react-native-sectioned-multi-select/-/react-native-sectioned-multi-select-0.3.4.tgz#e82531fe006895dd637172e022294d14f37cbcdd"
 
 "react-native-tab-view@github:react-navigation/react-native-tab-view":
   version "0.0.74"

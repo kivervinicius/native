@@ -11,7 +11,7 @@ export default class SearchScreenApp extends Component {
 
   render() {
     return (
-      <Shell>
+      <Shell header={null}>
         <Screen {...this.props} onSubmit={this.onSubmit} />
       </Shell>
     )

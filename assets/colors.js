@@ -5,10 +5,12 @@ export const gray = {
   medium: '#bababa',
   mediumDark: '#8c8c8c',
   dark: '#4a4a4a',
-  darker: '#262626'
+  darker: '#262626',
+  $f0f0: '#f0f0f0'
 }
 
 export const blue = {
+  pastel: '#9ED2E5',
   light: '#e1f7ff',
   medium: '#227ea2',
   dark: '#1d6c8b'

@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "rnpm": {
-    "assets": [
-      "./assets/fonts"
-    ]
+    "assets": ["./assets/fonts"]
   },
   "scripts": {
     "prepare": "patch-package",
@@ -22,17 +20,14 @@
   "jest": {
     "preset": "react-native",
     "automock": false,
-    "unmockedModulePathPatterns": [
-      "/node_modules/"
-    ],
-    "setupFiles": [
-      "./__test__/setup.js"
-    ],
+    "unmockedModulePathPatterns": ["/node_modules/"],
+    "setupFiles": ["./__test__/setup.js"],
     "transformIgnorePatterns": [
       "/node_modules/(?!(jest-)?react-native|react-navigation)/"
     ]
   },
   "dependencies": {
+    "@ptomasroos/react-native-multi-slider": "^0.0.12",
     "babel-plugin-lodash": "^3.3.2",
     "es6-error": "^4.1.1",
     "immutability-helper": "^2.6.6",
@@ -46,7 +41,6 @@
     "react-native-maps": "^0.20.1",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-photo-view": "^1.5.2",
-    "react-native-sectioned-multi-select": "0.3.4",
     "react-native-vector-icons": "^4.5.0",
     "react-native-webkit-webview": "0.10.7",
     "react-navigation": "^1.5.8",

@@ -22,9 +22,30 @@ export default class SearchHeaderApp extends Component {
     navigation.goBack(null)
   }
 
+  onReset = () => {
+    const {navigation} = this.props
+    navigation.dispatch(
+      NavigationActions.setParams({
+        params: {
+          price: undefined,
+          area: undefined,
+          rooms: undefined,
+          neighborhoods: undefined
+        },
+        key: route.last(navigation.state).key
+      })
+    )
+  }
+
   render() {
     const {navigation} = this.props
     const isRoot = navigation.state.routes.length == 1
-    return <Header root={isRoot} onNavigate={this.onNavigate} />
+    return (
+      <Header
+        root={isRoot}
+        onNavigate={this.onNavigate}
+        onReset={this.onReset}
+      />
+    )
   }
 }

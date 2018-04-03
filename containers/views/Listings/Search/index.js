@@ -1,16 +1,16 @@
 import {StackNavigator} from 'react-navigation'
 
 import Header from './Header'
-import * as menu from './Menu'
-import fields from './fields'
+import * as filter from './Filter'
+import * as neighborhoods from './Neighborhoods'
 
 export const screen = StackNavigator(
   {
-    menu,
-    ...fields
+    filter,
+    neighborhoods
   },
   {
-    initialRouteName: 'menu',
+    initialRouteName: 'filter',
     initialRouteParams: {},
     headerMode: 'float',
     navigationOptions: {
