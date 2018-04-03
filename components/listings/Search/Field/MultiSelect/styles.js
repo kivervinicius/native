@@ -12,10 +12,18 @@ export default StyleSheet({
     borderColor: colors.gray.$f0f0
   },
   text: {
-    fontSize: 18
+    fontSize: 18,
+    ':active': {
+      color: colors.blue.medium
+    }
   },
   icon: {
     fontSize: 20,
-    color: colors.gray.lighter
+    color: colors.gray.lighter,
+    ':active': {
+      color: colors.blue.medium
+    }
   }
 })
+
+export const highlightColor = colors.gray.$f0f0
