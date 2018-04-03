@@ -23,7 +23,9 @@ export default class MultiSelectField extends Component {
   }
 
   renderOption = (value) => {
-    return <Button label={value} onPress={() => this.onSelect(value)} />
+    return (
+      <Button key={value} label={value} onPress={() => this.onSelect(value)} />
+    )
   }
 
   render() {
