@@ -12,7 +12,7 @@ export default function SearchHeader({root, onNavigate, onReset}) {
       </TouchableOpacity>
       <Text style={styles.title}>Filtrar Busca</Text>
       <TouchableOpacity onPress={onReset}>
-        <Text>Limpar</Text>
+        <Text style={styles.button}>Limpar</Text>
       </TouchableOpacity>
     </View>
   )

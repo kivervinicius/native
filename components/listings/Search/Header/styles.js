@@ -22,5 +22,9 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     fontWeight: '300'
+  },
+  button: {
+    fontSize: 14,
+    color: colors.blue.medium
   }
 })
