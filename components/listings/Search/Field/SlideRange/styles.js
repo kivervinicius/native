@@ -49,7 +49,7 @@ export default StyleSheet.create({
     borderRadius: 30,
     borderWidth: 1,
     borderColor: colors.gray.lighter,
-    backgroundColor: colors.gray.$ffff,
+    backgroundColor: colors.gray.$f0f0,
     ...elevation(3)
   }
 })

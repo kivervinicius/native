@@ -6,7 +6,6 @@ export const gray = {
   mediumDark: '#8c8c8c',
   dark: '#4a4a4a',
   darker: '#262626',
-  $ffff: '#f0f0f0',
   $f0f0: '#f0f0f0'
 }
 
