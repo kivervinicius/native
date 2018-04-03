@@ -10,7 +10,3 @@ export default function LandingScreen() {
 }
 
 export const screen = LandingScreen
-
-export const navigationOptions = () => ({
-  title: 'EmCasa'
-})

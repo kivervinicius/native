@@ -19,7 +19,7 @@ export default StyleSheet({
       zIndex: 1
     }
   },
-  nav: {
+  footer: {
     flex: 0,
     width: '100%',
     zIndex: 1,

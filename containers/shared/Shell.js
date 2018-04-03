@@ -1,15 +1,18 @@
-import withNavigation from 'react-navigation/src/views/withNavigation'
-
 import Shell, {Section} from '@/components/shared/Shell'
 import Header from './Header'
+import Navigation from './Navigation'
 
-function ShellApp({...props}) {
-  if (typeof props.header === 'undefined') {
-    props.header = <Header />
-  }
+export default function ShellApp(props) {
   return <Shell {...props} />
 }
 
-export {Section}
+ShellApp.defaultProps = {
+  get header() {
+    return <Header />
+  },
+  get footer() {
+    return <Navigation />
+  }
+}
 
-export default withNavigation(ShellApp)
+export {Section}
