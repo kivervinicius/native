@@ -1,6 +1,7 @@
 import {View, ScrollView, TouchableOpacity} from 'react-native'
 
 import Text from '@/components/shared/Text'
+import Button from '@/components/shared/Button'
 import styles from './styles'
 
 export default function SearchScreen({children, label, onSubmit}) {
@@ -10,11 +11,7 @@ export default function SearchScreen({children, label, onSubmit}) {
         <ScrollView>{children}</ScrollView>
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity onPress={onSubmit}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>{label}</Text>
-          </View>
-        </TouchableOpacity>
+        <Button onPress={onSubmit}>{label}</Button>
       </View>
     </View>
   )
