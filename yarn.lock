@@ -4868,10 +4868,6 @@ react-native-safe-area-view@^0.7.0:
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
-react-native-sectioned-multi-select@0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/react-native-sectioned-multi-select/-/react-native-sectioned-multi-select-0.3.4.tgz#e82531fe006895dd637172e022294d14f37cbcdd"
-
 "react-native-tab-view@github:react-navigation/react-native-tab-view":
   version "0.0.74"
   resolved "https://codeload.github.com/react-navigation/react-native-tab-view/tar.gz/36ebd834d78b841fc19778c966465d02fd1213bb"
