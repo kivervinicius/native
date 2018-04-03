@@ -1,5 +1,6 @@
 import StyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
+import {elevation} from '@/assets/styles'
 
 export default StyleSheet({
   container: {
@@ -14,6 +15,8 @@ export default StyleSheet({
   header: {
     margin: 0,
     width: '100%',
+    borderColor: colors.gray.lighter,
+    borderBottomWidth: 0.8,
     ':overlay': {
       position: 'absolute',
       zIndex: 1
@@ -22,9 +25,9 @@ export default StyleSheet({
   footer: {
     flex: 0,
     width: '100%',
-    zIndex: 1,
     backgroundColor: 'white',
-    borderTopColor: colors.gray.light,
-    borderTopWidth: 0.8
+    borderTopColor: colors.gray.lighter,
+    borderTopWidth: 0.8,
+    ...elevation(6)
   }
 })
