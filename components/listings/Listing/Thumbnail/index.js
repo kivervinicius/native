@@ -13,18 +13,10 @@ const ActionButton = (props) => (
   </View>
 )
 
-export default function ListingThumbnail({
-  images,
-  matterport_code,
-  onOpen,
-  onInterest
-}) {
+export default function ListingThumbnail({images, matterport_code, onOpen}) {
   const image = images[0] || {}
   return (
     <View style={styles.container}>
-      <View style={styles.actions}>
-        <ActionButton title="Marcar Visita" onPress={onInterest} />
-      </View>
       <Matterport code={matterport_code} width={WIDTH} height={HEIGHT}>
         <Image thumbnail {...image} width={WIDTH} height={HEIGHT} />
       </Matterport>
