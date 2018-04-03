@@ -23,7 +23,9 @@ export default ({name}) => (Target) =>
       }
 
       render() {
-        return <Target value={this.value} onChange={this.onChange} />
+        return (
+          <Target {...this.props} value={this.value} onChange={this.onChange} />
+        )
       }
     }
   )

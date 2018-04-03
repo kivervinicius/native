@@ -1,29 +1,21 @@
-import StyleSheet from '@/assets/StyleSheet'
+import {StyleSheet} from 'react-native'
+
 import * as colors from '@/assets/colors'
 
-export default StyleSheet({
-  container: {
+export default StyleSheet.create({
+  button: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 15,
-    borderBottomWidth: 1,
-    borderColor: colors.gray.$f0f0
+    padding: 15
   },
-  text: {
-    fontSize: 18,
-    ':active': {
-      color: colors.blue.medium
-    }
+  buttonText: {
+    color: colors.blue.medium
   },
-  icon: {
+  buttonIcon: {
     fontSize: 20,
-    color: colors.gray.lighter,
-    ':active': {
-      color: colors.blue.medium
-    }
+    color: colors.blue.medium
   }
 })
 
-export const highlightColor = colors.gray.$f0f0
+export const button = StyleSheet.create({})

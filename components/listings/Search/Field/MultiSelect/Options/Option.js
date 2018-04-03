@@ -9,11 +9,7 @@ function MultiSelectOption({styles, label, onPress}) {
     <TouchableHighlight underlayColor={highlightColor} onPress={onPress}>
       <View style={styles.container}>
         <Text style={styles.text}>{label}</Text>
-        <Icon
-          style={$styles.all(styles.text, styles.icon)}
-          name="check"
-          size={20}
-        />
+        <Icon style={$styles.all(styles.text, styles.icon)} name="check" />
       </View>
     </TouchableHighlight>
   )

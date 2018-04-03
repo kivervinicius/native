@@ -1,7 +1,7 @@
 import {Component} from 'react'
 
-import Field, {Button} from '@/components/listings/Search/Field'
-import {Price, Area, Rooms} from './filters'
+import Field from '@/components/listings/Search/Field'
+import {Price, Area, Rooms, Neighborhoods} from './filters'
 import Screen from '../Screen'
 
 export default class MenuScreen extends Component {
@@ -14,7 +14,10 @@ export default class MenuScreen extends Component {
     return (
       <Screen {...this.props}>
         <Field title="Bairros">
-          <Button onPress={this.onSelect('neighborhoods')}>Ver bairros</Button>
+          <Neighborhoods
+            title="Ver bairros"
+            onPress={this.onSelect('neighborhoods')}
+          />
         </Field>
         <Field title="Preço">
           <Price />

@@ -1,48 +1,46 @@
 import {Component} from 'react'
-import {FlatList} from 'react-native'
+import {TouchableOpacity, View} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import Option from './Option'
-
-const extractKey = ({value}) => value
+import Text from '@/components/shared/Text'
+import Options from './Options'
+import Button from './Button'
+import styles from './styles'
 
 export default class MultiSelectField extends Component {
+  static Options = Options
+
   static defaultProps = {
     value: []
   }
 
   onSelect = (option) => {
-    const {onChange} = this.props
-    const value = Array.from(this.props.value)
-    const index = this.selectedIndex(option)
-    if (index === -1) value.push(option)
-    else value.splice(index, 1)
-    onChange(value)
+    const {onChange, value} = this.props
+    const newValue = Array.from(value)
+    const index = this.props.value.findIndex((val) => val === option)
+    newValue.splice(index, 1)
+    onChange(newValue)
   }
 
-  selectedIndex(option) {
-    return this.props.value.findIndex((val) => val === option)
-  }
-
-  renderOption = ({item}) => {
-    return (
-      <Option
-        {...item}
-        key={item.value}
-        active={this.selectedIndex(item.value) !== -1}
-        onPress={() => this.onSelect(item.value)}
-      />
-    )
+  renderOption = (value) => {
+    return <Button label={value} onPress={() => this.onSelect(value)} />
   }
 
   render() {
-    const {options} = this.props
+    const {title, value, onPress} = this.props
 
     return (
-      <FlatList
-        data={options}
-        renderItem={this.renderOption}
-        keyExtractor={extractKey}
-      />
+      <View>
+        {value.length && (
+          <View style={styles.options}>{value.map(this.renderOption)}</View>
+        )}
+        <TouchableOpacity onPress={onPress}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>{title}</Text>
+            <Icon style={styles.buttonIcon} name="chevron-right" />
+          </View>
+        </TouchableOpacity>
+      </View>
     )
   }
 }

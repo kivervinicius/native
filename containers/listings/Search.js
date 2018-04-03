@@ -7,6 +7,11 @@ import {
 
 const mapOptions = (options) => options.map((value) => ({label: value, value}))
 
+const withNeighborhoodOptions = (Target) =>
+  withNeighborhoods(({neighborhoods, ...props}) => (
+    <Target {...props} options={mapOptions(neighborhoods)} />
+  ))
+
 export const assign = (options) => (Target) => {
   const Field = (props) => <Target {...props} />
   return Object.assign(Field, options)
@@ -39,6 +44,6 @@ export const Area = assign({
   }
 })(SlideRange)
 
-export const Neighborhoods = withNeighborhoods(({neighborhoods, ...props}) => (
-  <MultiSelect {...props} options={mapOptions(neighborhoods)} />
-))
+export const Neighborhoods = withNeighborhoodOptions(MultiSelect)
+
+Neighborhoods.Options = withNeighborhoodOptions(MultiSelect.Options)
