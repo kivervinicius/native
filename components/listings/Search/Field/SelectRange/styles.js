@@ -22,11 +22,18 @@ export const button = StyleSheet({
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: colors.gray.medium,
-    ...margin(null, 10, 15)
+    ...margin(null, 10, 15),
+    ':active': {
+      backgroundColor: colors.blue.medium,
+      borderColor: colors.blue.light
+    }
   },
   text: {
     fontSize: 18,
     fontWeight: '600',
-    color: colors.gray.medium
+    color: colors.gray.medium,
+    ':active': {
+      color: 'white'
+    }
   }
 })
