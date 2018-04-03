@@ -5,20 +5,6 @@ import {elevation, padding} from '@/assets/styles'
 
 export default StyleSheet.create({
   container: {
-    position: 'relative',
-    flex: 1
-  },
-  body: {
-    flex: 1,
-    zIndex: 0
-  },
-  buttonWrapper: {
-    position: 'absolute',
-    width: '100%',
-    bottom: 0,
-    zIndex: 1
-  },
-  button: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -29,11 +15,11 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 5
   },
-  buttonText: {
+  text: {
     fontSize: 14,
     color: colors.blue.medium
   },
-  buttonIcon: {
+  icon: {
     fontSize: 25,
     marginLeft: -5,
     color: colors.blue.medium

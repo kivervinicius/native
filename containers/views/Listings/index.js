@@ -8,6 +8,7 @@ export const screen = StackNavigator(
   {results, search, map},
   {
     initialRouteName: 'results',
+    initialRouteParams: {},
     headerMode: 'none'
   }
 )
