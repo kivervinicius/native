@@ -13,6 +13,7 @@ export default StyleSheet({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
+    marginBottom: 2
   }
 })
