@@ -6,3 +6,5 @@ export default function ListingApp({id, ...props}) {
     <Loader id={id}>{({data}) => data && <View {...data} {...props} />}</Loader>
   )
 }
+
+export {default as Navigation} from './Navigation'

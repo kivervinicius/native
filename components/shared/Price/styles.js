@@ -10,5 +10,10 @@ export default StyleSheet({
   },
   currency: {
     ...padding(null, '1%', '0.5%', null)
+  },
+  text: {
+    ':thin': {
+      fontWeight: '300'
+    }
   }
 })

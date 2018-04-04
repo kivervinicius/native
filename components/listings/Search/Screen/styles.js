@@ -16,18 +16,5 @@ export default StyleSheet.create({
     padding: 10,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderColor: colors.gray.$f0f0
-  },
-  button: {
-    padding: 10,
-    backgroundColor: colors.blue.medium,
-    borderWidth: 1,
-    borderColor: colors.blue.light,
-    borderRadius: 5
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center',
-    color: 'white'
   }
 })
