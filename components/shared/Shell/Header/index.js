@@ -1,18 +1,17 @@
-import {Component} from 'react'
-import {View, TextInput, TouchableOpacity} from 'react-native'
+import {View, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Text from '@/components/shared/Text'
-import styles from './styles'
+import $styles from './styles'
 
 function renderTitle(title) {
   if (!title) return undefined
   if (typeof title === 'string')
-    return <Text style={styles.titleText}>{title}</Text>
+    return <Text style={$styles.titleText}>{title}</Text>
   return title
 }
 
-export default function Header({title, root, onReturn}) {
+function Header({styles, title, root, onReturn}) {
   return (
     <View style={styles.container}>
       {!root && (
@@ -26,3 +25,5 @@ export default function Header({title, root, onReturn}) {
     </View>
   )
 }
+
+export default $styles.inject()(Header)

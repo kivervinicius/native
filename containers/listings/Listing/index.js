@@ -7,4 +7,5 @@ export default function ListingApp({id, ...props}) {
   )
 }
 
+export {default as Price} from './Price'
 export {default as Navigation} from './Navigation'

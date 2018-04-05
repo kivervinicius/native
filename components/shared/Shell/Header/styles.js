@@ -1,8 +1,7 @@
-import {StyleSheet} from 'react-native'
-
+import StyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
 
-export default StyleSheet.create({
+export default StyleSheet({
   container: {
     display: 'flex',
     flexDirection: 'row',
@@ -12,11 +11,17 @@ export default StyleSheet.create({
     height: 45
   },
   title: {
-    flex: 1
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 40,
+    ':root': {
+      paddingRight: 0
+    }
   },
   titleText: {
     fontSize: 20,
-    textAlign: 'center',
     color: colors.gray.dark
   },
   buttonIcon: {
