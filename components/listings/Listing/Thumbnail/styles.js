@@ -2,32 +2,25 @@ import {StyleSheet, Platform} from 'react-native'
 
 const matterportBackground = '#313435'
 
-import * as $colors from '@/assets/colors'
-
-export const colors = {
-  button: Platform.select({
-    ios: 'white',
-    android: matterportBackground
-  })
-}
+import * as colors from '@/assets/colors'
 
 export default StyleSheet.create({
   container: {
     display: 'flex',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.gray.lighter,
     width: '100%'
   },
   actions: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    borderColor: $colors.gray.light,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    backgroundColor: Platform.select({
-      ios: matterportBackground,
-      android: colors.button
-    })
+    padding: 5
   },
-  button: {
-    flex: 1
+  icon: {
+    padding: 10,
+    fontSize: 25,
+    color: colors.gray.dark
   }
 })

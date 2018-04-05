@@ -1,4 +1,5 @@
-import {View, Button, Dimensions} from 'react-native'
+import {View, TouchableOpacity, Dimensions} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Matterport from '@/components/listings/Matterport'
 import Image from '../../Image'
@@ -7,9 +8,16 @@ import styles, {colors} from './styles'
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = WIDTH * 0.64
 
-const ActionButton = (props) => (
+const ActionButton = ({title, icon, onPress}) => (
   <View style={styles.button}>
-    <Button color={colors.button} {...props} />
+    <TouchableOpacity
+      accessible
+      accessibilityLabel={title}
+      accessibilityTraits="button"
+      onPress={onPress}
+    >
+      <Icon name={icon} style={styles.icon} />
+    </TouchableOpacity>
   </View>
 )
 
@@ -21,10 +29,15 @@ export default function ListingThumbnail({images, matterport_code, onOpen}) {
         <Image thumbnail {...image} width={WIDTH} height={HEIGHT} />
       </Matterport>
       <View style={styles.actions}>
-        <ActionButton title="Ver Imagens" onPress={onOpen('gallery')} />
+        <ActionButton
+          title="Ver Imagens"
+          icon="camera"
+          onPress={onOpen('gallery')}
+        />
         {matterport_code && (
           <ActionButton
             title="Ver em Tela Cheia"
+            icon="fullscreen"
             onPress={onOpen('matterport')}
           />
         )}

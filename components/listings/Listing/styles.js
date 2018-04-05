@@ -8,7 +8,7 @@ export default StyleSheet.create({
     display: 'flex'
   },
   header: {
-    borderColor: colors.gray.light,
+    borderColor: colors.gray.lighter,
     borderBottomWidth: StyleSheet.hairlineWidth,
     marginBottom: 10
   },
