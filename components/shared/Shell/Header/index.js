@@ -1,35 +1,28 @@
 import {Component} from 'react'
-import {View, TextInput, SafeAreaView, TouchableOpacity} from 'react-native'
+import {View, TextInput, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Text from '@/components/shared/Text'
 import styles from './styles'
 
-export default class Header extends Component {
-  state = {
-    value: ''
-  }
+function renderTitle(title) {
+  if (!title) return undefined
+  if (typeof title === 'string')
+    return <Text style={styles.titleText}>{title}</Text>
+  return title
+}
 
-  render() {
-    const {onSearchOptions} = this.props
-    const {value} = this.state
-
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.wrapper}>
-          <Icon name="magnify" style={styles.icon} />
-          <TextInput
-            style={styles.input}
-            placeholder="Buscar"
-            value={value}
-            onChangeText={this.onChange}
-            underlineColorAndroid="rgba(0,0,0,0)"
-          />
-          <TouchableOpacity style={styles.button} onPress={onSearchOptions}>
-            <Text style={styles.buttonText}>Filtrar</Text>
+export default function Header({title, root, onReturn}) {
+  return (
+    <View style={styles.container}>
+      {!root && (
+        <View style={styles.button}>
+          <TouchableOpacity onPress={onReturn}>
+            <Icon style={styles.buttonIcon} name="chevron-left" />
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    )
-  }
+      )}
+      {title && <View style={styles.title}>{renderTitle(title)}</View>}
+    </View>
+  )
 }

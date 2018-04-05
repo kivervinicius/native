@@ -18,7 +18,6 @@ export default class ListingScreen extends Component {
     return (
       <Shell
         scroll
-        header={null}
         footer={<Navigation id={id} onInterest={this.onInterest} />}
       >
         <Listing active={isFocused} id={id} />

@@ -3,7 +3,7 @@ import Listings from '@/containers/listings/Feed'
 
 export default function LandingScreen() {
   return (
-    <Shell>
+    <Shell title="Início" root>
       <Listings type="featured" />
     </Shell>
   )
