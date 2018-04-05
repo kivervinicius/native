@@ -5,7 +5,7 @@ import {StackNavigator} from 'react-navigation'
 import views from '@/containers/views'
 
 const Stack = StackNavigator(views, {
-  initialRouteName: 'home',
+  initialRouteName: 'listings',
   initialRouteParams: {},
   headerMode: 'float',
   navigationOptions: {

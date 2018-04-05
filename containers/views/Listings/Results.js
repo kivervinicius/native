@@ -10,7 +10,7 @@ export default class ListingsScreen extends Component {
     const {navigation} = this.props
 
     return (
-      <Shell>
+      <Shell title="Início" root>
         <View>
           <Listings
             type="search"
