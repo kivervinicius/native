@@ -1,6 +1,4 @@
-import {StyleSheet, Platform} from 'react-native'
-
-const matterportBackground = '#313435'
+import {StyleSheet} from 'react-native'
 
 import * as colors from '@/assets/colors'
 

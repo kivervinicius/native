@@ -1,13 +1,14 @@
 import {Platform} from 'react-native'
 
 import StyleSheet from '@/assets/StyleSheet'
+import * as colors from '@/assets/colors'
 import {padding} from '@/assets/styles'
 
 export default StyleSheet({
   container: {
-    position: 'relative',
     flex: 1,
-    display: 'flex'
+    display: 'flex',
+    position: 'relative'
   },
   header: {
     display: 'flex',
@@ -21,7 +22,13 @@ export default StyleSheet({
     }
   },
   closeIcon: {
-    fontSize: 30
+    fontSize: 35,
+    ':contrast': {
+      color: 'white',
+      textShadowColor: colors.gray.darker,
+      textShadowRadius: 6,
+      textShadowOffset: {width: 0, height: 1}
+    }
   },
   title: {
     flex: 1,
