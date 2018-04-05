@@ -1,4 +1,3 @@
-import {concat} from 'lodash'
 import _ from 'lodash/fp'
 import combine from './combine'
 import inject from './hoc'
