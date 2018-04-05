@@ -1,6 +1,7 @@
 import _ from 'lodash/fp'
 import combine from './combine'
 import inject from './hoc'
+import {styleId} from './flatten'
 
 export default function createStyleSheet(flat) {
   const styleSheet = _.flow(
@@ -14,16 +15,17 @@ export default function createStyleSheet(flat) {
       return result
     }
   )
-  styleSheet.get = (namespace, variantsToApply = {}) =>
-    _.keys(variantsToApply).reduce(
-      (result, variant) => {
-        const key = `${namespace}__${variant}`
-        if (key in flat.styles && variantsToApply[variant])
-          result.push(flat.styles[key])
-        return result
-      },
-      [flat.styles[namespace]]
-    )
+  styleSheet.get = (namespace, variantsToApply = {}) => {
+    const result = [flat.styles[namespace]]
+    for (const key of _.keys(variantsToApply)) {
+      const value = variantsToApply[key]
+      if (!value) continue
+      result.push(flat.styles[styleId(namespace, key)])
+      if (typeof value === 'string')
+        result.push(flat.styles[styleId(namespace, key, value)])
+    }
+    return _.compact(result)
+  }
   styleSheet._flat = flat
   styleSheet.inject = inject(styleSheet)
   styleSheet.all = combine(styleSheet)

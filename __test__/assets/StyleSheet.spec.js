@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import renderer from 'react-test-renderer'
 
 import StyleSheet from '@/assets/StyleSheet'
+import {styleId} from '@/assets/StyleSheet/flatten'
 
 const STYLES = {
   foo: {
@@ -11,7 +12,9 @@ const STYLES = {
     ':bar': {width: 200}
   },
   bar: {
-    position: 'absolute'
+    position: 'absolute',
+    ':test=foo': {height: 200},
+    ':test=bar': {width: 200}
   }
 }
 
@@ -19,7 +22,9 @@ const FLAT_STYLES = {
   foo: _.omit(STYLES.foo, [':foo', ':bar']),
   foo__foo: STYLES.foo[':foo'],
   foo__bar: STYLES.foo[':bar'],
-  bar: STYLES.bar
+  bar: _.omit(STYLES.bar, [':test=foo', ':test=bar']),
+  bar__foo: STYLES.bar[':test=foo'],
+  bar__bar: STYLES.bar[':test=bar']
 }
 
 describe('StyleSheet', () => {
@@ -28,8 +33,8 @@ describe('StyleSheet', () => {
   it('contains flat stylesheet properties', () => {
     expect($styles.foo).toMatchObject(FLAT_STYLES.foo)
     expect($styles.bar).toMatchObject(FLAT_STYLES.bar)
-    expect($styles.foo__foo).toMatchObject(FLAT_STYLES.foo__foo)
-    expect($styles.foo__bar).toMatchObject(FLAT_STYLES.foo__bar)
+    expect($styles[styleId('foo', 'foo')]).toMatchObject(FLAT_STYLES.foo__foo)
+    expect($styles[styleId('foo', 'bar')]).toMatchObject(FLAT_STYLES.foo__bar)
   })
 
   it('returns a stylesheet with desired variants', () => {
@@ -43,6 +48,13 @@ describe('StyleSheet', () => {
     expect($styles({foo: true, bar: false})).toMatchObject({
       foo: [FLAT_STYLES.foo, FLAT_STYLES.foo__foo],
       bar: [FLAT_STYLES.bar]
+    })
+  })
+
+  it('matches selectors by value', () => {
+    expect($styles({test: 'foo'})).toMatchObject({
+      foo: [FLAT_STYLES.foo],
+      bar: [FLAT_STYLES.bar, FLAT_STYLES.bar__foo]
     })
   })
 
