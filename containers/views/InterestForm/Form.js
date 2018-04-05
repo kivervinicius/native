@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-import Shell from '@/containers/shared/Shell'
+import Shell, {Footer} from '@/containers/shared/Shell'
 import Form from '@/containers/interest/Form'
 
 export default class InterestFormScreen extends Component {
@@ -9,9 +9,10 @@ export default class InterestFormScreen extends Component {
     navigation.goBack(null)
   }
 
-  onFinish = (err) => {
+  onSubmit = () => {
     const {navigation} = this.props
-    if (!err) navigation.navigate('message')
+    this.form.onSubmit()
+    navigation.navigate('message')
   }
 
   onOpenCalendly = () => {
@@ -19,13 +20,19 @@ export default class InterestFormScreen extends Component {
     navigation.navigate('calendly')
   }
 
+  formRef = (element) => {
+    this.form = element
+  }
+
   render() {
     const {navigation} = this.props
     return (
-      <Shell>
+      <Shell
+        footer={<Footer label="Enviar" color="green" onPress={this.onSubmit} />}
+      >
         <Form
+          innerRef={this.formRef}
           id={navigation.state.params.id}
-          onFinish={this.onFinish}
           onDismiss={this.onDismiss}
           onOpenCalendly={this.onOpenCalendly}
         />

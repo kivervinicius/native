@@ -13,4 +13,8 @@ function Button({styles, children, onPress}) {
   )
 }
 
+Button.defaultProps = {
+  color: 'blue'
+}
+
 export default $styles.inject()(Button)

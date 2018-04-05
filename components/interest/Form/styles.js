@@ -3,10 +3,6 @@ import {padding} from '@/assets/styles'
 
 export default StyleSheet({
   container: {
-    flex: 1,
-    display: 'flex'
-  },
-  body: {
     padding: 20
   },
   text: {

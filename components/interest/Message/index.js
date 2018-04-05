@@ -1,9 +1,9 @@
-import {View, Button} from 'react-native'
+import {View} from 'react-native'
 
 import Text from '@/components/shared/Text'
-import $styles, {buttonColor} from './styles'
+import $styles from './styles'
 
-function InterestMessage({styles, onDismiss}) {
+function InterestMessage({styles}) {
   return (
     <View style={styles.container}>
       <Text style={$styles.all(styles.text, styles.title)}>
@@ -12,12 +12,6 @@ function InterestMessage({styles, onDismiss}) {
       <Text style={styles.text}>
         Entraremos em contato o mais rápido possível para agendarmos uma visita!
       </Text>
-      <Button
-        title="Ok"
-        color={buttonColor}
-        style={styles.icon}
-        onPress={onDismiss}
-      />
     </View>
   )
 }
