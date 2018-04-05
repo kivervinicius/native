@@ -1,8 +1,7 @@
 import {Component} from 'react'
-import {KeyboardAvoidingView, ScrollView, View, Button} from 'react-native'
+import {KeyboardAvoidingView, View, Button} from 'react-native'
 
 import Text from '@/components/shared/Text'
-import Footer from '@/components/shared/Shell/Footer'
 import interestTypes from './interestTypes'
 import SelectType from './SelectType'
 import Fields from './Fields'
@@ -43,24 +42,21 @@ export default class InterestForm extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.body}>
-          <Text style={styles.text}>
-            Escolha a melhor forma para agendar sua visita ao imóvel:
-          </Text>
-          <Button title="Agendamento Online" onPress={onOpenCalendly} />
-          <Text style={styles.separator}>OU</Text>
-          <KeyboardAvoidingView>
-            <View style={styles.field}>
-              <SelectType
-                types={types}
-                value={type}
-                onChange={this.onChangeType}
-              />
-            </View>
-            {fields && fields.map(this.renderField)}
-          </KeyboardAvoidingView>
-        </ScrollView>
-        <Footer label="Enviar" color="green" onPress={this.onSubmit} />
+        <Text style={styles.text}>
+          Escolha a melhor forma para agendar sua visita ao imóvel:
+        </Text>
+        <Button title="Agendamento Online" onPress={onOpenCalendly} />
+        <Text style={styles.separator}>OU</Text>
+        <KeyboardAvoidingView>
+          <View style={styles.field}>
+            <SelectType
+              types={types}
+              value={type}
+              onChange={this.onChangeType}
+            />
+          </View>
+          {fields && fields.map(this.renderField)}
+        </KeyboardAvoidingView>
       </View>
     )
   }
