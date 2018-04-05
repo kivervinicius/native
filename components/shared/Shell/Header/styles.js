@@ -1,38 +1,31 @@
-import {StyleSheet} from 'react-native'
-
+import StyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
-import {elevation, margin, padding} from '@/assets/styles'
 
-export default StyleSheet.create({
-  wrapper: {
+export default StyleSheet({
+  container: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderColor: colors.gray.lighter,
-    borderWidth: StyleSheet.hairlineWidth,
-    height: 45,
-    ...padding(0, 10),
-    ...margin(10, 20),
-    ...elevation(6)
+    height: 45
   },
-  input: {
+  title: {
     flex: 1,
-    color: colors.gray.dark,
-    fontSize: 16,
-    lineHeight: 18,
-    ...margin(0, 5)
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 40,
+    ':root': {
+      paddingRight: 0
+    }
   },
-  icon: {
-    fontSize: 27,
+  titleText: {
+    fontSize: 20,
+    color: colors.gray.dark
+  },
+  buttonIcon: {
+    fontSize: 40,
     color: colors.gray.mediumDark
-  },
-  button: {
-    ...padding(0, 10)
-  },
-  buttonText: {
-    fontSize: 14,
-    color: colors.blue.medium
   }
 })

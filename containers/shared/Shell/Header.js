@@ -1,25 +1,16 @@
 import {Component} from 'react'
-import {NavigationActions} from 'react-navigation'
 import withNavigation from 'react-navigation/src/views/withNavigation'
 
 import Header from '@/components/shared/Shell/Header'
-import * as route from '@/lib/route'
 
 @withNavigation
 export default class HeaderApp extends Component {
-  onSearchOptions = () => {
+  onReturn = () => {
     const {navigation} = this.props
-    navigation.navigate(
-      'listings',
-      null,
-      NavigationActions.navigate({
-        routeName: 'search',
-        params: route.last(navigation.state).params
-      })
-    )
+    navigation.goBack(null)
   }
 
   render() {
-    return <Header onSearchOptions={this.onSearchOptions} />
+    return <Header {...this.props} onReturn={this.onReturn} />
   }
 }
