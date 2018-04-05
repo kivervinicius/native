@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Matterport from '@/components/listings/Matterport'
 import Image from '../../Image'
-import styles, {colors} from './styles'
+import styles from './styles'
 
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = WIDTH * 0.64
