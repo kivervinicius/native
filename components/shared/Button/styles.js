@@ -3,14 +3,14 @@ import * as colors from '@/assets/colors'
 
 export default StyleSheet({
   container: {
-    padding: 10,
+    padding: 8,
     backgroundColor: colors.blue.medium,
     borderWidth: 1,
     borderColor: colors.blue.light,
     borderRadius: 5
   },
   text: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
     color: 'white',
