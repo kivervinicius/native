@@ -1,16 +1,13 @@
-import * as colors from '@/assets/colors'
-import {padding} from '@/assets/styles'
 import StyleSheet from '@/assets/StyleSheet'
-
-export const buttonColor = colors.green.medium
 
 export default StyleSheet({
   container: {
     flex: 1,
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    ...padding(25, 25, 0)
+    justifyContent: 'space-between'
+  },
+  body: {
+    padding: 15
   },
   text: {
     width: '100%',

@@ -2,6 +2,7 @@ import {Component} from 'react'
 import {KeyboardAvoidingView, ScrollView, View, Button} from 'react-native'
 
 import Text from '@/components/shared/Text'
+import Footer from '@/components/shared/Shell/Footer'
 import interestTypes from './interestTypes'
 import SelectType from './SelectType'
 import Fields from './Fields'
@@ -59,7 +60,7 @@ export default class InterestForm extends Component {
             {fields && fields.map(this.renderField)}
           </KeyboardAvoidingView>
         </ScrollView>
-        <Button title="Enviar" onPress={this.onSubmit} />
+        <Footer label="Enviar" color="green" onPress={this.onSubmit} />
       </View>
     )
   }

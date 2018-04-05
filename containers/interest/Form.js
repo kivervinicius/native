@@ -9,7 +9,7 @@ import Form from '@/components/interest/Form'
 class InterestFormApp extends Component {
   componentWillReceiveProps(next) {
     if (this.props.loading && !next.loading) {
-      next.onFinish(next.error)
+      next.onSubmitSuccess(next.error)
     }
   }
 

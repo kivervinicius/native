@@ -9,7 +9,7 @@ export default class InterestFormScreen extends Component {
     navigation.goBack(null)
   }
 
-  onFinish = (err) => {
+  onSuccess = (err) => {
     const {navigation} = this.props
     if (!err) navigation.navigate('message')
   }
@@ -25,7 +25,7 @@ export default class InterestFormScreen extends Component {
       <Shell>
         <Form
           id={navigation.state.params.id}
-          onFinish={this.onFinish}
+          onSubmitSuccess={this.onSuccess}
           onDismiss={this.onDismiss}
           onOpenCalendly={this.onOpenCalendly}
         />

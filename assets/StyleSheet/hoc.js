@@ -17,5 +17,6 @@ export default ($styles) => (mapProps) => (Target) => {
     return <Target styles={merge($styles(styleProps), styles)} {...props} />
   }
   Component.displayName = `withStyleSheet(${displayName})`
+  Component.defaultProps = Target.defaultProps
   return Component
 }
