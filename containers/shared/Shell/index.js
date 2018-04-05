@@ -1,5 +1,6 @@
-import Shell, {Section} from '@/components/shared/Shell'
+import Shell, {Section, Footer} from '@/components/shared/Shell'
 import Header from './Header'
+import Navigation from './Navigation'
 
 export default function ShellApp(props) {
   return <Shell {...props} />
@@ -9,4 +10,4 @@ ShellApp.defaultProps = {
   header: Header
 }
 
-export {Section}
+export {Section, Header, Footer, Navigation}
