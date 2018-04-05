@@ -1,6 +1,7 @@
 import _ from 'lodash'
-import {TextInput, Picker} from 'react-native'
+import {Picker} from 'react-native'
 
+import TextInput from '@/components/shared/TextInput'
 import styles from './styles'
 
 export function Name({onChange, ...props}) {
