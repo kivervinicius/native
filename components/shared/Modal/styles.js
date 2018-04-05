@@ -22,7 +22,7 @@ export default StyleSheet({
     }
   },
   closeIcon: {
-    fontSize: 30,
+    fontSize: 35,
     ':contrast': {
       color: 'white',
       textShadowColor: colors.gray.darker,
