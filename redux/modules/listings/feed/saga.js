@@ -14,7 +14,7 @@ import ResponseError from '@/lib/api/ResponseError'
 import {reportError} from '@/redux/modules/fabric'
 import * as api from '@/lib/services/listings'
 import * as actions from './index'
-import {getOptions} from './selectors'
+import {getOptions, getListingIds} from './selectors'
 
 const pagination = (res) => ({
   currentPage: res.page_number || 0,
@@ -23,10 +23,17 @@ const pagination = (res) => ({
   totalEntries: res.total_entries
 })
 
+function* buildParams(type, options = {}) {
+  const result = {...options}
+  result.excluded_listing_ids = yield select(getListingIds, {type})
+  return result
+}
+
 function* request({key, options}) {
   yield put(actions.request(key, options))
+  const params = yield call(buildParams, key, options)
   try {
-    const response = yield call(api[key], options)
+    const response = yield call(api[key], params)
     yield put(actions.success(key, response.listings, pagination(response)))
   } catch (err) {
     yield put(actions.failure(key, err))
