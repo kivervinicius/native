@@ -31,7 +31,7 @@ export default class InterestFormScreen extends Component {
         footer={<Footer label="Enviar" color="green" onPress={this.onSubmit} />}
       >
         <Form
-          ref={this.formRef}
+          innerRef={this.formRef}
           id={navigation.state.params.id}
           onDismiss={this.onDismiss}
           onOpenCalendly={this.onOpenCalendly}

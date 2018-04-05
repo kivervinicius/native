@@ -12,9 +12,15 @@ function merge($styles, styles) {
 
 export default ($styles) => (mapProps) => (Target) => {
   const displayName = Target.displayName || Target.name
-  const Component = ({styles, ...props}) => {
+  const Component = ({styles, innerRef, ...props}) => {
     const styleProps = mapProps ? mapProps(props) : props
-    return <Target styles={merge($styles(styleProps), styles)} {...props} />
+    return (
+      <Target
+        ref={innerRef}
+        styles={merge($styles(styleProps), styles)}
+        {...props}
+      />
+    )
   }
   Component.displayName = `withStyleSheet(${displayName})`
   Component.defaultProps = Target.defaultProps
