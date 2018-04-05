@@ -45,7 +45,7 @@ export default class InterestForm extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          Escolha a melhor forma para agendar sua visita ao imóvel:
+          Escolha a melhor forma para agendar sua visita
         </Text>
         <Button raised color="lightblue" onPress={onOpenCalendly}>
           Agendamento Online
