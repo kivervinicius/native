@@ -8,14 +8,11 @@ export default StyleSheet({
   text: {
     fontSize: 18,
     textAlign: 'center',
+    marginBottom: 15,
     ...padding(10, 40)
   },
   field: {
     paddingTop: 20
-  },
-  input: {
-    fontSize: 18,
-    width: '100%'
   },
   separator: {
     marginTop: 20
