@@ -5,8 +5,9 @@ export default StyleSheet({
   container: {
     fontSize: 18,
     borderWidth: 1,
-    borderColor: colors.gray.light,
     borderRadius: 4,
+    borderColor: colors.gray.light,
+    color: colors.gray.dark,
     padding: 14,
     ':value': {
       borderColor: colors.blue.pastel
