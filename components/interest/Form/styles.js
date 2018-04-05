@@ -18,9 +18,6 @@ export default StyleSheet({
     width: '100%'
   },
   separator: {
-    textAlign: 'center',
-    fontWeight: '600',
-    fontSize: 14,
-    marginTop: 15
+    marginTop: 20
   }
 })
