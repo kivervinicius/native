@@ -6,9 +6,9 @@ import {padding} from '@/assets/styles'
 
 export default StyleSheet({
   container: {
-    position: 'relative',
     flex: 1,
-    display: 'flex'
+    display: 'flex',
+    position: 'relative'
   },
   header: {
     display: 'flex',

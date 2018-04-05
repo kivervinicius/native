@@ -17,10 +17,10 @@ function ControlledModal({
     <Modal {...props} onRequestClose={onDismiss} onDismiss={onDismiss}>
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
+          <Text style={styles.title}>{title}</Text>
           <TouchableOpacity style={styles.closeButton} onPress={onDismiss}>
             <Icon name={closeIcon} style={styles.closeIcon} />
           </TouchableOpacity>
-          {title && <Text style={styles.title}>{title}</Text>}
         </View>
         <View style={styles.body}>{children}</View>
       </SafeAreaView>

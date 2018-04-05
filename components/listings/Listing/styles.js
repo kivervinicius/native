@@ -17,3 +17,9 @@ export default StyleSheet.create({
     height: 300
   }
 })
+
+export const modalStyles = StyleSheet.create({
+  header: {
+    paddingTop: 60
+  }
+})
