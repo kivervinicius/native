@@ -2,11 +2,6 @@ import StyleSheet from '@/assets/StyleSheet'
 
 export default StyleSheet({
   container: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  body: {
     padding: 15
   },
   text: {

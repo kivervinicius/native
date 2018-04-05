@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-import Shell from '@/containers/shared/Shell'
+import Shell, {Footer} from '@/containers/shared/Shell'
 import Message from '@/components/interest/Message'
 
 export default class InterestMessageScreen extends Component {
@@ -11,8 +11,10 @@ export default class InterestMessageScreen extends Component {
 
   render() {
     return (
-      <Shell>
-        <Message onDismiss={this.onDismiss} />
+      <Shell
+        footer={<Footer label="Ok" color="green" onPress={this.onDismiss} />}
+      >
+        <Message />
       </Shell>
     )
   }
