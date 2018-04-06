@@ -5,8 +5,8 @@ import Image from '@/components/listings/Image'
 import {Price, Header} from './components'
 import $styles from './styles'
 
-function FlatListingCard({children, style, ...props}) {
-  const {styles, raised, width, images} = props
+function FlatListingCard({children, styles, style, ...props}) {
+  const {raised, width, images} = props
   const image = images[0] || {}
   const imageSize = {
     width,
@@ -22,9 +22,11 @@ function FlatListingCard({children, style, ...props}) {
         <Image thumbnail style={styles.image} {...image} {...imageSize} />
       </View>
       <View style={styles.body}>
-        {React.Children.map(children, (child) =>
-          React.cloneElement(child, props)
-        )}
+        {React.Children.map(children, (child) => (
+          <View style={styles.paragraph}>
+            {React.cloneElement(child, props)}
+          </View>
+        ))}
       </View>
     </View>
   )

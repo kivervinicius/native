@@ -44,7 +44,13 @@ export default $StyleSheet({
     }
   },
   body: {
-    padding: 15
+    marginTop: 10,
+    ':raised': {
+      margin: 15
+    }
+  },
+  paragraph: {
+    marginTop: 5
   },
   header: {
     display: 'flex',
@@ -57,15 +63,10 @@ export default $StyleSheet({
     color: colors.gray.darker,
     flex: 1,
     fontSize: 20,
-    marginRight: 15,
-    ':size=small': {
-      fontSize: 14,
-      fontWeight: '500',
-      marginTop: 10
-    }
+    marginRight: 15
   },
   neighborhood: {
-    color: colors.gray.medium,
+    color: colors.gray.mediumDark,
     fontWeight: '600'
   },
   priceText: {
