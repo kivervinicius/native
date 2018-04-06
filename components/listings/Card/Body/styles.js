@@ -33,15 +33,14 @@ export default $StyleSheet({
       borderColor: colors.blue.medium,
       backgroundColor: colors.blue.medium,
       marginTop: -4
+    },
+    ':raised': {
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0
     }
   },
   image: {
-    width: '100%',
-    borderRadius: 5,
-    ':primary': {
-      borderTopLeftRadius: 0,
-      borderTopRightRadius: 0
-    }
+    width: '100%'
   },
   body: {
     marginTop: 10,
