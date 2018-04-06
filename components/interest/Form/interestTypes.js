@@ -6,7 +6,8 @@ export default {
     fields: ['name', 'phone', 'time']
   },
   3: {
-    fields: ['name', 'email', 'message']
+    fields: ['name', 'email', 'message'],
+    optional: ['message']
   },
   4: {
     fields: ['name', 'phone']
