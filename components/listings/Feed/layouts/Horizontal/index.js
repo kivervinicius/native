@@ -1,59 +1,30 @@
 import _ from 'lodash'
 import {Component} from 'react'
-import {View} from 'react-native'
-import SwipeableView from 'react-swipeable-views-native'
-import {virtualize} from 'react-swipeable-views-utils'
+import {View, Dimensions} from 'react-native'
+import Carousel from 'react-native-snap-carousel'
 
 import Card from '@/components/listings/Card'
 import styles, {cardStyles} from './styles'
 
-const VirtualizedView = virtualize(SwipeableView)
-
 export default class HorizontalFeed extends Component {
   static defaultProps = {
-    count: 2
-  }
-
-  slideRenderer = ({index}) => {
-    const {count} = this.props
-    let itemIndex = (count + index % count) * count
-    return (
-      <View style={styles.slide} key={index}>
-        {_.times(count).map((i) =>
-          this.renderSlideNumber((itemIndex + i) % count)
-        )}
-      </View>
-    )
+    count: 1.5,
+    get width() {
+      return Dimensions.get('window').width
+    }
   }
 
   get totalCount() {
     return this.props.data.length
   }
 
-  get slideCount() {
-    const {count} = this.props
-    if (this.totalCount <= count) return count
-    return undefined
-  }
-
-  renderSlideNumber = (n) => {
-    const {count} = this.props
-    const item = this.props.data[n]
-    if (item) return this.renderSlide(item)
+  renderItem = ({item: {id, ...props}}) => {
+    const {onSelect, count, width} = this.props
     return (
-      <View
-        key={`placeholder-${n}`}
-        style={[styles.placeholder, {flex: 1 / count}]}
-      />
-    )
-  }
-
-  renderSlide = ({id, ...props}) => {
-    const {onSelect, count} = this.props
-    return (
-      <View style={[styles.item, {flex: 1 / count}]} key={id}>
+      <View style={styles.item} key={id}>
         <Card
           size={1 / count}
+          style={{width: width / count}}
           styles={cardStyles}
           onPress={onSelect(id)}
           {...props}
@@ -64,15 +35,18 @@ export default class HorizontalFeed extends Component {
 
   render() {
     if (!this.totalCount) return null
-    const {slideCount} = this
+    const {data, count, width} = this.props
     return (
-      <VirtualizedView
+      <Carousel
+        loop
+        enableMomentum
+        inactiveSlideOpacity={1}
+        inactiveSlideScale={1}
         style={styles.container}
-        containerStyle={styles.container}
-        overscanSlideAfter={slideCount ? 0 : 1}
-        overscanSlideBefore={slideCount ? 0 : 1}
-        slideCount={slideCount}
-        slideRenderer={this.slideRenderer}
+        data={data}
+        renderItem={this.renderItem}
+        sliderWidth={width}
+        itemWidth={width / count}
       />
     )
   }

@@ -8,10 +8,10 @@ import $styles from './styles'
 const WIDTH = Dimensions.get('window').width - 40
 const HEIGHT = WIDTH * 0.64
 
-function FullListingCard({styles, size, images, price, address}) {
+function FullListingCard({styles, style, size, images, price, address}) {
   const image = images[0] || {}
   return (
-    <View style={styles.container}>
+    <View style={styles.container.concat(style)}>
       <View style={styles.thumbnail}>
         <Image
           thumbnail
