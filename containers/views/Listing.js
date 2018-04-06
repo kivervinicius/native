@@ -29,7 +29,7 @@ export default class ListingScreen extends Component {
       >
         <Listing active={isFocused} id={id} />
         <Section title="Veja Também">
-          <RelatedListings id={id} />
+          <RelatedListings raised id={id} />
         </Section>
       </Shell>
     )

@@ -2,15 +2,27 @@ import {StyleSheet} from 'react-native'
 
 import NestedStyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
+import {elevation} from '@/assets/styles'
 
 export default NestedStyleSheet({
   container: {
-    padding: 7,
+    padding: 15,
     paddingTop: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.gray.lighter,
+    borderRadius: 5,
+    ':small': {
+      borderRadius: 3
+    },
     ':active': {
       backgroundColor: colors.gray.offWhite
+    },
+    ':raised': {
+      padding: 0,
+      paddingTop: 0,
+      margin: 10,
+      backgroundColor: 'white',
+      ...elevation(5)
     }
   },
   thumbnail: {
@@ -46,6 +58,10 @@ export default NestedStyleSheet({
     padding: 15,
     ':small': {
       padding: 20
+    },
+    ':raised': {
+      padding: 15,
+      paddingTop: 10
     }
   },
   header: {

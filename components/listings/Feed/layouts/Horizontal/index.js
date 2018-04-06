@@ -19,10 +19,11 @@ export default class HorizontalFeed extends Component {
   }
 
   renderItem = ({item: {id, ...props}}) => {
-    const {onSelect, count, width} = this.props
+    const {onSelect, count, width, raised} = this.props
     return (
       <View style={styles.item} key={id}>
         <Card
+          raised={raised}
           size={1 / count}
           style={{width: width / count}}
           styles={cardStyles}

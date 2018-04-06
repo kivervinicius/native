@@ -44,8 +44,8 @@ FullListingCard.defaultProps = {
   size: 1
 }
 
-export default $styles.inject(({size, active, primary}) => ({
+export default $styles.inject(({size, primary, ...props}) => ({
+  ...props,
   primary,
-  active,
   small: size < 0.7
 }))(FullListingCard)
