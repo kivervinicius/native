@@ -25,7 +25,7 @@ export default class HorizontalFeed extends Component {
         <Card
           raised={raised}
           size={1 / count}
-          style={{width: width / count}}
+          style={{width: width / count - 20}}
           styles={cardStyles}
           onPress={onSelect(id)}
           {...props}
@@ -44,6 +44,7 @@ export default class HorizontalFeed extends Component {
         inactiveSlideOpacity={1}
         inactiveSlideScale={1}
         style={styles.container}
+        slideStyle={styles.slide}
         data={data}
         renderItem={this.renderItem}
         sliderWidth={width}

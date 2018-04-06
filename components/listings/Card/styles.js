@@ -20,7 +20,6 @@ export default NestedStyleSheet({
     ':raised': {
       padding: 0,
       paddingTop: 0,
-      margin: 10,
       backgroundColor: 'white',
       ...elevation(5)
     }
@@ -61,7 +60,7 @@ export default NestedStyleSheet({
     },
     ':raised': {
       padding: 15,
-      paddingTop: 10
+      paddingTop: 5
     }
   },
   header: {
