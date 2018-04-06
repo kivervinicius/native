@@ -12,6 +12,12 @@ export default $StyleSheet({
     borderRadius: 5,
     ':active': {
       backgroundColor: colors.gray.offWhite
+    },
+    ':raised': {
+      backgroundColor: 'white',
+      padding: 0,
+      paddingTop: 0,
+      borderBottomWidth: 0
     }
   },
   thumbnail: {

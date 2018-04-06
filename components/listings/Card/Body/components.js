@@ -3,11 +3,15 @@ import {View} from 'react-native'
 import Text from '@/components/shared/Text'
 import PriceComponent from '@/components/shared/Price'
 
-export const Price = ({styles, price}) => (
-  <PriceComponent styles={{text: styles.priceText}} size={24}>
+export const Price = ({styles, price, size}) => (
+  <PriceComponent styles={{text: styles.priceText}} size={size}>
     {price}
   </PriceComponent>
 )
+
+Price.defaultProps = {
+  size: 24
+}
 
 export const Street = ({styles, address}) => (
   <Text style={styles.street} numberOfLines={1} ellipsizeMode="tail">
