@@ -8,7 +8,7 @@ import styles, {cardStyles} from './styles'
 
 export default class HorizontalFeed extends Component {
   static defaultProps = {
-    count: 1.5,
+    count: 1.25,
     get width() {
       return Dimensions.get('window').width
     }
