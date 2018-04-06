@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native'
 
 import $StyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
+import {elevation} from '@/assets/styles'
 
 export default $StyleSheet({
   container: {
@@ -17,7 +18,8 @@ export default $StyleSheet({
       backgroundColor: 'white',
       padding: 0,
       paddingTop: 0,
-      borderBottomWidth: 0
+      borderBottomWidth: 0,
+      ...elevation(4)
     }
   },
   thumbnail: {
