@@ -1,7 +1,9 @@
 import {Component} from 'react'
-import {KeyboardAvoidingView, View, Button} from 'react-native'
+import {KeyboardAvoidingView, View} from 'react-native'
 
 import Text from '@/components/shared/Text'
+import Button from '@/components/shared/Button'
+import Separator from '@/components/shared/Separator'
 import interestTypes from './interestTypes'
 import SelectType from './SelectType'
 import Fields from './Fields'
@@ -43,18 +45,14 @@ export default class InterestForm extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          Escolha a melhor forma para agendar sua visita ao imóvel:
+          Escolha a melhor forma para agendar sua visita
         </Text>
-        <Button title="Agendamento Online" onPress={onOpenCalendly} />
-        <Text style={styles.separator}>OU</Text>
+        <Button raised color="lightblue" onPress={onOpenCalendly}>
+          Agendamento Online
+        </Button>
+        <Separator style={styles.separator}>OU</Separator>
         <KeyboardAvoidingView>
-          <View style={styles.field}>
-            <SelectType
-              types={types}
-              value={type}
-              onChange={this.onChangeType}
-            />
-          </View>
+          <SelectType types={types} value={type} onChange={this.onChangeType} />
           {fields && fields.map(this.renderField)}
         </KeyboardAvoidingView>
       </View>
