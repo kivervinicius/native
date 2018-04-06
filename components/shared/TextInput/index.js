@@ -1,9 +1,29 @@
+import {Component} from 'react'
 import {View, TextInput} from 'react-native'
 
 import $styles from './styles'
 
-export default $styles.inject()(({styles, style, ...props}) => (
-  <View style={styles.container.concat(style)}>
-    <TextInput style={styles.input} {...props} />
-  </View>
-))
+@$styles.inject()
+export default class ControlledTextInput extends Component {
+  static defaultProps = {
+    onValidate: () => true
+  }
+
+  onChange = (value) => {
+    const {onChangeText, onValidate} = this.props
+    if (onChangeText) onChangeText(value, onValidate(value))
+  }
+
+  render() {
+    const {styles, style, ...props} = this.props
+    return (
+      <View style={styles.container.concat(style)}>
+        <TextInput
+          {...props}
+          style={styles.input}
+          onChangeText={this.onChange}
+        />
+      </View>
+    )
+  }
+}

@@ -10,6 +10,9 @@ export default StyleSheet({
     ':value': {
       borderColor: colors.blue.pastel
     },
+    ':invalid': {
+      borderColor: 'red'
+    },
     ':multiline': {
       paddingTop: 10
     }

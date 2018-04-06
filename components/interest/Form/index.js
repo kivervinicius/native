@@ -1,3 +1,4 @@
+import _ from 'lodash/fp'
 import {Component} from 'react'
 import {KeyboardAvoidingView, View} from 'react-native'
 
@@ -9,10 +10,14 @@ import SelectType from './SelectType'
 import Fields from './Fields'
 import $styles from './styles'
 
+const validate = _.mapValues((value, key) => Fields[key].validate(value))
+
 @$styles.inject()
 export default class InterestForm extends Component {
   state = {
-    type: undefined
+    activeType: undefined,
+    values: {},
+    validation: {}
   }
 
   constructor(props) {
@@ -20,27 +25,49 @@ export default class InterestForm extends Component {
     this.state.type = props.types[0].id
   }
 
-  onChangeValue = (field) => (value) => this.setState({[field]: value})
+  onChangeValue = (field) => (value) =>
+    this.setState(({values}) => ({
+      values: {
+        ...values,
+        [field]: value
+      }
+    }))
 
-  onChangeType = (id) => this.setState({type: id})
+  onChangeType = (id) => this.setState({activeType: id})
 
-  onSubmit = () => this.props.onSubmit(this.state)
+  onSubmit = () => {
+    if (this.validate()) {
+      this.props.onSubmit(this.state)
+    }
+  }
+
+  validate = () => {
+    const {values} = this.props
+    const validation = validate(values)
+    this.setState({validation})
+    return validation.findIndex(_.isEmpty) === -1
+  }
 
   renderField = (type) => {
     const {styles} = this.props
-    const value = this.state[type] || ''
+    const value = this.state.values[type] || ''
+    const valid = this.state.validation[type] || true
     const Target = Fields[type]
     return (
       <View key={type} style={styles.field}>
-        <Target value={value} onChange={this.onChangeValue(type)} />
+        <Target
+          invalid={!valid}
+          value={value}
+          onChange={this.onChangeValue(type)}
+        />
       </View>
     )
   }
 
   render() {
     const {styles, types, onOpenCalendly} = this.props
-    const {type} = this.state
-    const fields = type ? interestTypes[type].fields : undefined
+    const {activeType} = this.state
+    const fields = activeType ? interestTypes[activeType].fields : undefined
 
     return (
       <View style={styles.container}>
@@ -52,7 +79,11 @@ export default class InterestForm extends Component {
         </Button>
         <Separator style={styles.separator}>OU</Separator>
         <KeyboardAvoidingView>
-          <SelectType types={types} value={type} onChange={this.onChangeType} />
+          <SelectType
+            types={types}
+            value={activeType}
+            onChange={this.onChangeType}
+          />
           {fields && fields.map(this.renderField)}
         </KeyboardAvoidingView>
       </View>
