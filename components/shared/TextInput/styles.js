@@ -11,7 +11,7 @@ export default StyleSheet({
       borderColor: colors.blue.pastel
     },
     ':invalid': {
-      borderColor: 'red'
+      borderColor: colors.red.medium
     },
     ':multiline': {
       paddingTop: 10
