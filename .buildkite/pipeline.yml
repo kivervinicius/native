@@ -1,13 +1,13 @@
 steps:
   - label: 'test'
     command:
-    - ./setup.sh
+    - .buildkite/setup.sh
     - yarn test
   - wait
   - label: 'build:ios'
-    command: ./build.sh ios
+    command: .buildkite/build.sh ios
   - label: 'build:android'
-    command: ./build.sh android
+    command: .buildkite/build.sh android
   # - wait
   # - label: 'deploy:alpha'
   #   branches: !master
