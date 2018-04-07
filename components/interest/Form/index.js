@@ -17,13 +17,12 @@ const validateField = (value, name) => {
 
 const validateValues = (values) => _.mapValues(values, validateField)
 
-const isValidInterestType = (validation, type) => {
+const isValidInterestType = (validations, type) => {
   const target = interestTypes[type]
-  const fields = _.pick(validation, _.keys(target.fields))
-  const hasRequiredFields = () =>
-    _.every(target.required, (key) => key in fields)
-  if (_.has(fields, _.isEmpty)) return false
-  if (target.required && hasRequiredFields()) return false
+  for (const key of target.fields) {
+    if (!(key in validations) && Fields[key].validate) return false
+    if (!validations[key]) return false
+  }
   return true
 }
 
@@ -63,10 +62,11 @@ export default class InterestForm extends Component {
   }
 
   onValidate = () => {
-    const {values, activeType} = this.state
+    const {onValidate, values, activeType} = this.state
     const validations = validateValues(values)
     const isValid = isValidInterestType(validations, activeType)
     this.setState({validations, isValid})
+    if (onValidate) onValidate(isValid)
     return isValid
   }
 

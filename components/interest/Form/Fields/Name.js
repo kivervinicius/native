@@ -11,3 +11,5 @@ export default function Name({onChange, ...props}) {
     />
   )
 }
+
+Name.validate = (value) => value != ''
