@@ -1,4 +1,5 @@
 import TextInput from '@/components/shared/TextInput'
+import {validate} from 'email-validator'
 import styles from '../styles'
 
 export default function Email({onChange, ...props}) {
@@ -12,3 +13,5 @@ export default function Email({onChange, ...props}) {
     />
   )
 }
+
+Email.validate = validate

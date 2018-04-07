@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "rnpm": {
-    "assets": ["./assets/fonts"]
+    "assets": [
+      "./assets/fonts"
+    ]
   },
   "scripts": {
     "prepare": "patch-package",
@@ -20,8 +22,12 @@
   "jest": {
     "preset": "react-native",
     "automock": false,
-    "unmockedModulePathPatterns": ["/node_modules/"],
-    "setupFiles": ["./__test__/setup.js"],
+    "unmockedModulePathPatterns": [
+      "/node_modules/"
+    ],
+    "setupFiles": [
+      "./__test__/setup.js"
+    ],
     "transformIgnorePatterns": [
       "/node_modules/(?!(jest-)?react-native|react-navigation)/"
     ]
@@ -29,6 +35,7 @@
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "^0.0.12",
     "babel-plugin-lodash": "^3.3.2",
+    "email-validator": "^1.1.1",
     "es6-error": "^4.1.1",
     "immutability-helper": "^2.6.6",
     "lodash": "^4.17.5",
