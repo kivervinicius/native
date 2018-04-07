@@ -10,7 +10,7 @@ export default StyleSheet({
     ':raised': elevation(2),
     ':color=blue': {
       backgroundColor: colors.blue.medium,
-      borderColor: colors.blue.light
+      borderColor: colors.blue.border
     },
     ':color=green': {
       backgroundColor: colors.green.medium,
@@ -19,6 +19,9 @@ export default StyleSheet({
     ':color=lightblue': {
       backgroundColor: 'white',
       borderColor: colors.blue.medium
+    },
+    ':disabled': {
+      opacity: 0.6
     }
   },
   text: {
