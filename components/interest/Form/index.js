@@ -53,7 +53,10 @@ export default class InterestForm extends Component {
       }
     }))
 
-  onChangeType = (id) => this.setState({activeType: id})
+  onChangeType = (id) => {
+    this.setState({activeType: id})
+    this.onValidate()
+  }
 
   onSubmit = () => {
     if (this.onValidate()) {
