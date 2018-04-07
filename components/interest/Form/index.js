@@ -62,7 +62,8 @@ export default class InterestForm extends Component {
   }
 
   onValidate = () => {
-    const {onValidate, values, activeType} = this.state
+    const {onValidate} = this.props
+    const {values, activeType} = this.state
     const validations = validateValues(values)
     const isValid = isValidInterestType(validations, activeType)
     this.setState({validations, isValid})
