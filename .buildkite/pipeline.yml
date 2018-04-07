@@ -11,7 +11,7 @@ steps:
   - label: 'build:android'
     command:
     - .buildkite/setup.sh android
-    - .buildkite/build.sh
+    - .buildkite/build-android.sh
   # - wait
   # - label: 'deploy:alpha'
   #   branches: !master

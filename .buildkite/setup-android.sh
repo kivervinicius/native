@@ -1,4 +1,5 @@
 set -eu
+set -x
 
 PATH=$PATH:$ANDROID_HOME/tools/bin
 
@@ -14,7 +15,7 @@ sdkmanager "extras;android;m2repository" "extras;google;m2repository"
 
 echo "Installing keystore"
 
-aws s3 sync $AWS_SECRETS_BUCKET .secrets --quiet
+aws s3 sync $AWS_SECRETS_BUCKET .secrets
 
 export ANDROID_KEYSTORE_FILE=$PWD/.secrets/keystore.jks
 
