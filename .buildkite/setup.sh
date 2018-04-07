@@ -10,5 +10,5 @@ yarn install
 
 if [[ $1 =~ android|ios ]]; then
   PLATFORM=$1; shift;
-    ./setup-$PLATFORM.sh
+    ./.buildkite/setup-$PLATFORM.sh
 fi

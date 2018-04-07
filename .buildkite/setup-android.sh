@@ -1,6 +1,6 @@
-set -e
+set -eu
 
-PATH=PATH:$ANDROID_HOME/tools/bin
+PATH=$PATH:$ANDROID_HOME/tools/bin
 
 mkdir .secrets
 
@@ -16,5 +16,5 @@ echo "Installing keystore"
 
 aws s3 sync $SECRETS_BUCKET .secrets --quiet
 
-export ANDROID_KEYSTORE_FILE=~$PWD/.secrets/keystore.jks
+export ANDROID_KEYSTORE_FILE=$PWD/.secrets/keystore.jks
 
