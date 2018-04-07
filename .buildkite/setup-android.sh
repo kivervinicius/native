@@ -14,7 +14,7 @@ sdkmanager "extras;android;m2repository" "extras;google;m2repository"
 
 echo "Installing keystore"
 
-aws s3 sync $SECRETS_BUCKET .secrets --quiet
+aws s3 sync $AWS_SECRETS_BUCKET .secrets --quiet
 
 export ANDROID_KEYSTORE_FILE=$PWD/.secrets/keystore.jks
 

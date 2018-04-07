@@ -4,7 +4,7 @@ mkdir -p .secrets
 
 echo "Installing certificate"
 
-aws s3 sync $SECRETS_BUCKET .secrets --quiet
+aws s3 sync $AWS_SECRETS_BUCKET .secrets --quiet
 
 export IOS_XCCONFIG_FILE=$PWD/.secrets/ad-hoc/app.xcconfig
 export IOS_CERTIFICATE_FILE=$PWD/.secrets/ad-hoc/app.p12
