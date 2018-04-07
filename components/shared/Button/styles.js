@@ -12,13 +12,17 @@ export default StyleSheet({
       backgroundColor: colors.blue.medium,
       borderColor: colors.blue.border
     },
+    ':color=lightblue': {
+      backgroundColor: 'white',
+      borderColor: colors.blue.medium
+    },
     ':color=green': {
       backgroundColor: colors.green.medium,
       borderColor: colors.green.border
     },
-    ':color=lightblue': {
+    ':color=lightgreen': {
       backgroundColor: 'white',
-      borderColor: colors.blue.medium
+      borderColor: colors.green.bright
     },
     ':disabled': {
       opacity: 0.6
@@ -32,6 +36,9 @@ export default StyleSheet({
     marginBottom: 2,
     ':color=lightblue': {
       color: colors.blue.medium
+    },
+    ':color=lightgreen': {
+      color: colors.green.bright
     }
   }
 })

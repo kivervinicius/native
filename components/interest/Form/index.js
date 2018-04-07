@@ -101,7 +101,7 @@ export default class InterestForm extends Component {
         <Text style={styles.text}>
           Escolha a melhor forma para agendar sua visita
         </Text>
-        <Button raised color="lightblue" onPress={onOpenCalendly}>
+        <Button raised color="lightgreen" onPress={onOpenCalendly}>
           Agendamento Online
         </Button>
         <Separator style={styles.separator}>OU</Separator>

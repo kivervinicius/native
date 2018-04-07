@@ -29,6 +29,7 @@ export const orange = {
 }
 
 export const green = {
+  bright: '#08C56D',
   light: '#e6ffed',
   medium: '#0dbd62',
   border: '#008647',
