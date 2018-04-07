@@ -1,5 +1,7 @@
 set -e
 
+# Setup certificates
+
 export SECRETS_DIR=$PWD/tmp/.secrets
 export ANDROID_KEYSTORE_FILE=$SECRETS_DIR/keystore.jks
 export IOS_XCCONFIG_FILE=$SECRETS_DIR/ad-hoc/app.xcconfig
@@ -10,4 +12,8 @@ aws s3 sync $AWS_SECRETS_BUCKET $SECRETS_DIR
 
 export IOS_PROVISIONING_UUID=`grep UUID -A1 -a $IOS_PROVISIONING_FILE | grep -io "[-A-F0-9]\{36\}"`
 export IOS_PROVISIONING_NAME=`grep "<key>Name" -A1 -a $IOS_PROVISIONING_FILE | pcregrep -o1 '<string>(.*)</string>'`
+
+# Clean pods
+
+git clean -fxdq ios/Pods
 
