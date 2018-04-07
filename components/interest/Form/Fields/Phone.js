@@ -13,7 +13,7 @@ export default function Phone({onChange, ...props}) {
   )
 }
 
-const countryCode = '(\\+?\\d{1,3}|\\d{1,4})'
+const countryCode = '(\\+?\\d{1,3}|\\d{1,4})?'
 const areaCode = '\\(?\\d{2,3}\\)?'
 const number = '\\d{3,5}'
 const sep = '[ \\-]?'
