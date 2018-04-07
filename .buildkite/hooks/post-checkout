@@ -4,7 +4,7 @@ set -e
 
 export SECRETS_DIR=$PWD/tmp/.secrets
 export ANDROID_KEYSTORE_FILE=$SECRETS_DIR/keystore.jks
-export IOS_XCCONFIG_FILE=$SECRETS_DIR/app.xcconfig
+export IOS_XCCONFIG_FILE=$SECRETS_DIR/secrets.xcconfig
 export IOS_CERTIFICATE_FILE=$SECRETS_DIR/ad-hoc/app.p12
 export IOS_PROVISIONING_FILE=~$SECRETS_DIR/ad-hoc/app.mobileprovision
 
