@@ -1,27 +1,27 @@
 env:
-  - BUILDKITE_GIT_CLEAN_FLAGS=-fdq
-  - LC_ALL=pt_BR.UTF-8
-  - LANG=pt_BR.UTF-8
+  BUILDKITE_GIT_CLEAN_FLAGS: -fdq
+  LC_ALL: pt_BR.UTF-8
+  LANG: pt_BR.UTF-8
 
 steps:
-  - label: 'test'
-    command:
-    - .buildkite/setup.sh
-    - yarn test
-  - wait
-  - label: 'build:ios'
-    command:
-    - .buildkite/setup.sh ios
-    - .buildkite/build-ios.sh
-  - label: 'build:android'
-    command:
-    - .buildkite/setup.sh android
-    - .buildkite/build-android.sh
-  # - wait
-  # - label: 'deploy:alpha'
-  #   branches: !master
-  #   command: ./deploy.sh $ALPHA_TESTERS
-  # - label: 'deploy:beta'
-  #   branches: master
-  #   command: ./deploy.sh $BETA_TESTERS
+- label: 'test'
+  command:
+  - .buildkite/setup.sh
+  - yarn test
+- wait
+- label: 'build:ios'
+  command:
+  - .buildkite/setup.sh ios
+  - .buildkite/build-ios.sh
+- label: 'build:android'
+  command:
+  - .buildkite/setup.sh android
+  - .buildkite/build-android.sh
+# - wait
+# - label: 'deploy:alpha'
+#   branches: !master
+#   command: ./deploy.sh $ALPHA_TESTERS
+# - label: 'deploy:beta'
+#   branches: master
+#   command: ./deploy.sh $BETA_TESTERS
 
