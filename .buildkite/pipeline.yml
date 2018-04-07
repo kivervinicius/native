@@ -1,0 +1,18 @@
+steps:
+  - label: 'test'
+    command:
+    - ./setup.sh
+    - yarn test
+  - wait
+  - label: 'build:ios'
+    command: ./build.sh ios
+  - label: 'build:android'
+    command: ./build.sh android
+  # - wait
+  # - label: 'deploy:alpha'
+  #   branches: !master
+  #   command: ./deploy.sh $ALPHA_TESTERS
+  # - label: 'deploy:beta'
+  #   branches: master
+  #   command: ./deploy.sh $BETA_TESTERS
+
