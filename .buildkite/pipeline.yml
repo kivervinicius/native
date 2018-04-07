@@ -5,9 +5,13 @@ steps:
     - yarn test
   - wait
   - label: 'build:ios'
-    command: .buildkite/build.sh ios
+    command:
+    - .buildkite/setup.sh ios
+    - .buildkite/build-ios.sh
   - label: 'build:android'
-    command: .buildkite/build.sh android
+    command:
+    - .buildkite/setup.sh android
+    - .buildkite/build.sh
   # - wait
   # - label: 'deploy:alpha'
   #   branches: !master
