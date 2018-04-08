@@ -1,5 +1,3 @@
-set -x
-
 BUILD_NUMBER_PATTERN='(versionCode) ([[:digit:]]*)'
 VERSION_NAME_PATTERN='(versionName) "(.*)"'
 

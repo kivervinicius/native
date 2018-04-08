@@ -1,4 +1,4 @@
-set -eux
+set -eu
 
 export IOS_PROVISIONING_UUID=`grep UUID -A1 -a $IOS_PROVISIONING_FILE | grep -io "[-A-F0-9]\{36\}"`
 export IOS_PROVISIONING_NAME=`grep "<key>Name" -A1 -a $IOS_PROVISIONING_FILE | pcregrep -o1 '<string>(.*)</string>'`
