@@ -3,6 +3,8 @@ env:
   BUILDKITE_GIT_CLEAN_FLAGS: -fdq
   LC_ALL: pt_BR.UTF-8
   LANG: pt_BR.UTF-8
+  BETA_TESTERS: product,dev
+  APLHA_TESTERS: dev
 
 steps:
 - label: 'test'
@@ -12,17 +14,22 @@ steps:
 - wait
 - label: 'build:ios'
   command:
-  - .buildkite/run ios setup
-  - .buildkite/run ios build
+  - .buildkite/run ios setup,build
+  - buildkite-agent artifact upload "ios/build/EmCasa.xcarchive"
 - label: 'build:android'
   command:
-  - .buildkite/run android setup
-  - .buildkite/run android build
-# - wait
-# - label: 'deploy:alpha'
-#   branches: !master
-#   command: ./deploy.sh $ALPHA_TESTERS
-# - label: 'deploy:beta'
-#   branches: master
-#   command: ./deploy.sh $BETA_TESTERS
-
+  - .buildkite/run android setup,build
+  - buildkite-agent artifact upload "android/app/build/outputs/apk/app-release.apk"
+- wait
+- label: 'beta:ios'
+  branches: !master
+  command:
+  - buildkite-agent artifact download "ios/build/EmCasa.xcarchive" . --step "build:ios"
+  - .buildkite/run setup
+  - .buildkite/run ios sign,deploy
+- label: 'beta:android'
+  branches: master
+  command:
+  - buildkite-agent artifact download "android/app/build/outputs/apk/app-release.apk" . --step "build:android"
+  - .buildkite/run setup
+  - .buildkite/run android deploy

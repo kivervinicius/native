@@ -1,15 +1,15 @@
 #!/bin/bash
 
+set -x
 export ROOT=${BUILDKITE_BUILD_CHECKOUT_PATH:-$PWD}
 
 if [[ "$1" =~ ^(android|ios)$ ]]; then PLATFORM=$1; shift; fi
-if [[ "$1" =~ ^[a-z]+$ ]]; then SCRIPT=$1; shift;
+if [[ "$1" =~ ^[a-z,]+$ ]]; then SCRIPTS=$1; shift;
 else echo "Invalid script $1"; exit 1; fi
 
-if [[ -f $ROOT/.buildkite/$SCRIPT.sh ]]; then
-  /bin/bash $ROOT/.buildkite/$SCRIPT.sh $@
-fi
-
-if [[ -f $ROOT/.buildkite/$PLATFORM/$SCRIPT.sh ]]; then
-  /bin/bash $ROOT/.buildkite/$PLATFORM/$SCRIPT.sh $@
-fi
+for script in $(echo $SCRIPTS | sed -e "s/\([^,]*\)/\1,$PLATFORM\/\1/g" | tr "," " "); do
+  if [[ -f $ROOT/.buildkite/$script.sh ]]; then
+    echo $script
+    # /bin/bash $ROOT/.buildkite/$script.sh $@
+  fi
+done
