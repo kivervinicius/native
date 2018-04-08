@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export ROOT=${BUILDKITE_BUILD_CHECKOUT_PATH:-$PWD}
+
+if [[ $1 =~ android|ios ]]; then PLATFORM=$1; shift; fi
+SCRIPT=$1; shift;
+
+if [[ -f $ROOT/.buildkite/$SCRIPT.sh ]]; then
+  /bin/bash $ROOT/.buildkite/$SCRIPT.sh $@
+fi
+
+if [[ -f $ROOT/.buildkite/$PLATFORM/$SCRIPT.sh ]]; then
+  /bin/bash $ROOT/.buildkite/$PLATFORM/$SCRIPT.sh $@
+fi

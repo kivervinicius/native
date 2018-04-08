@@ -6,17 +6,17 @@ env:
 steps:
 - label: 'test'
   command:
-  - .buildkite/setup.sh
+  - .buildkite/run setup
   - yarn test
 - wait
 - label: 'build:ios'
   command:
-  - .buildkite/setup.sh ios
-  - .buildkite/build-ios.sh
+  - .buildkite/run ios setup
+  - .buildkite/run ios build
 - label: 'build:android'
   command:
-  - .buildkite/setup.sh android
-  - .buildkite/build-android.sh
+  - .buildkite/run android setup
+  - .buildkite/run android build
 # - wait
 # - label: 'deploy:alpha'
 #   branches: !master
