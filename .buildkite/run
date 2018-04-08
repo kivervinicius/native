@@ -2,8 +2,9 @@
 
 export ROOT=${BUILDKITE_BUILD_CHECKOUT_PATH:-$PWD}
 
-if [[ $1 =~ android|ios ]]; then PLATFORM=$1; shift; fi
-SCRIPT=$1; shift;
+if [[ "$1" =~ ^(android|ios)$ ]]; then PLATFORM=$1; shift; fi
+if [[ "$1" =~ ^[a-z]+$ ]]; then SCRIPT=$1; shift;
+else echo "Invalid script $1"; exit 1; fi
 
 if [[ -f $ROOT/.buildkite/$SCRIPT.sh ]]; then
   /bin/bash $ROOT/.buildkite/$SCRIPT.sh $@
