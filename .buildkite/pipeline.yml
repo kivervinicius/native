@@ -15,7 +15,7 @@ steps:
 - label: 'build:ios'
   command:
   - .buildkite/run ios setup,bump,build
-  - cd ios/build && zip -qr EmCasa.xcarchive.zip EmCasa.xcarchive/**/*
+  - cd ios/build && zip -r EmCasa.xcarchive.zip EmCasa.xcarchive/**/*
   - buildkite-agent artifact upload "ios/build/EmCasa.xcarchive.zip"
 - label: 'build:android'
   command:
