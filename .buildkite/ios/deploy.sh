@@ -1,3 +1,7 @@
 set -e
 
-fastlane ios beta bin:$ROOT/ios/build/EmCasa.ipa groups:$TESTER_GROUPS
+bundle exec fastlane run crashlytics \
+  ipa_path:$ROOT/ios/build/EmCasa.ipa \
+  api_token:$FABRIC_API_KEY \
+  build_secret:$FABRIC_BUILD_SECRET \
+  groups:$TESTER_GROUPS
