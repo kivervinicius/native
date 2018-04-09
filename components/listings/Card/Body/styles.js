@@ -47,7 +47,7 @@ export default $StyleSheet({
   body: {
     marginTop: 10,
     ':raised': {
-      margin: 15
+      margin: 20
     }
   },
   paragraph: {
