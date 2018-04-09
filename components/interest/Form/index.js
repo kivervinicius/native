@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import update from 'immutability-helper'
 import {Component} from 'react'
 import {KeyboardAvoidingView, View} from 'react-native'
 
@@ -24,7 +25,6 @@ export default class InterestForm extends Component {
   state = {
     values: {},
     validations: {},
-    isValid: false,
     activeType: undefined
   }
 
@@ -48,7 +48,6 @@ export default class InterestForm extends Component {
 
   onChangeType = (id) => {
     this.setState({activeType: id})
-    this.onValidate()
   }
 
   onSubmit = () => {
@@ -57,22 +56,27 @@ export default class InterestForm extends Component {
     }
   }
 
-  onValidate = () => {
-    const {activeType} = this
-    const {onValidate} = this.props
-    const values = activeType.fields.reduce(
+  getValues = (fields) =>
+    fields.reduce(
       (values, key) => ({
         ...values,
         [key]: this.state.values[key]
       }),
       {}
     )
-    const validations = validateValues(values)
-    const valid = _.findKey(validations, _.negate(isValid)) === -1
-    this.setState({validations, isValid: valid})
+
+  onValidateField = (...fields) => () => {
+    const {onValidate} = this.props
+    const validations = validateValues(this.getValues(fields))
+    const valid = _.findKey(validations, _.negate(isValid)) === undefined
+    this.setState({
+      validations: update(this.state.validations, {$merge: validations})
+    })
     if (onValidate) onValidate(valid)
     return valid
   }
+
+  onValidate = () => this.onValidateField(...this.activeType.fields)()
 
   renderField = (type) => {
     const {styles} = this.props
@@ -86,7 +90,7 @@ export default class InterestForm extends Component {
         <Target
           invalid={!valid}
           value={value}
-          onBlur={this.onValidate}
+          onBlur={this.onValidateField(type)}
           onChange={this.onChangeValue(type)}
         />
         {!valid && <Text style={styles.validation}>{validation}</Text>}
