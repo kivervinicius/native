@@ -22,13 +22,11 @@ steps:
   - buildkite-agent artifact upload "android/app/build/outputs/apk/app-release.apk"
 - wait
 - label: 'beta:ios'
-  branches: !master
   command:
   - buildkite-agent artifact download "ios/build/EmCasa.xcarchive/**/*" . --step "build:ios"
   - .buildkite/run setup
   - .buildkite/run ios sign,deploy
 - label: 'beta:android'
-  branches: master
   command:
   - buildkite-agent artifact download "android/app/build/outputs/apk/app-release.apk" . --step "build:android"
   - .buildkite/run setup
