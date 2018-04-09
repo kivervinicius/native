@@ -4,7 +4,7 @@ set -o pipefail
 ARGS=()
 OPTIONS=(CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=)
 
-if [[ ! -z $IOS_XCCONFIG_FILE ]]; then ARGS+=(-xcconfig $IOS_XCCONFIG_FILE); fi
+if [[ ! -z "$IOS_XCCONFIG_FILE" ]]; then ARGS+=(-xcconfig "$IOS_XCCONFIG_FILE"); fi
 
 cd $ROOT/ios && xcodebuild \
   -scheme EmCasa \
