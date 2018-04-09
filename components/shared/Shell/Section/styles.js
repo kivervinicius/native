@@ -13,6 +13,6 @@ export default StyleSheet.create({
     color: colors.gray.dark,
     fontWeight: '600',
     fontSize: 13,
-    ...margin(null, 25, 10)
+    ...margin(null, 20, 10)
   }
 })

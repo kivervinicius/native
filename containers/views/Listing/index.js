@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import {Dimensions} from 'react-native'
 import {withNavigationFocus} from 'react-navigation'
 
 import Shell, {Section, Footer} from '@/containers/shared/Shell'
@@ -10,10 +9,6 @@ export default class ListingScreen extends Component {
   onInterest = () => {
     const {navigation} = this.props
     navigation.navigate('interestForm', navigation.state.params)
-  }
-
-  get slideWidth() {
-    return Dimensions.get('window').width - 65
   }
 
   render() {
@@ -34,7 +29,7 @@ export default class ListingScreen extends Component {
       >
         <Listing active={isFocused} id={id} />
         <Section title="Veja Também">
-          <RelatedListings id={id} slideWidth={this.slideWidth} />
+          <RelatedListings id={id} />
         </Section>
       </Shell>
     )
