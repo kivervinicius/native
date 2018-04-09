@@ -8,6 +8,7 @@ export default function Email({onChange, ...props}) {
       style={styles.input}
       keyboardType="email-address"
       placeholder="Email"
+      autoCapitalize="none"
       onChangeText={onChange}
       {...props}
     />
