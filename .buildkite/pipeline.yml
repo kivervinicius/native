@@ -4,7 +4,7 @@ env:
   LC_ALL: pt_BR.UTF-8
   LANG: pt_BR.UTF-8
   BETA_TESTERS: product,dev
-  APLHA_TESTERS: dev
+  ALPHA_TESTERS: dev
 
 steps:
 - label: 'test'
