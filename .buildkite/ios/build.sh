@@ -1,4 +1,5 @@
 set -e
+set -o pipefail
 
 ARGS=()
 OPTIONS=(CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=)
