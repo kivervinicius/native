@@ -11,8 +11,10 @@ export default class InterestFormScreen extends Component {
 
   onSubmit = () => {
     const {navigation} = this.props
-    this.form.onSubmit()
-    navigation.navigate('message')
+    if (this.form.onValidate()) {
+      this.form.onSubmit()
+      navigation.navigate('message')
+    }
   }
 
   onOpenCalendly = () => {
@@ -26,6 +28,7 @@ export default class InterestFormScreen extends Component {
 
   render() {
     const {navigation} = this.props
+
     return (
       <Shell footer={<Footer label="Enviar" onPress={this.onSubmit} />}>
         <Form

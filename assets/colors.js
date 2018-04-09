@@ -10,6 +10,7 @@ export const gray = {
 }
 
 export const blue = {
+  border: '#094156',
   pastel: '#9ED2E5',
   light: '#e1f7ff',
   medium: '#227ea2',
@@ -28,6 +29,7 @@ export const orange = {
 }
 
 export const green = {
+  bright: '#08C56D',
   light: '#e6ffed',
   medium: '#0dbd62',
   border: '#008647',

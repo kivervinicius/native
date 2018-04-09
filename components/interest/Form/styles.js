@@ -1,4 +1,5 @@
 import StyleSheet from '@/assets/StyleSheet'
+import * as colors from '@/assets/colors'
 import {padding} from '@/assets/styles'
 
 export default StyleSheet({
@@ -16,5 +17,11 @@ export default StyleSheet({
   },
   separator: {
     marginTop: 20
+  },
+  validation: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: colors.red.medium,
+    marginTop: 5
   }
 })
