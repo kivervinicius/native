@@ -38,14 +38,15 @@ export default class HorizontalFeed extends Component {
 
   render() {
     if (!this.totalCount) return null
-    const {data, width, slideWidth} = this.props
+    const {data, style, loop, width, slideWidth} = this.props
     return (
       <Carousel
-        loop
         enableMomentum
+        loop={loop}
         inactiveSlideOpacity={1}
         inactiveSlideScale={1}
-        style={styles.container}
+        activeSlideAlignment={loop ? 'center' : 'start'}
+        containerCustomStyle={[styles.container, style]}
         slideStyle={styles.slide}
         data={data}
         renderItem={this.renderItem}
