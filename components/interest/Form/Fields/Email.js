@@ -16,7 +16,7 @@ export default function Email({onChange, ...props}) {
 }
 
 Email.validate = (value) => {
-  if (!value) return 'Este campo é obrigatório'
+  if (!value) return 'O email é obrigatório'
   if (!validate(value)) return 'Este email é inválido'
   return null
 }

@@ -21,7 +21,7 @@ const pattern = countryCode + sep + areaCode + sep + number + sep + number
 const EXPRESSION = new RegExp(`^${pattern}\\s*$`)
 
 Phone.validate = (value) => {
-  if (!value) return 'Este campo é obrigatório'
+  if (!value) return 'O telefone é obrigatório'
   if (!EXPRESSION.test(value)) return 'Este não é um número válido'
   return null
 }
