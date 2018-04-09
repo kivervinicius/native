@@ -17,14 +17,7 @@ const validateField = (value, name) => {
 
 const validateValues = (values) => _.mapValues(values, validateField)
 
-const isValidInterestType = (validations, type) => {
-  const target = interestTypes[type]
-  for (const key of target.fields) {
-    if (!(key in validations) && Fields[key].validate) return false
-    if (typeof validations[key] === 'string') return false
-  }
-  return true
-}
+const isValid = (validation) => typeof validation !== 'string'
 
 @$styles.inject()
 export default class InterestForm extends Component {
@@ -65,21 +58,28 @@ export default class InterestForm extends Component {
   }
 
   onValidate = () => {
+    const {activeType} = this
     const {onValidate} = this.props
-    const {values, activeType} = this.state
+    const values = activeType.fields.reduce(
+      (values, key) => ({
+        ...values,
+        [key]: this.state.values[key]
+      }),
+      {}
+    )
     const validations = validateValues(values)
-    const isValid = isValidInterestType(validations, activeType)
-    this.setState({validations, isValid})
-    if (onValidate) onValidate(isValid)
-    return isValid
+    const valid = _.findKey(validations, _.negate(isValid)) === -1
+    this.setState({validations, isValid: valid})
+    if (onValidate) onValidate(valid)
+    return valid
   }
 
   renderField = (type) => {
     const {styles} = this.props
     const {values, validations} = this.state
     const value = values[type] || ''
-    const validation = !(type in validations) || validations[type]
-    const valid = typeof validation !== 'string'
+    const validation = validations[type] || null
+    const valid = isValid(validation)
     const Target = Fields[type]
     return (
       <View key={type} style={styles.field}>
