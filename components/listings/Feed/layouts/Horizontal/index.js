@@ -1,61 +1,35 @@
 import _ from 'lodash'
 import {Component} from 'react'
-import {View} from 'react-native'
-import SwipeableView from 'react-swipeable-views-native'
-import {virtualize} from 'react-swipeable-views-utils'
+import {View, Dimensions} from 'react-native'
+import Carousel from 'react-native-snap-carousel'
 
 import Card from '@/components/listings/Card'
 import styles, {cardStyles} from './styles'
 
-const VirtualizedView = virtualize(SwipeableView)
-
 export default class HorizontalFeed extends Component {
   static defaultProps = {
-    count: 2
-  }
-
-  slideRenderer = ({index}) => {
-    const {count} = this.props
-    let itemIndex = (count + index % count) * count
-    return (
-      <View style={styles.slide} key={index}>
-        {_.times(count).map((i) =>
-          this.renderSlideNumber((itemIndex + i) % count)
-        )}
-      </View>
-    )
+    get slideWidth() {
+      return Dimensions.get('window').width / 1.25
+    },
+    get width() {
+      return Dimensions.get('window').width
+    }
   }
 
   get totalCount() {
     return this.props.data.length
   }
 
-  get slideCount() {
-    const {count} = this.props
-    if (this.totalCount <= count) return count
-    return undefined
-  }
-
-  renderSlideNumber = (n) => {
-    const {count} = this.props
-    const item = this.props.data[n]
-    if (item) return this.renderSlide(item)
+  renderItem = ({item: {id, ...props}}) => {
+    const {onSelect, children, slideWidth, raised} = this.props
     return (
-      <View
-        key={`placeholder-${n}`}
-        style={[styles.placeholder, {flex: 1 / count}]}
-      />
-    )
-  }
-
-  renderSlide = ({id, ...props}) => {
-    const {onSelect, count} = this.props
-    return (
-      <View style={[styles.item, {flex: 1 / count}]} key={id}>
+      <View style={styles.item} key={id}>
         <Card
-          size={1 / count}
+          raised={raised}
+          width={slideWidth - 20}
           styles={cardStyles}
           onPress={onSelect(id)}
+          children={children}
           {...props}
         />
       </View>
@@ -64,15 +38,20 @@ export default class HorizontalFeed extends Component {
 
   render() {
     if (!this.totalCount) return null
-    const {slideCount} = this
+    const {data, style, loop, width, slideWidth} = this.props
     return (
-      <VirtualizedView
-        style={styles.container}
-        containerStyle={styles.container}
-        overscanSlideAfter={slideCount ? 0 : 1}
-        overscanSlideBefore={slideCount ? 0 : 1}
-        slideCount={slideCount}
-        slideRenderer={this.slideRenderer}
+      <Carousel
+        enableMomentum
+        loop={loop}
+        inactiveSlideOpacity={1}
+        inactiveSlideScale={1}
+        activeSlideAlignment={loop ? 'center' : 'start'}
+        containerCustomStyle={[styles.container, style]}
+        slideStyle={styles.slide}
+        data={data}
+        renderItem={this.renderItem}
+        sliderWidth={width}
+        itemWidth={slideWidth}
       />
     )
   }

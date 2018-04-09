@@ -5,14 +5,7 @@ export default StyleSheet.create({
     flex: null
   },
   slide: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'stretch'
-  },
-  placeholder: {
-    width: null
+    padding: 10
   }
 })
 

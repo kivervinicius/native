@@ -1,16 +1,25 @@
 import {StyleSheet} from 'react-native'
 
-import NestedStyleSheet from '@/assets/StyleSheet'
+import $StyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
+import {elevation} from '@/assets/styles'
 
-export default NestedStyleSheet({
+export default $StyleSheet({
   container: {
-    padding: 7,
+    padding: 15,
     paddingTop: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.gray.lighter,
+    borderRadius: 5,
     ':active': {
       backgroundColor: colors.gray.offWhite
+    },
+    ':raised': {
+      backgroundColor: 'white',
+      padding: 0,
+      paddingTop: 0,
+      borderBottomWidth: 0,
+      ...elevation(4)
     }
   },
   thumbnail: {
@@ -19,9 +28,6 @@ export default NestedStyleSheet({
     alignItems: 'center',
     overflow: 'hidden',
     borderRadius: 5,
-    ':small': {
-      borderRadius: 3
-    },
     ':primary': {
       borderTopLeftRadius: 0,
       borderTopRightRadius: 0,
@@ -29,48 +35,39 @@ export default NestedStyleSheet({
       borderColor: colors.blue.medium,
       backgroundColor: colors.blue.medium,
       marginTop: -4
+    },
+    ':raised': {
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0
     }
   },
   image: {
-    width: '100%',
-    borderRadius: 5,
-    ':small': {
-      borderRadius: 3
-    },
-    ':primary': {
-      borderTopLeftRadius: 0,
-      borderTopRightRadius: 0
-    }
+    width: '100%'
   },
   body: {
-    padding: 15,
-    ':small': {
-      padding: 20
+    marginTop: 10,
+    ':raised': {
+      margin: 20
     }
+  },
+  paragraph: {
+    marginTop: 5
   },
   header: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
-    ':small': {
-      marginBottom: 5
-    }
+    marginBottom: 10
   },
   street: {
     color: colors.gray.darker,
     flex: 1,
     fontSize: 20,
-    marginRight: 15,
-    ':small': {
-      fontSize: 14,
-      fontWeight: '500',
-      marginTop: 10
-    }
+    marginRight: 15
   },
   neighborhood: {
-    color: colors.gray.medium,
+    color: colors.gray.mediumDark,
     fontWeight: '600'
   },
   priceText: {
