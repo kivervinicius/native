@@ -1,8 +1,6 @@
 set -e
 set -o pipefail
 
-mkdir ios/build
-
 ARGS=()
 OPTIONS=(CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=)
 
