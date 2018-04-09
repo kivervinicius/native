@@ -14,4 +14,7 @@ export default function Email({onChange, ...props}) {
   )
 }
 
-Email.validate = validate
+Email.validate = (value) => {
+  if (!validate(value)) return 'Este email é inválido'
+  return null
+}

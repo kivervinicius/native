@@ -12,4 +12,7 @@ export default function Name({onChange, ...props}) {
   )
 }
 
-Name.validate = (value) => value != ''
+Name.validate = (value) => {
+  if (!value) return 'Este campo é obrigatório'
+  return null
+}

@@ -12,7 +12,7 @@ import $styles from './styles'
 
 const validateField = (value, name) => {
   const validateFn = Fields[name].validate
-  return validateFn ? validateFn(value) : true
+  return validateFn ? validateFn(value) : null
 }
 
 const validateValues = (values) => _.mapValues(values, validateField)
@@ -21,7 +21,7 @@ const isValidInterestType = (validations, type) => {
   const target = interestTypes[type]
   for (const key of target.fields) {
     if (!(key in validations) && Fields[key].validate) return false
-    if (!validations[key]) return false
+    if (typeof validations[key] === 'string') return false
   }
   return true
 }
@@ -78,7 +78,8 @@ export default class InterestForm extends Component {
     const {styles} = this.props
     const {values, validations} = this.state
     const value = values[type] || ''
-    const valid = !(type in validations) || validations[type]
+    const validation = !(type in validations) || validations[type]
+    const valid = typeof validation !== 'string'
     const Target = Fields[type]
     return (
       <View key={type} style={styles.field}>
@@ -88,6 +89,7 @@ export default class InterestForm extends Component {
           onBlur={this.onValidate}
           onChange={this.onChangeValue(type)}
         />
+        {!valid && <Text style={styles.validation}>{validation}</Text>}
       </View>
     )
   }
