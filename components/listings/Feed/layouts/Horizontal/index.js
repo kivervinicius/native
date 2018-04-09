@@ -8,7 +8,9 @@ import styles, {cardStyles} from './styles'
 
 export default class HorizontalFeed extends Component {
   static defaultProps = {
-    count: 1.25,
+    get slideWidth() {
+      return Dimensions.get('window').width / 1.25
+    },
     get width() {
       return Dimensions.get('window').width
     }
@@ -19,12 +21,12 @@ export default class HorizontalFeed extends Component {
   }
 
   renderItem = ({item: {id, ...props}}) => {
-    const {onSelect, children, count, width, raised} = this.props
+    const {onSelect, children, slideWidth, raised} = this.props
     return (
       <View style={styles.item} key={id}>
         <Card
           raised={raised}
-          width={width / count - 20}
+          width={slideWidth - 20}
           styles={cardStyles}
           onPress={onSelect(id)}
           children={children}
@@ -36,7 +38,7 @@ export default class HorizontalFeed extends Component {
 
   render() {
     if (!this.totalCount) return null
-    const {data, count, width} = this.props
+    const {data, width, slideWidth} = this.props
     return (
       <Carousel
         loop
@@ -48,7 +50,7 @@ export default class HorizontalFeed extends Component {
         data={data}
         renderItem={this.renderItem}
         sliderWidth={width}
-        itemWidth={width / count}
+        itemWidth={slideWidth}
       />
     )
   }
