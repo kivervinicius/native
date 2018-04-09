@@ -13,7 +13,7 @@ export default class ListingScreen extends Component {
   }
 
   get slideWidth() {
-    return Dimensions.get('window').width - 30
+    return Dimensions.get('window').width - 65
   }
 
   render() {
