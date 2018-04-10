@@ -18,7 +18,7 @@ import {getOptions, getListingIds} from './selectors'
 
 const pagination = (res, req) => ({
   remainingCount: res.remaining_count || 0,
-  pageSize: req.page_size || 10
+  pageSize: req.pageSize || 10
 })
 
 function* buildParams(type, options = {}) {

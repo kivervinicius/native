@@ -11,11 +11,6 @@ export const getFeed = createSelector(
   (feed, type) => feed[type] || {}
 )
 
-export const getPagination = createSelector(
-  getFeed,
-  (feed) => feed.pagination || {}
-)
-
 export const getError = createSelector(getFeed, (feed) => feed.error)
 
 export const getOptions = createSelector(getFeed, (feed) => feed.options)
@@ -26,6 +21,19 @@ export const getPages = createSelector(getFeed, (feed) => feed.pages || {})
 
 export const getListingIds = createSelector(getPages, (pages) =>
   _.flatten(Object.values(pages))
+)
+
+export const getPagination = createSelector(
+  getFeed,
+  getListingIds,
+  ({pagination}, listings) =>
+    _.assign(
+      {
+        count: listings.length,
+        totalCount: listings.length + (pagination && pagination.remainingCount)
+      },
+      pagination
+    )
 )
 
 export const getListings = createSelector(

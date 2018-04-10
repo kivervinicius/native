@@ -22,3 +22,5 @@ export default class ListingsFeed extends Component {
     return <Layout {...props} onSelect={this.onSelect} />
   }
 }
+
+export {default as Results} from './Results'

@@ -8,3 +8,5 @@ export default function FeedApp({as, type, ...props}) {
     </Loader>
   )
 }
+
+export {Results} from '@/components/listings/Feed'
