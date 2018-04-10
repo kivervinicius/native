@@ -16,11 +16,9 @@ import * as api from '@/lib/services/listings'
 import * as actions from './index'
 import {getOptions, getListingIds} from './selectors'
 
-const pagination = (res) => ({
-  currentPage: res.page_number || 0,
-  pageSize: res.page_size,
-  totalPages: res.total_pages,
-  totalEntries: res.total_entries
+const pagination = (res, req) => ({
+  remainingCount: res.remaining_count || 0,
+  pageSize: req.page_size || 10
 })
 
 function* buildParams(type, options = {}) {
@@ -34,7 +32,9 @@ function* request({key, options}) {
   const params = yield call(buildParams, key, options)
   try {
     const response = yield call(api[key], params)
-    yield put(actions.success(key, response.listings, pagination(response)))
+    yield put(
+      actions.success(key, response.listings, pagination(response, params))
+    )
   } catch (err) {
     yield put(actions.failure(key, err))
     if (!(err instanceof ResponseError)) yield put(reportError(err))
