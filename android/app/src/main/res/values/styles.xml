@@ -4,8 +4,9 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
     <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
+    <item name="android:windowDisablePreview">true</item>
   </style>
-  <style name="SplashTheme" parent="AppTheme">
+  <style name="AppTheme.SplashScreen" parent="AppTheme">
     <item name="android:windowBackground">@drawable/splash_screen</item>
   </style>
   <style name="SpinnerItem" parent="Theme.AppCompat.Light.NoActionBar">>
