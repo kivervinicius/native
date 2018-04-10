@@ -9,4 +9,4 @@ export default function FeedApp({as, type, ...props}) {
   )
 }
 
-export {Results} from '@/components/listings/Feed'
+export {Results, Empty} from '@/components/listings/Feed'

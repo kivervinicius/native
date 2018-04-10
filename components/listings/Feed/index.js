@@ -1,12 +1,14 @@
 import {Component} from 'react'
 import withNavigation from 'react-navigation/src/views/withNavigation'
 
+import Empty from './Empty'
 import layouts from './layouts'
 
 @withNavigation
 export default class ListingsFeed extends Component {
   static defaultProps = {
-    layout: 'vertical'
+    layout: 'vertical',
+    ListEmptyComponent: Empty
   }
 
   onSelect = (id) => () => {
@@ -24,3 +26,4 @@ export default class ListingsFeed extends Component {
 }
 
 export {default as Results} from './Results'
+export {default as Empty} from './Empty'

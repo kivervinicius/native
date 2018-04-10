@@ -7,7 +7,10 @@ import Card from '@/components/listings/Card'
 const keyExtractor = _.flow(_.get('id'), _.toString)
 
 export default class VerticalFeed extends PureComponent {
-  renderComponent = (Target) => (props) => <Target {...this.props} {...props} />
+  renderComponent = (Target) => (props) => {
+    const finalProps = _.assign({}, this.props, props)
+    return <Target {...finalProps} />
+  }
 
   renderProps = _.flow(
     _.pick([
