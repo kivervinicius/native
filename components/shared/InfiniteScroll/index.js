@@ -6,7 +6,7 @@ export default class InfiniteScroll extends Component {
     threshold: 1000
   }
 
-  onLoad = () => this.props.onChangePage()
+  onLoad = () => this.props.onLoad()
 
   isOverThreshold = ({contentOffset, contentSize, layoutMeasurement}) => {
     const {threshold} = this.props
