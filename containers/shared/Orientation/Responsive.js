@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {PureComponent} from 'react'
+import React, {PureComponent} from 'react'
 import Orientation from 'react-native-orientation'
 
 import {Provider, withOrientation} from './Provider/Context'
@@ -31,12 +31,18 @@ export default class ResponsiveOrientation extends PureComponent {
     return _.pick(this.props, ['dimensions', 'orientation'])
   }
 
+  renderChildren() {
+    const {children} = this.props
+    if (React.isValidElement(children))
+      return React.cloneElement(
+        React.Children.only(children),
+        this.orientationParams
+      )
+    return children(this.orientationParams)
+  }
+
   render() {
-    return (
-      <Provider value={{locked: false}}>
-        {this.props.children(this.orientationParams)}
-      </Provider>
-    )
+    return <Provider value={{locked: false}}>{this.renderChildren()}</Provider>
   }
 }
 

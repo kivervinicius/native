@@ -1,10 +1,11 @@
-import {Component} from 'react'
+import _ from 'lodash'
+import {PureComponent} from 'react'
 import {Dimensions} from 'react-native'
 import Orientation from 'react-native-orientation'
 
 import {Provider} from './Context'
 
-export default class OrientationProvider extends Component {
+export default class OrientationProvider extends PureComponent {
   static defaultProps = {
     to: 'window'
   }
@@ -20,14 +21,14 @@ export default class OrientationProvider extends Component {
   state = this.getState()
 
   componentDidMount() {
-    Dimensions.addEventListener('change', this.onChange)
+    Orientation.addOrientationListener(this.onChange)
   }
 
   componentWillUnmount() {
-    Dimensions.removeEventListener('change', this.onChange)
+    Orientation.removeOrientationListener(this.onChange)
   }
 
-  onChange = () => this.setState(this.getState())
+  onChange = _.debounce(() => this.setState(this.getState()), 200)
 
   render() {
     return <Provider {...this.props} value={this.state} />

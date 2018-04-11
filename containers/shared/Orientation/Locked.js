@@ -1,9 +1,9 @@
-import {Component} from 'react'
+import {PureComponent} from 'react'
 import Orientation from 'react-native-orientation'
 
 import {Provider} from './Provider/Context'
 
-export default class LockedOrientation extends Component {
+export default class LockedOrientation extends PureComponent {
   state = {
     locked: false
   }
