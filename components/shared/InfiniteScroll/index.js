@@ -6,10 +6,7 @@ export default class InfiniteScroll extends Component {
     threshold: 1000
   }
 
-  onLoad = () => {
-    const {onChangePage, pagination} = this.props
-    onChangePage(pagination.currentPage + 1)
-  }
+  onLoad = () => this.props.onLoad()
 
   isOverThreshold = ({contentOffset, contentSize, layoutMeasurement}) => {
     const {threshold} = this.props
@@ -31,7 +28,7 @@ export default class InfiniteScroll extends Component {
 
   get isLastPage() {
     const {pagination} = this.props
-    return pagination.totalPages <= pagination.currentPage
+    return pagination.remainingCount === 0
   }
 
   render() {

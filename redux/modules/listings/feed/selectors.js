@@ -20,7 +20,7 @@ export const isLoading = createSelector(getFeed, (feed) => feed.loading)
 export const getPages = createSelector(getFeed, (feed) => feed.pages || {})
 
 export const getListingIds = createSelector(getPages, (pages) =>
-  _.flatten(Object.values(pages))
+  _.flatten(pages)
 )
 
 export const getPagination = createSelector(

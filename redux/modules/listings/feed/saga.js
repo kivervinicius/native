@@ -33,7 +33,7 @@ function* request({key, options}) {
   try {
     const response = yield call(api[key], params)
     yield put(
-      actions.success(key, response.listings, pagination(response, params))
+      actions.success(key, response.listings, pagination(response, options))
     )
   } catch (err) {
     yield put(actions.failure(key, err))
@@ -41,7 +41,7 @@ function* request({key, options}) {
   }
 }
 
-const filterParams = _.omit('page')
+const filterParams = _.omit('excluded_listing_ids')
 
 const eqlOptions = _.overArgs(_.isEqual)(Array(2).fill(filterParams))
 
