@@ -22,7 +22,7 @@ export default class ResponsiveOrientation extends PureComponent {
   componentWillUnmount() {
     const {locked} = this.props
     const {previousState} = this.state
-    if (previousState && !locked) {
+    if (previousState && locked) {
       Locker.lockTo(previousState)
     }
   }
