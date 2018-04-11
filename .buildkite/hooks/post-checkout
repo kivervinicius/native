@@ -13,6 +13,14 @@ export IOS_PROVISIONING_FILE=$SECRETS_DIR/ad-hoc/app.mobileprovision
 
 aws s3 sync $AWS_SECRETS_BUCKET $SECRETS_DIR
 
+# Version configuration
+
+export BUILD_NUMBER="$BUILDKITE_BUILD_NUMBER"
+export VERSION_NAME=$(node -e 'console.log(require("./package.json").version)')
+if [[ "$BUILDKITE_BRANCH" && "$BUILDKITE_BRANCH" != "master" ]]; then
+  export VERSION_NAME="$VERSION_NAME-$BUILDKITE_BRANCH"
+fi
+
 # Clean pods
 
 git clean -fxdq ios/Pods
