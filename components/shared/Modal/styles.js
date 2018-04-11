@@ -38,6 +38,7 @@ export default StyleSheet({
     textAlign: 'center'
   },
   body: {
-    flex: 1
+    flex: 1,
+    zIndex: 0
   }
 })
