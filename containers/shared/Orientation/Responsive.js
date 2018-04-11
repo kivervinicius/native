@@ -2,16 +2,17 @@ import {Component} from 'react'
 import {Dimensions} from 'react-native'
 import Orientation from 'react-native-orientation'
 
-export default class ResponsiveOrientation extends Component {
+import Provider from './Provider'
+
+export default class ResponsiveOrientationProvider extends Component {
   static defaultProps = {
-    type: 'window'
+    to: 'window'
   }
 
   getState = () => {
-    const {width, height} = Dimensions.get(this.props.type)
+    const {width, height} = Dimensions.get(this.props.to)
     return {
-      width,
-      height,
+      dimensions: {width, height},
       orientation: height > width ? 'portrait' : 'landscape'
     }
   }
@@ -29,18 +30,6 @@ export default class ResponsiveOrientation extends Component {
   onChange = () => this.setState(this.getState())
 
   render() {
-    return this.props.children(this.state)
+    return <Provider {...this.props} value={this.state} />
   }
 }
-
-export const responsive = (orientationProps) => (Target) => (props) => (
-  <ResponsiveOrientation {...orientationProps}>
-    {({width, height, orientation}) => (
-      <Target
-        {...props}
-        orientation={orientation}
-        dimensions={{width, height}}
-      />
-    )}
-  </ResponsiveOrientation>
-)

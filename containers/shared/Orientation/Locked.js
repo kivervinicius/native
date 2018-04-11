@@ -1,7 +1,9 @@
 import {Component} from 'react'
 import Orientation from 'react-native-orientation'
 
-export default class LockedOrientation extends Component {
+import Provider from './Provider'
+
+export default class LockedOrientationProvider extends Component {
   state = {
     locked: false
   }
@@ -46,6 +48,6 @@ export default class LockedOrientation extends Component {
   }
 
   render() {
-    return this.props.children
+    return <Provider {...this.props} value={this.state} />
   }
 }
