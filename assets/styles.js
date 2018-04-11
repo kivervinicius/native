@@ -1,16 +1,22 @@
 import _ from 'lodash'
+import {Platform} from 'react-native'
 
 // Simulate drop shadow elevation across all platforms
-export const elevation = (value) => ({
-  elevation: value,
-  shadowColor: '#666',
-  shadowOpacity: 0.6,
-  shadowRadius: 4 * value / 5,
-  shadowOffset: {
-    width: 0,
-    height: 2.5 * value / 5
-  }
-})
+export const elevation = (value) =>
+  Platform.select({
+    android: {
+      elevation: value
+    },
+    ios: {
+      shadowColor: '#666',
+      shadowOpacity: 0.6,
+      shadowRadius: 4 * value / 5,
+      shadowOffset: {
+        width: 0,
+        height: 2.5 * value / 5
+      }
+    }
+  })
 
 // Mimic CSS's shorthand padding/margin syntax
 export const spacing = (prefix) =>

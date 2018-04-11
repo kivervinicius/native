@@ -1,12 +1,15 @@
+import {Platform} from 'react-native'
+
 import StyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
+import {padding} from '@/assets/styles'
 
 export default StyleSheet({
   container: {
     borderWidth: 1,
     borderRadius: 4,
     borderColor: colors.gray.light,
-    padding: 14,
+    ...padding(Platform.OS === 'ios' ? 14 : 3, 14),
     ':value': {
       borderColor: colors.blue.pastel
     },
@@ -19,6 +22,7 @@ export default StyleSheet({
   },
   input: {
     fontSize: 18,
+    lineHeight: 18,
     color: colors.gray.dark
   }
 })

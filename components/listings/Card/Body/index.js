@@ -6,7 +6,7 @@ import {Price, Header} from './components'
 import $styles from './styles'
 
 function FlatListingCard({children, styles, style, ...props}) {
-  const {raised, width, images} = props
+  const {raised, width, images, ...rest} = props
   const image = images[0] || {}
   const imageSize = {
     width,
@@ -17,7 +17,7 @@ function FlatListingCard({children, styles, style, ...props}) {
     imageSize.height -= 30
   }
   return (
-    <View style={styles.container.concat(style, {width})}>
+    <View style={styles.container.concat(style, {width})} {...rest}>
       <View style={styles.thumbnail}>
         <Image thumbnail style={styles.image} {...image} {...imageSize} />
       </View>
