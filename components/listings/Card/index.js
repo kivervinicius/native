@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {TouchableHighlight} from 'react-native'
+import {TouchableWithoutFeedback} from 'react-native'
 
 import Card from './Body'
 
@@ -14,14 +14,13 @@ export default class ListingCard extends Component {
     const {onPress, ...props} = this.props
     const {active} = this.state
     return (
-      <TouchableHighlight
+      <TouchableWithoutFeedback
         onPress={onPress}
-        underlayColor="rgba(0,0,0,0)"
-        onShowUnderlay={this.onHighlight(true)}
-        onHideUnderlay={this.onHighlight(false)}
+        onPressIn={this.onHighlight(true)}
+        onPressOut={this.onHighlight(false)}
       >
         <Card active={active} {...props} />
-      </TouchableHighlight>
+      </TouchableWithoutFeedback>
     )
   }
 }
