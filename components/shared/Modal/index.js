@@ -2,7 +2,7 @@ import {Modal, View, SafeAreaView, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Text from '@/components/shared/Text'
-import {responsive} from '@/components/shared/Orientation'
+import {responsive} from '@/containers/shared/Orientation/Responsive'
 import $styles from './styles'
 
 function ControlledModal({

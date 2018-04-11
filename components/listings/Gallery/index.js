@@ -3,7 +3,7 @@ import {View} from 'react-native'
 import SwipeableView from 'react-swipeable-views-native/lib/SwipeableViews.scroll'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {responsive} from '@/components/shared/Orientation'
+import {responsive} from '@/containers/shared/Orientation/Responsive'
 import Image from '../Image'
 import styles from './styles'
 
