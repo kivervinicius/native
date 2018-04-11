@@ -36,10 +36,8 @@ const initialState = {
   loading: false,
   error: null,
   options: undefined,
-  pagination: {
-    currentPage: 0
-  },
-  pages: {}
+  pagination: {},
+  pages: []
 }
 
 listingsFeed.node = (state = initialState, action) => {
@@ -61,11 +59,7 @@ listingsFeed.node = (state = initialState, action) => {
           error: undefined,
           pagination: action.pagination
         },
-        pages: {
-          [action.pagination.currentPage]: {
-            $set: _.map(action.data, 'id')
-          }
-        }
+        pages: {$push: _.map(action.data, 'id')}
       })
     case FAILURE:
       return update(state, {
