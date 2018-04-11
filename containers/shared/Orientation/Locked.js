@@ -1,11 +1,16 @@
 import {Component} from 'react'
 import Orientation from 'react-native-orientation'
 
-import Provider from './Provider'
+import {Provider} from './Provider/Context'
 
-export default class LockedOrientationProvider extends Component {
+export default class LockedOrientation extends Component {
   state = {
     locked: false
+  }
+
+  static lockTo(orientation) {
+    if (orientation === 'landscape') Orientation.lockToLandscape()
+    else if (orientation === 'portrait') Orientation.lockToPortrait()
   }
 
   static getDerivedStateFromProps(props) {
@@ -30,14 +35,7 @@ export default class LockedOrientationProvider extends Component {
   onLock = (force = false) => {
     const {to} = this.props
     if (!to || (!force && this.state.locked)) return
-    switch (to) {
-      case 'landscape':
-        Orientation.lockToLandscape()
-        break
-      case 'portrait':
-        Orientation.lockToPortrait()
-        break
-    }
+    LockedOrientation.lockTo(to)
     this.setState({locked: true})
   }
 
@@ -48,6 +46,7 @@ export default class LockedOrientationProvider extends Component {
   }
 
   render() {
-    return <Provider {...this.props} value={this.state} />
+    const {children} = this.props
+    return <Provider value={this.state}>{children}</Provider>
   }
 }

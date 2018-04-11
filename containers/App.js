@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {Platform, StatusBar} from 'react-native'
 import {StackNavigator} from 'react-navigation'
 
-import Responsive from '@/containers/shared/Orientation/Responsive'
+import OrientationProvider from '@/containers/shared/Orientation/Provider'
 import views from '@/containers/views'
 
 const Stack = StackNavigator(views, {
@@ -27,9 +27,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <Responsive>
+      <OrientationProvider>
         <Stack />
-      </Responsive>
+      </OrientationProvider>
     )
   }
 }

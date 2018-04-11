@@ -2,7 +2,7 @@ import {Modal, View, SafeAreaView, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Text from '@/components/shared/Text'
-import {withOrientation} from '@/containers/shared/Orientation/Provider'
+import {withOrientation} from '@/containers/shared/Orientation/Provider/Context'
 import $styles from './styles'
 
 function ControlledModal({
@@ -14,7 +14,12 @@ function ControlledModal({
   ...props
 }) {
   return (
-    <Modal {...props} onRequestClose={onDismiss} onDismiss={onDismiss}>
+    <Modal
+      {...props}
+      onRequestClose={onDismiss}
+      supportedOrientations={['landscape', 'portrait']}
+      onDismiss={onDismiss}
+    >
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.title}>{title}</Text>

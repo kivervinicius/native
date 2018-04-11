@@ -1,35 +1,47 @@
-import {Component} from 'react'
-import {Dimensions} from 'react-native'
+import _ from 'lodash'
+import {PureComponent} from 'react'
 import Orientation from 'react-native-orientation'
 
-import Provider from './Provider'
+import {Provider, withOrientation} from './Provider/Context'
+import Locker from './Locked'
 
-export default class ResponsiveOrientationProvider extends Component {
-  static defaultProps = {
-    to: 'window'
+@withOrientation
+export default class ResponsiveOrientation extends PureComponent {
+  state = {
+    previousState: null
   }
 
-  getState = () => {
-    const {width, height} = Dimensions.get(this.props.to)
-    return {
-      dimensions: {width, height},
-      orientation: height > width ? 'portrait' : 'landscape'
+  componentDidMount() {
+    const {locked, orientation} = this.props
+    if (locked) {
+      this.setState({previousState: orientation})
+      Orientation.unlockAllOrientations()
     }
   }
 
-  state = this.getState()
-
-  componentDidMount() {
-    Orientation.addOrientationListener(this.onChange)
-  }
-
   componentWillUnmount() {
-    Orientation.removeOrientationListener(this.onChange)
+    const {locked} = this.props
+    const {previousState} = this.state
+    if (previousState && !locked) {
+      Locker.lockTo(previousState)
+    }
   }
 
-  onChange = () => this.setState(this.getState())
+  get orientationParams() {
+    return _.pick(this.props, ['dimensions', 'orientation'])
+  }
 
   render() {
-    return <Provider {...this.props} value={this.state} />
+    return (
+      <Provider value={{locked: false}}>
+        {this.props.children(this.orientationParams)}
+      </Provider>
+    )
   }
 }
+
+export const responsive = (Target) => (props) => (
+  <ResponsiveOrientation>
+    {(data) => <Target {...props} {...data} />}
+  </ResponsiveOrientation>
+)

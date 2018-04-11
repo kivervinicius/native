@@ -3,11 +3,11 @@ import {View} from 'react-native'
 import SwipeableView from 'react-swipeable-views-native/lib/SwipeableViews.scroll'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {withOrientation} from '@/containers/shared/Orientation/Provider'
+import {responsive} from '@/containers/shared/Orientation/Responsive'
 import Image from '../Image'
 import styles from './styles'
 
-@withOrientation
+@responsive
 export default class ListingGallery extends Component {
   state = {
     position: 0
