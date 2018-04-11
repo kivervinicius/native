@@ -30,7 +30,7 @@ export default class InterestFormScreen extends Component {
     const {navigation} = this.props
 
     return (
-      <Shell footer={<Footer label="Enviar" onPress={this.onSubmit} />}>
+      <Shell scroll footer={<Footer label="Enviar" onPress={this.onSubmit} />}>
         <Form
           innerRef={this.formRef}
           id={navigation.state.params.id}

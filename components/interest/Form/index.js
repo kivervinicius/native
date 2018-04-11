@@ -86,15 +86,17 @@ export default class InterestForm extends Component {
     const valid = isValid(validation)
     const Target = Fields[type]
     return (
-      <View key={type} style={styles.field}>
-        <Target
-          invalid={!valid}
-          value={value}
-          onBlur={this.onValidateField(type)}
-          onChange={this.onChangeValue(type)}
-        />
-        {!valid && <Text style={styles.validation}>{validation}</Text>}
-      </View>
+      <KeyboardAvoidingView key={type}>
+        <View style={styles.field}>
+          <Target
+            invalid={!valid}
+            value={value}
+            onBlur={this.onValidateField(type)}
+            onChange={this.onChangeValue(type)}
+          />
+          {!valid && <Text style={styles.validation}>{validation}</Text>}
+        </View>
+      </KeyboardAvoidingView>
     )
   }
 
@@ -111,14 +113,12 @@ export default class InterestForm extends Component {
           Agendamento Online
         </Button>
         <Separator style={styles.separator}>OU</Separator>
-        <KeyboardAvoidingView>
-          <SelectType
-            types={types}
-            value={this.state.activeType}
-            onChange={this.onChangeType}
-          />
-          {activeType.fields.map(this.renderField)}
-        </KeyboardAvoidingView>
+        <SelectType
+          types={types}
+          value={this.state.activeType}
+          onChange={this.onChangeType}
+        />
+        {activeType.fields.map(this.renderField)}
       </View>
     )
   }
