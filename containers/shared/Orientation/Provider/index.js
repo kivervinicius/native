@@ -20,11 +20,11 @@ export default class OrientationProvider extends Component {
   state = this.getState()
 
   componentDidMount() {
-    Orientation.addOrientationListener(this.onChange)
+    Dimensions.addEventListener('change', this.onChange)
   }
 
   componentWillUnmount() {
-    Orientation.removeOrientationListener(this.onChange)
+    Dimensions.removeEventListener('change', this.onChange)
   }
 
   onChange = () => this.setState(this.getState())
