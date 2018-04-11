@@ -31,9 +31,9 @@ function* request({key, options}) {
   yield put(actions.request(key, options))
   const params = yield call(buildParams, key, options)
   try {
-    const response = yield call(api[key], options)
+    const response = yield call(api[key], params)
     yield put(
-      actions.success(key, response.listings, pagination(response, params))
+      actions.success(key, response.listings, pagination(response, options))
     )
   } catch (err) {
     yield put(actions.failure(key, err))
