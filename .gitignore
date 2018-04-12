@@ -45,6 +45,8 @@ project.xcworkspace
 local.properties
 *.keystore
 *.iml
+.project
+android/app/bin
 
 # fastlane
 report.xml
