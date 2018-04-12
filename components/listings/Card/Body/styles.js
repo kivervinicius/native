@@ -46,19 +46,16 @@ export default $StyleSheet({
   },
   body: {
     marginTop: 10,
+    marginBottom: 10,
     ':raised': {
       margin: 20
     }
-  },
-  paragraph: {
-    marginTop: 5
   },
   header: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10
+    alignItems: 'center'
   },
   street: {
     color: colors.gray.darker,
