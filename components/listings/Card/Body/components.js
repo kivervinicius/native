@@ -11,7 +11,7 @@ export const Price = $styles.inject()(({styles, price, size}) => (
 ))
 
 Price.defaultProps = {
-  size: 24
+  size: 26
 }
 
 export const Street = $styles.inject()(({styles, style, address}) => (
