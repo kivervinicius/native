@@ -7,10 +7,9 @@ export default function ListingsFeedResults({pagination}) {
   if (!pagination.totalCount) return null
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, styles.highlight]}>
-        {pagination.totalCount} imóveis
+      <Text style={styles.text}>
+        Encontre o imóvel perfeito para você no Rio de Janeiro
       </Text>
-      <Text style={styles.text}>em Rio de Janeiro</Text>
     </View>
   )
 }
