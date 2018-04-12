@@ -28,9 +28,9 @@ steps:
   - buildkite-agent artifact download "ios/build/EmCasa.xcarchive.zip" . --step "build:ios"
   - (cd ios/build && unzip EmCasa.xcarchive.zip)
   - buildkite-agent artifact download "ios/build/EmCasa.xcarchive/Info.plist" . --step "build:ios"
-  - .buildkite/run ios setup,sign,deploy
+  - .buildkite/run ios setup,sign,deploy -p beta
 - label: 'beta:android'
   command:
   - buildkite-agent artifact download "android/app/build/outputs/apk/app-release.apk" . --step "build:android"
   - .buildkite/run setup
-  - .buildkite/run android deploy
+  - .buildkite/run android deploy -p beta
