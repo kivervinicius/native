@@ -1,4 +1,4 @@
-set -eu
+set -e
 
 cd $ROOT/ios
 

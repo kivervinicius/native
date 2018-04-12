@@ -1,5 +1,4 @@
 set -e
-set +u
 
 ICON_FILE=$ROOT/assets/img/icon.png
 
