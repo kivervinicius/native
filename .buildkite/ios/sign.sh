@@ -18,6 +18,7 @@ cp $IOS_PROVISIONING_FILE ~/Library/MobileDevice/Provisioning\ Profiles/$IOS_PRO
 
 sed \
   -e "s/\$TEAM_ID/$IOS_TEAM_ID/g" \
+  -e "s/\$CODESIGN_PROFILE/${CODESIGN_PROFILE:-ad-hoc}/g" \
   -e "s/\$PROVISIONING_NAME/$IOS_PROVISIONING_NAME/g" \
   -e "s/\$PROVISIONING_UUID/$IOS_PROVISIONING_UUID/g" \
   -e "s/\$CODESIGN_IDENTITY/$IOS_CODESIGN_IDENTITY/g" \
