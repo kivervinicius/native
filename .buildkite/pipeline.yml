@@ -41,7 +41,7 @@ steps:
   command:
   - buildkite-agent artifact download "android/app/build.zip" . --step "build:android"
   - (cd android/app && unzip -q build.zip)
-  - .buildkite/run android setup,deploy --profile production
+  - .buildkite/run android setup,bump,deploy --profile production
   # branches: master
 - label: 'release:ios'
   command:
