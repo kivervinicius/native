@@ -37,7 +37,11 @@ export default class ListingView extends Component {
     const {view} = this.state
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
+        <View
+          style={styles.header}
+          onMoveShouldSetResponder={() => true}
+          onResponderMove={}
+        >
           <Thumbnail onOpen={this.onOpen} {...this.props} />
           <Properties {...this.props} />
         </View>
