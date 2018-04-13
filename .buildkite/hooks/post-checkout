@@ -6,10 +6,11 @@ mkdir tmp
 mkdir tmp/logs
 
 export SECRETS_DIR=$PWD/tmp/.secrets
-export ANDROID_KEYSTORE_FILE=$SECRETS_DIR/keystore.jks
-export IOS_XCCONFIG_FILE=$SECRETS_DIR/secrets.xcconfig
-export IOS_CERTIFICATE_FILE=$SECRETS_DIR/ad-hoc/app.p12
-export IOS_PROVISIONING_FILE=$SECRETS_DIR/ad-hoc/app.mobileprovision
+export ANDROID_KEYSTORE_FILE=$SECRETS_DIR/android/keystore.jks
+export PLAY_STORE_CERTIFICATE_FILE=$SECRETS_DIR/android/play-store.p12
+export IOS_XCCONFIG_FILE=$SECRETS_DIR/ios/secrets.xcconfig
+export IOS_CERTIFICATE_FILE=$SECRETS_DIR/ios/app.p12
+export IOS_PROVISIONING_FILE=$SECRETS_DIR/ios/%s.mobileprovision
 
 aws s3 sync $AWS_SECRETS_BUCKET $SECRETS_DIR
 

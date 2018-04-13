@@ -1,5 +1,4 @@
 set -e
-set +u
 
 ICON_FILE=$ROOT/assets/img/icon.png
 
@@ -9,7 +8,8 @@ case $1 in
   app-icon label -i $ICON_FILE -o $ROOT/tmp/icon.release.png --top $VERSION_NAME --bottom $BUILD_NUMBER
   ICON_FILE=$ROOT/tmp/icon.release.png
   shift;;
-  *) break;;
+  '') break;;
+  *) shift;;
 esac
 done
 

@@ -9,6 +9,7 @@ else echo "Invalid script $1"; exit 1; fi
 
 for script in $(echo $SCRIPTS | sed -e "s/\([^,]*\)/\1,$PLATFORM\/\1/g" | tr "," " "); do
   if [[ -f $ROOT/.buildkite/$script.sh ]]; then
+    set +eu
     source $ROOT/.buildkite/$script.sh $@
   fi
 done
