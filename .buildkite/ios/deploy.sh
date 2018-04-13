@@ -2,6 +2,8 @@ set -e
 
 IPA_FILE="$ROOT/ios/build/EmCasa.ipa"
 PATH="$PATH:$(dirname "$(xcode-select -p)")/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/"
+export FASTLANE_USER=$APPLE_ID
+export FASTLANE_PASSWORD=$APPLE_PASSWORD
 
 case $RELEASE_PROFILE in
   beta)
@@ -12,12 +14,15 @@ case $RELEASE_PROFILE in
       groups:"$TESTER_GROUPS"
     ;;
   production)
-    ARGS=(--type ios)
-    ARGS+=(--file $IPA_FILE)
-    ARGS+=(--username "$APPLE_ID")
-    ARGS+=(--password "$APPLE_PASSWORD")
-    altool --validate-app ${ARGS[*]}
-    altool --upload-app ${ARGS[*]}
+    bundle exec fastlane deliver \
+      --skip_metadata --skip_screenshots \
+      --submit_for_review \
+      --ipa $IPA_FILE \
+      --app $APPLE_APP_ID \
+      --username $APPLE_ID \
+      --build_number $BUILD_NUMBER \
+      --app_version $APP_VERSION \
+      --app_identifier com.EmCasa.native
     ;;
 esac
 
