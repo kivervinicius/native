@@ -213,7 +213,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 if (playStoreCertificate && playStoreCredential) {
   play {
-    track = 'alpha'
+    track = 'production'
     serviceAccountEmail = playStoreCredential
     pk12File = file(playStoreCertificate)
   }
