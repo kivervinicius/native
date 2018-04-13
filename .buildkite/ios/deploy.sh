@@ -16,7 +16,6 @@ case $RELEASE_PROFILE in
   production)
     bundle exec fastlane deliver \
       --skip_metadata --skip_screenshots \
-      --submit_for_review \
       --ipa $IPA_FILE \
       --app $APPLE_APP_ID \
       --username $APPLE_ID \
