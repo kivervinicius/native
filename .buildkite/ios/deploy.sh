@@ -1,4 +1,4 @@
-set -e
+set -eu
 
 IPA_FILE="$ROOT/ios/build/EmCasa.ipa"
 PATH="$PATH:$(dirname "$(xcode-select -p)")/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/"
@@ -19,7 +19,7 @@ case $RELEASE_PROFILE in
       --ipa $IPA_FILE \
       --app $APPLE_APP_ID \
       --username $APPLE_ID \
-      --app_version $APP_VERSION \
+      --app_version $VERSION_NAME \
       --app_identifier com.EmCasa.native
     ;;
 esac
