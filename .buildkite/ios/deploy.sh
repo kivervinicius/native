@@ -19,7 +19,6 @@ case $RELEASE_PROFILE in
       --ipa $IPA_FILE \
       --app $APPLE_APP_ID \
       --username $APPLE_ID \
-      --build_number $BUILD_NUMBER \
       --app_version $APP_VERSION \
       --app_identifier com.EmCasa.native
     ;;
