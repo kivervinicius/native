@@ -33,14 +33,14 @@ steps:
 - label: 'beta:android'
   command:
   - buildkite-agent artifact download "android/app/build.zip" . --step "build:android"
-  - (cd android/app && unzip build.zip build/outputs/apk/app-release.apk)
+  - (cd android/app && unzip -q build.zip build/outputs/apk/app-release.apk)
   - .buildkite/run setup
   - .buildkite/run android deploy --profile beta
 - block: ":rocket: Release"
 - label: "release:android"
   command:
   - buildkite-agent artifact download "android/app/build.zip" . --step "build:android"
-  - (cd android/app && unzip build.zip)
+  - (cd android/app && unzip -q build.zip)
   - .buildkite/run android setup,deploy --profile production
   branches: master
 - label: 'release:ios'
