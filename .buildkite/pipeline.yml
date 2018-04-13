@@ -1,6 +1,6 @@
 env:
   BUILDKITE_ARTIFACT_PATHS: tmp/logs/*.log
-  BUILDKITE_GIT_CLEAN_FLAGS: -fdq
+  BUILDKITE_GIT_CLEAN_FLAGS: -fq
   LC_ALL: pt_BR.UTF-8
   LANG: pt_BR.UTF-8
   BETA_TESTERS: product,dev
