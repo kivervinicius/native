@@ -37,11 +37,11 @@ steps:
   - .buildkite/run setup
   - .buildkite/run android deploy --profile beta
 - block: ":rocket: Release"
-- label: "release:android"
-  command:
-  - buildkite-agent artifact download "android/app/build.zip" . --step "build:android"
-  - (cd android/app && unzip build.zip)
-  - .buildkite/run android setup,deploy --profile production
+# - label: "release:android"
+#   command:
+#   - buildkite-agent artifact download "android/app/build.zip" . --step "build:android"
+#   - (cd android/app && unzip build.zip)
+#   - .buildkite/run android setup,deploy --profile production
 - label: 'release:ios'
   command:
   - buildkite-agent artifact download "ios/build/EmCasa.xcarchive.zip" . --step "build:ios"
