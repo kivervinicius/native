@@ -7,7 +7,7 @@ export default StyleSheet.create({
   container: {
     display: 'flex',
     backgroundColor: 'white',
-    ...padding(10, 25)
+    ...padding(10, 20)
   },
   row: {
     display: 'flex',

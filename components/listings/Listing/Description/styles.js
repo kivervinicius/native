@@ -6,7 +6,7 @@ import {padding} from '@/assets/styles'
 export default StyleSheet.create({
   container: {
     display: 'flex',
-    ...padding(10, 30)
+    ...padding(10, 20)
   },
   title: {
     color: colors.gray.darker,
