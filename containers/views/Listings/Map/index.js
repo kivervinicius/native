@@ -33,7 +33,11 @@ export default class MapScreen extends Component {
             <Map onSelect={this.onSelect} active={active} type="search" />
           </View>
           <View style={styles.listings}>
-            <Feed type="search" params={navigation.state.params} />
+            <Feed
+              active={active}
+              type="search"
+              params={navigation.state.params}
+            />
           </View>
         </View>
       </Shell>

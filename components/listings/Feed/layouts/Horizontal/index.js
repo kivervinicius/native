@@ -1,5 +1,4 @@
-import _ from 'lodash'
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {View, Dimensions} from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 
@@ -17,15 +16,26 @@ export default class HorizontalFeed extends Component {
     }
   }
 
+  slider = React.createRef()
+
+  componentDidUpdate(prev) {
+    const {active, data} = this.props
+    if (prev.active !== active && active) {
+      this.slider.value.snapToItem(data.findIndex(({id}) => id == active))
+    }
+  }
+
   get totalCount() {
     return this.props.data.length
   }
 
   renderItem = ({item: {id, ...props}}) => {
-    const {styles, onSelect, children, slideWidth, raised} = this.props
+    const {styles, onSelect, children, slideWidth, active, raised} = this.props
+    const primary = active === id
     return (
       <View style={styles.item} key={id}>
         <Card
+          primary={primary}
           raised={raised}
           width={slideWidth - (raised ? 20 : 0)}
           styles={cardStyles}
@@ -53,6 +63,7 @@ export default class HorizontalFeed extends Component {
         renderItem={this.renderItem}
         sliderWidth={width}
         itemWidth={slideWidth}
+        ref={this.slider}
       />
     )
   }
