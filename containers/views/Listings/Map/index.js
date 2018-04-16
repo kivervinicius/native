@@ -28,17 +28,15 @@ export default class MapScreen extends Component {
 
     return (
       <Shell overlay>
-        <View style={styles.container}>
-          <View style={styles.body}>
-            <Map onSelect={this.onSelect} active={active} type="search" />
-          </View>
-          <View style={styles.listings}>
-            <Feed
-              active={active}
-              type="search"
-              params={navigation.state.params}
-            />
-          </View>
+        <View style={styles.body}>
+          <Map onSelect={this.onSelect} active={active} type="search" />
+        </View>
+        <View style={styles.listings}>
+          <Feed
+            active={active}
+            type="search"
+            params={navigation.state.params}
+          />
         </View>
       </Shell>
     )

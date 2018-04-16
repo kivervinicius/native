@@ -11,14 +11,16 @@ function renderElement(Element, props = {}) {
 function Shell({styles, children, header, footer, scroll, ...props}) {
   const Main = scroll ? ScrollView : View
   return (
-    <SafeAreaView style={styles.container}>
-      {header && (
-        <View style={styles.header}>{renderElement(header, props)}</View>
-      )}
-      <Main style={styles.main}>{children}</Main>
-      {footer && (
-        <View style={styles.footer}>{renderElement(footer, props)}</View>
-      )}
+    <SafeAreaView style={styles.wrapper}>
+      <View style={styles.container}>
+        {header && (
+          <View style={styles.header}>{renderElement(header, props)}</View>
+        )}
+        <Main style={styles.main}>{children}</Main>
+        {footer && (
+          <View style={styles.footer}>{renderElement(footer, props)}</View>
+        )}
+      </View>
     </SafeAreaView>
   )
 }
