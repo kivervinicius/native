@@ -15,15 +15,19 @@ Price.defaultProps = {
   size: 26
 }
 
-export const Street = $styles.inject()(({styles, style, address}) => (
+export const Street = $styles.inject()(({styles, style, size, address}) => (
   <Text
-    style={styles.street.concat(style)}
+    style={styles.street.concat(style, {fontSize: size})}
     numberOfLines={1}
     ellipsizeMode="tail"
   >
     {address.street}
   </Text>
 ))
+
+Street.defaultProps = {
+  size: 20
+}
 
 export const Neighborhood = $styles.inject()(({styles, address}) => (
   <Text style={styles.neighborhood}>{address.neighborhood.toUpperCase()}</Text>

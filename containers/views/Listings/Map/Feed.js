@@ -1,6 +1,7 @@
 import {Dimensions} from 'react-native'
-import {Header} from '@/components/listings/Card'
+import {Row, Street, Price} from '@/components/listings/Card'
 import Feed from '@/containers/listings/Feed'
+import InfiniteScroll from '@/components/shared/InfiniteScroll'
 
 export default function MapListings(props) {
   return (
@@ -11,8 +12,8 @@ export default function MapListings(props) {
       as={InfiniteScroll}
     >
       <Row>
-        <Street />
-        <Price />
+        <Street size={14} />
+        <Price size={16} />
       </Row>
     </Feed>
   )
