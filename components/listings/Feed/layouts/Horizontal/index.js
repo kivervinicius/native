@@ -49,7 +49,16 @@ export default class HorizontalFeed extends Component {
 
   render() {
     if (!this.totalCount) return null
-    const {data, style, styles, loop, width, slideWidth} = this.props
+    const {
+      data,
+      style,
+      styles,
+      loop,
+      width,
+      slideWidth,
+      onScroll,
+      scrollEventThrottle
+    } = this.props
     return (
       <Carousel
         enableMomentum
@@ -63,6 +72,8 @@ export default class HorizontalFeed extends Component {
         renderItem={this.renderItem}
         sliderWidth={width}
         itemWidth={slideWidth}
+        onScroll={onScroll}
+        scrollEventThrottle={scrollEventThrottle}
         ref={this.slider}
       />
     )

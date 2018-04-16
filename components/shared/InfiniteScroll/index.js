@@ -1,18 +1,24 @@
-import {Component} from 'react'
-import {ScrollView} from 'react-native'
+import React, {Component} from 'react'
 
 export default class InfiniteScroll extends Component {
   static defaultProps = {
-    threshold: 1000
+    threshold: 1500,
+    lauout: 'vertical'
   }
 
   onLoad = () => this.props.onLoad()
 
   isOverThreshold = ({contentOffset, contentSize, layoutMeasurement}) => {
-    const {threshold} = this.props
-    const offsetHeight = contentOffset.y
-    const height = contentSize.height - layoutMeasurement.height
-    const distance = height - offsetHeight
+    const {threshold, layout} = this.props
+    let offset, length
+    if (layout === 'vertical') {
+      offset = contentOffset.y
+      length = contentSize.height - layoutMeasurement.height
+    } else {
+      offset = contentOffset.x
+      length = contentSize.width - layoutMeasurement.width
+    }
+    const distance = length - offset
     return !isNaN(distance) && Math.abs(distance) <= threshold
   }
 
@@ -32,11 +38,10 @@ export default class InfiniteScroll extends Component {
   }
 
   render() {
-    const {children} = this.props
-    return (
-      <ScrollView onScroll={this.onScroll} scrollEventThrottle={100}>
-        {children}
-      </ScrollView>
-    )
+    const children = React.Children.only(this.props.children)
+    return React.cloneElement(children, {
+      onScroll: this.onScroll,
+      scrollEventThrottle: 200
+    })
   }
 }
