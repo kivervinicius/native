@@ -8,6 +8,7 @@ class MapApp extends PureComponent {
 
   render() {
     const {data, active} = this.props
+    const zIndex = active ? 2 : 1
     return (
       <Map>
         {data &&
@@ -16,6 +17,8 @@ class MapApp extends PureComponent {
               active={active === listing.id}
               onPress={this.onSelect(listing.id)}
               key={listing.id}
+              style={{zIndex}}
+              zIndex={zIndex}
               {...listing}
             />
           ))}
