@@ -25,4 +25,4 @@ export default class ListingCard extends Component {
   }
 }
 
-export {Price, Header, Street, Neighborhood} from './Body/components'
+export {Row, Price, Street, Neighborhood} from './Body/components'

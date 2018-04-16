@@ -8,8 +8,12 @@ export default function MapListings(props) {
       {...props}
       layout="horizontal"
       slideWidth={Dimensions.get('window').width / 1.5}
+      as={InfiniteScroll}
     >
-      <Header size={16} />
+      <Row>
+        <Street />
+        <Price />
+      </Row>
     </Feed>
   )
 }

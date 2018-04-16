@@ -1,3 +1,4 @@
+import React from 'react'
 import {View} from 'react-native'
 
 import Text from '@/components/shared/Text'
@@ -28,9 +29,10 @@ export const Neighborhood = $styles.inject()(({styles, address}) => (
   <Text style={styles.neighborhood}>{address.neighborhood.toUpperCase()}</Text>
 ))
 
-export const Header = $styles.inject()((props) => (
-  <View style={props.styles.header}>
-    <Street {...props} />
-    <Neighborhood {...props} />
+export const Row = $styles.inject()(({children, styles, ...props}) => (
+  <View style={styles.row}>
+    {React.Children.map(children, (element) =>
+      React.cloneElement(element, props)
+    )}
   </View>
 ))
