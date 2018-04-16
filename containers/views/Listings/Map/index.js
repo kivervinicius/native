@@ -3,7 +3,6 @@ import {View} from 'react-native'
 
 import Shell from '@/containers/shared/Shell'
 import Map from '@/containers/listings/Map'
-import ActionButton from '@/components/listings/Map/ActionButton'
 import Feed from './Feed'
 import styles from './styles'
 
@@ -24,6 +23,7 @@ export default class MapScreen extends Component {
   }
 
   render() {
+    const {navigation} = this.props
     const active = this.activeId
 
     return (
@@ -32,19 +32,9 @@ export default class MapScreen extends Component {
           <View style={styles.body}>
             <Map onSelect={this.onSelect} active={active} type="search" />
           </View>
-          {active ? (
-            <View style={styles.listings}>
-              <Feed id={active} />
-            </View>
-          ) : (
-            <ActionButton
-              style={styles.actionButton}
-              icon="chevron-left"
-              onPress={this.onDismiss}
-            >
-              Ver listagem de imóveis
-            </ActionButton>
-          )}
+          <View style={styles.listings}>
+            <Feed type="search" params={navigation.state.params} />
+          </View>
         </View>
       </Shell>
     )

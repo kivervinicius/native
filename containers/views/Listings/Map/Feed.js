@@ -1,19 +1,15 @@
-import RelatedLoader from '@/containers/listings/Related/Loader'
-import {withListing} from '@/containers/listings/Listing/Loader'
-import Feed from '@/components/listings/Feed'
+import {Dimensions} from 'react-native'
+import {Header} from '@/components/listings/Card'
+import Feed from '@/containers/listings/Feed'
 
-function MapFeed({id, data: listing}) {
+export default function MapListings(props) {
   return (
-    <RelatedLoader id={id}>
-      {({data}) => (
-        <Feed
-          key={id}
-          layout="horizontal"
-          data={[{...listing, primary: true}].concat(data)}
-        />
-      )}
-    </RelatedLoader>
+    <Feed
+      {...props}
+      layout="horizontal"
+      slideWidth={Dimensions.get('window').width / 1.5}
+    >
+      <Header size={16} />
+    </Feed>
   )
 }
-
-export default withListing(MapFeed)
