@@ -46,17 +46,14 @@ export default class MarkerAggregator extends Component {
   }
 
   render() {
+    const {enabled, children} = this.props
     const {groups} = this.state
 
-    return groups.map(
-      ({children, ...props}) =>
-        children.length === 1 ? (
-          this.props.children[children[0]]
-        ) : (
-          <Marker key={`${children.join(',')}`} {...props}>
-            {children.length}
-          </Marker>
-        )
-    )
+    if (!enabled) return children
+    return groups.map(({children, ...props}) => (
+      <Marker key={`${children.join(',')}`} {...props}>
+        {children.length}
+      </Marker>
+    ))
   }
 }

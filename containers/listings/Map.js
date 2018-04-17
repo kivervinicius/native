@@ -7,11 +7,11 @@ class MapApp extends PureComponent {
   onSelect = (id) => () => this.props.onSelect(id)
 
   render() {
-    const {data, active, ...props} = this.props
+    const {data, active, aggregate, ...props} = this.props
     const zIndex = active ? 2 : 1
     return (
       <Map {...props}>
-        <Aggregator {...props}>
+        <Aggregator enabled={aggregate} {...props}>
           {data &&
             data.map((listing) => (
               <Marker
