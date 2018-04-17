@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {Component} from 'react'
 import {View} from 'react-native'
 
@@ -11,10 +12,10 @@ export default class MapScreen extends Component {
     zoom: 0
   }
 
-  onRegionChange = (region) => {
+  onRegionChange = _.debounce((region) => {
     const zoom = (region.latitudeDelta + region.longitudeDelta) / 2
     this.setState({zoom})
-  }
+  }, 200)
 
   onSelect = (id) => {
     const {navigation} = this.props
@@ -40,9 +41,10 @@ export default class MapScreen extends Component {
       <Shell overlay>
         <View style={styles.body}>
           <Map
-            onRegionChangeComplete={this.onRegionChange}
+            onRegionChange={this.onRegionChange}
             onSelect={this.onSelect}
             distance={zoom * 5}
+            aggregate={zoom > 0.01}
             active={active}
             type="search"
           />
