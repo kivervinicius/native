@@ -43,8 +43,8 @@ export default class MapScreen extends Component {
           <Map
             onRegionChange={this.onRegionChange}
             onSelect={this.onSelect}
-            distance={zoom * 5}
-            aggregate={zoom > 0.01}
+            distance={zoom * 4}
+            aggregate={zoom > 0.05}
             active={active}
             type="search"
           />

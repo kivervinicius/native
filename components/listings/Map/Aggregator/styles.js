@@ -1,6 +1,6 @@
 import StyleSheet from '@/assets/StyleSheet'
 import * as colors from '@/assets/colors'
-import {elevation, padding} from '@/assets/styles'
+import {elevation} from '@/assets/styles'
 
 const SIZE = 30
 
