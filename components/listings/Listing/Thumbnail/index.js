@@ -25,9 +25,14 @@ export default function ListingThumbnail({images, matterport_code, onOpen}) {
   const image = images[0] || {}
   return (
     <View style={styles.container}>
-      <Matterport code={matterport_code} width={WIDTH} height={HEIGHT}>
-        <Image thumbnail {...image} width={WIDTH} height={HEIGHT} />
-      </Matterport>
+      <View
+        onMoveShouldSetResponder={() => true}
+        onStartShouldSetResponder={() => true}
+      >
+        <Matterport code={matterport_code} width={WIDTH} height={HEIGHT}>
+          <Image thumbnail {...image} width={WIDTH} height={HEIGHT} />
+        </Matterport>
+      </View>
       <View style={styles.actions}>
         <ActionButton
           title="Ver Imagens"
