@@ -10,7 +10,7 @@ export default function MapListings(props) {
       {...props}
       layout="horizontal"
       slideWidth={width / 1.5}
-      threshold={width * 2}
+      threshold={width * 5}
       as={InfiniteScroll}
     >
       <Row>
