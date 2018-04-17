@@ -7,14 +7,15 @@ import Map from '@/containers/listings/Map'
 import Feed from './Feed'
 import styles from './styles'
 
+const zoom = ({longitudeDelta}) => Math.PI * _.round(longitudeDelta, 10) / 180
+
 export default class MapScreen extends Component {
   state = {
-    zoom: 0
+    zoom: zoom({longitudeDelta: 0.09999999999993747})
   }
 
   onRegionChange = _.debounce((region) => {
-    const zoom = (region.latitudeDelta + region.longitudeDelta) / 2
-    this.setState({zoom})
+    this.setState({zoom: zoom(region)})
   }, 200)
 
   onSelect = (id) => {
@@ -43,8 +44,8 @@ export default class MapScreen extends Component {
           <Map
             onRegionChange={this.onRegionChange}
             onSelect={this.onSelect}
-            distance={zoom * 4}
-            aggregate={zoom > 0.05}
+            distance={1000 * zoom}
+            aggregate={zoom > 0.0007}
             active={active}
             type="search"
           />

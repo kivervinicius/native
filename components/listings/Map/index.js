@@ -6,12 +6,12 @@ export {Marker, Aggregator}
 
 const Zoom = {
   close: {
-    latitudeDelta: 0.0043,
-    longitudeDelta: 0.0034
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01
   },
   far: {
-    latitudeDelta: 0.043 * 2,
-    longitudeDelta: 0.034 * 2
+    latitudeDelta: 0.1,
+    longitudeDelta: 0.1
   }
 }
 
