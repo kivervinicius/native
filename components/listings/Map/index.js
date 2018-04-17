@@ -1,7 +1,8 @@
 import MapView from 'react-native-maps'
 import Marker from './Marker'
+import Aggregator from './Aggregator'
 
-export {Marker}
+export {Marker, Aggregator}
 
 const Zoom = {
   close: {
