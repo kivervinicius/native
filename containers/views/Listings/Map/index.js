@@ -33,8 +33,11 @@ export default class MapScreen extends Component {
     return this.props.navigation.state.params.id
   }
 
+  get params() {
+    return _.omitBy(this.props.navigation.state.params, 'id')
+  }
+
   render() {
-    const {navigation} = this.props
     const {zoom} = this.state
     const active = this.activeId
 
@@ -51,11 +54,7 @@ export default class MapScreen extends Component {
           />
         </View>
         <View style={styles.listings}>
-          <Feed
-            active={active}
-            type="search"
-            params={navigation.state.params}
-          />
+          <Feed active={active} type="search" params={this.params} />
         </View>
       </Shell>
     )

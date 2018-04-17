@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {PureComponent} from 'react'
 import {connect} from 'react-redux'
 
@@ -14,10 +15,18 @@ export class FeedLoader extends PureComponent {
     length: 15
   }
 
-  onLoad = () => {
+  onInitialLoad = () => {
+    const {load, type, data} = this.props
+    if (_.isEmpty(data)) load(type, this.params)
+    this.onLoad = this.onRequestLoad
+  }
+
+  onRequestLoad = () => {
     const {load, loading, type} = this.props
     if (!loading) load(type, this.params)
   }
+
+  onLoad = this.onInitialLoad
 
   get params() {
     const {length, params} = this.props
