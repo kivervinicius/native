@@ -15,7 +15,14 @@ const Zoom = {
   }
 }
 
-export default function ListingMap({children, zoom, lat, lng, style}) {
+export default function ListingMap({
+  children,
+  zoom,
+  lat,
+  lng,
+  style,
+  ...props
+}) {
   return (
     <MapView
       style={[{flex: 1, width: '100%', height: '100%'}, style]}
@@ -24,6 +31,7 @@ export default function ListingMap({children, zoom, lat, lng, style}) {
         longitude: lng,
         ...Zoom[zoom]
       }}
+      {...props}
     >
       {typeof children === 'undefined' ? (
         <Marker icon="home" address={{lat, lng}} />

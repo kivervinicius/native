@@ -7,6 +7,15 @@ import Feed from './Feed'
 import styles from './styles'
 
 export default class MapScreen extends Component {
+  state = {
+    zoom: 0
+  }
+
+  onRegionChange = (region) => {
+    const zoom = (region.latitudeDelta + region.longitudeDelta) / 2
+    this.setState({zoom})
+  }
+
   onSelect = (id) => {
     const {navigation} = this.props
     if (id === this.activeId) navigation.setParams({id: null})
@@ -24,12 +33,19 @@ export default class MapScreen extends Component {
 
   render() {
     const {navigation} = this.props
+    const {zoom} = this.state
     const active = this.activeId
 
     return (
       <Shell overlay>
         <View style={styles.body}>
-          <Map onSelect={this.onSelect} active={active} type="search" />
+          <Map
+            onRegionChangeComplete={this.onRegionChange}
+            onSelect={this.onSelect}
+            distance={zoom * 5}
+            active={active}
+            type="search"
+          />
         </View>
         <View style={styles.listings}>
           <Feed

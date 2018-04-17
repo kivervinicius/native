@@ -32,16 +32,15 @@ export default class MarkerAggregator extends Component {
   static getDerivedStateFromProps({children, distance: diameter}) {
     const groups = []
     const byAddress = (addr) => (group) => distance([addr, group]) <= diameter
-    React.Children.forEach(children, ({props: {id, address}}) => {
+    React.Children.forEach(children, ({props: {address}}, i) => {
       const {lat, lng} = address
       const index = groups.findIndex(byAddress(address))
       if (index !== -1) {
-        groups[index].ids.push(id)
         groups[index] = {
           ...average(address, groups[index]),
-          ids: groups[index].ids.concat(id)
+          children: groups[index].children.concat(i)
         }
-      } else groups.push({lat, lng, ids: [id]})
+      } else groups.push({lat, lng, children: [i]})
     })
     return {groups}
   }
@@ -49,10 +48,15 @@ export default class MarkerAggregator extends Component {
   render() {
     const {groups} = this.state
 
-    return groups.map(({ids, ...props}) => (
-      <Marker key={`${ids.join(',')}`} {...props}>
-        {ids.length}
-      </Marker>
-    ))
+    return groups.map(
+      ({children, ...props}) =>
+        children.length === 1 ? (
+          this.props.children[children[0]]
+        ) : (
+          <Marker key={`${children.join(',')}`} {...props}>
+            {children.length}
+          </Marker>
+        )
+    )
   }
 }
