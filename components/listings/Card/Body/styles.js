@@ -51,7 +51,7 @@ export default $StyleSheet({
       margin: 20
     }
   },
-  header: {
+  row: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -1,11 +1,11 @@
-import _ from 'lodash'
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {View, Dimensions} from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 
 import Card from '@/components/listings/Card'
-import styles, {cardStyles} from './styles'
+import $styles, {cardStyles} from './styles'
 
+@$styles.inject()
 export default class HorizontalFeed extends Component {
   static defaultProps = {
     get slideWidth() {
@@ -16,17 +16,28 @@ export default class HorizontalFeed extends Component {
     }
   }
 
+  slider = React.createRef()
+
+  componentDidUpdate(prev) {
+    const {active, data} = this.props
+    if (prev.active !== active && active) {
+      this.slider.value.snapToItem(data.findIndex(({id}) => id == active))
+    }
+  }
+
   get totalCount() {
     return this.props.data.length
   }
 
   renderItem = ({item: {id, ...props}}) => {
-    const {onSelect, children, slideWidth, raised} = this.props
+    const {styles, onSelect, children, slideWidth, active, raised} = this.props
+    const primary = active === id
     return (
       <View style={styles.item} key={id}>
         <Card
+          primary={primary}
           raised={raised}
-          width={slideWidth - 20}
+          width={slideWidth - (raised ? 20 : 0)}
           styles={cardStyles}
           onPress={onSelect(id)}
           children={children}
@@ -38,7 +49,16 @@ export default class HorizontalFeed extends Component {
 
   render() {
     if (!this.totalCount) return null
-    const {data, style, loop, width, slideWidth} = this.props
+    const {
+      data,
+      style,
+      styles,
+      loop,
+      width,
+      slideWidth,
+      onScroll,
+      scrollEventThrottle
+    } = this.props
     return (
       <Carousel
         enableMomentum
@@ -46,12 +66,15 @@ export default class HorizontalFeed extends Component {
         inactiveSlideOpacity={1}
         inactiveSlideScale={1}
         activeSlideAlignment={loop ? 'center' : 'start'}
-        containerCustomStyle={[styles.container, style]}
+        containerCustomStyle={styles.container.concat(style)}
         slideStyle={styles.slide}
         data={data}
         renderItem={this.renderItem}
         sliderWidth={width}
         itemWidth={slideWidth}
+        onScroll={onScroll}
+        scrollEventThrottle={scrollEventThrottle}
+        ref={this.slider}
       />
     )
   }

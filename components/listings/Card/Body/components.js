@@ -1,3 +1,4 @@
+import React from 'react'
 import {View} from 'react-native'
 
 import Text from '@/components/shared/Text'
@@ -14,9 +15,9 @@ Price.defaultProps = {
   size: 26
 }
 
-export const Street = $styles.inject()(({styles, style, address}) => (
+export const Street = $styles.inject()(({styles, style, size, address}) => (
   <Text
-    style={styles.street.concat(style)}
+    style={styles.street.concat(style, {fontSize: size})}
     numberOfLines={1}
     ellipsizeMode="tail"
   >
@@ -24,13 +25,18 @@ export const Street = $styles.inject()(({styles, style, address}) => (
   </Text>
 ))
 
+Street.defaultProps = {
+  size: 20
+}
+
 export const Neighborhood = $styles.inject()(({styles, address}) => (
   <Text style={styles.neighborhood}>{address.neighborhood.toUpperCase()}</Text>
 ))
 
-export const Header = $styles.inject()((props) => (
-  <View style={props.styles.header}>
-    <Street {...props} />
-    <Neighborhood {...props} />
+export const Row = $styles.inject()(({children, styles, ...props}) => (
+  <View style={styles.row}>
+    {React.Children.map(children, (element) =>
+      React.cloneElement(element, props)
+    )}
   </View>
 ))

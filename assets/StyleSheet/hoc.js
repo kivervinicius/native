@@ -14,6 +14,7 @@ export default ($styles) => (mapProps) => (Target) => {
   const displayName = Target.displayName || Target.name
   const Component = ({styles, innerRef, ...props}) => {
     const styleProps = mapProps ? mapProps(props) : props
+    if (styles && styles._flat) styles = styles(styleProps)
     return (
       <Target
         ref={innerRef}

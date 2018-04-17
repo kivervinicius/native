@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Dimensions} from 'react-native'
 
 import Image from '@/components/listings/Image'
-import {Price, Header} from './components'
+import {Row, Price, Street, Neighborhood} from './components'
 import $styles from './styles'
 
 function FlatListingCard({children, styles, style, ...props}) {
@@ -37,7 +37,13 @@ FlatListingCard.defaultProps = {
     return Dimensions.get('window').width
   },
   get children() {
-    return [<Header key="header" />, <Price key="price" />]
+    return [
+      <Row key="header">
+        <Street />
+        <Neighborhood />
+      </Row>,
+      <Price key="price" />
+    ]
   }
 }
 

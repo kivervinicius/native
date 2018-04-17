@@ -1,19 +1,20 @@
-import RelatedLoader from '@/containers/listings/Related/Loader'
-import {withListing} from '@/containers/listings/Listing/Loader'
-import Feed from '@/components/listings/Feed'
+import {Dimensions} from 'react-native'
+import {Row, Street, Price} from '@/components/listings/Card'
+import Feed from '@/containers/listings/Feed'
+import InfiniteScroll from '@/components/shared/InfiniteScroll'
 
-function MapFeed({id, data: listing}) {
+export default function MapListings(props) {
   return (
-    <RelatedLoader id={id}>
-      {({data}) => (
-        <Feed
-          key={id}
-          layout="horizontal"
-          data={[{...listing, primary: true}].concat(data)}
-        />
-      )}
-    </RelatedLoader>
+    <Feed
+      {...props}
+      layout="horizontal"
+      slideWidth={Dimensions.get('window').width / 1.5}
+      as={InfiniteScroll}
+    >
+      <Row>
+        <Street size={14} />
+        <Price size={16} />
+      </Row>
+    </Feed>
   )
 }
-
-export default withListing(MapFeed)
