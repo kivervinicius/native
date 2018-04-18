@@ -27,8 +27,8 @@ export default class ControlledFormConsumer extends PureComponent {
     }, initialState)
   }
 
-  onValidate = (value) => {
-    const state = this.validate(value)
+  onValidate = () => {
+    const state = this.validate(this.props.value)
     this.setState(state)
     this.props.onValidate(state.valid, state.errors)
     return state.valid
