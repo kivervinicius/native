@@ -1,7 +1,5 @@
-export {default} from './Context/Provider'
-export {pureField, field} from './Context/Consumer'
-
-export {default as Field} from './Field'
+export {default} from './Form'
+export {default as Field, pureField, field} from './Field'
 
 export {default as TextInput} from './fields/TextInput'
 export {default as Email} from './fields/Email'

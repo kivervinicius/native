@@ -1,9 +1,9 @@
 import {email} from '@/lib/validations'
 import TextInput from '@/components/shared/TextInput'
-import {field} from '../Context/Consumer'
+import {field} from '../Field'
 
 export default field({
-  validations: [email]
+  validations: [email()]
 })(({onChange, valid, ...props}) => (
   <TextInput
     {...props}

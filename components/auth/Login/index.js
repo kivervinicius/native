@@ -3,7 +3,7 @@ import {View} from 'react-native'
 
 import Text from '@/components/shared/Text'
 import Link from '@/components/shared/Link'
-import Form, {Field, Email, TextInput} from '@/components/shared/Form'
+import Form, {Email, TextInput} from '@/components/shared/Form'
 import styles from './styles'
 
 export default class LoginForm extends Component {
@@ -22,12 +22,8 @@ export default class LoginForm extends Component {
     return (
       <Form onChange={this.onChange} value={this.state}>
         <View style={styles.container}>
-          <Field>
-            <Email name="email" />
-          </Field>
-          <Field>
-            <TextInput secureTextEntry name="password" placeholder="Senha" />
-          </Field>
+          <Email name="email" />
+          <TextInput secureTextEntry name="password" placeholder="Senha" />
           <View style={styles.inlineText}>
             <Link style={styles.text} onPress={onPasswordRecovery}>
               Esqueci a minha senha
