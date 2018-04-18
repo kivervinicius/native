@@ -16,12 +16,24 @@ export default class LoginForm extends Component {
 
   onChange = (value) => this.setState(value)
 
+  get errorMessage() {
+    const {error} = this.props
+    if (!error) return undefined
+    switch (error.status) {
+      case 401:
+        return 'Senha ou email inválidos'
+      default:
+        return 'Unexpected error'
+    }
+  }
   render() {
+    const {errorMessage} = this
     const {onPasswordRecovery, onSignUp} = this.props
 
     return (
       <Form onChange={this.onChange} value={this.state}>
         <View style={styles.container}>
+          {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
           <Email name="email" />
           <TextInput secureTextEntry name="password" placeholder="Senha" />
           <View style={styles.inlineText}>
