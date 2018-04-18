@@ -13,7 +13,7 @@ export default function Navigation({user, navigation}) {
       {user ? (
         <Button icon="account-outline">Perfil</Button>
       ) : (
-        <Button icon="account-outline" onPress={navigateTo('login')}>
+        <Button icon="account-outline" onPress={navigateTo('auth')}>
           Login
         </Button>
       )}
