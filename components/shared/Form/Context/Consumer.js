@@ -1,15 +1,8 @@
 import {Component} from 'react'
 
-export const pureField = (Target) => ({name, ...props}) => (
-  <Consumer>
-    {({value, onChange}) => (
-      <Target {...props} onChange={onChange(name)} value={value[name]} />
-    )}
-  </Consumer>
-)
+import {Consumer} from './Context'
 
-@pureField
-export default class ControlledFieldConsumer extends Component {
+export default class ControlledFormConsumer extends Component {
   static defaultProps = {
     validations: []
   }
@@ -36,8 +29,17 @@ export default class ControlledFieldConsumer extends Component {
   }
 }
 
-export const field = (options) => (Target) => (props) => (
-  <ControlledFieldConsumer {...props} {...options}>
-    {(validation) => <Target {...validation} {...props} />}
-  </ControlledFieldConsumer>
+export const pureField = (Target) => ({name, ...props}) => (
+  <Consumer>
+    {({value, onChange}) => (
+      <Target {...props} onChange={onChange(name)} value={value[name]} />
+    )}
+  </Consumer>
 )
+
+export const field = (options) => (Target) =>
+  pureField((props) => (
+    <ControlledFormConsumer {...props} {...options}>
+      {(validation) => <Target {...validation} {...props} />}
+    </ControlledFormConsumer>
+  ))

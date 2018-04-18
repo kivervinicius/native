@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-import {Provider} from './Consumer'
+import {Provider} from './Context'
 
 export default class FormProvider extends Component {
   static defaultProps = {

@@ -3,7 +3,7 @@ import {View} from 'react-native'
 
 import Text from '@/components/shared/Text'
 import Link from '@/components/shared/Link'
-import Form, {Field, TextInput} from '@/components/shared/Form'
+import Form, {Field, Email, TextInput} from '@/components/shared/Form'
 import styles from './styles'
 
 export default class LoginForm extends Component {
@@ -23,12 +23,7 @@ export default class LoginForm extends Component {
       <Form onChange={this.onChange} value={this.state}>
         <View style={styles.container}>
           <Field>
-            <TextInput
-              name="email"
-              keyboardType="email-address"
-              placeholder="Email"
-              autoCapitalize="none"
-            />
+            <Email name="email" />
           </Field>
           <Field>
             <TextInput secureTextEntry name="password" placeholder="Senha" />
