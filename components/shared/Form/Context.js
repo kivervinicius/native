@@ -7,7 +7,9 @@ const Context = React.createContext({
 
 export const field = (Target) => ({name, ...props}) => (
   <Context.Consumer>
-    {({value, ...ctx}) => <Target {...props} {...ctx} value={value[name]} />}
+    {({value, onChange}) => (
+      <Target {...props} onChange={onChange(name)} value={value[name]} />
+    )}
   </Context.Consumer>
 )
 
@@ -30,6 +32,7 @@ export default class FormProvider extends Component {
   }
 
   render() {
-    return <Context.Provider {...this.props} value={this.value} />
+    const {children} = this.props
+    return <Context.Provider value={this.value}>{children}</Context.Provider>
   }
 }
