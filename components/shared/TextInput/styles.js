@@ -22,7 +22,6 @@ export default StyleSheet({
   },
   input: {
     fontSize: 18,
-    lineHeight: 18,
     color: colors.gray.dark
   }
 })

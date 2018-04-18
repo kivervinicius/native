@@ -39,20 +39,20 @@ export default class ControlledFormConsumer extends PureComponent {
     const {valid, errors} = this.state
 
     return (
-      <View style={styles.container}>
-        <KeyboardAvoidingView>
+      <KeyboardAvoidingView>
+        <View style={styles.container}>
           {render({...this.state, onBlur: this.onValidate})}
-        </KeyboardAvoidingView>
-        {!valid && (
-          <View style={styles.errors}>
-            {errors.map((message, i) => (
-              <Text key={i} style={styles.text}>
-                {message}
-              </Text>
-            ))}
-          </View>
-        )}
-      </View>
+          {!valid && (
+            <View style={styles.errors}>
+              {errors.map((message, i) => (
+                <Text key={i} style={styles.text}>
+                  {message}
+                </Text>
+              ))}
+            </View>
+          )}
+        </View>
+      </KeyboardAvoidingView>
     )
   }
 }
