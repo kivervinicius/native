@@ -4,9 +4,10 @@ import {field} from '../Context/Consumer'
 
 export default field({
   validations: [email]
-})(({onChange, ...props}) => (
+})(({onChange, valid, ...props}) => (
   <TextInput
     {...props}
+    invalid={!valid}
     keyboardType="email-address"
     placeholder="Email"
     autoCapitalize="none"

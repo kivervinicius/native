@@ -1,8 +1,8 @@
-import {Component} from 'react'
+import {PureComponent} from 'react'
 
 import {Provider} from './Context'
 
-export default class FormProvider extends Component {
+export default class FormProvider extends PureComponent {
   static defaultProps = {
     value: {}
   }
@@ -16,6 +16,14 @@ export default class FormProvider extends Component {
       ...this.props.value,
       [field]: value
     })
+
+  onValidate = (field) => (valid) => {
+    const validations = {
+      ...this.state.validations,
+      [field]: valid
+    }
+    this.setState({validations})
+  }
 
   get value() {
     return {

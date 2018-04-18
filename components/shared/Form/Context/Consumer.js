@@ -1,38 +1,52 @@
-import {Component} from 'react'
+import _ from 'lodash'
+import {PureComponent} from 'react'
 
 import {Consumer} from './Context'
 
-export default class ControlledFormConsumer extends Component {
+const initialState = {
+  valid: true,
+  errors: []
+}
+
+export default class ControlledFormConsumer extends PureComponent {
   static defaultProps = {
     validations: []
   }
 
-  static initialState = {
-    valid: true,
-    errors: []
-  }
+  state = initialState
 
-  state = null
-
-  static getDerivedStateFormProps({validations, value}, state) {
-    if (!state || validations.length === 0) return this.initialState
+  validate = (value) => {
+    const {validations} = this.props
+    if (validations.length === 0) return initialState
     return validations.reduce(({valid, errors}, fun) => {
       const error = fun(value)
       if (error) return {valid: false, errors: [error].concat(errors)}
       else return {valid, errors}
-    }, this.initialState)
+    }, initialState)
+  }
+
+  onValidate = (value) => {
+    const state = this.validate(value)
+    this.setState(state)
+    this.props.onValidate(state.valid, state.errors)
+    return state.valid
   }
 
   render() {
     const {children} = this.props
-    return children(this.state)
+    return children({...this.state, onBlur: this.onValidate})
   }
 }
 
 export const pureField = (Target) => ({name, ...props}) => (
   <Consumer>
-    {({value, onChange}) => (
-      <Target {...props} onChange={onChange(name)} value={value[name]} />
+    {({value, onChange, onValidate}) => (
+      <Target
+        {...props}
+        onChange={onChange(name)}
+        onValidate={onValidate(name)}
+        value={value[name]}
+      />
     )}
   </Consumer>
 )
@@ -40,6 +54,6 @@ export const pureField = (Target) => ({name, ...props}) => (
 export const field = (options) => (Target) =>
   pureField((props) => (
     <ControlledFormConsumer {...props} {...options}>
-      {(validation) => <Target {...validation} {...props} />}
+      {(ctx) => <Target {...ctx} {...props} />}
     </ControlledFormConsumer>
   ))
