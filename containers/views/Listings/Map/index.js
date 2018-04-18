@@ -27,7 +27,7 @@ export default class MapScreen extends Component {
     const active = this.activeId
 
     return (
-      <Shell overlay>
+      <Shell overlay footer={null}>
         <View style={styles.body}>
           <Map onSelect={this.onSelect} active={active} type="search" />
         </View>
