@@ -14,11 +14,13 @@ export default class LoginForm extends Component {
 
   onSubmit = () => this.props.onSubmit(this.state)
 
+  onChange = (value) => this.setState(value)
+
   render() {
     const {onPasswordRecovery, onSignUp} = this.props
 
     return (
-      <Form onChange={this.setState} value={this.state}>
+      <Form onChange={this.onChange} value={this.state}>
         <View style={styles.container}>
           <Field>
             <TextInput
