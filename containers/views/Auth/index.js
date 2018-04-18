@@ -12,6 +12,11 @@ export default class LoginScreen extends Component {
 
   onValidate = (valid) => this.setState({valid})
 
+  onSuccess = () => {
+    const {navigation} = this.props
+    navigation.goBack(null)
+  }
+
   onSubmit = (...args) => {
     const {valid} = this.state
     const form = this.form.value

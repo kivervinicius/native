@@ -10,6 +10,10 @@ class LoginFormApp extends Component {
     const {signIn, loading} = this.props
     if (!loading) signIn(params)
   }
+  componentDidUpdate() {
+    const {user, onSuccess} = this.props
+    if (user && onSuccess) onSuccess()
+  }
 
   render() {
     const {innerRef} = this.props
