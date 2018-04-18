@@ -45,6 +45,7 @@ export default class LoginScreen extends Component {
           onSignUp={this.onSignUp}
           onPasswordRecovery={this.onPasswordRecovery}
           onValidate={this.onValidate}
+          onSuccess={this.onSuccess}
         />
       </Shell>
     )
