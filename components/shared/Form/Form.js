@@ -1,6 +1,13 @@
+import _ from 'lodash/fp'
 import {PureComponent} from 'react'
 
 import {Provider} from './Context'
+
+const isValid = _.flow(
+  _.values,
+  _.findIndex((value) => value === false),
+  (index) => index === -1
+)
 
 export default class FormProvider extends PureComponent {
   static defaultProps = {
@@ -18,11 +25,13 @@ export default class FormProvider extends PureComponent {
     })
 
   onValidate = (field) => (valid) => {
+    const {onValidate} = this.props
     const validations = {
       ...this.state.validations,
       [field]: valid
     }
     this.setState({validations})
+    if (onValidate) onValidate(isValid(validations))
   }
 
   get value() {

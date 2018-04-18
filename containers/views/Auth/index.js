@@ -4,9 +4,19 @@ import Shell, {Footer} from '@/containers/shared/Shell'
 import Login from '@/containers/auth/Login'
 
 export default class LoginScreen extends Component {
+  state = {
+    valid: true
+  }
+
   form = React.createRef()
 
-  onSubmit = (...args) => this.form.value.onSubmit(...args)
+  onValidate = (valid) => this.setState({valid})
+
+  onSubmit = (...args) => {
+    const {valid} = this.state
+    const form = this.form.value
+    if (valid) form.onSubmit(...args)
+  }
 
   onSignUp = () => {
     // const {navigation} = this.props
@@ -29,6 +39,7 @@ export default class LoginScreen extends Component {
           innerRef={this.form}
           onSignUp={this.onSignUp}
           onPasswordRecovery={this.onPasswordRecovery}
+          onValidate={this.onValidate}
         />
       </Shell>
     )

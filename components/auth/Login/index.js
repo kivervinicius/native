@@ -28,10 +28,10 @@ export default class LoginForm extends Component {
   }
   render() {
     const {errorMessage} = this
-    const {onPasswordRecovery, onSignUp} = this.props
+    const {onPasswordRecovery, onSignUp, onValidate} = this.props
 
     return (
-      <Form onChange={this.onChange} value={this.state}>
+      <Form onChange={this.onChange} onValidate={onValidate} value={this.state}>
         <View style={styles.container}>
           {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
           <Email name="email" />

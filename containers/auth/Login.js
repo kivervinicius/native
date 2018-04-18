@@ -8,7 +8,6 @@ import Form from '@/components/auth/Login'
 class LoginFormApp extends Component {
   onSubmit = (params) => {
     const {signIn, loading} = this.props
-    console.log(this.props, params)
     if (!loading) signIn(params)
   }
 
