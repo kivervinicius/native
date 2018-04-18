@@ -34,4 +34,4 @@ cd $ROOT/ios && xcodebuild -verbose \
   -exportPath $ROOT/ios/build \
   -archivePath $ROOT/ios/build/EmCasa.xcarchive \
   -exportOptionsPlist $ROOT/tmp/release.plist \
-  ${OPTIONS[*]} | xcpretty
+  ${OPTIONS[*]} | tee $ROOT/tmp/logs/ios.sign.log | xcpretty
