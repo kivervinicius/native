@@ -2,7 +2,6 @@ import {Component} from 'react'
 import {View} from 'react-native'
 
 import Text from '@/components/shared/Text'
-import Link from '@/components/shared/Link'
 import Form, {Email, Password, TextInput} from '@/components/shared/Form'
 import styles from './styles'
 

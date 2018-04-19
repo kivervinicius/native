@@ -2,13 +2,13 @@ import {Component} from 'react'
 import {connect} from 'react-redux'
 
 import {getUser, getError, isLoading} from '@/redux/modules/auth/selectors'
-import {signIn} from '@/redux/modules/auth'
+import {signUp} from '@/redux/modules/auth'
 import Form from '@/components/auth/SignUp'
 
 class SignUpFormApp extends Component {
   onSubmit = (params) => {
-    const {signIn, loading} = this.props
-    if (!loading) signIn(params)
+    const {signUp, loading} = this.props
+    if (!loading) signUp(params)
   }
 
   componentDidUpdate() {
@@ -28,6 +28,6 @@ const props = (state) => ({
   error: getError(state)
 })
 
-const actions = {signIn}
+const actions = {signUp}
 
 export default connect(props, actions)(SignUpFormApp)

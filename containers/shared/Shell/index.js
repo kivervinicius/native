@@ -1,11 +1,30 @@
+import React from 'react'
+import {Gateway} from 'react-gateway'
+
 import Lock from '@/containers/shared/Orientation/Locked'
 import Shell, {Section, Footer} from '@/components/shared/Shell'
 import Header from './Header'
 import Navigation from './Navigation'
 
-export default function ShellApp({lock, ...props}) {
-  const children = <Shell {...props} />
-  return <Lock to={lock}>{children}</Lock>
+function renderElement(Element, props = {}) {
+  if (React.isValidElement(Element)) return Element
+  return <Element {...props} />
+}
+
+export default function ShellApp({lock, children, header, footer, ...props}) {
+  return (
+    <Lock to={lock}>
+      <Shell>
+        {children}
+        {header && (
+          <Gateway into="header">{renderElement(header, props)}</Gateway>
+        )}
+        {footer && (
+          <Gateway into="footer">{renderElement(footer, props)}</Gateway>
+        )}
+      </Shell>
+    </Lock>
+  )
 }
 
 ShellApp.defaultProps = {
