@@ -1,4 +1,3 @@
-import {Component} from 'react'
 import {View} from 'react-native'
 
 import Text from '@/components/shared/Text'
@@ -10,9 +9,9 @@ const getError = (error) => {
   if (!error) return undefined
   switch (error.status) {
     case 401:
-      return 'Senha ou email inválidos'
+      return 'Senha ou email inválidos.'
     default:
-      return 'Unexpected error'
+      return 'Ocorreu um erro desconhecido. Por favor, tente novamente.'
   }
 }
 

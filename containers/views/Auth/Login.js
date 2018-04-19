@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import Shell, {Footer} from '@/containers/shared/Shell'
+import Shell from '@/containers/shared/Shell'
 import Login from '@/containers/auth/Login'
 
 export default class LoginScreen extends Component {
@@ -17,12 +17,6 @@ export default class LoginScreen extends Component {
     navigation.goBack(null)
   }
 
-  onSubmit = (...args) => {
-    const {valid} = this.state
-    const form = this.form.value
-    if (valid) form.onSubmit(...args)
-  }
-
   onSignUp = () => {
     const {navigation} = this.props
     navigation.navigate('signUp')
@@ -35,16 +29,10 @@ export default class LoginScreen extends Component {
 
   render() {
     return (
-      <Shell
-        scroll
-        title="Login"
-        footer={<Footer label="Enviar" onPress={this.onSubmit} />}
-      >
+      <Shell scroll title="Login">
         <Login
-          innerRef={this.form}
           onSignUp={this.onSignUp}
           onPasswordRecovery={this.onPasswordRecovery}
-          onValidate={this.onValidate}
           onSuccess={this.onSuccess}
         />
       </Shell>
