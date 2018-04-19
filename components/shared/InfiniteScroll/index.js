@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 export default class InfiniteScroll extends Component {
   static defaultProps = {
     threshold: 1500,
-    lauout: 'vertical'
+    layout: 'vertical'
   }
 
   onLoad = () => this.props.onLoad()

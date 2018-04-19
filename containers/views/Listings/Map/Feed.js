@@ -4,11 +4,13 @@ import Feed from '@/containers/listings/Feed'
 import InfiniteScroll from '@/components/shared/InfiniteScroll'
 
 export default function MapListings(props) {
+  const {width} = Dimensions.get('window')
   return (
     <Feed
       {...props}
       layout="horizontal"
-      slideWidth={Dimensions.get('window').width / 1.5}
+      slideWidth={width / 1.5}
+      threshold={width * 5}
       as={InfiniteScroll}
     >
       <Row>

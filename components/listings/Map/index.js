@@ -1,20 +1,28 @@
 import MapView from 'react-native-maps'
 import Marker from './Marker'
+import Aggregator from './Aggregator'
 
-export {Marker}
+export {Marker, Aggregator}
 
 const Zoom = {
   close: {
-    latitudeDelta: 0.0043,
-    longitudeDelta: 0.0034
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01
   },
   far: {
-    latitudeDelta: 0.043 * 2,
-    longitudeDelta: 0.034 * 2
+    latitudeDelta: 0.1,
+    longitudeDelta: 0.1
   }
 }
 
-export default function ListingMap({children, zoom, lat, lng, style}) {
+export default function ListingMap({
+  children,
+  zoom,
+  lat,
+  lng,
+  style,
+  ...props
+}) {
   return (
     <MapView
       style={[{flex: 1, width: '100%', height: '100%'}, style]}
@@ -23,6 +31,7 @@ export default function ListingMap({children, zoom, lat, lng, style}) {
         longitude: lng,
         ...Zoom[zoom]
       }}
+      {...props}
     >
       {typeof children === 'undefined' ? (
         <Marker icon="home" address={{lat, lng}} />
