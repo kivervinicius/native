@@ -1,31 +1,19 @@
 import {PureComponent} from 'react'
 import {View, KeyboardAvoidingView} from 'react-native'
 
+import validate, {OK} from '@/lib/validations/validate'
 import Text from '@/components/shared/Text'
 import {Consumer} from '../Context'
 import styles from './styles'
-
-const initialState = {
-  valid: true,
-  errors: []
-}
 
 export default class ControlledFormConsumer extends PureComponent {
   static defaultProps = {
     validations: []
   }
 
-  state = initialState
+  state = OK
 
-  validate = (value) => {
-    const {validations} = this.props
-    if (validations.length === 0) return initialState
-    return validations.reduce(({valid, errors}, fun) => {
-      const error = fun(value)
-      if (error) return {valid: false, errors: [error].concat(errors)}
-      else return {valid, errors}
-    }, initialState)
-  }
+  validate = (value) => validate(this.props.validations)(value)
 
   onValidate = () => {
     const state = this.validate(this.props.value)
