@@ -42,6 +42,7 @@
     "number-abbreviate": "^2.0.0",
     "qs": "^6.5.1",
     "react": "^16.3.0-alpha.1",
+    "react-gateway": "^3.0.0",
     "react-native": "0.54.0",
     "react-native-fabric": "^0.5.1",
     "react-native-fabric-crashlytics": "^0.1.8",

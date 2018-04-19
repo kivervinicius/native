@@ -1,27 +1,20 @@
-import React from 'react'
 import {SafeAreaView, ScrollView, View} from 'react-native'
+import {GatewayProvider, GatewayDest} from 'react-gateway'
 
 import $styles from './styles'
 
-function renderElement(Element, props = {}) {
-  if (React.isValidElement(Element)) return Element
-  return <Element {...props} />
-}
-
-function Shell({styles, children, header, footer, scroll, ...props}) {
+function Shell({styles, children, scroll}) {
   const Main = scroll ? ScrollView : View
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.container}>
-        {header && (
-          <View style={styles.header}>{renderElement(header, props)}</View>
-        )}
-        <Main style={styles.main}>{children}</Main>
-        {footer && (
-          <View style={styles.footer}>{renderElement(footer, props)}</View>
-        )}
-      </View>
-    </SafeAreaView>
+    <GatewayProvider>
+      <SafeAreaView style={styles.wrapper}>
+        <View style={styles.container}>
+          <GatewayDest name="header" component={View} style={styles.header} />
+          <Main style={styles.main}>{children}</Main>
+          <GatewayDest name="footer" component={View} style={styles.footer} />
+        </View>
+      </SafeAreaView>
+    </GatewayProvider>
   )
 }
 
