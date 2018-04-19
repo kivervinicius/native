@@ -35,7 +35,7 @@ export default class LoginForm extends Component {
       <Form onChange={this.onChange} onValidate={onValidate} value={this.state}>
         <View style={styles.container}>
           {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
-          <TextInput required name="name" />
+          <TextInput required name="name" placeholder="Nome" />
           <Email name="email" />
           <Password name="password" />
         </View>

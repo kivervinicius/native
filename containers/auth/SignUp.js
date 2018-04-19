@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {getUser, getError, isLoading} from '@/redux/modules/auth/selectors'
 import {signIn} from '@/redux/modules/auth'
-import Form from '@/components/auth/Login'
+import Form from '@/components/auth/SignUp'
 
 class SignUpFormApp extends Component {
   onSubmit = (params) => {
