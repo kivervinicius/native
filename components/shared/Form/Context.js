@@ -3,6 +3,9 @@ import React from 'react'
 export const {Consumer, Provider} = React.createContext({
   value: {},
   validation: {},
-  onChange: () => () => null,
-  onValidate: () => () => null
+  onSubscribe: () => null,
+  onUnsubscribe: () => null,
+  onChangeField: () => () => null,
+  onValidateField: () => () => null,
+  onValidate: () => true
 })

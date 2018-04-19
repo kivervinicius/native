@@ -23,6 +23,7 @@ export default class FormProvider extends PureComponent {
   state = {
     valid: true,
     value: {},
+    fields: {},
     validation: {}
   }
 
@@ -31,17 +32,26 @@ export default class FormProvider extends PureComponent {
     if (props.defaultValue) this.state.value = props.defaultValue
   }
 
-  onChange = (field) => (value) => {
-    const {onChange} = this.props
-    const result = {
-      ...this.state.value,
-      [field]: value
-    }
-    this.setState({value: result})
-    if (onChange) onChange(result)
+  onSubscribe = (name, node) => {
+    this.setState(({fields}) => ({fields: {...fields, [name]: node}}))
   }
 
-  onValidate = (field) => (value) => {
+  onUnsubscribe = (name, node) => {
+    if (node !== this.state.fields[name]) return
+    this.setState(({fields}) => ({fields: _.without(name)(fields)}))
+  }
+
+  onValidate = () => {
+    const {fields} = this.state
+    const valid = fields.reduce(
+      (valid, field) => valid && field.onValidate(),
+      true
+    )
+    this.setState({valid})
+    return valid
+  }
+
+  onValidateField = (field, value) => {
     const {onValidate} = this.props
     const result = {
       ...this.state.validation,
@@ -52,10 +62,23 @@ export default class FormProvider extends PureComponent {
     if (onValidate) onValidate(valid)
   }
 
+  onChangeField = (field, value) => {
+    const {onChange} = this.props
+    const result = {
+      ...this.state.value,
+      [field]: value
+    }
+    this.setState({value: result})
+    if (onChange) onChange(result)
+  }
+
   get value() {
     return {
-      ...this.state,
-      onChange: this.onChange,
+      ..._.omit(['fields'])(this.state),
+      onSubscribe: this.onSubscribe,
+      onUnsubscribe: this.onUnsubscribe,
+      onChangeField: this.onChangeField,
+      onValidateField: this.onValidateField,
       onValidate: this.onValidate
     }
   }

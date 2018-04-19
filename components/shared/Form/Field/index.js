@@ -1,33 +1,28 @@
+import React from 'react'
 import {PureComponent} from 'react'
 import {View, KeyboardAvoidingView} from 'react-native'
 
-import validate, {OK} from '@/lib/validations/validate'
 import Text from '@/components/shared/Text'
-import {Consumer} from '../Context'
+import {field as baseField} from './Provider'
 import styles from './styles'
 
-export default class ControlledFormConsumer extends PureComponent {
-  static defaultProps = {
-    valid: true,
-    errors: []
-  }
-
-  validate = (value) => validate(this.props.validations)(value)
-
-  onValidate = () => {
-    const state = this.validate(this.props.value)
-    this.setState(state)
-    this.props.onValidate(state)
-    return state.valid
+@baseField
+export default class FieldView extends PureComponent {
+  renderInput() {
+    const {children, onValidate, ...props} = this.props
+    return React.cloneElement(React.Children.only(children), {
+      ...props,
+      onBlur: onValidate
+    })
   }
 
   render() {
-    const {children: render, valid, errors} = this.props
+    const {valid, errors} = this.props
 
     return (
       <KeyboardAvoidingView>
         <View style={styles.container}>
-          {render({...this.state, onBlur: this.onValidate})}
+          {this.renderInput()}
           {!valid && (
             <View style={styles.errors}>
               {errors.map((message, i) => (
@@ -43,23 +38,8 @@ export default class ControlledFormConsumer extends PureComponent {
   }
 }
 
-export const pureField = (Target) => ({name, ...props}) => (
-  <Consumer>
-    {({value, validation, onChange, onValidate}) => (
-      <Target
-        {...props}
-        onChange={onChange(name)}
-        onValidate={onValidate(name)}
-        {...validation[name] || OK}
-        value={value[name] || ''}
-      />
-    )}
-  </Consumer>
+export const field = (options) => (Target) => (props) => (
+  <FieldView {...props} {...options}>
+    <Target {...props} />
+  </FieldView>
 )
-
-export const field = (options) => (Target) =>
-  pureField((props) => (
-    <ControlledFormConsumer {...props} {...options}>
-      {(ctx) => <Target {...ctx} {...props} />}
-    </ControlledFormConsumer>
-  ))
