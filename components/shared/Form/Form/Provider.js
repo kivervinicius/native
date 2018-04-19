@@ -1,12 +1,18 @@
 import _ from 'lodash/fp'
 import {PureComponent} from 'react'
 
-import {Provider} from './Context'
+import {Provider, Consumer} from '../Context'
 
 const isValid = _.flow(
   _.values,
   _.findIndex((value) => value === false),
   (index) => index === -1
+)
+
+export const withForm = (Target) => (props) => (
+  <FormProvider {...props}>
+    <Consumer>{({...ctx}) => <Target {...props} {...ctx} />}</Consumer>
+  </FormProvider>
 )
 
 export default class FormProvider extends PureComponent {
@@ -15,6 +21,7 @@ export default class FormProvider extends PureComponent {
   }
 
   state = {
+    valid: true,
     value: {},
     validation: {}
   }
@@ -40,8 +47,9 @@ export default class FormProvider extends PureComponent {
       ...this.state.validation,
       [field]: value
     }
-    this.setState({validation: result})
-    if (onValidate) onValidate(isValid(result))
+    const valid = isValid(result)
+    this.setState({validation: result, valid})
+    if (onValidate) onValidate(valid)
   }
 
   get value() {
