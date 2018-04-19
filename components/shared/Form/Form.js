@@ -15,28 +15,38 @@ export default class FormProvider extends PureComponent {
   }
 
   state = {
-    validations: {}
+    value: {},
+    validation: {}
   }
 
-  onChange = (field) => (value) =>
-    this.props.onChange({
-      ...this.props.value,
-      [field]: value
-    })
+  constructor(props) {
+    super(props)
+    if (props.defaultValue) this.state.value = props.defaultValue
+  }
 
-  onValidate = (field) => (valid) => {
-    const {onValidate} = this.props
-    const validations = {
-      ...this.state.validations,
-      [field]: valid
+  onChange = (field) => (value) => {
+    const {onChange} = this.props
+    const result = {
+      ...this.state.value,
+      [field]: value
     }
-    this.setState({validations})
-    if (onValidate) onValidate(isValid(validations))
+    this.setState({value: result})
+    if (onChange) onChange(result)
+  }
+
+  onValidate = (field) => (value) => {
+    const {onValidate} = this.props
+    const result = {
+      ...this.state.validation,
+      [field]: value
+    }
+    this.setState({validation: result})
+    if (onValidate) onValidate(isValid(result))
   }
 
   get value() {
     return {
-      value: this.props.value,
+      ...this.state,
       onChange: this.onChange,
       onValidate: this.onValidate
     }

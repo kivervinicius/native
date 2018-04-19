@@ -8,23 +8,21 @@ import styles from './styles'
 
 export default class ControlledFormConsumer extends PureComponent {
   static defaultProps = {
-    validations: []
+    valid: true,
+    errors: []
   }
-
-  state = OK
 
   validate = (value) => validate(this.props.validations)(value)
 
   onValidate = () => {
     const state = this.validate(this.props.value)
     this.setState(state)
-    this.props.onValidate(state.valid, state.errors)
+    this.props.onValidate(state)
     return state.valid
   }
 
   render() {
-    const {children: render} = this.props
-    const {valid, errors} = this.state
+    const {children: render, valid, errors} = this.props
 
     return (
       <KeyboardAvoidingView>
@@ -47,12 +45,13 @@ export default class ControlledFormConsumer extends PureComponent {
 
 export const pureField = (Target) => ({name, ...props}) => (
   <Consumer>
-    {({value, onChange, onValidate}) => (
+    {({value, validation, onChange, onValidate}) => (
       <Target
         {...props}
         onChange={onChange(name)}
         onValidate={onValidate(name)}
-        value={value[name]}
+        {...validation[name] || OK}
+        value={value[name] || ''}
       />
     )}
   </Consumer>

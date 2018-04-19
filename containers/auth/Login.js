@@ -17,8 +17,7 @@ class LoginFormApp extends Component {
   }
 
   render() {
-    const {innerRef} = this.props
-    return <Form {...this.props} ref={innerRef} onSubmit={this.onSubmit} />
+    return <Form {...this.props} onSubmit={this.onSubmit} />
   }
 }
 
