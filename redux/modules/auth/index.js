@@ -10,6 +10,12 @@ export const signIn = ({email, password}) => ({
   email,
   password
 })
+export const signUp = ({name, email, password}) => ({
+  type: SIGN_UP,
+  name,
+  email,
+  password
+})
 export const signOut = () => ({type: SIGN_OUT})
 export const request = () => ({type: REQUEST})
 export const success = (data) => ({type: SUCCESS, data})
