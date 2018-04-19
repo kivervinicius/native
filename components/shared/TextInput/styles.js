@@ -22,7 +22,7 @@ export default StyleSheet({
   },
   input: {
     fontSize: 18,
-    lineHeight: 18,
+    lineHeight: Platform.OS === 'ios' ? null : 18,
     color: colors.gray.dark
   }
 })

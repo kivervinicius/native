@@ -42,7 +42,7 @@ export default class MapScreen extends Component {
     const active = this.activeId
 
     return (
-      <Shell overlay>
+      <Shell overlay footer={null}>
         <View style={styles.body}>
           <Map
             onRegionChange={this.onRegionChange}

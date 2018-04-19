@@ -24,7 +24,7 @@ function reportError({error}) {
 function identifySession({data}) {
   Crashlytics.setUserName(data.name)
   Crashlytics.setUserEmail(data.email)
-  Crashlytics.setUserIdentifier(data.id)
+  Crashlytics.setUserIdentifier(data.id.toString())
 }
 
 function* initialize() {
