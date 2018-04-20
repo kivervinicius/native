@@ -10,6 +10,10 @@ class SignUpFormApp extends Component {
     this.props.reset()
   }
 
+  componentWillUnmount() {
+    this.props.reset()
+  }
+
   componentDidUpdate() {
     const {user, onSuccess} = this.props
     if (user && onSuccess) onSuccess()
