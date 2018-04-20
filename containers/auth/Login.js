@@ -25,7 +25,14 @@ class LoginFormApp extends Component {
   }
 
   render() {
-    return <Form {...this.props} onSubmit={this.onSubmit} />
+    const {enabled, error, ...props} = this.props
+    return (
+      <Form
+        {...props}
+        error={enabled ? error : undefined}
+        onSubmit={this.onSubmit}
+      />
+    )
   }
 }
 
