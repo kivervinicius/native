@@ -18,16 +18,14 @@ export default function SignUpForm({onSubmit, error}) {
   const errorMessage = getError(error)
   return (
     <Form onSubmit={onSubmit}>
-      <View style={styles.container}>
-        {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
-        <TextInput
-          validations={{required: 'O nome é obrigatório'}}
-          name="name"
-          placeholder="Nome"
-        />
-        <Email name="email" />
-        <Password name="password" />
-      </View>
+      {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
+      <TextInput
+        validations={{required: 'O nome é obrigatório'}}
+        name="name"
+        placeholder="Nome"
+      />
+      <Email name="email" />
+      <Password name="password" />
     </Form>
   )
 }

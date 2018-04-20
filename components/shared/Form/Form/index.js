@@ -4,9 +4,7 @@ import {Gateway} from 'react-gateway'
 
 import {Footer} from '@/components/shared/Shell'
 import {form} from './Provider'
-//import styles from './styles'
-
-const styles = {container: {}}
+import styles from './styles'
 
 @form
 export default class FormView extends PureComponent {

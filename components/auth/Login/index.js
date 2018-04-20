@@ -24,21 +24,19 @@ export default function LoginForm({
   const errorMessage = getError(error)
   return (
     <Form onSubmit={onSubmit}>
-      <View style={styles.container}>
-        {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
-        <Email name="email" />
-        <Password name="password" />
-        <View style={styles.inlineText}>
-          <Link style={styles.text} onPress={onPasswordRecovery}>
-            Esqueci a minha senha
-          </Link>
-        </View>
-        <View style={styles.inlineText}>
-          <Text style={styles.text}>Não tem cadastro?</Text>
-          <Link style={styles.text} onPress={onSignUp}>
-            Cadastre-se
-          </Link>
-        </View>
+      {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
+      <Email name="email" />
+      <Password name="password" />
+      <View style={styles.inlineText}>
+        <Link style={styles.text} onPress={onPasswordRecovery}>
+          Esqueci a minha senha
+        </Link>
+      </View>
+      <View style={styles.inlineText}>
+        <Text style={styles.text}>Não tem cadastro?</Text>
+        <Link style={styles.text} onPress={onSignUp}>
+          Cadastre-se
+        </Link>
       </View>
     </Form>
   )
