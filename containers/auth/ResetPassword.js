@@ -10,6 +10,10 @@ class ResetPasswordFormApp extends PureComponent {
     this.props.reset()
   }
 
+  componentWillUnmount() {
+    this.props.reset()
+  }
+
   componentDidUpdate(prev) {
     const {onSuccess, loading, error} = this.props
     const finishedLoading = prev.loading && !loading

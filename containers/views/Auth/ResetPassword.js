@@ -3,10 +3,10 @@ import {Component} from 'react'
 import Shell from '@/containers/shared/Shell'
 import ResetPassword from '@/containers/auth/ResetPassword'
 
-export default class SignUpScreen extends Component {
+export default class ResetPasswordScreen extends Component {
   onSuccess = () => {
     const {navigation} = this.props
-    navigation.goBack(null)
+    navigation.goBack()
   }
 
   render() {
@@ -18,4 +18,4 @@ export default class SignUpScreen extends Component {
   }
 }
 
-export const screen = SignUpScreen
+export const screen = ResetPasswordScreen
