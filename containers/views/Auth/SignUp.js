@@ -4,9 +4,14 @@ import Shell from '@/containers/shared/Shell'
 import SignUp from '@/containers/auth/SignUp'
 
 export default class SignUpScreen extends Component {
-  onSuccess = () => {
+  onSuccess = ({name}) => {
     const {navigation} = this.props
-    navigation.goBack(null)
+    const firstName = name.split(' ')[0]
+    navigation.replace('success', {
+      pageTitle: 'Cadastre-se',
+      title: 'Cadastro concluído',
+      message: `${firstName}, enviamos um e-mail para você confirmar seu cadastro.`
+    })
   }
 
   render() {

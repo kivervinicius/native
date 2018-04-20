@@ -22,10 +22,11 @@ export const signOut = () => ({type: SIGN_OUT})
 export const resetPassword = ({email}) => ({type: RESET_PASSWORD, email})
 export const reset = () => ({type: RESET})
 export const request = () => ({type: REQUEST})
-export const success = (data) => ({type: SUCCESS, data})
+export const success = (user, data) => ({type: SUCCESS, user, data})
 export const failure = (error) => ({type: FAILURE, error})
 
 const initialState = {
+  user: undefined,
   data: undefined,
   loading: false,
   error: undefined
@@ -40,7 +41,7 @@ export default function auth(state = initialState, action) {
     case REQUEST:
       return {...state, loading: true}
     case SUCCESS:
-      return {loading: false, data: action.data}
+      return {loading: false, user: action.user, data: action.data}
     case FAILURE:
       return {
         loading: false,

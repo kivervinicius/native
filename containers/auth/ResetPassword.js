@@ -1,7 +1,7 @@
 import {PureComponent} from 'react'
 import {connect} from 'react-redux'
 
-import {getError, isLoading} from '@/redux/modules/auth/selectors'
+import {getData, getError, isLoading} from '@/redux/modules/auth/selectors'
 import {resetPassword, reset} from '@/redux/modules/auth'
 import Form from '@/components/auth/ResetPassword'
 
@@ -15,9 +15,10 @@ class ResetPasswordFormApp extends PureComponent {
   }
 
   componentDidUpdate(prev) {
-    const {onSuccess, loading, error} = this.props
+    const {onSuccess, loading, data, error} = this.props
     const finishedLoading = prev.loading && !loading
-    if (finishedLoading && !error && onSuccess) onSuccess()
+    const success = !error && data
+    if (finishedLoading && success && onSuccess) onSuccess(data)
   }
 
   onSubmit = (params) => {
@@ -31,6 +32,7 @@ class ResetPasswordFormApp extends PureComponent {
 }
 
 const props = (state) => ({
+  data: getData(state),
   loading: isLoading(state),
   error: getError(state)
 })

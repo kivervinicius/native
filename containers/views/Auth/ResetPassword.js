@@ -6,7 +6,12 @@ import ResetPassword from '@/containers/auth/ResetPassword'
 export default class ResetPasswordScreen extends Component {
   onSuccess = () => {
     const {navigation} = this.props
-    navigation.goBack()
+    navigation.replace('success', {
+      pageTitle: 'Lembrar Senha',
+      title: 'Email enviado',
+      message:
+        'Enviamos um e-mail pra você com instruções para criar uma nova senha.'
+    })
   }
 
   render() {
