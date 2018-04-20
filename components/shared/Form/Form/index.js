@@ -1,8 +1,7 @@
 import {PureComponent} from 'react'
 import {View} from 'react-native'
-import {Gateway} from 'react-gateway'
 
-import {Footer} from '@/components/shared/Shell'
+import SubmitButton from '../SubmitButton'
 import {form} from './Provider'
 import styles from './styles'
 
@@ -18,13 +17,11 @@ export default class FormView extends PureComponent {
   }
 
   render() {
-    const {children, label, style} = this.props
+    const {children, label, style, ...props} = this.props
     return (
       <View style={[styles.container].concat(style)}>
         {children}
-        <Gateway into="footer">
-          <Footer label={label} onPress={this.onSubmit} />
-        </Gateway>
+        <SubmitButton label={label} onPress={this.onSubmit} {...props} />
       </View>
     )
   }
