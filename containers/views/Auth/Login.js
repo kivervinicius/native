@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
+import {withNavigationFocus} from 'react-navigation'
 
 import Shell from '@/containers/shared/Shell'
 import Login from '@/containers/auth/Login'
 
+@withNavigationFocus
 export default class LoginScreen extends Component {
   state = {
     valid: true
@@ -23,14 +25,16 @@ export default class LoginScreen extends Component {
   }
 
   onPasswordRecovery = () => {
-    // const {navigation} = this.props
-    // navigation.navigate('passwordReset')
+    const {navigation} = this.props
+    navigation.navigate('resetPassword')
   }
 
   render() {
+    const {isFocused} = this.props
     return (
       <Shell scroll title="Login">
         <Login
+          enabled={isFocused}
           onSignUp={this.onSignUp}
           onPasswordRecovery={this.onPasswordRecovery}
           onSuccess={this.onSuccess}

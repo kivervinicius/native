@@ -22,6 +22,7 @@ function reportError({error}) {
 }
 
 function identifySession({data}) {
+  if (!data) return
   Crashlytics.setUserName(data.name)
   Crashlytics.setUserEmail(data.email)
   Crashlytics.setUserIdentifier(data.id.toString())
@@ -29,7 +30,7 @@ function identifySession({data}) {
 
 function* initialize() {
   const data = yield select(getUser)
-  if (data) yield fork(identifySession, {data})
+  yield fork(identifySession, {data})
   // Send uncaught errors to Crashlytics
   initErrorReporting()
 }

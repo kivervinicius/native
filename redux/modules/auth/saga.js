@@ -28,9 +28,14 @@ function* signUp({name, email, password}) {
   yield fork(load, api.signIn, {name, email, password})
 }
 
+function* resetPassword({email}) {
+  yield fork(load, api.resetPassword, {email})
+}
+
 export default function* authSaga() {
   yield all([
     takeLatest(actions.SIGN_IN, signIn),
-    takeLatest(actions.SIGN_UP, signUp)
+    takeLatest(actions.SIGN_UP, signUp),
+    takeLatest(actions.RESET_PASSWORD, resetPassword)
   ])
 }
