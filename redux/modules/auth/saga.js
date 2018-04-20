@@ -25,7 +25,7 @@ function* signIn({email, password}) {
 }
 
 function* signUp({name, email, password}) {
-  yield fork(load, api.signIn, {name, email, password})
+  yield fork(load, api.signUp, {name, email, password})
 }
 
 function* resetPassword({email}) {
