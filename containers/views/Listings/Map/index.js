@@ -37,7 +37,7 @@ export default class MapScreen extends Component {
     const {active, zoom} = this.state
 
     return (
-      <Shell overlay footer={null}>
+      <Shell overlay title="Buscar imóveis" footer={null}>
         <View style={styles.body}>
           <Map
             onRegionChange={this.onRegionChange}
