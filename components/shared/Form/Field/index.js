@@ -1,47 +1,28 @@
+import React from 'react'
 import {PureComponent} from 'react'
 import {View, KeyboardAvoidingView} from 'react-native'
 
 import Text from '@/components/shared/Text'
-import {Consumer} from '../Context'
+import {field as baseField} from './Provider'
 import styles from './styles'
 
-const initialState = {
-  valid: true,
-  errors: []
-}
-
-export default class ControlledFormConsumer extends PureComponent {
-  static defaultProps = {
-    validations: []
-  }
-
-  state = initialState
-
-  validate = (value) => {
-    const {validations} = this.props
-    if (validations.length === 0) return initialState
-    return validations.reduce(({valid, errors}, fun) => {
-      const error = fun(value)
-      if (error) return {valid: false, errors: [error].concat(errors)}
-      else return {valid, errors}
-    }, initialState)
-  }
-
-  onValidate = () => {
-    const state = this.validate(this.props.value)
-    this.setState(state)
-    this.props.onValidate(state.valid, state.errors)
-    return state.valid
+@baseField
+export default class FieldView extends PureComponent {
+  renderInput() {
+    const {children, onValidate, ...props} = this.props
+    return React.cloneElement(React.Children.only(children), {
+      ...props,
+      onBlur: onValidate
+    })
   }
 
   render() {
-    const {children: render} = this.props
-    const {valid, errors} = this.state
+    const {valid, errors} = this.props
 
     return (
       <KeyboardAvoidingView>
         <View style={styles.container}>
-          {render({...this.state, onBlur: this.onValidate})}
+          {this.renderInput()}
           {!valid && (
             <View style={styles.errors}>
               {errors.map((message, i) => (
@@ -57,22 +38,8 @@ export default class ControlledFormConsumer extends PureComponent {
   }
 }
 
-export const pureField = (Target) => ({name, ...props}) => (
-  <Consumer>
-    {({value, onChange, onValidate}) => (
-      <Target
-        {...props}
-        onChange={onChange(name)}
-        onValidate={onValidate(name)}
-        value={value[name]}
-      />
-    )}
-  </Consumer>
+export const field = (options) => (Target) => (props) => (
+  <FieldView {...props} {...options}>
+    <Target {...props} />
+  </FieldView>
 )
-
-export const field = (options) => (Target) =>
-  pureField((props) => (
-    <ControlledFormConsumer {...props} {...options}>
-      {(ctx) => <Target {...ctx} {...props} />}
-    </ControlledFormConsumer>
-  ))

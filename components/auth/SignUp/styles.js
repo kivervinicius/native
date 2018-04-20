@@ -3,14 +3,8 @@ import {StyleSheet} from 'react-native'
 import * as colors from '@/assets/colors'
 
 export default StyleSheet.create({
-  inlineText: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginBottom: 10
-  },
-  text: {
-    fontSize: 16,
-    marginRight: 5
+  container: {
+    margin: 15
   },
   error: {
     fontSize: 16,
