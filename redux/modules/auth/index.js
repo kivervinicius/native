@@ -1,6 +1,7 @@
 export const SIGN_IN = 'auth/SIGN_IN'
 export const SIGN_UP = 'auth/SIGN_UP'
 export const SIGN_OUT = 'auth/SIGN_OUT'
+export const RESET_PASSWORD = 'auth/RESET_PASSWORD'
 export const REQUEST = 'auth/REQUEST'
 export const SUCCESS = 'auth/SUCCESS'
 export const FAILURE = 'auth/FAILURE'
@@ -18,6 +19,7 @@ export const signUp = ({name, email, password}) => ({
   password
 })
 export const signOut = () => ({type: SIGN_OUT})
+export const resetPassword = ({email}) => ({type: RESET_PASSWORD, email})
 export const reset = () => ({type: RESET})
 export const request = () => ({type: REQUEST})
 export const success = (data) => ({type: SUCCESS, data})
