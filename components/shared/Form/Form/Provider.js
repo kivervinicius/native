@@ -10,10 +10,14 @@ const isValid = _.flow(
 )
 
 export const withForm = (Target) => (props) => (
-  <FormProvider {...props}>
-    <Consumer>{({...ctx}) => <Target {...props} {...ctx} />}</Consumer>
-  </FormProvider>
+  <Consumer>{({...ctx}) => <Target {...props} {...ctx} />}</Consumer>
 )
+
+export const form = _.flow(withForm, (Target) => (props) => (
+  <FormProvider {...props}>
+    <Target {...props} />
+  </FormProvider>
+))
 
 export default class FormProvider extends PureComponent {
   static defaultProps = {
@@ -43,7 +47,7 @@ export default class FormProvider extends PureComponent {
 
   onValidate = () => {
     const {fields} = this.state
-    const valid = fields.reduce(
+    const valid = Object.values(fields).reduce(
       (valid, field) => valid && field.onValidate(),
       true
     )

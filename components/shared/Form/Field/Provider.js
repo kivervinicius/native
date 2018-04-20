@@ -11,12 +11,13 @@ export const withField = (Target) =>
       {...validation[name] || OK}
       value={value[name] || ''}
       validation={undefined}
+      name={name}
     />
   ))
 
-export const field = (Target) => ({validations, ...props}) => (
-  <FieldProvider validations={validations}>
-    {(ctx) => <Target {...props} {...ctx} />}
+export const field = (Target) => ({children, ...props}) => (
+  <FieldProvider {...props}>
+    {(ctx) => <Target {...ctx}>{children}</Target>}
   </FieldProvider>
 )
 

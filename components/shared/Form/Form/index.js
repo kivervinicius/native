@@ -3,20 +3,20 @@ import {View} from 'react-native'
 import {Gateway} from 'react-gateway'
 
 import {Footer} from '@/components/shared/Shell'
-import {withForm} from './Provider'
+import {form} from './Provider'
 //import styles from './styles'
 
 const styles = {container: {}}
 
-@withForm
+@form
 export default class FormView extends PureComponent {
   static defaultProps = {
     label: 'Enviar'
   }
+
   onSubmit = () => {
-    const {onSubmit} = this.props
-    console.log('eyy')
-    // onSubmit(this.props.value)
+    const {onValidate, onSubmit} = this.props
+    if (onValidate()) onSubmit(this.props.value)
   }
 
   render() {
