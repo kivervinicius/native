@@ -4,9 +4,13 @@ import Shell from '@/containers/shared/Shell'
 import ResetPassword from '@/containers/auth/ResetPassword'
 
 export default class ResetPasswordScreen extends Component {
-  onSuccess = () => {
+  onSuccess = ({name}) => {
     const {navigation} = this.props
-    navigation.goBack()
+    const firstName = name.split(' ')[0]
+    navigation.replace('success', {
+      title: 'Cadastro concluído',
+      message: `${firstName}, enviamos um e-mail para você confirmar seu cadastro.`
+    })
   }
 
   render() {
