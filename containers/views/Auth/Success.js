@@ -10,9 +10,9 @@ export default class AuthSuccessScreen extends Component {
   }
 
   render() {
-    const {title, message} = this.props.navigation.state.params
+    const {pageTitle, title, message} = this.props.navigation.state.params
     return (
-      <Shell scroll title="Lembrar Senha">
+      <Shell scroll title={pageTitle}>
         <FormMessage title={title} onClose={this.onClose}>
           {message}
         </FormMessage>

@@ -8,8 +8,9 @@ export default class ResetPasswordScreen extends Component {
     const {navigation} = this.props
     const firstName = name.split(' ')[0]
     navigation.replace('success', {
-      title: 'Cadastro concluído',
-      message: `${firstName}, enviamos um e-mail para você confirmar seu cadastro.`
+      pageTitle: 'Lembrar Senha',
+      title: 'Email enviado',
+      message: `${firstName}, enviamos um e-mail pra você com instruções para criar uma nova senha.`
     })
   }
 
