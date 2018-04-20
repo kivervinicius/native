@@ -6,8 +6,8 @@ import * as actions from './index'
 function* request(fun, params) {
   yield put(actions.request())
   try {
-    const {user} = yield call(fun, params)
-    yield put(actions.success(user))
+    const {user, data} = yield call(fun, params)
+    yield put(actions.success(user, data))
   } catch (err) {
     yield put(actions.failure(err))
   }
