@@ -6,13 +6,17 @@ import {signIn, reset} from '@/redux/modules/auth'
 import Form from '@/components/auth/Login'
 
 class LoginFormApp extends Component {
+  static defaultProps = {
+    enabled: true
+  }
+
   componentDidMount() {
     this.props.reset()
   }
 
   componentDidUpdate() {
-    const {user, onSuccess} = this.props
-    if (user && onSuccess) onSuccess()
+    const {enabled, user, onSuccess} = this.props
+    if (enabled && user && onSuccess) onSuccess()
   }
 
   onSubmit = (params) => {
