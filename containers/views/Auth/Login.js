@@ -23,8 +23,8 @@ export default class LoginScreen extends Component {
   }
 
   onPasswordRecovery = () => {
-    // const {navigation} = this.props
-    // navigation.navigate('passwordReset')
+    const {navigation} = this.props
+    navigation.navigate('resetPassword')
   }
 
   render() {
