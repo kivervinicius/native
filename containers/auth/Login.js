@@ -2,18 +2,22 @@ import {Component} from 'react'
 import {connect} from 'react-redux'
 
 import {getUser, getError, isLoading} from '@/redux/modules/auth/selectors'
-import {signIn} from '@/redux/modules/auth'
+import {signIn, reset} from '@/redux/modules/auth'
 import Form from '@/components/auth/Login'
 
 class LoginFormApp extends Component {
-  onSubmit = (params) => {
-    const {signIn, loading} = this.props
-    if (!loading) signIn(params)
+  componentDidMount() {
+    this.props.reset()
   }
 
   componentDidUpdate() {
     const {user, onSuccess} = this.props
     if (user && onSuccess) onSuccess()
+  }
+
+  onSubmit = (params) => {
+    const {signIn, loading} = this.props
+    if (!loading) signIn(params)
   }
 
   render() {
@@ -27,6 +31,6 @@ const props = (state) => ({
   error: getError(state)
 })
 
-const actions = {signIn}
+const actions = {signIn, reset}
 
 export default connect(props, actions)(LoginFormApp)
