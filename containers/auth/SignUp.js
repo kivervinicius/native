@@ -16,7 +16,7 @@ class SignUpFormApp extends Component {
 
   componentDidUpdate() {
     const {user, onSuccess} = this.props
-    if (user && onSuccess) onSuccess()
+    if (user && onSuccess) onSuccess(user)
   }
 
   onSubmit = (params) => {
