@@ -18,7 +18,7 @@ const persistent = (reducer, options = {}) =>
   )
 
 export default combineReducers({
-  auth: persistent(auth, {blacklist: ['error', 'loading']}),
+  auth: persistent(auth, {whitelist: ['user']}),
   listings,
   interest,
   neighborhoods

@@ -22,7 +22,7 @@ export const signOut = () => ({type: SIGN_OUT})
 export const resetPassword = ({email}) => ({type: RESET_PASSWORD, email})
 export const reset = () => ({type: RESET})
 export const request = () => ({type: REQUEST})
-export const success = (user, data) => ({type: SUCCESS, user, data})
+export const success = ({user, data}) => ({type: SUCCESS, user, data})
 export const failure = (error) => ({type: FAILURE, error})
 
 const initialState = {
@@ -35,7 +35,7 @@ const initialState = {
 export default function auth(state = initialState, action) {
   switch (action.type) {
     case SIGN_OUT:
-      return {...state, data: undefined}
+      return {...state, user: undefined}
     case RESET:
       return {...state, loading: false, error: undefined}
     case REQUEST:
