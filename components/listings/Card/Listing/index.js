@@ -27,7 +27,9 @@ function ListingCard({styles, style, address, images, width, price, ...props}) {
             {address.neighborhood.toUpperCase()}
           </Text>
         </View>
-        <Price styles={{text: styles.priceText}}>{price}</Price>
+        <Price size={22} styles={{text: styles.priceText}}>
+          {price}
+        </Price>
       </View>
     </View>
   )

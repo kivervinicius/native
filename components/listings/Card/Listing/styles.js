@@ -32,12 +32,13 @@ export default $StyleSheet({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 5
   },
   street: {
     color: colors.gray.darker,
     flex: 1,
-    fontSize: 20,
+    fontSize: 16,
     marginRight: 15
   },
   neighborhood: {

@@ -9,7 +9,7 @@ import styles from './styles'
 const keyExtractor = _.flow(_.get('id'), _.toString)
 
 const Header = () => (
-  <View style={styles.container}>
+  <View style={styles.header}>
     <Text style={styles.text}>
       Encontre o imóvel perfeito para você no Rio de Janeiro
     </Text>
