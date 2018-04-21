@@ -23,26 +23,36 @@ export const withField = (Target) =>
     />
   ))
 
-export const field = (Target) => ({children, ...props}) => (
-  <FieldProvider {...props}>
-    {(ctx) => <Target {...ctx}>{children}</Target>}
-  </FieldProvider>
-)
+export const field = (Target) =>
+  withField(
+    ({
+      children,
+      onSubscribe,
+      onUnsubscribe,
+      onChangeField,
+      onValidateField,
+      validations,
+      ...props
+    }) => (
+      <FieldProvider
+        name={props.name}
+        value={props.value}
+        validations={validations}
+        onSubscribe={onSubscribe}
+        onUnsubscribe={onUnsubscribe}
+        onChangeField={onChangeField}
+        onValidateField={onValidateField}
+      >
+        {(ctx) => (
+          <Target {...props} {...ctx}>
+            {children}
+          </Target>
+        )}
+      </FieldProvider>
+    )
+  )
 
-const childProps = _.omit([
-  'onSubscribe',
-  'onUnsubscribe',
-  'onValidateField',
-  'onChangeField'
-])
-
-@withField
 export default class FieldProvider extends PureComponent {
-  static defaultProps = {
-    valid: true,
-    errors: []
-  }
-
   componentDidMount() {
     const {name, onSubscribe} = this.props
     onSubscribe(name, this)
@@ -69,10 +79,9 @@ export default class FieldProvider extends PureComponent {
   }
 
   render() {
-    const {children, ...props} = this.props
+    const {children} = this.props
 
     return children({
-      ...childProps(props),
       onValidate: this.onValidate,
       onChange: this.onChange
     })

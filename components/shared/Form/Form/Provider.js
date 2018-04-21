@@ -20,9 +20,7 @@ export const form = (Target) => ({
   ...props
 }) => (
   <FormProvider onChange={onChange} onValidate={onValidate} onSubmit={onSubmit}>
-    <Consumer>
-      {(ctx) => <Target {...props} onValidate={ctx.onValidate} />}
-    </Consumer>
+    <Consumer>{(ctx) => <Target {...props} {...ctx} />}</Consumer>
   </FormProvider>
 )
 
@@ -83,6 +81,12 @@ export default class FormProvider extends PureComponent {
     if (onChange) onChange(result)
   }
 
+  onSubmit = () => {
+    const {onSubmit} = this.props
+    const {value} = this.state
+    if (onSubmit) onSubmit(value)
+  }
+
   get value() {
     return {
       ..._.omit(['fields'])(this.state),
@@ -90,7 +94,8 @@ export default class FormProvider extends PureComponent {
       onUnsubscribe: this.onUnsubscribe,
       onChangeField: this.onChangeField,
       onValidateField: this.onValidateField,
-      onValidate: this.onValidate
+      onValidate: this.onValidate,
+      onSubmit: this.onSubmit
     }
   }
 
