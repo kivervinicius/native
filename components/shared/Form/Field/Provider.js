@@ -1,8 +1,16 @@
 import _ from 'lodash/fp'
 import {PureComponent} from 'react'
 
-import validate, {OK} from '@/lib/validations/validate'
 import {withForm} from '../Form/Provider'
+
+const OK = {valid: true, errors: []}
+
+const validate = (validations) => (value) =>
+  validations.reduce(({valid, errors}, fun) => {
+    const error = fun(value)
+    if (error) return {valid: false, errors: errors.concat(error)}
+    else return {valid, errors}
+  }, OK)
 
 export const withField = (Target) =>
   withForm(({name, value, validation, ...props}) => (
