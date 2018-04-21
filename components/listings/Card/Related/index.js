@@ -1,7 +1,7 @@
 import {View} from 'react-native'
 
-import Text from '@/components/shared/Price'
-import Price from '@/components/shared/Text'
+import Text from '@/components/shared/Text'
+import Price from '@/components/shared/Price'
 import Image from '@/components/listings/Image'
 import touchable from '../touchable'
 import $styles from './styles'
@@ -27,7 +27,9 @@ function RelatedListingCard({
         <Image thumbnail style={styles.image} {...image} {...imageSize} />
       </View>
       <View style={styles.body}>
-        <Price styles={{text: styles.priceText}}>{price}</Price>
+        <Price size={26} styles={{text: styles.priceText}}>
+          {price}
+        </Price>
         <Text style={styles.street} numberOfLines={1} ellipsizeMode="tail">
           {address.street}
         </Text>

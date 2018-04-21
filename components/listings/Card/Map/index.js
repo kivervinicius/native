@@ -1,7 +1,7 @@
 import {View} from 'react-native'
 
-import Text from '@/components/shared/Price'
-import Price from '@/components/shared/Text'
+import Text from '@/components/shared/Text'
+import Price from '@/components/shared/Price'
 import Image from '@/components/listings/Image'
 import touchable from '../touchable'
 import $styles from './styles'

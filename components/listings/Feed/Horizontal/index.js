@@ -8,7 +8,7 @@ const createHandler = (fun, ...args) => fun && (() => fun(...args))
 
 export default class HorizontalFeed extends Component {
   static defaultProps = {
-    get slideWidth() {
+    get itemWidth() {
       return Dimensions.get('window').width / 1.25
     },
     get width() {
@@ -36,7 +36,7 @@ export default class HorizontalFeed extends Component {
 
   render() {
     if (!this.totalCount) return null
-    const {style, loop, width, slideWidth, ...props} = this.props
+    const {style, loop, width, ...props} = this.props
     props.renderItem = this.renderer(props.renderItem)
     return (
       <Carousel
@@ -47,7 +47,6 @@ export default class HorizontalFeed extends Component {
         containerCustomStyle={[{flex: null}, style]}
         ListEmptyComponent={Empty}
         sliderWidth={width}
-        itemWidth={slideWidth}
         ref={this.slider}
         {...props}
       />

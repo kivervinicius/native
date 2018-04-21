@@ -9,8 +9,9 @@ export default function RelatedFeed(props) {
     <HorizontalFeed
       {...props}
       style={{paddingLeft: 10}}
-      width={width - 40}
-      renderItem={(item) => <Card {...item} />}
+      slideStyle={{padding: 10}}
+      itemWidth={width - 40}
+      renderItem={(item) => <Card width={width - 60} {...item} />}
     />
   )
 }
