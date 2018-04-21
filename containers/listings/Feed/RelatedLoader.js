@@ -25,7 +25,7 @@ export class RelatedLoader extends PureComponent {
         {...this.props}
         params={id}
         onLoad={this.onLoad}
-        onSelect={this.onSelect}
+        props={{onSelect: this.onSelect}}
       />
     )
   }

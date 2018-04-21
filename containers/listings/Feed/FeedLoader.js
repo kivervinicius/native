@@ -46,7 +46,7 @@ export class FeedLoader extends PureComponent {
         {...this.props}
         params={this.params}
         onLoad={this.onLoad}
-        onSelect={this.onSelect}
+        props={{onSelect: this.onSelect}}
       />
     )
   }
