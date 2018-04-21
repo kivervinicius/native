@@ -16,7 +16,7 @@ export default class ListingsScreen extends Component {
     const {navigation} = this.props
 
     return (
-      <Shell title="Início" root>
+      <Shell root title="Buscar imóveis">
         <View style={styles.container}>
           <Listings type="search" params={navigation.state.params} />
           <MapButton style={styles.mapButton} onPress={this.onOpenMap} />
