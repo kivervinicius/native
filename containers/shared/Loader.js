@@ -1,6 +1,11 @@
 import _ from 'lodash'
 import React, {Component} from 'react'
 
+const renderChildren = (children, props) => {
+  if (_.isFunction(children)) return children(props)
+  return React.cloneElement(React.Children.only(children), props)
+}
+
 export default class Loader extends Component {
   componentDidMount() {
     const {onLoad, params} = this.props
@@ -16,16 +21,13 @@ export default class Loader extends Component {
     return _.pick(this.props, 'pagination', 'loading', 'error', 'data')
   }
 
-  renderChildren() {
-    const {children} = this.props
-    if (_.isFunction(children)) return children(this.status)
-    return React.cloneElement(React.Children.only(children), this.status)
-  }
-
   render() {
-    const {as: TargetComponent, ...props} = this.props
-    const children = this.renderChildren()
-    if (!TargetComponent) return children
-    return <TargetComponent {...props}>{children}</TargetComponent>
+    const {as: TargetComponent, children, ...props} = this.props
+    if (!TargetComponent) return renderChildren(children, props)
+    return (
+      <TargetComponent {...props}>
+        {renderChildren(children, props)}
+      </TargetComponent>
+    )
   }
 }

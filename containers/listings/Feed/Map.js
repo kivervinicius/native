@@ -4,7 +4,7 @@ import Loader from './FeedLoader'
 
 export default function MapFeedApp({type, ...props}) {
   return (
-    <Loader as={InfiniteScroll} type={type} {...props}>
+    <Loader as={InfiniteScroll} direction="horizontal" type={type} {...props}>
       <Feed {...props} />
     </Loader>
   )
