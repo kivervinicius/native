@@ -29,7 +29,7 @@ export default (Target) =>
           onPressIn={this.onHighlight(true)}
           onPressOut={this.onHighlight(false)}
         >
-          <Touchable active={active} {...props} />
+          <Target active={active} {...props} />
         </TouchableWithoutFeedback>
       )
     }

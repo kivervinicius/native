@@ -4,6 +4,8 @@ import Carousel from 'react-native-snap-carousel'
 
 import Empty from '../Empty'
 
+const createHandler = (fun, ...args) => fun && (() => fun(...args))
+
 export default class HorizontalFeed extends Component {
   static defaultProps = {
     get slideWidth() {
@@ -29,7 +31,7 @@ export default class HorizontalFeed extends Component {
 
   renderer = (fun) => ({item}) => {
     const {onSelect} = this.props
-    return fun({...item, onPress: onSelect(item.id)})
+    return fun({...item, onPress: createHandler(onSelect, item.id)})
   }
 
   render() {
